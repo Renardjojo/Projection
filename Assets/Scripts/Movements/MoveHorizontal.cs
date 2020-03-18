@@ -13,6 +13,13 @@ public class MoveHorizontal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+                
+    }
+
+    private void Move()
+    {
+        //Vector3 newVector = transform.position;
+        //newVector += 
+        //transform.position
     }
 }
