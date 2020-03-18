@@ -7,7 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class InputCallbacks
 {
-    public string name;
+    public InputType type;
+    //public string name;
     public UnityEvent eventCallbacks;
 }
 
@@ -18,10 +19,18 @@ public class UnityEventFloat : UnityEvent<float> { }
 [System.Serializable]
 public class InputCallbacksF
 {
-    public string name;
+    public InputType type;
+    //public string name;
     public UnityEventFloat eventCallbacks;
 }
 
+
+[System.Serializable]
+public enum InputType
+{
+    Horizontal,
+    Vertical
+}
 
 
 public class InputManager : MonoBehaviour
@@ -43,7 +52,7 @@ public class InputManager : MonoBehaviour
         foreach (InputCallbacks input in buttonList)
         {
             // Call callback if input is on
-            if (Input.GetButton(input.name))
+            if (Input.GetButton(input.type.ToString()))
             {
                 input.eventCallbacks?.Invoke();
             }
@@ -52,8 +61,9 @@ public class InputManager : MonoBehaviour
         // For each joystick
         foreach (InputCallbacksF input in joystickList)
         {
+            Debug.Log(input.type.ToString());
             // Call callback with joystick values
-            input.eventCallbacks?.Invoke(Input.GetAxis(input.name));
+            input.eventCallbacks?.Invoke(Input.GetAxis(input.type.ToString()));
         }
     }
 }

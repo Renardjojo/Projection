@@ -18,17 +18,11 @@ public class Move : MonoBehaviour
 
     public void moveX(float value)
     {
-        Debug.Log(value.ToString());
         transform.position += new Vector3(value, 0, 0);
     }
 
     public void moveY(float value)
     {
         transform.position += new Vector3(0, value, 0);
-    }
-
-    public void debug()
-    {
-        Debug.Log("Debug");
     }
 }
