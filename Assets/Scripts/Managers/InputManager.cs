@@ -1,26 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
+
+[System.Serializable]
+struct InputPair
+{
+    public KeyCode keycode;
+    public UnityEvent e;
+}
 
 public class InputManager : MonoBehaviour
 {
-    //public delegate void deleg();
-
-    //[System.Serializable]
-    //public class Inputs : Dictionary<KeyCode, UnityEvent> { }
+    public delegate void deleg();
 
     //[SerializeField]
-    //private Inputs truc;
+    //public class Inputs : Dictionary<KeyCode, deleg> { }
 
     [SerializeField]
-    private UnityEvent OnEscapeIsClick;
+    private List<InputPair> inputList;
 
-    [SerializeField]
-    private UnityEvent<float> OnAxisX;
-
-    [SerializeField]
-    private UnityEvent<float> OnAxisY;
 
     // Start is called before the first frame update
     void Start()
@@ -31,24 +30,12 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        foreach (InputPair input in inputList)
         {
-            print("space key was pressed");
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnEscapeIsClick?.Invoke();
-        }
-
-        if (Input.GetAxis("Horizontal") != 0f)
-        {
-            OnAxisX?.Invoke(Input.GetAxis("Horizontal"));
-        }
-
-        if (Input.GetAxis("Vertical") != 0f)
-        {
-            OnAxisY?.Invoke(Input.GetAxis("Vertical"));
+            if (Input.GetKeyDown(input.keycode))
+            {
+                input.e?.Invoke();
+            }
         }
     }
 }
