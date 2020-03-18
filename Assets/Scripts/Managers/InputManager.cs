@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
+
+[System.Serializable]
+struct InputPair
+{
+    public KeyCode keycode;
+    public UnityEvent e;
+}
 
 public class InputManager : MonoBehaviour
 {
     public delegate void deleg();
 
-    [SerializeField]
-    public class Inputs : Dictionary<KeyCode, deleg> { }
+    //[SerializeField]
+    //public class Inputs : Dictionary<KeyCode, deleg> { }
 
     [SerializeField]
-    private Inputs truc;
+    private List<InputPair> inputList;
 
 
     // Start is called before the first frame update
@@ -22,9 +30,12 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        foreach (InputPair input in inputList)
         {
-            print("space key was pressed");
+            if (Input.GetKeyDown(input.keycode))
+            {
+                input.e?.Invoke();
+            }
         }
     }
 }
