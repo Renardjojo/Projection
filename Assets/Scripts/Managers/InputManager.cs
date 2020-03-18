@@ -3,22 +3,31 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 
+// Callbacks with no arguments.
 [System.Serializable]
-struct InputPair
+public class InputCallbacks
 {
-    public KeyCode keycode;
-    public UnityEvent e;
+    public string name;
+    public UnityEvent eventCallbacks;
 }
+
+[System.Serializable]
+public class UnityEventFloat : UnityEvent<float> { }
+
+// Callbacks with no arguments.
+[System.Serializable]
+public class InputCallbacksF
+{
+    public string name;
+    public UnityEventFloat eventCallbacks;
+}
+
+
 
 public class InputManager : MonoBehaviour
 {
-    public delegate void deleg();
-
-    //[SerializeField]
-    //public class Inputs : Dictionary<KeyCode, deleg> { }
-
-    [SerializeField]
-    private List<InputPair> inputList;
+    [SerializeField] private List<InputCallbacks>  buttonList   = null;
+    [SerializeField] private List<InputCallbacksF> joystickList = null;
 
 
     // Start is called before the first frame update
@@ -30,12 +39,21 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (InputPair input in inputList)
+        // For each button
+        foreach (InputCallbacks input in buttonList)
         {
-            if (Input.GetKeyDown(input.keycode))
+            // Call callback if input is on
+            if (Input.GetButton(input.name))
             {
-                input.e?.Invoke();
+                input.eventCallbacks?.Invoke();
             }
+        }
+
+        // For each joystick
+        foreach (InputCallbacksF input in joystickList)
+        {
+            // Call callback with joystick values
+            input.eventCallbacks?.Invoke(Input.GetAxis(input.name));
         }
     }
 }
