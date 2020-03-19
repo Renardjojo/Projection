@@ -396,6 +396,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c3e6ca446ba54f4e8981d1275e9961a, type: 3}
+--- !u!1 &660135362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7240604001364462771, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1527168405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &660135363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7240604001364462770, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
@@ -740,6 +746,36 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: OnCollisionHappendWithTagBodyClone.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: OnCollisionHappendWithTagBodyClone.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: OnCollisionHappendWithTagBodyClone.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: OnCollisionHappendWithTagBodyClone.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1590198309}
+    - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: OnCollisionHappendWithTagBodyClone.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: OnCollisionHappendWithTagBodyClone.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4, type: 3}
@@ -1160,6 +1196,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.2204459e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1590198309 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7240604001354782060, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1527168405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1590198310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7240604001354782063, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
@@ -1172,7 +1214,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1527168405}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1590198309}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c4146d3be9bf5647ada4bb1e35c8a5d, type: 3}
@@ -1408,7 +1450,7 @@ PrefabInstance:
     - target: {fileID: 8748844514965419456, guid: fdb9acb65b0ca584291f16fb853d5017,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8748844514965419459, guid: fdb9acb65b0ca584291f16fb853d5017,
         type: 3}
@@ -1514,7 +1556,7 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 660135362}
     - target: {fileID: 1225134375799466561, guid: fdb9acb65b0ca584291f16fb853d5017,
         type: 3}
       propertyPath: target

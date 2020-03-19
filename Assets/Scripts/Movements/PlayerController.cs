@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         body.constraints = (RigidbodyConstraints)120; //RigidbodyConstraints.FreezeRotation + RigidbodyConstraints.FreezePositionZ;
         body.useGravity = true;
 
+        shadow.AddComponent<CapsuleCollider>();
         shadow.AddComponent<Move>();
         shadow.AddComponent<Jump>();
     }
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         Destroy(shadow.GetComponent<Move>());
         Destroy(shadow.GetComponent<Jump>());
+        Destroy(shadow.GetComponent<CapsuleCollider>());
         Destroy(shadow.GetComponent<Rigidbody>());
     }
 }
