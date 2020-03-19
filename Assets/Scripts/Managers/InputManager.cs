@@ -32,7 +32,7 @@ public enum InputType
 {
     Horizontal,
     Vertical,
-    Fire
+    Transpose
 }
 
 
