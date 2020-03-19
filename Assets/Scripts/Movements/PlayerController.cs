@@ -1,30 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using Cinemachine;
 
-public class PlayerCollider : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private GameObject              shadow;
-    private GameObject              body;
+    private Move                    shadowMoveScript;
+    private Jump                    shadowJumpScript;
 
-    [SerializeField] private UnityEvent OnCollisionHappendWithTagBodyClone;
-    [SerializeField] private UnityEvent OnCollisionHappendWithTagShadowClone;
+    private GameObject              body;
+    private Move                    bodyMoveScript;
+    private Jump                    bodyJumpScript;
+
+    [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
+
+    bool isTransposed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        shadow   = transform.Find("Shadow").gameObject;
-        body     = transform.Find("Body").gameObject;
+        shadow              = transform.Find("Shadow").gameObject;
+        shadowMoveScript    = shadow.GetComponent<Move>();
+        shadowJumpScript    = shadow.GetComponent<Jump>();
+
+        body           = transform.Find("Body").gameObject;
+        bodyMoveScript = body.GetComponent<Move>();
+        bodyJumpScript = body.GetComponent<Jump>();
+
     }
 
-    public void collisionEnterTagBodyClone()
+    // Update is called once per frame
+    void Update()
     {
-        OnCollisionHappendWithTagBodyClone?.Invoke();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Transpose();
+        }
     }
 
-    public void collisionEnterTagShadowClone()
+    public void MoveX(float value)
     {
-        OnCollisionHappendWithTagShadowClone?.Invoke();
+        if (isTransposed)
+        {
+            shadowMoveScript.MoveX(value);
+        }
+        else
+        {
+            shadowMoveScript    .MoveX(value);
+            bodyMoveScript      .MoveX(value);
+        }
+    }
+
+    public void Jump(float value)
+    {
+        if (isTransposed)
+        {
+            shadowJumpScript.StartJump(value);
+        }
+        else
+        {
+            shadowJumpScript.StartJump(value);
+            bodyJumpScript.StartJump(value);
+        }
+    }
+    
+    public void Transpose()
+    {
+        isTransposed = !isTransposed;
+
+        if (isTransposed)
+            bodyMoveScript  .MoveX(0f);
+
+        cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
     }
 }
