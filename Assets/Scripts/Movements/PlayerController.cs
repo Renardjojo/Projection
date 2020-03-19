@@ -1,60 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
+using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerCollider : MonoBehaviour
 {
     private GameObject              shadow;
-    private Move                    shadowMoveScript;
-
     private GameObject              body;
-    private Move                    bodyMoveScript;
 
-    [SerializeField] private CinemachineVirtualCamera  cameraSetting;
-
-    bool isTransposed = false;
+    [SerializeField] private UnityEvent OnCollisionHappendWithTagBodyClone;
+    [SerializeField] private UnityEvent OnCollisionHappendWithTagShadowClone;
 
     // Start is called before the first frame update
     void Start()
     {
-        shadow              = transform.Find("Shadow").gameObject;
-        shadowMoveScript    = shadow.GetComponent<Move>();
-
-        body            = transform.Find("Body").gameObject;
-        bodyMoveScript  = body.GetComponent<Move>();
-
+        shadow   = transform.Find("Shadow").gameObject;
+        body     = transform.Find("Body").gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void collisionEnterTagBodyClone()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            transpose();
-        }
+        OnCollisionHappendWithTagBodyClone?.Invoke();
     }
 
-    public void moveX(float value)
+    public void collisionEnterTagShadowClone()
     {
-        if (isTransposed)
-        {
-            shadowMoveScript    .moveX(value);
-        }
-        else
-        {
-            shadowMoveScript    .moveX(value);
-            bodyMoveScript      .moveX(value);
-        }
-    }
-    
-    public void transpose()
-    {
-        isTransposed = !isTransposed;
-
-        if (isTransposed)
-            bodyMoveScript  .moveX(0f);
-
-        cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
+        OnCollisionHappendWithTagShadowClone?.Invoke();
     }
 }

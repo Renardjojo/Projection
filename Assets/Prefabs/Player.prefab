@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4146d3be9bf5647ada4bb1e35c8a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shadow: {fileID: 7240604002880360332}
-  player: {fileID: 7240604001364462771}
   cameraSetting: {fileID: 0}
 --- !u!1 &7240604001364462771
 GameObject:
@@ -63,9 +61,10 @@ GameObject:
   - component: {fileID: 7240604001364462777}
   - component: {fileID: 5014004275157451136}
   - component: {fileID: 9031212130177216571}
+  - component: {fileID: 8824494348918193685}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: BodyClone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +172,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   jump: 10
-  rb: {fileID: 0}
 --- !u!114 &9031212130177216571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +184,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426972c594e8aac4eaa9e068203af07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8824494348918193685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240604001364462771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc781ea6cf8a7504db90f2011a7577ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionHappendWithTagBodyClone:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7240604002880360332
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,9 +216,10 @@ GameObject:
   - component: {fileID: 982930650086166864}
   - component: {fileID: 2675499613459417169}
   - component: {fileID: 5940043570290210225}
+  - component: {fileID: 9203498070310706257}
   m_Layer: 0
   m_Name: Shadow
-  m_TagString: Untagged
+  m_TagString: ShadowClone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -311,7 +327,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   jump: 10
-  rb: {fileID: 0}
 --- !u!114 &5940043570290210225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,3 +339,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426972c594e8aac4eaa9e068203af07b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9203498070310706257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240604002880360332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a904b02420940c547874834d1453b8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionHappendWithTagShadowClone:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
