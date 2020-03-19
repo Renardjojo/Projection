@@ -15,13 +15,15 @@ public class FollowPath : MonoBehaviour
     private Queue<Quaternion> storedRotation = new Queue<Quaternion>();
 
     private Vector3 lastLoc;
-    private Quaternion lastRot;
+    //private Quaternion lastRot;
     private float lastTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        lastLoc = transform.position;
+        //lastRot = transform.rotation;
+        lastTime = 0f;
     }
 
     // Update is called once per frame
@@ -59,7 +61,7 @@ public class FollowPath : MonoBehaviour
         else
         {
             transform.position = lastLoc;
-            transform.rotation = lastRot;
+            //transform.rotation = lastRot;
         }
     }
 }

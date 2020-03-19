@@ -57,6 +57,7 @@ public class Move : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("ON GROUND");
         if (collision.gameObject.tag == "ground")
         {
             {
