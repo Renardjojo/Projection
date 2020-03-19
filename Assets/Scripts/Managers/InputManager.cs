@@ -9,7 +9,9 @@ public class InputCallbacks
 {
     public InputType type;
     //public string name;
-    public UnityEvent eventCallbacks;
+    public UnityEvent onPressed, onReleased;
+
+    public bool isOn;
 }
 
 [System.Serializable]
@@ -21,7 +23,7 @@ public class InputCallbacksF
 {
     public InputType type;
     //public string name;
-    public UnityEventFloat eventCallbacks;
+    public UnityEventFloat callback;
 }
 
 
@@ -29,14 +31,18 @@ public class InputCallbacksF
 public enum InputType
 {
     Horizontal,
-    Vertical
+    Vertical,
+    Fire
 }
 
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private List<InputCallbacks>  buttonList   = null;
-    [SerializeField] private List<InputCallbacksF> joystickList = null;
+    [SerializeField, Tooltip("Calls \"onPressed\" and \"onReleased\" events when the key is pressed or released.")] 
+    private List<InputCallbacks>  buttonList   = null;
+
+    [SerializeField, Tooltip("Calls \"callback\" each tick with different values depending on the axes.")] 
+    private List<InputCallbacksF> joystickList = null;
 
 
     // Start is called before the first frame update
@@ -54,16 +60,25 @@ public class InputManager : MonoBehaviour
             // Call callback if input is on
             if (Input.GetButton(input.type.ToString()))
             {
-                input.eventCallbacks?.Invoke();
+                if (!input.isOn)
+                {
+                    input.isOn = true;
+                    input.onPressed?.Invoke();
+                }
+            }
+
+            else if (input.isOn)
+            {
+                input.onReleased?.Invoke();
+                input.isOn = false;
             }
         }
 
         // For each joystick
         foreach (InputCallbacksF input in joystickList)
         {
-            Debug.Log(input.type.ToString());
             // Call callback with joystick values
-            input.eventCallbacks?.Invoke(Input.GetAxis(input.type.ToString()));
+            input.callback?.Invoke(Input.GetAxis(input.type.ToString()));
         }
     }
 }

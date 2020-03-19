@@ -25,4 +25,14 @@ public class Move : MonoBehaviour
     {
         transform.position += new Vector3(0, value, 0);
     }
+
+    public void onQPressed()
+    {
+        Debug.Log("pressed");
+    }
+
+    public void onQReleased()
+    {
+        Debug.Log("released");
+    }
 }
