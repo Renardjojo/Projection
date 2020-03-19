@@ -32,6 +32,8 @@ public enum InputType
 {
     Horizontal,
     Vertical,
+    LightHorizontal,
+    LightVertical,
     Transpose
 }
 
