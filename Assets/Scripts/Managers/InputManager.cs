@@ -32,11 +32,19 @@ public enum InputType
     Vertical
 }
 
+public enum ActionType
+{
+    LeaveGame,
+    MoveX,
+    MoveY,
+    Jump,
+}
+
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private List<InputCallbacks>  buttonList   = null;
-    [SerializeField] private List<InputCallbacksF> joystickList = null;
+    [SerializeField] private InputCallbacks[]  buttonList   = null;
+    [SerializeField] private InputCallbacksF[] joystickList = null;
 
 
     // Start is called before the first frame update
@@ -61,7 +69,6 @@ public class InputManager : MonoBehaviour
         // For each joystick
         foreach (InputCallbacksF input in joystickList)
         {
-            Debug.Log(input.type.ToString());
             // Call callback with joystick values
             input.eventCallbacks?.Invoke(Input.GetAxis(input.type.ToString()));
         }
