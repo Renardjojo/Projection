@@ -59,14 +59,22 @@ public class Move : MonoBehaviour
     {
         if (collision.gameObject.tag == "ground")
         {
-            isGrounded = true;
-
-            // TODO : fix wall block
-            float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.right);
-            if (dot > 0.5 || dot < -0.5)
             {
-                if (rb.velocity.x > 0)
-                rb.velocity = new Vector3(0, rb.velocity.y);
+                float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
+                if (dot > 0.5 || dot < -0.5)
+                {
+                    isGrounded = true;
+                }
+            }
+
+            {
+                // TODO : fix wall block
+                float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.right);
+                if (dot > 0.5 || dot < -0.5)
+                {
+                    if (rb.velocity.x > 0)
+                        rb.velocity = new Vector3(0, rb.velocity.y);
+                }
             }
         }
     }
