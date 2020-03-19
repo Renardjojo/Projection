@@ -5,16 +5,25 @@ using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject                 shadow;
-    [SerializeField] private GameObject                 player;
-    [SerializeField] private CinemachineVirtualCamera   cameraSetting;
+    private GameObject              shadow;
+    private Move                    shadowMoveScript;
+
+    private GameObject              body;
+    private Move                    bodyMoveScript;
+
+    [SerializeField] private CinemachineVirtualCamera  cameraSetting;
 
     bool isTransposed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        shadow              = transform.Find("Shadow").gameObject;
+        shadowMoveScript    = shadow.GetComponent<Move>();
+
+        body            = transform.Find("Body").gameObject;
+        bodyMoveScript  = body.GetComponent<Move>();
+
     }
 
     // Update is called once per frame
@@ -28,19 +37,20 @@ public class PlayerController : MonoBehaviour
 
     public void moveX(float value)
     {
-        transform.position += new Vector3(value, 0, 0);
-    }
-
-    public void moveY(float value)
-    {
-        transform.position += new Vector3(0, value, 0);
+        if (isTransposed)
+        {
+            shadowMoveScript.moveX(value);
+        }
+        else
+        {
+            shadowMoveScript    .moveX(value);
+            bodyMoveScript      .moveX(value);
+        }
     }
     
     public void transpose()
     {
         isTransposed = !isTransposed;
-
-        player.SetActive(!isTransposed);
-        cameraSetting.Follow = isTransposed ? shadow.transform : player.transform;
+        cameraSetting.Follow = isTransposed ? shadow.transform : body.transform;
     }
 }

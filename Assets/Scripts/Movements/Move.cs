@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Move : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private float speed = 100f;
 
     [SerializeField]
     private float jump = 10f;
 
-    [SerializeField]
     private Rigidbody rb;
 
     private bool bJump = false;
@@ -21,7 +21,7 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-                
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -51,8 +51,7 @@ public class Move : MonoBehaviour
         }
         bJump = false;
 
-
-        transform.position += new Vector3(Time.fixedDeltaTime * horizontalMove * speed, 0, 0);
+        rb.velocity = new Vector3(Time.fixedDeltaTime * horizontalMove * speed, 0, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
