@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveHorizontal : MonoBehaviour
+public class Move : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,15 @@ public class MoveHorizontal : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void moveX(float value)
+    {
+        transform.position += new Vector3(value, 0, 0);
+    }
+
+    public void moveY(float value)
+    {
+        transform.position += new Vector3(0, value, 0);
     }
 }
