@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.moveX(value);
+            shadowMoveScript    .moveX(value);
         }
         else
         {
@@ -51,6 +51,10 @@ public class PlayerController : MonoBehaviour
     public void transpose()
     {
         isTransposed = !isTransposed;
-        cameraSetting.Follow = isTransposed ? shadow.transform : body.transform;
+
+        if (isTransposed)
+            bodyMoveScript  .moveX(0f);
+
+        cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
     }
 }
