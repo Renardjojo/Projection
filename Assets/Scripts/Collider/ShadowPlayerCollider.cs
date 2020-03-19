@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ShadowPlayerCollider : MonoBehaviour
 {
-    [SerializeField] private UnityEvent OnCollisionHappendWithTagShadowClone;
+    [SerializeField] private UnityEvent OnCollisionHappendWithTagShadowClone = null;
 
     // Start is called before the first frame update
     void Start()

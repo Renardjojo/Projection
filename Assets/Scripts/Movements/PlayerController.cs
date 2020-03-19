@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
 
     bool isTransposed = false;
+
+    public event Action onTransposed;
+    public event Action onUntransposed;
 
     // Start is called before the first frame update
     void Start()
@@ -33,10 +37,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Transpose();
-        }
+
     }
 
     public void MoveX(float value)
@@ -70,7 +71,14 @@ public class PlayerController : MonoBehaviour
         isTransposed = !isTransposed;
 
         if (isTransposed)
-            bodyMoveScript  .MoveX(0f);
+        {
+            bodyMoveScript.MoveX(0f);
+            onTransposed();
+        }
+        else
+        {
+            onUntransposed();
+        }
 
         cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
     }

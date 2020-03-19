@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class BodyPlayerCollider : MonoBehaviour
 {
-    [SerializeField] private UnityEvent OnCollisionHappendWithTagBodyClone;
+    [SerializeField] private UnityEvent OnCollisionHappendWithTagBodyClone = null;
 
     // Start is called before the first frame update
     void Start()
