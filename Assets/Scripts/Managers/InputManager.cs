@@ -29,7 +29,8 @@ public class InputCallbacksF
 public enum InputType
 {
     Horizontal,
-    Vertical
+    Vertical,
+    Transpose
 }
 
 
