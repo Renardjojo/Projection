@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject target;
-
-    [SerializeField]
-    private float delay;
+    [SerializeField] private GameObject target;
+    [SerializeField] [Range(0f, 10f)]private float delay = 3f;
 
     private Queue<float>      storedTime     = new Queue<float>();
     private Queue<Vector3>    storedLocation = new Queue<Vector3>();
