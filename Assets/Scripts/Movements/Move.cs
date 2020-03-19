@@ -26,15 +26,13 @@ public class Move : MonoBehaviour
 
     public void MoveX(float value)
     {
-        horizontalMove = value;
+       horizontalMove = value;
     }
 
     private void FixedUpdate()
     {
         rb.velocity = new Vector3(Time.fixedDeltaTime * horizontalMove * speed, rb.velocity.y, 0);
     }
-
-
 
     public void OnQPressed()
     {
