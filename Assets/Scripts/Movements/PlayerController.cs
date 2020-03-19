@@ -5,13 +5,11 @@ using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject              shadow;
-    private Move                    shadowMoveScript;
-    private Jump                    shadowJumpScript;
-
     private GameObject              body;
     private Move                    bodyMoveScript;
     private Jump                    bodyJumpScript;
+
+    private GameObject              shadow;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
 
@@ -20,35 +18,26 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shadow              = transform.Find("Shadow").gameObject;
-        shadowMoveScript    = shadow.GetComponent<Move>();
-        shadowJumpScript    = shadow.GetComponent<Jump>();
-
         body           = transform.Find("Body").gameObject;
         bodyMoveScript = body.GetComponent<Move>();
         bodyJumpScript = body.GetComponent<Jump>();
 
+        shadow              = body.transform.Find("Shadow").gameObject;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Transpose();
-        }
-    }
+    {}
 
     public void MoveX(float value)
     {
         if (isTransposed)
         {
-            shadowMoveScript.MoveX(value);
+            shadow.GetComponent<Move>().MoveX(value);
         }
         else
         {
-            shadowMoveScript    .MoveX(value);
-            bodyMoveScript      .MoveX(value);
+            bodyMoveScript.MoveX(value);
         }
     }
 
@@ -56,11 +45,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowJumpScript.StartJump(value);
+            shadow.GetComponent<Jump>().StartJump(value);
         }
         else
         {
-            shadowJumpScript.StartJump(value);
             bodyJumpScript.StartJump(value);
         }
     }
@@ -70,8 +58,34 @@ public class PlayerController : MonoBehaviour
         isTransposed = !isTransposed;
 
         if (isTransposed)
-            bodyMoveScript  .MoveX(0f);
+        {
+            bodyMoveScript.MoveX(0f);
+            AddComponenetToControlShadow();
+        }
+        else
+        {
+            RemoveComponentToUnconstrolShadow();
+        }
 
         cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
+    }
+
+    private void AddComponenetToControlShadow()
+    {
+        Rigidbody body = shadow.AddComponent<Rigidbody>();
+
+        body.constraints = RigidbodyConstraints.FreezeRotation;
+        body.constraints = RigidbodyConstraints.FreezePositionZ;
+        body.useGravity = false;
+
+        shadow.AddComponent<Move>();
+        shadow.AddComponent<Jump>();
+    }
+
+    private void RemoveComponentToUnconstrolShadow()
+    {
+        Destroy(shadow.GetComponent<Move>());
+        Destroy(shadow.GetComponent<Jump>());
+        Destroy(shadow.GetComponent<Rigidbody>());
     }
 }
