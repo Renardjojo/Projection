@@ -28,7 +28,7 @@ public class Jump : MonoBehaviour
 
     public void StartJump(float value)
     {
-        if (value > 0f)
+        if (value > 0.5f)
             bJump = true;
     }
 
