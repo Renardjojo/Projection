@@ -666,11 +666,19 @@ PrefabInstance:
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
       propertyPath: joystickList.Array.data[0].eventCallbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1704951355}
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
       propertyPath: buttonList.Array.data[0].eventCallbacks.m_TypeName
       value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: joystickList.Array.data[0].eventCallbacks.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: moveX
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: joystickList.Array.data[0].eventCallbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
