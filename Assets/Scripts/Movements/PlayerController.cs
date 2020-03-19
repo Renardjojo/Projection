@@ -7,9 +7,11 @@ public class PlayerController : MonoBehaviour
 {
     private GameObject              shadow;
     private Move                    shadowMoveScript;
+    private Jump                    shadowJumpScript;
 
     private GameObject              body;
     private Move                    bodyMoveScript;
+    private Jump                    bodyJumpScript;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting;
 
@@ -20,9 +22,11 @@ public class PlayerController : MonoBehaviour
     {
         shadow              = transform.Find("Shadow").gameObject;
         shadowMoveScript    = shadow.GetComponent<Move>();
+        shadowJumpScript    = shadow.GetComponent<Jump>();
 
-        body            = transform.Find("Body").gameObject;
-        bodyMoveScript  = body.GetComponent<Move>();
+        body           = transform.Find("Body").gameObject;
+        bodyMoveScript = body.GetComponent<Move>();
+        bodyJumpScript = body.GetComponent<Jump>();
 
     }
 
@@ -31,24 +35,37 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            transpose();
+            Transpose();
         }
     }
 
-    public void moveX(float value)
+    public void MoveX(float value)
     {
         if (isTransposed)
         {
-            shadowMoveScript.moveX(value);
+            shadowMoveScript.MoveX(value);
         }
         else
         {
-            shadowMoveScript    .moveX(value);
-            bodyMoveScript      .moveX(value);
+            shadowMoveScript    .MoveX(value);
+            bodyMoveScript      .MoveX(value);
+        }
+    }
+
+    public void Jump(float value)
+    {
+        if (isTransposed)
+        {
+            shadowJumpScript.StartJump(value);
+        }
+        else
+        {
+            shadowJumpScript.StartJump(value);
+            bodyJumpScript.StartJump(value);
         }
     }
     
-    public void transpose()
+    public void Transpose()
     {
         isTransposed = !isTransposed;
         cameraSetting.Follow = isTransposed ? shadow.transform : body.transform;
