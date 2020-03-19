@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Move                    bodyMoveScript;
     private Jump                    bodyJumpScript;
 
-    [SerializeField] private CinemachineVirtualCamera  cameraSetting;
+    [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
 
     bool isTransposed = false;
 
@@ -68,6 +68,10 @@ public class PlayerController : MonoBehaviour
     public void Transpose()
     {
         isTransposed = !isTransposed;
-        cameraSetting.Follow = isTransposed ? shadow.transform : body.transform;
+
+        if (isTransposed)
+            bodyMoveScript  .MoveX(0f);
+
+        cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
     }
 }

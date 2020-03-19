@@ -32,8 +32,6 @@ public class Move : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector3(Time.fixedDeltaTime * horizontalMove * speed, rb.velocity.y, 0);
-
-        //rb.velocity = new Vector3();
     }
 
 
