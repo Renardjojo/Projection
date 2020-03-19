@@ -78,4 +78,14 @@ public class Move : MonoBehaviour
             }
         }
     }
+
+    public void onQPressed()
+    {
+        Debug.Log("pressed");
+    }
+
+    public void onQReleased()
+    {
+        Debug.Log("released");
+    }
 }
