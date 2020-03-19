@@ -533,7 +533,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135005994}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.386389, y: -1.5390544, z: -1.9582562}
+  m_LocalPosition: {x: 11.386389, y: -0.8, z: -1.9582562}
   m_LocalScale: {x: 3.9084, y: 1.3234, z: 1}
   m_Children:
   - {fileID: 462840530}
@@ -1583,6 +1583,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 982930650086166864, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 982930650086166864, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5014004275157451136, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
         type: 3}
