@@ -74,9 +74,8 @@ public class PlayerController : MonoBehaviour
     {
         Rigidbody body = shadow.AddComponent<Rigidbody>();
 
-        body.constraints = RigidbodyConstraints.FreezeRotation;
-        body.constraints = RigidbodyConstraints.FreezePositionZ;
-        body.useGravity = false;
+        body.constraints = (RigidbodyConstraints)120; //RigidbodyConstraints.FreezeRotation + RigidbodyConstraints.FreezePositionZ;
+        body.useGravity = true;
 
         shadow.AddComponent<Move>();
         shadow.AddComponent<Jump>();
