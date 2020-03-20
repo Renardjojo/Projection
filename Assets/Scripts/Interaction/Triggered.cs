@@ -8,8 +8,8 @@ using System;
 class Triggered : MonoBehaviour
 {
     [SerializeField] protected List<Trigger>    triggerList;
-    [SerializeField] protected UnityEvent       onActivatedEvent;
-    [SerializeField] protected UnityEvent       onDisabledEvent;
+    [SerializeField] protected UnityEvent       OnActivatedEvent;
+    [SerializeField] protected UnityEvent       OnDisabledEvent;
     [SerializeField] protected bool             isActivate = false;
 
     public void TryToActivate()
@@ -37,11 +37,11 @@ class Triggered : MonoBehaviour
 
     public void OnActivated()
     {
-        onActivatedEvent?.Invoke();
+        OnActivatedEvent?.Invoke();
     }
 
     public void OnDisabled()
     {
-        onDisabledEvent?.Invoke();
+        OnDisabledEvent?.Invoke();
     }
 }
