@@ -10,7 +10,9 @@ public class Jump : MonoBehaviour
     private Rigidbody rb = null;
 
     private bool bJump = false;
-    private bool isGrounded = true;
+    private bool IsGrounded { get { return collidingObjects.Count > 0; } }
+
+    private List<GameObject> collidingObjects = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -36,35 +38,24 @@ public class Jump : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isGrounded && bJump)
+        if (IsGrounded && bJump)
         {
-            rb.velocity += new Vector3(0, jump, 0);
-            isGrounded = false;
+            rb.velocity = new Vector3(rb.velocity.x, jump, 0);
         }
         bJump = false;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "ground")
+        float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
+        if (dot > 0.5)
         {
-            {
-                float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
-                if (dot > 0.5 || dot < -0.5)
-                {
-                    isGrounded = true;
-                }
-            }
-
-            {
-                // TODO : fix wall block
-                float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.right);
-                if (dot > 0.5 || dot < -0.5)
-                {
-                    if (rb.velocity.x > 0)
-                        rb.velocity = new Vector3(0, rb.velocity.y);
-                }
-            }
+            collidingObjects.Add(collision.gameObject);
         }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        collidingObjects.Remove(collision.gameObject);
     }
 }

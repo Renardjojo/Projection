@@ -574,6 +574,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovingPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 3615561670044375663, guid: ac462870c4979ab4eacfa95943a34a4e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5515122045319780604, guid: ac462870c4979ab4eacfa95943a34a4e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -671,9 +676,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1996722832285812345, guid: ac462870c4979ab4eacfa95943a34a4e,
         type: 3}
+      propertyPath: orTriggerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996722832285812345, guid: ac462870c4979ab4eacfa95943a34a4e,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1996722832285812345, guid: ac462870c4979ab4eacfa95943a34a4e,
+        type: 3}
       propertyPath: triggerList.Array.data[0]
       value: 
       objectReference: {fileID: 5212094556258397845}
+    - target: {fileID: 1996722832285812345, guid: ac462870c4979ab4eacfa95943a34a4e,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      value: 
+      objectReference: {fileID: 42768570}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac462870c4979ab4eacfa95943a34a4e, type: 3}
 --- !u!1 &462840529
@@ -690,7 +710,7 @@ GameObject:
   - component: {fileID: 462840531}
   m_Layer: 0
   m_Name: shadow
-  m_TagString: ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1207,7 +1227,7 @@ GameObject:
   - component: {fileID: 1135005995}
   m_Layer: 0
   m_Name: Obstacle2
-  m_TagString: ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1299,7 +1319,7 @@ GameObject:
   - component: {fileID: 1168985485}
   m_Layer: 0
   m_Name: Obstacle1
-  m_TagString: ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1432,6 +1452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303652447490896759, guid: cdf34600e1360f04698200fe40d6af10,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5631906228330554646, guid: cdf34600e1360f04698200fe40d6af10,
         type: 3}
@@ -1567,6 +1592,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PressureButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5926456578921156114, guid: 2a23371f519285e4f952f7d0c563b621,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926456578921156113, guid: 2a23371f519285e4f952f7d0c563b621,
+        type: 3}
+      propertyPath: tagsWithCollisionEnabled.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5926456578921156113, guid: 2a23371f519285e4f952f7d0c563b621,
+        type: 3}
+      propertyPath: tagsWithCollisionEnabled.Array.data[0]
+      value: BodyPlayer
+      objectReference: {fileID: 0}
     - target: {fileID: 5926456578921156589, guid: 2a23371f519285e4f952f7d0c563b621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1621,16 +1661,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5926456578921156113, guid: 2a23371f519285e4f952f7d0c563b621,
-        type: 3}
-      propertyPath: tagsWithCollisionEnabled.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5926456578921156113, guid: 2a23371f519285e4f952f7d0c563b621,
-        type: 3}
-      propertyPath: tagsWithCollisionEnabled.Array.data[0]
-      value: BodyPlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a23371f519285e4f952f7d0c563b621, type: 3}
@@ -1774,7 +1804,7 @@ PrefabInstance:
     - target: {fileID: 5014004275157451136, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
         type: 3}
       propertyPath: speed
-      value: 100
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8824494348918193685, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
         type: 3}
@@ -2293,7 +2323,7 @@ GameObject:
   - component: {fileID: 1543529907}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2563,6 +2593,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PressureButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5926456578921156114, guid: 2a23371f519285e4f952f7d0c563b621,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5926456578921156589, guid: 2a23371f519285e4f952f7d0c563b621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2685,7 +2720,7 @@ GameObject:
   - component: {fileID: 2087261469}
   m_Layer: 0
   m_Name: shadow
-  m_TagString: ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3130,6 +3165,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever
       objectReference: {fileID: 0}
+    - target: {fileID: 4304078600350078782, guid: 4f8d0777290c5974093b936a0965d337,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5960123690339301846, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3210,6 +3250,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LightIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051682866048531252, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531249, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -3335,26 +3400,6 @@ PrefabInstance:
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor.g
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a411ed36972e7f74abd4026384961605, type: 3}
