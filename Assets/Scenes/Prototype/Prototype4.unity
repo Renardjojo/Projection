@@ -1768,11 +1768,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
       propertyPath: joystickList.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
       propertyPath: buttonList.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
       propertyPath: joystickList.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
@@ -1788,6 +1788,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
       propertyPath: buttonList.Array.data[1].onPressed.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
@@ -1970,6 +1974,44 @@ PrefabInstance:
       propertyPath: buttonList.Array.data[1].onReleased.m_TypeName
       value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1590198311}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onReleased.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+      propertyPath: buttonList.Array.data[2].onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}

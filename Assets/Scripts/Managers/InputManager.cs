@@ -33,7 +33,8 @@ public enum InputType
     Horizontal,
     Vertical,
     Transpose,
-    Interact
+    Interact,
+    Jump
 }
 
 
