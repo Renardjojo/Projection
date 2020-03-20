@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public event Action onTransposed;
     public event Action onUntransposed;
+    public event Action<Vector3> OnInteractButton;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,12 @@ public class PlayerController : MonoBehaviour
         bodyJumpScript = body.GetComponent<Jump>();
 
         shadow         = body.transform.Find("Shadow").gameObject;
+
+        Lever[] components = GameObject.FindObjectsOfType<Lever>();
+        foreach (Lever lever in components)
+        {
+            OnInteractButton += lever.TryToSwitch;
+        }
     }
 
     // Update is called once per frame
@@ -75,6 +82,11 @@ public class PlayerController : MonoBehaviour
         }
 
         cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
+    }
+
+    public void Interact()
+    {
+        OnInteractButton(body.transform.position);
     }
 
     private void AddComponenetToControlShadow()

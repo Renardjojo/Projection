@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lever : Trigger
 {
-    [SerializeField] private float interactionRadius = 1f;
+    [SerializeField] private float interactionRadius = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class Lever : Trigger
 
     public void TryToSwitch(Vector3 playerPos)
     {
-        if ((playerPos - transform.position).sqrMagnitude > interactionRadius * interactionRadius)
+        if ((playerPos - transform.position).sqrMagnitude < interactionRadius * interactionRadius)
         {
             Switch();
         }

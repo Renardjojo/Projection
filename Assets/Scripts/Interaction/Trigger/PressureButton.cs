@@ -54,7 +54,7 @@ public class PressureButton : Trigger
     {
         if (IsOn && currentCollidingObjects < necessaryCollidingObjects)
         {
-            OnDisable();
+            Disable();
         }
         else if (!IsOn && currentCollidingObjects >= necessaryCollidingObjects)
         {
