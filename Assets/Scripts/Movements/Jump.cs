@@ -10,9 +10,9 @@ public class Jump : MonoBehaviour
     private Rigidbody rb = null;
 
     private bool bJump = false;
-    private bool IsGrounded { get { return nbGroundCollsions > 0; } }
+    private bool IsGrounded { get { return collidingObjects.Count > 0; } }
 
-    private uint nbGroundCollsions = 0;
+    private List<GameObject> collidingObjects = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,6 @@ public class Jump : MonoBehaviour
         if (IsGrounded && bJump)
         {
             rb.velocity = new Vector3(rb.velocity.x, jump, 0);
-            //IsGrounded = false;
         }
         bJump = false;
     }
@@ -50,24 +49,11 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.tag == "ground")
         {
+            float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
+            if (dot > 0.5)
             {
-                //float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
-                //if (dot > 0.5 || dot < -0.5)
-                //{
-                    nbGroundCollsions++;
-                    //isGrounded = true;
-                //}
+                collidingObjects.Add(collision.gameObject);
             }
-
-            //{
-            //    // TODO : fix wall block
-            //    float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.right);
-            //    if (dot > 0.5 || dot < -0.5)
-            //    {
-            //        if (rb.velocity.x > 0)
-            //            rb.velocity = new Vector3(0, rb.velocity.y);
-            //    }
-            //}
         }
     }
 
@@ -75,19 +61,7 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.tag == "ground")
         {
-            nbGroundCollsions--;
-            //isGrounded = true;
-
-            //if (collision.contacts.Length > 0)
-            //{
-            //    // TODO : fix wall block
-            //    float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.right);
-            //    if (dot > 0.5 || dot < -0.5)
-            //    {
-            //        if (rb.velocity.x > 0)
-            //            rb.velocity = new Vector3(0, rb.velocity.y);
-            //    }
-            //}
+            collidingObjects.Remove(collision.gameObject);
         }
     }
 }
