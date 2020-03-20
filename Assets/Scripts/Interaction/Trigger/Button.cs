@@ -7,6 +7,13 @@ public class Button : Trigger
     [SerializeField] private float interactionRadius = 2f;
     [SerializeField] private float activationLength = 1f;
 
+    private Coroutine releaseCoroutine = null;
+
+    private void Start()
+    {
+
+    }
+
     IEnumerator ReleaseCoroutine()
     {
         // wait for activationLength seconds
@@ -21,8 +28,10 @@ public class Button : Trigger
     {
         IsOn = true;
         Enable();
-        StopCoroutine(ReleaseCoroutine());
-        StartCoroutine(ReleaseCoroutine());
+
+        if (releaseCoroutine != null)
+            StopCoroutine(releaseCoroutine);
+        releaseCoroutine = StartCoroutine(ReleaseCoroutine());
     }
 
     public void TryToPress(Vector3 playerPos)
