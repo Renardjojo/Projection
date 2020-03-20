@@ -6,8 +6,8 @@ using System;
 
 public class PressureButton : Trigger
 {
-    [SerializeField] private uint necessaryPressure = 1;
-    private uint currentPressure = 0;
+    [SerializeField] private uint necessaryCollidingObjects = 1;
+    private uint currentCollidingObjects = 0;
 
 
     // Start is called before the first frame update
@@ -27,7 +27,7 @@ public class PressureButton : Trigger
     {
         if (IsInputCollision(collision))
         {
-            currentPressure++;
+            currentCollidingObjects++;
             UpdateButton();
         }
     }
@@ -36,18 +36,18 @@ public class PressureButton : Trigger
     {
         if (IsInputCollision(collision))
         {
-            currentPressure--;
+            currentCollidingObjects--;
             UpdateButton();
         }
     }
 
     private void UpdateButton()
     {
-        if (IsOn && currentPressure < necessaryPressure)
+        if (IsOn && currentCollidingObjects < necessaryCollidingObjects)
         {
             OnDisable();
         }
-        else if (!IsOn && currentPressure >= necessaryPressure)
+        else if (!IsOn && currentCollidingObjects >= necessaryCollidingObjects)
         {
             Enable();
         }
