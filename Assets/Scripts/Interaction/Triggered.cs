@@ -7,14 +7,14 @@ using System;
 
 class Triggered : MonoBehaviour
 {
-    [SerializeField] protected List<Trigger>    TriggerList { get; set; }
-    [SerializeField] protected UnityEvent       OnActivatedEvent;
-    [SerializeField] protected UnityEvent       OnDisabledEvent;
+    [SerializeField] protected List<Trigger>    triggerList;
+    [SerializeField] protected UnityEvent       onActivatedEvent;
+    [SerializeField] protected UnityEvent       onDisabledEvent;
     [SerializeField] protected bool             isActivate = false;
 
     public void TryToActivate()
     {
-        foreach (Trigger trig in TriggerList)
+        foreach (Trigger trig in triggerList)
         {
             if (!trig.IsOn)
                 return;
@@ -23,9 +23,9 @@ class Triggered : MonoBehaviour
         OnActivated();
     }
 
-    public void TryToDesactivate()
+    public void TryToDeactivate()
     {
-        foreach (Trigger trig in TriggerList)
+        foreach (Trigger trig in triggerList)
         {
             if (!trig.IsOn)
             {
@@ -37,11 +37,11 @@ class Triggered : MonoBehaviour
 
     public void OnActivated()
     {
-        OnActivatedEvent?.Invoke();
+        onActivatedEvent?.Invoke();
     }
 
     public void OnDisabled()
     {
-        OnDisabledEvent?.Invoke();
+        onDisabledEvent?.Invoke();
     }
 }
