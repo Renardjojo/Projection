@@ -54,7 +54,6 @@ public class Jump : MonoBehaviour
                 //float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
                 //if (dot > 0.5 || dot < -0.5)
                 //{
-                    Debug.Log("Enter");
                     nbGroundCollsions++;
                     //isGrounded = true;
                 //}
@@ -76,7 +75,6 @@ public class Jump : MonoBehaviour
     {
         if (collision.gameObject.tag == "ground")
         {
-            Debug.Log("Exit");
             nbGroundCollsions--;
             //isGrounded = true;
 
