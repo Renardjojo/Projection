@@ -9,6 +9,13 @@ public class PressureButton : Trigger
     [SerializeField] private uint necessaryPressure = 1;
     private uint currentPressure = 0;
 
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        IsOn = false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         currentPressure++;

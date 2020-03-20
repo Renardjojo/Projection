@@ -14,14 +14,14 @@ public abstract class Trigger : MonoBehaviour
 
     protected void Enable()
     {
-        OnTriggered();
         IsOn = true;
+        OnTriggered();
     }
 
     protected void OnDisable()
     {
-        OnUntriggered();
         IsOn = false;
+        OnUntriggered();
     }
 }
 
