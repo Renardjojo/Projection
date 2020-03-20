@@ -34,6 +34,12 @@ public class PlayerController : MonoBehaviour
         {
             OnInteractButton += lever.TryToSwitch;
         }
+
+        Button[] components2 = GameObject.FindObjectsOfType<Button>();
+        foreach (Button button in components2)
+        {
+            OnInteractButton += button.TryToPress;
+        }
     }
 
     // Update is called once per frame
