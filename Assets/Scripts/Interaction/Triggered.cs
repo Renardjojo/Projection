@@ -12,6 +12,16 @@ class Triggered : MonoBehaviour
     [SerializeField] protected UnityEvent       OnDisabledEvent;
     [SerializeField] protected bool             isActivate = false;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        foreach (Trigger trig in TriggerList)
+        {
+            trig.OnTriggered   += TryToActivate;
+            trig.OnUntriggered += TryToDesactivate;
+        }
+    }
+
     public void TryToActivate()
     {
         foreach (Trigger trig in TriggerList)

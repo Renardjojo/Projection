@@ -4,12 +4,25 @@ using UnityEngine;
 
 using System;
 
-public interface Trigger
+public abstract class Trigger : MonoBehaviour
 {
-    bool IsOn { get; set; }
+    [SerializeField]
+    public bool IsOn { get; set; }
 
-    event Action onTriggered;
-    event Action onUntriggered;
+    public event Action OnTriggered;
+    public event Action OnUntriggered;
+
+    protected void Enable()
+    {
+        OnTriggered();
+        IsOn = true;
+    }
+
+    protected void OnDisable()
+    {
+        OnUntriggered();
+        IsOn = false;
+    }
 }
 
 
