@@ -5,44 +5,69 @@ using UnityEngine.Events;
 using UnityEditor;
 using System;
 
+[System.Serializable]
+public class AndTriggerList
+{
+    public List<Trigger> andList;
+}
+
 class Triggered : MonoBehaviour
 {
-    [SerializeField] protected List<Trigger>    triggerList      = null;
-    [SerializeField] protected UnityEvent       OnActivatedEvent = null;
-    [SerializeField] protected UnityEvent       OnDisabledEvent  = null;
-                     protected bool             isActivate       = false;
+    [SerializeField] protected List<AndTriggerList>  orTriggerList      = null;
+    [SerializeField] protected UnityEvent           OnActivatedEvent = null;
+    [SerializeField] protected UnityEvent           OnDisabledEvent  = null;
+                     protected bool                 isActivate       = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Trigger trig in triggerList)
+        foreach (AndTriggerList andTriggerList in orTriggerList)
         {
-            trig.OnTriggered   += TryToActivate;
-            trig.OnUntriggered += TryToDeactivate;
+            foreach (Trigger trig in andTriggerList.andList)
+            {
+                trig.OnTriggered += TryToActivate;
+                trig.OnUntriggered += TryToDeactivate;
+            }
         }
     }
 
     public void TryToActivate()
     {
-        foreach (Trigger trig in triggerList)
+        bool Or = false;
+
+        foreach (AndTriggerList andTriggerList in orTriggerList)
         {
-            if (!trig.IsOn)
-                return;
+            bool And = true;
+            foreach (Trigger trig in andTriggerList.andList)
+            {
+                And &= trig.IsOn;
+            }
+            Debug.Log(And + "   ");
+            Or |= And;
         }
 
-        OnActivated();
+        Debug.Log("or : " + Or);
+
+        if (Or)
+            OnActivated();
     }
 
     public void TryToDeactivate()
     {
-        foreach (Trigger trig in triggerList)
+        bool Or = false;
+
+        foreach (AndTriggerList andTriggerList in orTriggerList)
         {
-            if (!trig.IsOn)
+            bool And = true;
+            foreach (Trigger trig in andTriggerList.andList)
             {
-                OnDisabled();
-                return;
+                And &= trig.IsOn;
             }
+            Or |= And;
         }
+
+        if (!Or)
+            OnDisabled();
     }
 
     public void OnActivated()
