@@ -9,8 +9,12 @@ public class PlayerController : MonoBehaviour
     private GameObject              body;
     private Move                    bodyMoveScript;
     private Jump                    bodyJumpScript;
+    private Rigidbody               bodyRigidbody;
 
     private GameObject              shadow;
+    private Move                    shadowMoveScript;
+    private Jump                    shadowJumpScript;
+    private Rigidbody               shadowRigidbody;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
 
@@ -23,11 +27,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        body           = transform.Find("Body").gameObject;
-        bodyMoveScript = body.GetComponent<Move>();
-        bodyJumpScript = body.GetComponent<Jump>();
+        body            = transform.Find("Body").gameObject;
+        bodyMoveScript  = body.GetComponent<Move>();
+        bodyJumpScript  = body.GetComponent<Jump>();
+        bodyRigidbody   = body.GetComponent<Rigidbody>();
 
-        shadow         = body.transform.Find("Shadow").gameObject;
+        shadow          = transform.Find("Shadow").gameObject;
+        shadowMoveScript= shadow.GetComponent<Move>();
+        shadowJumpScript= shadow.GetComponent<Jump>();
+        shadowRigidbody = shadow.GetComponent<Rigidbody>();
+        shadowRigidbody.detectCollisions = false;
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -50,7 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadow.GetComponent<Move>().MoveX(value);
+            shadowMoveScript.MoveX(value);
         }
         else
         {
@@ -62,7 +71,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadow.GetComponent<Jump>().StartJump(value);
+            shadowJumpScript.StartJump(value);
         }
         else
         {
@@ -97,21 +106,16 @@ public class PlayerController : MonoBehaviour
 
     private void AddComponenetToControlShadow()
     {
-        Rigidbody body = shadow.AddComponent<Rigidbody>();
-
-        body.constraints = (RigidbodyConstraints)120; //RigidbodyConstraints.FreezeRotation + RigidbodyConstraints.FreezePositionZ;
-        body.useGravity = true;
-
-        shadow.AddComponent<CapsuleCollider>();
-        shadow.AddComponent<Move>();
-        shadow.AddComponent<Jump>();
+        Destroy(shadow.GetComponent<FixedJoint>());
+        shadowRigidbody.detectCollisions = true;
+        shadowRigidbody.mass = 1f;
     }
 
     private void RemoveComponentToUnconstrolShadow()
     {
-        Destroy(shadow.GetComponent<Move>());
-        Destroy(shadow.GetComponent<Jump>());
-        Destroy(shadow.GetComponent<CapsuleCollider>());
-        Destroy(shadow.GetComponent<Rigidbody>());
+        shadow.AddComponent<FixedJoint>().connectedBody = bodyRigidbody;
+        shadowRigidbody.detectCollisions = false;
+        shadowRigidbody.velocity = Vector3.zero;
+        shadowRigidbody.mass = 0f;
     }
 }
