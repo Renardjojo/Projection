@@ -13,7 +13,7 @@ public class AndTriggerList
 
 class Triggered : MonoBehaviour
 {
-    [SerializeField] protected List<AndTriggerList>  orTriggerList      = null;
+    [SerializeField] protected List<AndTriggerList>  orTriggerList   = null;
     [SerializeField] protected UnityEvent           OnActivatedEvent = null;
     [SerializeField] protected UnityEvent           OnDisabledEvent  = null;
                      protected bool                 isActivate       = false;
@@ -42,11 +42,8 @@ class Triggered : MonoBehaviour
             {
                 And &= trig.IsOn;
             }
-            Debug.Log(And + "   ");
             Or |= And;
         }
-
-        Debug.Log("or : " + Or);
 
         if (Or)
             OnActivated();
