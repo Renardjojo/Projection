@@ -47,21 +47,15 @@ public class Jump : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "ground")
+        float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
+        if (dot > 0.5)
         {
-            float dot = Vector3.Dot(collision.contacts[0].normal, Vector3.up);
-            if (dot > 0.5)
-            {
-                collidingObjects.Add(collision.gameObject);
-            }
+            collidingObjects.Add(collision.gameObject);
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "ground")
-        {
-            collidingObjects.Remove(collision.gameObject);
-        }
+        collidingObjects.Remove(collision.gameObject);
     }
 }
