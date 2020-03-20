@@ -10,7 +10,7 @@ class Triggered : MonoBehaviour
     [SerializeField] protected List<Trigger>    triggerList;
     [SerializeField] protected UnityEvent       OnActivatedEvent;
     [SerializeField] protected UnityEvent       OnDisabledEvent;
-    [SerializeField] protected bool             isActivate = false;
+                     protected bool             isActivate = false;
 
     // Start is called before the first frame update
     void Start()
