@@ -32,7 +32,8 @@ public enum InputType
 {
     Horizontal,
     Vertical,
-    Transpose
+    Transpose,
+    Interact
 }
 
 

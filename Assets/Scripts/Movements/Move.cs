@@ -33,14 +33,4 @@ public class Move : MonoBehaviour
     {
         rb.velocity = new Vector3(Time.fixedDeltaTime * horizontalMove * speed, rb.velocity.y, 0);
     }
-
-    public void OnQPressed()
-    {
-        Debug.Log("pressed");
-    }
-
-    public void OnQReleased()
-    {
-        Debug.Log("released");
-    }
 }

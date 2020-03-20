@@ -9,19 +9,19 @@ public abstract class Trigger : MonoBehaviour
     [SerializeField]
     public bool IsOn { get; set; }
 
-    public event Action OnTriggered;
-    public event Action OnUntriggered;
+    public event Action OnTriggered   = null;
+    public event Action OnUntriggered = null;
 
     protected void Enable()
     {
         IsOn = true;
-        OnTriggered();
+        OnTriggered?.Invoke();
     }
 
-    protected void OnDisable()
+    protected void Disable()
     {
         IsOn = false;
-        OnUntriggered();
+        OnUntriggered?.Invoke();
     }
 }
 
