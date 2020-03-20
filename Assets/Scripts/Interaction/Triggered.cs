@@ -7,9 +7,9 @@ using System;
 
 class Triggered : MonoBehaviour
 {
-    [SerializeField] protected List<Trigger>    triggerList;
-    [SerializeField] protected UnityEvent       OnActivatedEvent;
-    [SerializeField] protected UnityEvent       OnDisabledEvent;
+    [SerializeField] protected List<Trigger>    triggerList      = null;
+    [SerializeField] protected UnityEvent       OnActivatedEvent = null;
+    [SerializeField] protected UnityEvent       OnDisabledEvent  = null;
     [SerializeField] protected bool             isActivate = false;
 
     // Start is called before the first frame update

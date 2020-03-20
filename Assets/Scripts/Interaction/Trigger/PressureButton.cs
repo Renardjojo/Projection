@@ -16,17 +16,32 @@ public class PressureButton : Trigger
         IsOn = false;
     }
 
+    //  Returns false if we should ignore the collision.
+    //  Else, returns true;
+    private bool IsInputCollision(Collision collision)
+    {
+        return collision.gameObject.CompareTag("BodyPlayer");
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        currentPressure++;
+        if (IsInputCollision(collision))
+        {
+            currentPressure++;
+            UpdateButton();
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        currentPressure--;
+        if (IsInputCollision(collision))
+        {
+            currentPressure--;
+            UpdateButton();
+        }
     }
 
-    private void Update()
+    private void UpdateButton()
     {
         if (IsOn && currentPressure < necessaryPressure)
         {
