@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         bodyMoveScript = body.GetComponent<Move>();
         bodyJumpScript = body.GetComponent<Jump>();
 
-        shadow              = body.transform.Find("Shadow").gameObject;
+        shadow         = body.transform.Find("Shadow").gameObject;
     }
 
     // Update is called once per frame
@@ -65,12 +65,12 @@ public class PlayerController : MonoBehaviour
         {
             bodyMoveScript.MoveX(0f);
 
-            onTransposed();
+            onTransposed?.Invoke();
             AddComponenetToControlShadow();
         }
         else
         {
-            onUntransposed();
+            onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
         }
 
