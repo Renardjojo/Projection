@@ -6,6 +6,7 @@ using System;
 
 public class PressureButton : Trigger
 {
+    [SerializeField] private String[] tagsWithCollisionEnabled = new string[] { "BodyPlayer" };
     [SerializeField] private uint necessaryCollidingObjects = 1;
     private uint currentCollidingObjects = 0;
 
@@ -20,7 +21,15 @@ public class PressureButton : Trigger
     //  Else, returns true;
     private bool IsInputCollision(Collision collision)
     {
-        return collision.gameObject.CompareTag("BodyPlayer");
+        foreach (String tag in tagsWithCollisionEnabled)
+        {
+            if (collision.gameObject.CompareTag(tag))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void OnCollisionEnter(Collision collision)
