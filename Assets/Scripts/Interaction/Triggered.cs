@@ -15,10 +15,10 @@ class Triggered : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Trigger trig in TriggerList)
+        foreach (Trigger trig in triggerList)
         {
             trig.OnTriggered   += TryToActivate;
-            trig.OnUntriggered += TryToDesactivate;
+            trig.OnUntriggered += TryToDeactivate;
         }
     }
 
