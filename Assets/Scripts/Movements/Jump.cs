@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    [SerializeField]
-    private float jump = 10f;
+    [SerializeField] private float jump = 10f;
+    [SerializeField] private float sensibility = 0.075f;
 
     private Rigidbody rb = null;
 
@@ -28,8 +28,10 @@ public class Jump : MonoBehaviour
 
     public void StartJump(float value)
     {
-        if (value > 0.5f)
+        if (value > sensibility)
+        {
             bJump = true;
+        }
     }
 
     private void FixedUpdate()
