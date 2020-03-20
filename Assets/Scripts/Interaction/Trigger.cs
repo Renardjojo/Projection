@@ -7,8 +7,8 @@ using System;
 
 public interface Trigger
 {
-    public bool IsOn { get; set; }
+    bool IsOn { get; set; }
 
-    public event Action onTriggered;
-    public event Action onUntriggered;
+    event Action onTriggered;
+    event Action onUntriggered;
 }

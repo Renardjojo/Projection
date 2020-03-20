@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface Triggered
 {
-    public Trigger TriggerList { get; set; }
+    Trigger TriggerList { get; set; }
 
-    public void OnActivated();
-    public void OnDisabled();
+    void OnActivated();
+    void OnDisabled();
 }
