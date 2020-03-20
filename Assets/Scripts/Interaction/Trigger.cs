@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using System.Collections;
 using System;
 
 public interface Trigger
@@ -12,3 +11,5 @@ public interface Trigger
     event Action onTriggered;
     event Action onUntriggered;
 }
+
+
