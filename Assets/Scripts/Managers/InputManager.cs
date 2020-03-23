@@ -35,7 +35,8 @@ public enum InputType
     Transpose,
     Interact,
     Jump, 
-    LightControl
+    LightHorizontal,
+    LightVertical
 }
 
 
