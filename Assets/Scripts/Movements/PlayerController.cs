@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private Jump                    shadowJumpScript;
     private Rigidbody               shadowRigidbody;
 
-    private GameObject playerLight;
+    private PlayerLight playerLight = null;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
     [SerializeField] private float                     shadowMaxMovementRadius = 3f;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         shadowRigidbody = shadow.GetComponent<Rigidbody>();
         shadowRigidbody.detectCollisions = false;
 
-        playerLight = body.transform.Find("PlayerLight").gameObject;
+        playerLight = body.transform.Find("PlayerLight").gameObject.GetComponent<PlayerLight>();
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -136,10 +136,18 @@ public class PlayerController : MonoBehaviour
 
     public void SetLightX(float value)
     {
-        playerLight.transform.localPosition = new Vector3(value, playerLight.transform.localPosition.y, -0.5f);        
+        playerLight.SetLightX(value);       
     }
     public void SetLightY(float value)
     {
-        playerLight.transform.localPosition = new Vector3(playerLight.transform.localPosition.x, value, -0.5f);
+        playerLight.SetLightY(value);
+    }
+    public void MoveLightX(float value)
+    {
+        playerLight.MoveLightX(value);
+    }
+    public void MoveLightY(float value)
+    {
+        playerLight.MoveLightY(value);
     }
 }
