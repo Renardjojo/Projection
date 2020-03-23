@@ -16,7 +16,7 @@ public class MovingObject : MonoBehaviour
     private float moveSpeed = 0.5f;
 
     float step = 0f; //bewteen 0 and 1. 0 on start position and 1 on end position
-    bool isMoving = true;
+    [SerializeField] bool isMoving = true;
 
 
     // Start is called before the first frame update
