@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 Debug.Log("Out");
-                shadowRigidbody.velocity = Vector3.zero;
+                shadowRigidbody.isKinematic = true;
             }
         }
         else
