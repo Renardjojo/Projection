@@ -36,13 +36,11 @@ public class MovingObject : MonoBehaviour
             if (moveTowardEndPosition)
             {
                 step += moveSpeed * Time.deltaTime;
-                if(step > 1f)
+                if (step > 1f)
                 {
                     step = 1f;
                     moveTowardEndPosition = false;
                 }
-
-
             }
             else
             {
