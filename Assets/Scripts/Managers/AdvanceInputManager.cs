@@ -53,7 +53,7 @@ public class Control
     private List<InputCallbacksF> analogButtonList;
 }
 
-public class InputManagerV2 : MonoBehaviour
+public class AdvanceInputManager : MonoBehaviour
 {
     [Header("Keyboard")]
     [SerializeField] private ControlToUse currentKeyboardControl;
