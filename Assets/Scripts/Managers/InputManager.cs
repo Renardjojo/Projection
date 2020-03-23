@@ -41,10 +41,10 @@ public enum InputType
 public class InputManager : MonoBehaviour
 {
     [SerializeField, Tooltip("Calls \"onPressed\" and \"onReleased\" events when the key is pressed or released.")] 
-    private List<InputCallbacks>  buttonList   = null;
+    private List<InputCallbacks>  digitalButtonlist   = null;
 
     [SerializeField, Tooltip("Calls \"callback\" each tick with different values depending on the axes.")] 
-    private List<InputCallbacksF> joystickList = null;
+    private List<InputCallbacksF> analogButtonList = null;
 
 
     // Start is called before the first frame update
@@ -57,7 +57,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         // For each button
-        foreach (InputCallbacks input in buttonList)
+        foreach (InputCallbacks input in digitalButtonlist)
         {
             // Call callback if input is on
             if (Input.GetButton(input.type.ToString()))
@@ -77,7 +77,7 @@ public class InputManager : MonoBehaviour
         }
 
         // For each joystick
-        foreach (InputCallbacksF input in joystickList)
+        foreach (InputCallbacksF input in analogButtonList)
         {
             // Call callback with joystick values
             input.callback?.Invoke(Input.GetAxis(input.type.ToString()));
