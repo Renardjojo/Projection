@@ -2,58 +2,58 @@
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
-/*
-// Callbacks with no arguments.
-[System.Serializable]
-public class InputCallbacksV2
+
+public enum ControlToUse : int
 {
-    public InputType type;
-    //public string name;
-    public UnityEvent onPressed, onReleased;
-
-    public bool isOn;
-}
-
-[System.Serializable]
-public class UnityEventFloatV2 : UnityEvent<float> { }
-
-// Callbacks with no arguments.
-[System.Serializable]
-public class InputCallbacksFV2
-{
-    public InputType type;
-    //public string name;
-    public UnityEventFloat callback;
-}*/
-/*
-[SerializeField, Tooltip("Calls \"onPressed\" and \"onReleased\" events when the key is pressed or released.")]
-private List<InputCallbacks> digitalButtonlist = null;
-
-[SerializeField, Tooltip("Calls \"callback\" each tick with different values depending on the axes.")]
-private List<InputCallbacksF> analogButtonList = null;
-*/
-
-public enum ControlToUse
-{
-    Default,
+    Default = 0,
     Control1,
     Control2,
     Control3
 }
+
+public enum InputAnalogueType
+{
+    LeftHorizontal,
+    LeftVertical,
+    RightHorizontal,
+    RightVertical
+}
+
+[System.Serializable]
+public class UnityEventCallBackFloat : UnityEvent<float> { }
+
+// Callbacks with no arguments.
+[System.Serializable]
+public class AdvanceDigitalInputCallbacks
+{
+    public KeyCode type;
+    public UnityEvent onPressed, onReleased;
+    public bool isOn;
+}
+
+[System.Serializable]
+public class AdvanceAnalogicInputCallbacks
+{
+    public InputAnalogueType        type;
+    public UnityEventCallBackFloat  callback;
+    public float                    value;
+}
+
+
 
 [System.Serializable]
 public class Control
 {
     [SerializeField] public string name;
 
-    [SerializeField, Tooltip("Calls \"onPressed\" and \"onReleased\" events when the key is pressed or released.")]
-    private List<InputCallbacks> digitalButtonlist;
+    [Tooltip("Calls \"onPressed\" and \"onReleased\" events when the key is pressed or released.")]
+    public List<AdvanceDigitalInputCallbacks> digitalButtonlist;
 
-    [SerializeField, Tooltip("Calls \"callback\" each tick with different values depending on the axes.")]
-    private List<InputCallbacksF> analogButtonList;
+    [Tooltip("Calls \"callback\" each tick with different values depending on the axes.")]
+    public List<AdvanceAnalogicInputCallbacks> analogButtonList;
 }
 
-public class InputManagerV2 : MonoBehaviour
+public class AdvanceInputManager : MonoBehaviour
 {
     [Header("Keyboard")]
     [SerializeField] private ControlToUse currentKeyboardControl;
@@ -62,7 +62,7 @@ public class InputManagerV2 : MonoBehaviour
     [Header("Game pad")]
     [SerializeField] private ControlToUse currentGamePadControl;
     [SerializeField] private List<Control> gamePadControls;
-    /*
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -73,10 +73,10 @@ public class InputManagerV2 : MonoBehaviour
     void Update()
     {
         // For each button
-        foreach (InputCallbacksV2 input in digitalButtonlist)
+        foreach (AdvanceDigitalInputCallbacks input in keyboardControls[(int)currentKeyboardControl].digitalButtonlist)
         {
             // Call callback if input is on
-            if (Input.GetButton(input.type.ToString()))
+            if (Input.GetKey(input.type))
             {
                 if (!input.isOn)
                 {
@@ -93,10 +93,10 @@ public class InputManagerV2 : MonoBehaviour
         }
 
         // For each joystick
-        foreach (InputCallbacksFV2 input in analogButtonList)
+        foreach (AdvanceAnalogicInputCallbacks input in keyboardControls[(int)currentKeyboardControl].analogButtonList)
         {
             // Call callback with joystick values
             input.callback?.Invoke(Input.GetAxis(input.type.ToString()));
         }
-    }*/
+    }
 }
