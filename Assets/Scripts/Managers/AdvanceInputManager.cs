@@ -72,8 +72,18 @@ public class AdvanceInputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        updateDigitalInput(keyboardControls[(int)currentKeyboardControl].digitalButtonlist);
+        updateAnalogicInput(keyboardControls[(int)currentKeyboardControl].analogButtonList);
+
+        updateDigitalInput(gamePadControls[(int)currentGamePadControl].digitalButtonlist);
+        updateAnalogicInput(gamePadControls[(int)currentGamePadControl].analogButtonList);
+
+    }
+
+    void updateDigitalInput(List<AdvanceDigitalInputCallbacks> listDigitalInput)
+    {
         // For each button
-        foreach (AdvanceDigitalInputCallbacks input in keyboardControls[(int)currentKeyboardControl].digitalButtonlist)
+        foreach (AdvanceDigitalInputCallbacks input in listDigitalInput)
         {
             // Call callback if input is on
             if (Input.GetKey(input.type))
@@ -91,9 +101,12 @@ public class AdvanceInputManager : MonoBehaviour
                 input.isOn = false;
             }
         }
+    }
 
+    void updateAnalogicInput(List<AdvanceAnalogicInputCallbacks> listAnalogicInput)
+    {
         // For each joystick
-        foreach (AdvanceAnalogicInputCallbacks input in keyboardControls[(int)currentKeyboardControl].analogButtonList)
+        foreach (AdvanceAnalogicInputCallbacks input in listAnalogicInput)
         {
             // Call callback with joystick values
             input.callback?.Invoke(Input.GetAxis(input.type.ToString()));
