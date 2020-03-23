@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     private Jump                    shadowJumpScript;
     private Rigidbody               shadowRigidbody;
 
-    [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
+    [SerializeField] private CinemachineVirtualCamera   cameraSetting = null;
+    [SerializeField] private float                      shadowMaxMovementRadius = 3f;
+
 
     bool isTransposed = false;
 
@@ -59,7 +61,15 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.MoveX(value);
+            if ((shadow.transform.position - body.transform.position).magnitude <= shadowMaxMovementRadius)
+            {
+                shadowMoveScript.MoveX(value);
+            }
+            else
+            {
+                Debug.Log("Out");
+                shadowRigidbody.velocity = Vector3.zero;
+            }
         }
         else
         {
@@ -71,7 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowJumpScript.StartJump(value);
+            //shadowJumpScript.StartJump(value);
         }
         else
         {
