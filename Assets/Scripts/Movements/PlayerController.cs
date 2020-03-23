@@ -12,12 +12,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody               bodyRigidbody;
 
     private GameObject              shadow;
-    private Move                    shadowMoveScript;
-    private Jump                    shadowJumpScript;
-    private Rigidbody               shadowRigidbody;
+    [SerializeField] private float  shadowSpeed = 5f;
+    //private Move                    shadowMoveScript;
+    //private Jump                    shadowJumpScript;
+    //private Rigidbody               shadowRigidbody;
 
     [SerializeField] private CinemachineVirtualCamera   cameraSetting = null;
-    [SerializeField] private float                      shadowMaxMovementRadius = 3f;
+    [SerializeField] private float                      shadowMaxMovementRadius = 10f;
 
 
     bool isTransposed = false;
@@ -34,11 +35,11 @@ public class PlayerController : MonoBehaviour
         bodyJumpScript  = body.GetComponent<Jump>();
         bodyRigidbody   = body.GetComponent<Rigidbody>();
 
-        shadow          = transform.Find("Shadow").gameObject;
-        shadowMoveScript= shadow.GetComponent<Move>();
+        shadow          = body.transform.Find("Shadow").gameObject;
+        /*shadowMoveScript= shadow.GetComponent<Move>();
         shadowJumpScript= shadow.GetComponent<Jump>();
         shadowRigidbody = shadow.GetComponent<Rigidbody>();
-        shadowRigidbody.detectCollisions = false;
+        shadowRigidbody.detectCollisions = false;*/
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -61,19 +62,29 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            if ((shadow.transform.position - body.transform.position).magnitude <= shadowMaxMovementRadius)
-            {
-                shadowMoveScript.MoveX(value);
-            }
-            else
-            {
-                Debug.Log("Out");
-                shadowRigidbody.isKinematic = true;
-            }
+            //shadowMoveScript.MoveX(value);
         }
         else
         {
             bodyMoveScript.MoveX(value);
+        }
+    }
+
+    public void MoveShadowX(float value)
+    {
+        Vector3 movement = Vector3.right * value * shadowSpeed * Time.deltaTime;
+        if (((shadow.transform.position + movement) - body.transform.position).magnitude <= shadowMaxMovementRadius)
+        {
+            shadow.transform.position += Vector3.right * value * shadowSpeed * Time.deltaTime;
+        }
+    }
+
+    public void MoveShadowY(float value)
+    {
+        Vector3 movement = Vector3.up * value * shadowSpeed * Time.deltaTime;
+        if (((shadow.transform.position + movement) - body.transform.position).magnitude <= shadowMaxMovementRadius)
+        {
+            shadow.transform.position += Vector3.up * value * shadowSpeed * Time.deltaTime;
         }
     }
 
@@ -95,15 +106,18 @@ public class PlayerController : MonoBehaviour
 
         if (isTransposed)
         {
-            bodyMoveScript.MoveX(0f);
+            //bodyMoveScript.MoveX(0f);
 
             onTransposed?.Invoke();
-            AddComponenetToControlShadow();
+            //AddComponenetToControlShadow();
+
+            shadow.GetComponent<CapsuleCollider>().isTrigger = false;
         }
         else
         {
             onUntransposed?.Invoke();
-            RemoveComponentToUnconstrolShadow();
+            //RemoveComponentToUnconstrolShadow();
+            shadow.GetComponent<CapsuleCollider>().isTrigger = true;
         }
 
         cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
@@ -113,7 +127,7 @@ public class PlayerController : MonoBehaviour
     {
         OnInteractButton(body.transform.position);
     }
-
+    /*
     private void AddComponenetToControlShadow()
     {
         Destroy(shadow.GetComponent<FixedJoint>());
@@ -127,5 +141,5 @@ public class PlayerController : MonoBehaviour
         shadowRigidbody.detectCollisions = false;
         shadowRigidbody.velocity = Vector3.zero;
         shadowRigidbody.mass = 0f;
-    }
+    }*/
 }
