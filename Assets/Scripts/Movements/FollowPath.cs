@@ -7,7 +7,7 @@ public class FollowPath : MonoBehaviour
     [SerializeField] private GameObject target   = null;
     [SerializeField] private PlayerController pc = null;
     [SerializeField] [Range(0f, 10f)] private float delay = 3f;
-    [SerializeField] [Range(1f, 5f)] private float slownessWhenSwitch = 1f;
+    [SerializeField] [Range(1f, 5f)] private float slownessWhenSwitch = 2f;
 
     private Queue<float>      storedTime     = new Queue<float>();
     private Queue<Vector3>    storedLocation = new Queue<Vector3>();
