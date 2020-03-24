@@ -86,6 +86,7 @@ public class CharacterMovements : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -2.5f); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
         else
         {
@@ -100,6 +101,7 @@ public class CharacterMovements : MonoBehaviour
 
             // Move the player.       
             controller.Move((moveDirection + moveDirection2) * Time.deltaTime);
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -2.5f); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
     }
 }
