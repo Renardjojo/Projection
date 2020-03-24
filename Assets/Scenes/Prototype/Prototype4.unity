@@ -1070,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1443548
+      value: -1.8459418
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
@@ -1080,7 +1080,7 @@ PrefabInstance:
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.039504
+      value: -8.092122
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
@@ -1238,7 +1238,7 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 7240604001910613592}
             m_MethodName: Jump
-            m_Mode: 4
+            m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1306,7 +1306,7 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 7240604001910613592}
             m_MethodName: Jump
-            m_Mode: 4
+            m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1361,6 +1361,17 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+          - m_Target: {fileID: 641076360}
+            m_MethodName: SwitchSlowMotionInFirstPlan
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
         m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       onReleased:
@@ -1394,6 +1405,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 306098304}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &641076360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8741543329375767038, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1536025045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0265d7bce6725b459e3374d181bc786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &686083743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2263,6 +2286,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 7240604001920139140}
+    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
+        type: 3}
+      propertyPath: m_Lens.FarClipPlane
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7545925545144556887, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2628,7 +2671,7 @@ PrefabInstance:
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.1443548
+      value: -1.8459418
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
@@ -2638,7 +2681,7 @@ PrefabInstance:
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.039504
+      value: -8.092122
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
@@ -2674,26 +2717,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 7240604001920139140}
-    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
-        type: 3}
-      propertyPath: m_Lens.OrthographicSize
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
-        type: 3}
-      propertyPath: m_Lens.FarClipPlane
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2546798068423475312, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
-        type: 3}
-      propertyPath: m_LookAt
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 812843946929278598, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
@@ -2747,6 +2770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 520305632, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
+    - {fileID: 2729321391797541466, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b9d4e9ebeec6dbd4c892e389cba69fe3, type: 3}
 --- !u!1 &1543529902
 GameObject:
@@ -3835,6 +3859,21 @@ PrefabInstance:
         type: 3}
       propertyPath: airControlRatio
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713168126170357395, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: speedScale
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713168126170357395, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: jumpSpeed
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713168126170357395, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: gravity
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 018ad8c3af6012e4797ef77b357ee034, type: 3}
