@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8762677050326248344}
-  - component: {fileID: 520305632}
+  - component: {fileID: 2729321391797541466}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 7545925545144556887}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &520305632
+--- !u!114 &2729321391797541466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,82 +40,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 477984564608047949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b822dbfe6c4f040ba3b09e1fceb2d7, type: 3}
+  m_Script: {fileID: 11500000, guid: daf44bb175666a840af405b02308c8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  digitalButtonlist:
-  - type: 2
-    onPressed:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7240604001354782062, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
-            type: 3}
-          m_MethodName: Transpose
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onReleased:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    isOn: 0
-  - type: 3
-    onPressed:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: Interact
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onReleased:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    isOn: 0
-  - type: 4
-    onPressed:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7240604001354782062, guid: 2b24d3d73f22e8e4dadc6e0f72e4baf4,
-            type: 3}
-          m_MethodName: Jump
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    onReleased:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    isOn: 0
-  analogButtonList: []
+  currentKeyboardControl: 0
+  keyboardControls: []
+  currentGamePadControl: 0
+  gamePadControls: []
 --- !u!1 &3048744697992939749
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +146,55 @@ Transform:
   m_Father: {fileID: 7545925545144556887}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4693766589780761211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7225524034689848395}
+  - component: {fileID: 8741543329375767038}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7225524034689848395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693766589780761211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7545925545144556887}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8741543329375767038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693766589780761211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0265d7bce6725b459e3374d181bc786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScaleList:
+  - name: First layout
+    timeScale: 1
+  - name: Second layout
+    timeScale: 1
+  timeScale: 1
 --- !u!1 &6178726468656109685
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +256,7 @@ Transform:
   - {fileID: 862251026639424368}
   - {fileID: 6559076443637957085}
   - {fileID: 1386692158611732179}
+  - {fileID: 7225524034689848395}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
