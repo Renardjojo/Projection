@@ -27,12 +27,12 @@ public class PlayerController : MonoBehaviour
     {
         body            = transform.Find("Body").gameObject;
         bodyMoveScript  = body.GetComponent<CharacterMovements>();
-        bodyRigidbody   = body.GetComponent<Rigidbody>();
+        //bodyRigidbody   = body.GetComponent<Rigidbody>();
 
         shadow          = body.transform.Find("Shadow").gameObject;
         shadowMoveScript= shadow.GetComponent<CharacterMovements>();
-        shadowRigidbody = shadow.GetComponent<Rigidbody>();
-        shadowRigidbody.detectCollisions = false;
+        //shadowRigidbody = shadow.GetComponent<Rigidbody>();
+        //shadowRigidbody.detectCollisions = false;
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -111,12 +111,12 @@ public class PlayerController : MonoBehaviour
     private void AddComponenetToControlShadow()
     {
         shadowMoveScript.enabled = true;
-        shadowRigidbody.detectCollisions = true;
+        //shadowRigidbody.detectCollisions = true;
     }
 
     private void RemoveComponentToUnconstrolShadow()
     {
         shadowMoveScript.enabled = false;
-        shadowRigidbody.detectCollisions = false;
+        //shadowRigidbody.detectCollisions = false;
     }
 }

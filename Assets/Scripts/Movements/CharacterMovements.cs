@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+//[RequireComponent(typeof(Rigidbody))]
 public class CharacterMovements : MonoBehaviour
 {
     private float inputSpeed = 0f;
@@ -24,7 +24,7 @@ public class CharacterMovements : MonoBehaviour
         inputSpeed = f;
     }
 
-    private Rigidbody rb = null;
+    //private Rigidbody rb = null;
     private CharacterController controller = null;
 
     [SerializeField]
@@ -36,10 +36,17 @@ public class CharacterMovements : MonoBehaviour
 
     private Vector3 moveDirection = Vector3.zero;
 
+    private float defaultZValue;
+
+    private void Awake()
+    {
+        //rb = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
+    }
+
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        controller = GetComponent<CharacterController>();
+        defaultZValue = gameObject.transform.localPosition.z;
     }
 
 
@@ -86,7 +93,7 @@ public class CharacterMovements : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -2.5f); // to lock Z axis, not lockable by rigid body constraints or any other methods.
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
         else
         {
@@ -101,7 +108,7 @@ public class CharacterMovements : MonoBehaviour
 
             // Move the player.       
             controller.Move((moveDirection + moveDirection2) * Time.deltaTime);
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -2.5f); // to lock Z axis, not lockable by rigid body constraints or any other methods.
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
     }
 }
