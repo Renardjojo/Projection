@@ -7,13 +7,11 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     private GameObject              body;
-    private Move                    bodyMoveScript;
-    private Jump                    bodyJumpScript;
+    private CharacterMovements      bodyMoveScript;
     private Rigidbody               bodyRigidbody;
 
     private GameObject              shadow;
-    private Move                    shadowMoveScript;
-    private Jump                    shadowJumpScript;
+    private CharacterMovements      shadowMoveScript;
     private Rigidbody               shadowRigidbody;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
@@ -28,15 +26,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         body            = transform.Find("Body").gameObject;
-        bodyMoveScript  = body.GetComponent<Move>();
-        bodyJumpScript  = body.GetComponent<Jump>();
-        bodyRigidbody   = body.GetComponent<Rigidbody>();
+        bodyMoveScript  = body.GetComponent<CharacterMovements>();
+        //bodyRigidbody   = body.GetComponent<Rigidbody>();
 
-        shadow          = transform.Find("Shadow").gameObject;
-        shadowMoveScript= shadow.GetComponent<Move>();
-        shadowJumpScript= shadow.GetComponent<Jump>();
-        shadowRigidbody = shadow.GetComponent<Rigidbody>();
-        shadowRigidbody.detectCollisions = false;
+        shadow          = body.transform.Find("Shadow").gameObject;
+        shadowMoveScript= shadow.GetComponent<CharacterMovements>();
+        //shadowRigidbody = shadow.GetComponent<Rigidbody>();
+        //shadowRigidbody.detectCollisions = false;
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -49,11 +45,19 @@ public class PlayerController : MonoBehaviour
         {
             OnInteractButton += button.TryToPress;
         }
+
+        RemoveComponentToUnconstrolShadow();
     }
 
     // Update is called once per frame
     void Update()
-    {}
+    {
+        // TODO : TOREMOVE
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Jump();
+        }
+    }
 
     public void MoveX(float value)
     {
@@ -67,15 +71,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump(float value)
+    public void Jump()
     {
         if (isTransposed)
         {
-            shadowJumpScript.StartJump(value);
+            shadowMoveScript.Jump();
         }
         else
         {
-            bodyJumpScript.StartJump(value);
+            bodyMoveScript.Jump();
         }
     }
     
@@ -106,16 +110,13 @@ public class PlayerController : MonoBehaviour
 
     private void AddComponenetToControlShadow()
     {
-        Destroy(shadow.GetComponent<FixedJoint>());
-        shadowRigidbody.detectCollisions = true;
-        shadowRigidbody.mass = 1f;
+        shadowMoveScript.enabled = true;
+        //shadowRigidbody.detectCollisions = true;
     }
 
     private void RemoveComponentToUnconstrolShadow()
     {
-        shadow.AddComponent<FixedJoint>().connectedBody = bodyRigidbody;
-        shadowRigidbody.detectCollisions = false;
-        shadowRigidbody.velocity = Vector3.zero;
-        shadowRigidbody.mass = 0f;
+        shadowMoveScript.enabled = false;
+        //shadowRigidbody.detectCollisions = false;
     }
 }
