@@ -1,11 +1,9 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
-using System;
 
-[System.Serializable]
+[Serializable]
 public class AndTriggerList
 {
     public List<Trigger> andList;
@@ -13,10 +11,10 @@ public class AndTriggerList
 
 class Triggered : MonoBehaviour
 {
-    [SerializeField] protected List<AndTriggerList>  orTriggerList   = null;
-    [SerializeField] protected UnityEvent           OnActivatedEvent = null;
-    [SerializeField] protected UnityEvent           OnDisabledEvent  = null;
-                     protected bool                 isActivate       = false;
+    [SerializeField] protected List<AndTriggerList> orTriggerList       = null;
+    [SerializeField] protected UnityEvent           OnActivatedEvent    = null;
+    [SerializeField] protected UnityEvent           OnDisabledEvent     = null;
+                     protected bool                 isActivate          = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +23,8 @@ class Triggered : MonoBehaviour
         {
             foreach (Trigger trig in andTriggerList.andList)
             {
-                trig.OnTriggered += TryToActivate;
-                trig.OnUntriggered += TryToDeactivate;
+                trig.OnTriggered    += TryToActivate;
+                trig.OnUntriggered  += TryToDeactivate;
             }
         }
     }
@@ -40,7 +38,7 @@ class Triggered : MonoBehaviour
             bool And = true;
             foreach (Trigger trig in andTriggerList.andList)
             {
-                And &= trig.IsOn;
+                And &= trig.isOn;
             }
             Or |= And;
         }
@@ -58,7 +56,7 @@ class Triggered : MonoBehaviour
             bool And = true;
             foreach (Trigger trig in andTriggerList.andList)
             {
-                And &= trig.IsOn;
+                And &= trig.isOn;
             }
             Or |= And;
         }

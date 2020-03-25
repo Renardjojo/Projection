@@ -12,13 +12,14 @@ public class PressureButton : Trigger
 
 
     // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        IsOn = false;
+        isOn = false;
     }
 
     //  Returns false if we should ignore the collision.
-    //  Else, returns true;
+    //  Else, returns true
     private bool IsInputCollision(Collision collision)
     {
         foreach (String tag in tagsWithCollisionEnabled)
@@ -52,11 +53,11 @@ public class PressureButton : Trigger
 
     private void UpdateButton()
     {
-        if (IsOn && currentCollidingObjects < necessaryCollidingObjects)
+        if (isOn && currentCollidingObjects < necessaryCollidingObjects)
         {
             Disable();
         }
-        else if (!IsOn && currentCollidingObjects >= necessaryCollidingObjects)
+        else if (!isOn && currentCollidingObjects >= necessaryCollidingObjects)
         {
             Enable();
         }

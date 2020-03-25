@@ -28,17 +28,17 @@ public class PhysicLever : Trigger
         hingeJoint.spring = js;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        if (IsOn == true && hingeJoint.angle >= activateAngle)
+        if (isOn && hingeJoint.angle >= activateAngle)
         {
-            IsOn = false;
+            isOn = false;
             Disable();
         }
-        else if (IsOn == false && hingeJoint.angle < activateAngle)
+        else if (!isOn && hingeJoint.angle < activateAngle)
         {
-            IsOn = true;
+            isOn = true;
             Enable();
         }
     }

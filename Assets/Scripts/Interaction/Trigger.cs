@@ -1,27 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 using System;
 
 public abstract class Trigger : MonoBehaviour
 {
     [SerializeField]
-    public bool IsOn { get; set; }
+    public bool isOn { get; set; }
 
     public event Action OnTriggered   = null;
     public event Action OnUntriggered = null;
 
     protected void Enable()
     {
-        IsOn = true;
+        isOn = true;
         OnTriggered?.Invoke();
     }
 
     protected void Disable()
     {
-        IsOn = false;
+        isOn = false;
         OnUntriggered?.Invoke();
+    }
+
+    protected void Toggle()
+    {
+        isOn = !isOn;
+        if (isOn)   OnTriggered?.Invoke();
+        else        OnUntriggered?.Invoke();
     }
 }
 

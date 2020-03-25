@@ -6,25 +6,18 @@ public class Lever : Trigger
 {
     [SerializeField] private float interactionRadius = 2f;
 
-    public void Switch()
+    private float interactionRadius2;
+
+    private void Awake()
     {
-        if (IsOn)
-        {
-            IsOn = false;
-            Disable();
-        }
-        else
-        {
-            IsOn = true;
-            Enable();
-        }
+        interactionRadius2 = interactionRadius * interactionRadius;
     }
 
     public void TryToSwitch(Vector3 playerPos)
     {
-        if ((playerPos - transform.position).sqrMagnitude < interactionRadius * interactionRadius)
+        if ((playerPos - transform.position).sqrMagnitude < interactionRadius2)
         {
-            Switch();
+            Toggle();
         }
     }
 
