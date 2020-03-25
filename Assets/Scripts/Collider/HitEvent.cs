@@ -19,7 +19,8 @@ public class HitEvent : MonoBehaviour
         {
             if (collision.gameObject.tag == listCollisionEventWithSpecificTag[i].collisionWithTag)
             {
-                listCollisionEventWithSpecificTag[i].OnControllerHit?.Invoke();
+                Debug.Log("Hit");
+                listCollisionEventWithSpecificTag[i].OnHit?.Invoke();
             }
         }
     }

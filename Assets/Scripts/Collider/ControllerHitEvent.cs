@@ -10,7 +10,7 @@ public struct HitEventInfo
 {
     [TagSelector]
     public string collisionWithTag;
-    public UnityEvent OnControllerHit;
+    public UnityEvent OnHit;
 
 }
 
@@ -29,7 +29,7 @@ public class ControllerHitEvent : MonoBehaviour
         {
             if (collision.gameObject.tag == listCollisionEventWithSpecificTag[i].collisionWithTag)
             {
-                listCollisionEventWithSpecificTag[i].OnControllerHit?.Invoke();
+                listCollisionEventWithSpecificTag[i].OnHit?.Invoke();
             }
         }
     }

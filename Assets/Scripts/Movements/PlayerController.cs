@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Cinemachine;
 using System;
 
@@ -15,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody               shadowRigidbody;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
+
+                        private CheckPoint checkPointPosition = null;
+    [SerializeField]    private UnityEvent OnIsDead;
 
     bool isTransposed = false;
 
@@ -119,4 +123,27 @@ public class PlayerController : MonoBehaviour
         shadowMoveScript.enabled = false;
         //shadowRigidbody.detectCollisions = false;
     }
+
+    public void TryToRespawn ()
+    {
+        if (checkPointPosition != null)
+        {
+            checkPointPosition.RespawnPlayer(body);
+        }
+        else
+        {
+            KillPlayer();
+        }
+    }
+
+    public void AffectNewCheckPoint(GameObject other)
+    {
+        checkPointPosition = other.GetComponent<CheckPoint>();
+    }
+
+    public void KillPlayer()
+    {
+        OnIsDead?.Invoke();
+    }
+
 }
