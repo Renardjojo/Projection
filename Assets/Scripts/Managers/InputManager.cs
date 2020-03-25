@@ -70,7 +70,6 @@ public class InputManager : MonoBehaviour
             Debug.Log("No player was passed");
         }
 
-
         if (useKeyboard)
         {
             keyboardInputs = new Dictionary<KeyCode, KeyboardCommand>();
@@ -95,8 +94,6 @@ public class InputManager : MonoBehaviour
                     gamepadAxisInputs.Add(kvp.Value.ToString("g"), kvp.Key);
             }
         }
-
-        Debug.Log(keyboardInputs);
     }
 
 
@@ -107,8 +104,9 @@ public class InputManager : MonoBehaviour
             // Listen to keyboard keys
             foreach (KeyValuePair<KeyCode, KeyboardCommand> kvp in keyboardInputs)
             {
-                if      (Input.GetKey(kvp.Key))     HandlePressedKeyCommand(kvp.Value);
-                else if (Input.GetKeyUp(kvp.Key))   HandleReleasedKeyCommand(kvp.Value);
+                if      (Input.GetKeyDown(kvp.Key)) HandleKeyDownCommand(kvp.Value);
+                else if (Input.GetKey(kvp.Key))     HandleKeyPressedCommand(kvp.Value);
+                else if (Input.GetKeyUp(kvp.Key))   HandleKeyUpCommand(kvp.Value);
             }
         }
         
@@ -118,8 +116,9 @@ public class InputManager : MonoBehaviour
             // Listen to gamepad buttons
             foreach (KeyValuePair<string, GamepadCommand> kvp in gamepadButtonInputs)
             {
-                if      (Input.GetButton(kvp.Key))      HandlePressedButtonCommand(kvp.Value);
-                else if (Input.GetButtonUp(kvp.Key))    HandleReleasedButtonCommand(kvp.Value);
+                if      (Input.GetButtonDown(kvp.Key))  HandleButtonDownCommand(kvp.Value);
+                else if (Input.GetButton(kvp.Key))      HandleButtonPressedCommand(kvp.Value);
+                else if (Input.GetButtonUp(kvp.Key))    HandleButtonUpCommand(kvp.Value);
             }
 
             // Listen to gamepad axis
@@ -130,11 +129,9 @@ public class InputManager : MonoBehaviour
     }
 
 
-    // One of the keyboard input is pressed
-    private void HandlePressedKeyCommand(KeyboardCommand command)
+    // One of the gamepad button input is released
+    private void HandleKeyDownCommand(KeyboardCommand command)
     {
-        Debug.Log("Pressed : " + command.ToString("g"));
-
         switch (command)
         {
             case KeyboardCommand.MoveLeft:
@@ -142,6 +139,44 @@ public class InputManager : MonoBehaviour
                     && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
                 {
                     // pc.Sprint(-1f);
+                    player.MoveX(-2f);
+                }
+
+                else
+                    player.MoveX(-1f);
+                break;
+            
+            case KeyboardCommand.MoveRight:
+                if (keyboardControls.ContainsKey(KeyboardCommand.Run)
+                    && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
+                {
+                    // pc.Sprint(1f);
+                    player.MoveX(2f);
+                }
+
+                else
+                    player.MoveX(1f);
+                break;
+
+            case KeyboardCommand.Jump:                          break;
+            case KeyboardCommand.Dash:                          break;
+            case KeyboardCommand.Switch:    player.Transpose(); break;
+            case KeyboardCommand.Interact:  player.Interact();  break;
+        }
+    }
+
+
+    // One of the keyboard input is pressed
+    private void HandleKeyPressedCommand(KeyboardCommand command)
+    {
+        switch (command)
+        {
+            case KeyboardCommand.MoveLeft:
+                if (keyboardControls.ContainsKey(KeyboardCommand.Run)
+                    && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
+                {
+                    // pc.Sprint(-1f);
+                    player.MoveX(-2f);
                 }
 
                 else
@@ -153,138 +188,97 @@ public class InputManager : MonoBehaviour
                     && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
                 {
                     // pc.Sprint(1f);
+                    player.MoveX(2f);
                 }
 
                 else
                     player.MoveX(1f);
-
                 break;
 
-            case KeyboardCommand.Jump:
-                player.Jump(1f);
-                break;
-
-            case KeyboardCommand.Dash:
-                // pc.Dash();
-                break;
-
-            case KeyboardCommand.Switch:
-                player.Transpose();
-                break;
-
-            case KeyboardCommand.Interact:
-                player.Interact();
-                break;
+            case KeyboardCommand.Jump:  player.Jump(1f);    break;
+            case KeyboardCommand.Dash:  /* pc.Dash(); */    break;
+            case KeyboardCommand.Switch:                    break;
+            case KeyboardCommand.Interact:                  break;
         }
     }
 
 
     // One of the keyboard input is released
-    private void HandleReleasedKeyCommand(KeyboardCommand command)
+    private void HandleKeyUpCommand(KeyboardCommand command)
     {
-        Debug.Log("Released : " + command.ToString("g"));
-
         switch (command)
         {
-            case KeyboardCommand.MoveLeft:
-                player.MoveX(0f);
-                break;
-
-            case KeyboardCommand.MoveRight:
-                player.MoveX(0f);
-                break;
-
-            case KeyboardCommand.Jump:
-                break;
-
-            case KeyboardCommand.Dash:
-                break;
-
-            case KeyboardCommand.Switch:
-                break;
-
-            case KeyboardCommand.Interact:
-                player.Interact();
-                break;
+            case KeyboardCommand.MoveLeft:      player.MoveX(0f);   break;
+            case KeyboardCommand.MoveRight:     player.MoveX(0f);   break;
+            case KeyboardCommand.Jump:                              break;
+            case KeyboardCommand.Dash:                              break;
+            case KeyboardCommand.Switch:                            break;
+            case KeyboardCommand.Interact:                          break;
         }
     }
 
 
-    // One of the gamebad button input is pressed
-    private void HandlePressedButtonCommand(GamepadCommand command)
+    // One of the gamepad button input was pressed
+    private void HandleButtonDownCommand(GamepadCommand command)
     {
         switch (command)
         {
-            case GamepadCommand.Move:
-                player.MoveX(1f);
-                break;
-
-            case GamepadCommand.Jump:
-                player.Jump(1f);
-                break;
-
-            case GamepadCommand.Dash:
-                // pc.Dash();
-                break;
-
-            case GamepadCommand.Switch:
-                player.Transpose();
-                break;
-
-            case GamepadCommand.Interact:
-                break;
+            case GamepadCommand.Move:       player.MoveX(1f);   break;
+            case GamepadCommand.Jump:       player.Jump(1f);    break;
+            case GamepadCommand.Dash:       /* pc.Dash(); */    break;
+            case GamepadCommand.Switch:     player.Transpose(); break;
+            case GamepadCommand.Interact:   player.Interact();  break;
         }
     }
 
 
-    // One of the gamebad button input is released
-    private void HandleReleasedButtonCommand(GamepadCommand command)
+    // One of the gamepad button input is being pressed
+    private void HandleButtonPressedCommand(GamepadCommand command)
     {
         switch (command)
         {
-            case GamepadCommand.Move:
-                break;
-
-            case GamepadCommand.Jump:
-                break;
-
-            case GamepadCommand.Dash:
-                break;
-
-            case GamepadCommand.Switch:
-                break;
-
-            case GamepadCommand.Interact:
-                player.Interact();
-                break;
+            case GamepadCommand.Move:       player.MoveX(1f);   break;
+            case GamepadCommand.Jump:       player.Jump(1f);    break;
+            case GamepadCommand.Dash:       /* pc.Dash(); */    break;
+            case GamepadCommand.Switch:                         break;
+            case GamepadCommand.Interact:                       break;
         }
     }
 
 
-    // Check whether a command must be called
+    // One of the gamepad button input was released
+    private void HandleButtonUpCommand(GamepadCommand command)
+    {
+        switch (command)
+        {
+            case GamepadCommand.Move:       player.MoveX(0f);   break;
+            case GamepadCommand.Jump:                           break;
+            case GamepadCommand.Dash:                           break;
+            case GamepadCommand.Switch:                         break;
+            case GamepadCommand.Interact:                       break;
+        }
+    }
+
+
+    // Check Axis values
     private void HandleAxisCommand(GamepadCommand command, float value)
     {
         switch (command)
         {
             case GamepadCommand.Move:
-                if (value != 0f) player.MoveX(value);
+                player.MoveX(value);
                 break;
 
             case GamepadCommand.Jump:
-                if (value != 0f) player.Jump(value);
+                player.Jump(value);
                 break;
 
             case GamepadCommand.Dash:
                 // if (value != 0f) pc.Dash()
                 break;
 
-            case GamepadCommand.Switch:
-                if (value != 0f) player.Transpose();
-                break;
-
-            case GamepadCommand.Interact:
-                if (value != 0f) player.Interact();
-                break;
+            case GamepadCommand.Switch:     break;
+            case GamepadCommand.Interact:   break;
         }
     }
 }
