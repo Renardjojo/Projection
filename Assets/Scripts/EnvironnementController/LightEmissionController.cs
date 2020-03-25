@@ -14,10 +14,11 @@ public class LightEmissionController : MonoBehaviour
                     private Material   material;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         material = GetComponent<MeshRenderer>().material;
         material.SetColor("_EmissionColor", offColor);
+        material.EnableKeyword("_EMISSION");
         material.color = Color.black;
     }
 

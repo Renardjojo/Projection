@@ -23,11 +23,8 @@ class Triggered : MonoBehaviour
         {
             foreach (Trigger trig in andTriggerList.andList)
             {
-                //if (trig != null)
-                {
-                    trig.OnTriggered += TryToActivate;
-                    trig.OnUntriggered += TryToDeactivate;
-                }
+                trig.OnTriggered += TryToActivate;
+                trig.OnUntriggered += TryToDeactivate;
             }
         }
     }
@@ -48,7 +45,6 @@ class Triggered : MonoBehaviour
 
         if (Or)
         {
-            Debug.Log("Lever on " + gameObject.name);
             OnActivated();
         }
     }
@@ -69,7 +65,6 @@ class Triggered : MonoBehaviour
 
         if (!Or)
         {
-            Debug.Log("Lever off" + gameObject.name);
             OnDisabled();
         }
     }
