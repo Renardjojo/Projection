@@ -27,12 +27,11 @@ public class PlayerController : MonoBehaviour
     {
         body            = transform.Find("Body").gameObject;
         bodyMoveScript  = body.GetComponent<CharacterMovements>();
-        //bodyRigidbody   = body.GetComponent<Rigidbody>();
+        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
         shadow          = body.transform.Find("Shadow").gameObject;
         shadowMoveScript= shadow.GetComponent<CharacterMovements>();
-        //shadowRigidbody = shadow.GetComponent<Rigidbody>();
-        //shadowRigidbody.detectCollisions = false;
+        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -111,12 +110,10 @@ public class PlayerController : MonoBehaviour
     private void AddComponenetToControlShadow()
     {
         shadowMoveScript.enabled = true;
-        //shadowRigidbody.detectCollisions = true;
     }
 
     private void RemoveComponentToUnconstrolShadow()
     {
         shadowMoveScript.enabled = false;
-        //shadowRigidbody.detectCollisions = false;
     }
 }

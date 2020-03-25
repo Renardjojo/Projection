@@ -35,7 +35,6 @@ public class PressureButton : Trigger
 
     internal void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Collision Enter");
         if (IsInputCollision(collision))
         {
             currentCollidingObjects++;

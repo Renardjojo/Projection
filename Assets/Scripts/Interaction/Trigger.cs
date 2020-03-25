@@ -9,19 +9,19 @@ public abstract class Trigger : MonoBehaviour
     public event Action OnTriggered   = null;
     public event Action OnUntriggered = null;
 
-    protected void Enable()
+    internal void Enable()
     {
         isOn = true;
         OnTriggered?.Invoke();
     }
 
-    protected void Disable()
+    internal void Disable()
     {
         isOn = false;
         OnUntriggered?.Invoke();
     }
 
-    protected void Toggle()
+    internal void Toggle()
     {
         isOn = !isOn;
         if (isOn)   OnTriggered?.Invoke();
