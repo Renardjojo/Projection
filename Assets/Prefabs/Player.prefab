@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4157455354134422235}
   - component: {fileID: 4157455354134422234}
   - component: {fileID: 8393232383932138840}
-  - component: {fileID: 6895507225507296638}
   - component: {fileID: 6394096562700000088}
   - component: {fileID: 6758202526370511383}
   - component: {fileID: 8713168126170357395}
@@ -99,22 +98,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!54 &6895507225507296638
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157455354134422239}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 0
 --- !u!136 &6394096562700000088
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -161,9 +144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashMaxTime: 1
   dashCooldown: 0
-  speedScale: 3
-  jumpSpeed: 8
-  gravity: 20
+  airControlRatio: 0.05
+  speedScale: 6
+  jumpSpeed: 16
+  gravity: 40
 --- !u!1 &4157455355636938815
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +159,7 @@ GameObject:
   - component: {fileID: 4157455355636938812}
   - component: {fileID: 4157455355636938813}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,10 +205,10 @@ GameObject:
   - component: {fileID: 4157455355646255596}
   - component: {fileID: 4157455355646255599}
   - component: {fileID: 4157455355646255598}
-  - component: {fileID: 4157455355646255594}
   - component: {fileID: 2864029600499569478}
   - component: {fileID: 6758202526267801618}
   - component: {fileID: 3061242172824960012}
+  - component: {fileID: 7240604001920139148}
   m_Layer: 0
   m_Name: Body
   m_TagString: BodyPlayer
@@ -306,22 +290,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4157455355646255594
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157455355646255584}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 120
-  m_CollisionDetection: 3
 --- !u!114 &2864029600499569478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +349,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashMaxTime: 1
-  dashCooldown: 0
+  dashCooldown: 2
+  airControlRatio: 0.9
   speedScale: 3
   jumpSpeed: 8
   gravity: 20
+--- !u!54 &7240604001920139148
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157455355646255584}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

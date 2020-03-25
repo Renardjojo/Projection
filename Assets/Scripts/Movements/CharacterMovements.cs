@@ -111,4 +111,13 @@ public class CharacterMovements : MonoBehaviour
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
     }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Moves cube
+        if (hit.gameObject.tag == "Cube")
+        {
+            hit.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(hit.moveDirection.x * 10, 0f, 0f), ForceMode.Force);
+        }
+    }
 }

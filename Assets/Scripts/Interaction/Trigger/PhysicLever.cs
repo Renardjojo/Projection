@@ -15,31 +15,25 @@ public class PhysicLever : Trigger
     [Tooltip("Angle to activate swhitch the state of the lever. By default 0 if the lever is activate when it is on the middle position")]
     protected float activateAngle = 0f;
 
-    protected HingeJoint    hingeJoint = null;
-
     // Start is called before the first frame update
     void Start()
     {
-        hingeJoint = transform.Find("handle").GetComponent<HingeJoint>();
+        //hingeJoint = transform.Find("handle").GetComponent<HingeJoint>();
 
         //Affect new Spring setting to the HingeJoint
-        JointSpring js = new JointSpring();
-        js.damper = leverDamper;
-        hingeJoint.spring = js;
+        //JointSpring js = new JointSpring();
+        //js.damper = leverDamper;
+        //hingeJoint.spring = js;
     }
 
 
     void Update()
     {
-        if (isOn && hingeJoint.angle >= activateAngle)
-        {
-            isOn = false;
-            Disable();
-        }
-        else if (!isOn && hingeJoint.angle < activateAngle)
-        {
-            isOn = true;
-            Enable();
-        }
+
+    }
+
+    internal void SwitchLeverState()
+    {
+        Toggle();
     }
 }

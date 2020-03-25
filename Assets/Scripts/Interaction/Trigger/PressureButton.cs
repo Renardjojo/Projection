@@ -20,7 +20,7 @@ public class PressureButton : Trigger
 
     //  Returns false if we should ignore the collision.
     //  Else, returns true
-    private bool IsInputCollision(Collision collision)
+    private bool IsInputCollision(Collider collision)
     {
         foreach (String tag in tagsWithCollisionEnabled)
         {
@@ -33,8 +33,9 @@ public class PressureButton : Trigger
         return false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    internal void OnTriggerEnter(Collider collision)
     {
+        Debug.Log("Collision Enter");
         if (IsInputCollision(collision))
         {
             currentCollidingObjects++;
@@ -42,7 +43,7 @@ public class PressureButton : Trigger
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    internal void OnTriggerExit(Collider collision)
     {
         if (IsInputCollision(collision))
         {
