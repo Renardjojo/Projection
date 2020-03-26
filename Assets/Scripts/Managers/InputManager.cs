@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum KeyboardCommand
+public enum KeyboardCommand : byte
 {
-    MoveLeft,
+    MoveLeft = 0,
     MoveRight,
     Run,
     Jump,
@@ -52,7 +52,7 @@ public class CommandGamepadCodeDict : SerializableDictionary<GamepadCommand, Gam
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private PlayerController       player              = null;
+    [SerializeField] private PlayerController       controlledPlayer    = null;
     [SerializeField] private bool                   useKeyboard         = true;
     [SerializeField] private bool                   useGamepad          = true;
     [SerializeField] private CommandKeyCodeDict     keyboardControls    = null;
@@ -64,7 +64,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!player)
+        if (!controlledPlayer)
         {
             useKeyboard = useGamepad = false;
             Debug.Log("No player was passed");
@@ -72,6 +72,7 @@ public class InputManager : MonoBehaviour
 
         if (useKeyboard)
         {
+            // Initialize keyboard inputs
             keyboardInputs = new Dictionary<KeyCode, KeyboardCommand>();
 
             foreach (KeyValuePair<KeyboardCommand, KeyCode> kpv in keyboardControls)
@@ -80,6 +81,7 @@ public class InputManager : MonoBehaviour
 
         if (useGamepad)
         {
+            // Initialize gamepad inputs
             gamepadButtonInputs = new Dictionary<string, GamepadCommand>();
             gamepadAxisInputs   = new Dictionary<string, GamepadCommand>();
 
@@ -116,14 +118,23 @@ public class InputManager : MonoBehaviour
             // Listen to gamepad buttons
             foreach (KeyValuePair<string, GamepadCommand> kvp in gamepadButtonInputs)
             {
-                if      (Input.GetButtonDown(kvp.Key))  HandleButtonDownCommand(kvp.Value);
-                else if (Input.GetButton(kvp.Key))      HandleButtonPressedCommand(kvp.Value);
-                else if (Input.GetButtonUp(kvp.Key))    HandleButtonUpCommand(kvp.Value);
+                if      (Input.GetButtonDown(kvp.Key))
+                    HandleButtonDownCommand(kvp.Value);
+
+                else if (Input.GetButton(kvp.Key))
+                    HandleButtonPressedCommand(kvp.Value);
+
+                else if (Input.GetButtonUp(kvp.Key))
+                    HandleButtonUpCommand(kvp.Value);
             }
 
             // Listen to gamepad axis
             foreach (KeyValuePair<string, GamepadCommand> kvp in gamepadAxisInputs)
+            {
                 HandleAxisCommand(kvp.Value, Input.GetAxis(kvp.Key));
+                if (kvp.Key.Contains("Trigger"))
+                    HandleTriggerCommand(kvp.Key, Input.GetAxis(kvp.Key));
+            }
         }
         
     }
@@ -135,33 +146,24 @@ public class InputManager : MonoBehaviour
         switch (command)
         {
             case KeyboardCommand.MoveLeft:
-                if (keyboardControls.ContainsKey(KeyboardCommand.Run)
-                    && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
-                {
-                    // pc.Sprint(-1f);
-                    player.MoveX(-2f);
-                }
-
-                else
-                    player.MoveX(-1f);
                 break;
             
             case KeyboardCommand.MoveRight:
-                if (keyboardControls.ContainsKey(KeyboardCommand.Run)
-                    && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
-                {
-                    // pc.Sprint(1f);
-                    player.MoveX(2f);
-                }
-
-                else
-                    player.MoveX(1f);
                 break;
 
-            case KeyboardCommand.Jump:                          break;
-            case KeyboardCommand.Dash:                          break;
-            case KeyboardCommand.Switch:    player.Transpose(); break;
-            case KeyboardCommand.Interact:  player.Interact();  break;
+            case KeyboardCommand.Jump:
+                break;
+
+            case KeyboardCommand.Dash:
+                break;
+
+            case KeyboardCommand.Switch:
+                controlledPlayer.Transpose();
+                break;
+
+            case KeyboardCommand.Interact:
+                controlledPlayer.Interact();
+                break;
         }
     }
 
@@ -175,30 +177,39 @@ public class InputManager : MonoBehaviour
                 if (keyboardControls.ContainsKey(KeyboardCommand.Run)
                     && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
                 {
-                    // pc.Sprint(-1f);
-                    player.MoveX(-2f);
+                    // controlledPlayer.Sprint(-1f);
+                    controlledPlayer.MoveX(-2f);
                 }
 
                 else
-                    player.MoveX(-1f);
+                    controlledPlayer.MoveX(-1f);
                 break;
 
             case KeyboardCommand.MoveRight:
                 if (keyboardControls.ContainsKey(KeyboardCommand.Run)
                     && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
                 {
-                    // pc.Sprint(1f);
-                    player.MoveX(2f);
+                    // controlledPlayer.Sprint(1f);
+                    controlledPlayer.MoveX(2f);
                 }
 
                 else
-                    player.MoveX(1f);
+                    controlledPlayer.MoveX(1f);
                 break;
 
-            case KeyboardCommand.Jump:  player.Jump(1f);    break;
-            case KeyboardCommand.Dash:  /* pc.Dash(); */    break;
-            case KeyboardCommand.Switch:                    break;
-            case KeyboardCommand.Interact:                  break;
+            case KeyboardCommand.Jump:
+                controlledPlayer.Jump(1f);
+                break;
+
+            case KeyboardCommand.Dash:
+                /* controlledPlayer.Dash(); */
+                break;
+
+            case KeyboardCommand.Switch:
+                break;
+
+            case KeyboardCommand.Interact:
+                break;
         }
     }
 
@@ -208,12 +219,22 @@ public class InputManager : MonoBehaviour
     {
         switch (command)
         {
-            case KeyboardCommand.MoveLeft:      player.MoveX(0f);   break;
-            case KeyboardCommand.MoveRight:     player.MoveX(0f);   break;
-            case KeyboardCommand.Jump:                              break;
-            case KeyboardCommand.Dash:                              break;
-            case KeyboardCommand.Switch:                            break;
-            case KeyboardCommand.Interact:                          break;
+            case KeyboardCommand.MoveLeft:
+            case KeyboardCommand.MoveRight:
+                controlledPlayer.MoveX(0f);
+                break;
+
+            case KeyboardCommand.Jump:
+                break;
+
+            case KeyboardCommand.Dash:
+                break;
+
+            case KeyboardCommand.Switch:
+                break;
+
+            case KeyboardCommand.Interact:
+                break;
         }
     }
 
@@ -223,11 +244,25 @@ public class InputManager : MonoBehaviour
     {
         switch (command)
         {
-            case GamepadCommand.Move:       player.MoveX(1f);   break;
-            case GamepadCommand.Jump:       player.Jump(1f);    break;
-            case GamepadCommand.Dash:       /* pc.Dash(); */    break;
-            case GamepadCommand.Switch:     player.Transpose(); break;
-            case GamepadCommand.Interact:   player.Interact();  break;
+            case GamepadCommand.Move:
+                controlledPlayer.MoveX(1f);
+                break;
+
+            case GamepadCommand.Jump:
+                controlledPlayer.Jump(1f);
+                break;
+
+            case GamepadCommand.Dash:
+                /* controlledPlayer.Dash(); */
+                break;
+
+            case GamepadCommand.Switch:
+                controlledPlayer.Transpose();
+                break;
+
+            case GamepadCommand.Interact:
+                controlledPlayer.Interact();
+                break;
         }
     }
 
@@ -237,11 +272,23 @@ public class InputManager : MonoBehaviour
     {
         switch (command)
         {
-            case GamepadCommand.Move:       player.MoveX(1f);   break;
-            case GamepadCommand.Jump:       player.Jump(1f);    break;
-            case GamepadCommand.Dash:       /* pc.Dash(); */    break;
-            case GamepadCommand.Switch:                         break;
-            case GamepadCommand.Interact:                       break;
+            case GamepadCommand.Move:
+                controlledPlayer.MoveX(1f);
+                break;
+
+            case GamepadCommand.Jump:
+                controlledPlayer.Jump(1f);
+                break;
+
+            case GamepadCommand.Dash:
+                /* controlledPlayer.Dash(); */
+                break;
+
+            case GamepadCommand.Switch:
+                break;
+
+            case GamepadCommand.Interact:
+                break;
         }
     }
 
@@ -251,11 +298,21 @@ public class InputManager : MonoBehaviour
     {
         switch (command)
         {
-            case GamepadCommand.Move:       player.MoveX(0f);   break;
-            case GamepadCommand.Jump:                           break;
-            case GamepadCommand.Dash:                           break;
-            case GamepadCommand.Switch:                         break;
-            case GamepadCommand.Interact:                       break;
+            case GamepadCommand.Move:
+                controlledPlayer.MoveX(0f);
+                break;
+
+            case GamepadCommand.Jump:
+                break;
+
+            case GamepadCommand.Dash:
+                break;
+
+            case GamepadCommand.Switch:
+                break;
+
+            case GamepadCommand.Interact:
+                break;
         }
     }
 
@@ -266,19 +323,35 @@ public class InputManager : MonoBehaviour
         switch (command)
         {
             case GamepadCommand.Move:
-                player.MoveX(value);
+                controlledPlayer.MoveX(value);
                 break;
 
             case GamepadCommand.Jump:
-                player.Jump(value);
+                controlledPlayer.Jump(value);
                 break;
 
             case GamepadCommand.Dash:
-                // if (value != 0f) pc.Dash()
+                // if (value != 0f) controlledPlayer.Dash()
                 break;
 
-            case GamepadCommand.Switch:     break;
-            case GamepadCommand.Interact:   break;
+            case GamepadCommand.Switch:
+                break;
+
+            case GamepadCommand.Interact:
+                break;
+        }
+    }
+
+    private void HandleTriggerCommand(string trigger, float value)
+    {
+        if (trigger.Contains("Left") && value < 0f)
+        {
+            // controlledPlayer.Dash()
+        }
+
+        else if (trigger.Contains("Left") && 0f < value)
+        {
+            controlledPlayer.Transpose();
         }
     }
 }
