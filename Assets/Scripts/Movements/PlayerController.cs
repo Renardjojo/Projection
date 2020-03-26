@@ -55,11 +55,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO : TOREMOVE
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Jump();
-        }
+
     }
 
     public void MoveX(float value)

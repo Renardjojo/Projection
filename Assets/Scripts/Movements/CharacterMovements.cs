@@ -17,6 +17,10 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField]
     private float airControlRatio = 0.05f;
 
+    // cumulative
+    [SerializeField]
+    private float airControlRatioCum = 0f;
+
     private bool bIsJumping = false;
 
     public void MoveX(float f)
@@ -31,8 +35,10 @@ public class CharacterMovements : MonoBehaviour
     private float speedScale = 3.0f;
     [SerializeField]
     private float jumpSpeed = 8.0f;
-    [SerializeField]
-    private float gravity = 20.0f;
+    [SerializeField] private float gravity = 20.0f;
+
+    // This is not physically correct, but it gives a better video game like jump.
+    [SerializeField] private float accelerationWhenFalling = 0.1f;
 
     private Vector3 moveDirection = Vector3.zero;
 
@@ -52,7 +58,8 @@ public class CharacterMovements : MonoBehaviour
 
     internal void Jump()
     {
-        bIsJumping = true;
+        if (controller.isGrounded)
+            bIsJumping = true;
     }
 
 
@@ -98,13 +105,19 @@ public class CharacterMovements : MonoBehaviour
         else
         {
             Vector3 moveDirection2 = new Vector3(inputSpeed, 0.0f, 0f);
-            moveDirection2 *= speedScale * airControlRatio;
+            moveDirection2 *= speedScale;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
             //moveDirection -= jumpLastVelocity;
             moveDirection.y -= gravity * Time.deltaTime;
+            moveDirection += moveDirection2 * airControlRatioCum;
+
+            moveDirection2 *= airControlRatio;
+
+            if (moveDirection.y < 0)
+                moveDirection.y -= 0.1f;
 
             // Move the player.       
             controller.Move((moveDirection + moveDirection2) * Time.deltaTime);
