@@ -17,7 +17,8 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField]
     private float airControlRatio = 0.05f;
 
-    private bool bIsJumping = false;
+    internal bool JumpFlag {get; set;}
+    internal bool DashFlag { get; set; }
 
     public void MoveX(float f)
     {
@@ -42,7 +43,9 @@ public class CharacterMovements : MonoBehaviour
 
     private void Awake()
     {
-        //rb = GetComponent<Rigidbody>();
+        JumpFlag = false;
+        DashFlag = false;
+
         controller = GetComponent<CharacterController>();
     }
 
@@ -50,13 +53,6 @@ public class CharacterMovements : MonoBehaviour
     {
         defaultZValue = gameObject.transform.localPosition.z;
     }
-
-
-    internal void Jump()
-    {
-        bIsJumping = true;
-    }
-
 
     void Update()
     {
@@ -68,7 +64,7 @@ public class CharacterMovements : MonoBehaviour
 
         dashCooldownLeft -= Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.F) && moveDirection.sqrMagnitude != 0f && dashCooldownLeft <= 0)
+        if (DashFlag && moveDirection.sqrMagnitude != 0f && dashCooldownLeft <= 0)
         {
             controller.Move(moveDirection.normalized * Time.deltaTime * 10);
             dashCurrentTime += Time.deltaTime;
@@ -83,10 +79,10 @@ public class CharacterMovements : MonoBehaviour
             moveDirection = new Vector3(inputSpeed, 0.0f, 0f);
             moveDirection *= speedScale;
 
-            if (bIsJumping)
+            if (JumpFlag)
             {
                 moveDirection.y = jumpSpeed;
-                bIsJumping = false;
+                JumpFlag = false;
             }
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
