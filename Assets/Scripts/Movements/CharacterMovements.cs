@@ -17,10 +17,6 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField]
     private float airControlRatio = 0.05f;
 
-    // cumulative
-    [SerializeField]
-    private float airControlRatioCum = 0f;
-
     private bool bIsJumping = false;
 
     public void MoveX(float f)
@@ -103,23 +99,20 @@ public class CharacterMovements : MonoBehaviour
         }
         else
         {
-            Vector3 moveDirection2 = new Vector3(inputSpeed, 0.0f, 0f);
-            moveDirection2 *= speedScale;
+            if (!Mathf.Approximately(inputSpeed, 0f))
+                moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
             //moveDirection -= jumpLastVelocity;
             moveDirection.y -= gravity * Time.deltaTime;
-            moveDirection += moveDirection2 * airControlRatioCum;
-
-            moveDirection2 *= airControlRatio;
 
             if (moveDirection.y < 0)
                 moveDirection.y -= 0.1f;
 
             // Move the player.       
-            controller.Move((moveDirection + moveDirection2) * Time.deltaTime);
+            controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
     }
