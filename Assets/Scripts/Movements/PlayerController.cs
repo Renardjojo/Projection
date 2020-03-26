@@ -8,11 +8,11 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     private GameObject              body;
-    private CharacterMovements      bodyMoveScript;
+    internal CharacterMovements     bodyMoveScript;
     private Rigidbody               bodyRigidbody;
 
     private GameObject              shadow;
-    private CharacterMovements      shadowMoveScript;
+    internal CharacterMovements     shadowMoveScript;
     private Rigidbody               shadowRigidbody;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
@@ -74,11 +74,12 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.Jump();
+            shadowMoveScript.JumpFlag = true;
         }
         else
         {
-            bodyMoveScript.Jump();
+            bodyMoveScript.JumpFlag = true;
+;
         }
     }
     

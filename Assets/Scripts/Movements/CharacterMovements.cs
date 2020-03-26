@@ -17,7 +17,7 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField]
     private float airControlRatio = 0.05f;
 
-    internal bool JumpFlag {get; set;}
+    internal bool JumpFlag { get; set; }
     internal bool DashFlag { get; set; }
 
     public void MoveX(float f)
