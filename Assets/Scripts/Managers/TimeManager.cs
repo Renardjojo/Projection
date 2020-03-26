@@ -21,7 +21,7 @@ public class TimeManager : MonoBehaviour
     void Update()
     {}
 
-    public void enableSlowMotionInFirstPlan(bool value)
+    public void EnableSlowMotionInFirstPlan(bool value)
     {
         if (value)
         {

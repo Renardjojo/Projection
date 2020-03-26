@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8762677050326248344}
   - component: {fileID: 2729321391797541466}
+  - component: {fileID: 2616177641337041401}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -47,6 +48,27 @@ MonoBehaviour:
   keyboardControls: []
   currentGamePadControl: 0
   gamePadControls: []
+--- !u!114 &2616177641337041401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477984564608047949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b822dbfe6c4f040ba3b09e1fceb2d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlledPlayer: {fileID: 0}
+  useKeyboard: 1
+  useGamepad: 1
+  keyboardControls:
+    m_keys: 
+    m_values: 
+  gamepadControls:
+    m_keys: 
+    m_values: 
 --- !u!1 &3048744697992939749
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,12 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0265d7bce6725b459e3374d181bc786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScaleList:
-  - name: First layout
-    timeScale: 1
-  - name: Second layout
-    timeScale: 1
-  timeScale: 1
+  timeScaleInFirstPlanWhenSwitch: 0.5
 --- !u!1 &6178726468656109685
 GameObject:
   m_ObjectHideFlags: 0
