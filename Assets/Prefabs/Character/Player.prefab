@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4157455354134422236}
   - component: {fileID: 4157455354134422235}
   - component: {fileID: 4157455354134422234}
-  - component: {fileID: 8393232383932138840}
   - component: {fileID: 6394096562700000088}
   - component: {fileID: 6758202526370511383}
   - component: {fileID: 8713168126170357395}
@@ -81,23 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8393232383932138840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4157455354134422239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a904b02420940c547874834d1453b8d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionHappendWithTagShadowClone:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!136 &6394096562700000088
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -144,10 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashMaxTime: 1
   dashCooldown: 0
-  airControlRatio: 0.05
+  airControlRatio: 1
   speedScale: 6
   jumpSpeed: 16
   gravity: 40
+  accelerationWhenFalling: 0.1
 --- !u!1 &4157455355636938815
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +176,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraSetting: {fileID: 0}
+  OnIsDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &4157455355646255584
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,22 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc781ea6cf8a7504db90f2011a7577ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnCollisionHappendWithTagBodyClone:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4157455355636938815}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  listCollisionEventWithSpecificTag: []
 --- !u!143 &6758202526267801618
 CharacterController:
   m_ObjectHideFlags: 0
@@ -353,3 +326,4 @@ MonoBehaviour:
   speedScale: 3
   jumpSpeed: 8
   gravity: 20
+  accelerationWhenFalling: 0.1
