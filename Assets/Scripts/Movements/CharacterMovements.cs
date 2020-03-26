@@ -58,8 +58,7 @@ public class CharacterMovements : MonoBehaviour
 
     internal void Jump()
     {
-        if (controller.isGrounded)
-            bIsJumping = true;
+        bIsJumping = true;
     }
 
 
