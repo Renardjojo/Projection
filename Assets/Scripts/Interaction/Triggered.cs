@@ -23,7 +23,7 @@ class Triggered : MonoBehaviour
         {
             foreach (Trigger trig in andTriggerList.andList)
             {
-                GameDebug.AssertInTransform(trig != null, gameObject.transform, "Lever should not be null");
+                GameDebug.AssertInTransform(trig != null, gameObject.transform, "Trigger should not be null");
 
                 trig.OnTriggered += TryToActivate;
                 trig.OnUntriggered += TryToDeactivate;
