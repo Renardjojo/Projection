@@ -31,6 +31,8 @@ public enum GamepadCode : byte
     X,
     Y,
     Start,
+    LeftBumper,
+    RightBumper,
     LeftHorizontal,
     LeftVertical,
     RightHorizontal,
@@ -349,7 +351,7 @@ public class InputManager : MonoBehaviour
             // controlledPlayer.Dash()
         }
 
-        else if (trigger.Contains("Left") && 0f < value)
+        else if (trigger.Contains("Right") && 0f < value)
         {
             controlledPlayer.Transpose();
         }
