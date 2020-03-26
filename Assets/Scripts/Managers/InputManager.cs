@@ -201,7 +201,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Jump:
-                controlledPlayer.Jump(1f);
+                controlledPlayer.Jump();
                 break;
 
             case KeyboardCommand.Dash:
@@ -252,7 +252,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Jump:
-                controlledPlayer.Jump(1f);
+                controlledPlayer.Jump();
                 break;
 
             case GamepadCommand.Dash:
@@ -279,7 +279,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Jump:
-                controlledPlayer.Jump(1f);
+                controlledPlayer.Jump();
                 break;
 
             case GamepadCommand.Dash:
@@ -329,7 +329,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Jump:
-                controlledPlayer.Jump(value);
+                controlledPlayer.Jump();
                 break;
 
             case GamepadCommand.Dash:
