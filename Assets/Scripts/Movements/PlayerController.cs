@@ -1,31 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
-using Cinemachine;
 using System;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject              body;
-    private CharacterMovements      bodyMoveScript;
+    [SerializeField] private GameObject     body;
+    [SerializeField] private GameObject     shadow;
+    [SerializeField] private TimeManager    timeManagerScript;
+    [SerializeField] private UnityEvent     OnIsDead;
 
-    private GameObject              shadow;
-    private CharacterMovements      shadowMoveScript;
+    private CharacterMovements              bodyMoveScript;
+    private CharacterMovements              shadowMoveScript;
 
-    public GameObject controlledObject { get; private set; }
+    public GameObject                       controlledObject { get; private set; }
+    private Vector3                         checkPointPosition;
+    private bool                            isTransposed;
 
-    [SerializeField] private TimeManager timeManagerScript;
-
-
-                        private Vector3 checkPointPosition;
-    [SerializeField]    private UnityEvent OnIsDead;
-
-    bool isTransposed = false;
-
-    public event Action onTransposed;
-    public event Action onUntransposed;
-    public event Action<Vector3> OnInteractButton;
+    public event Action                     onTransposed;
+    public event Action                     onUntransposed;
+    public event Action<Vector3>            OnInteractButton;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +48,7 @@ public class PlayerController : MonoBehaviour
         controlledObject = body;
 
         checkPointPosition = controlledObject.transform.position;
+        isTransposed = false;
     }
 
     // Update is called once per frame
