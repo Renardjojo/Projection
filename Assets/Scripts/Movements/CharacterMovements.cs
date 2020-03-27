@@ -20,6 +20,8 @@ public class CharacterMovements : MonoBehaviour
     internal bool JumpFlag { get; set; }
     internal bool DashFlag { get; set; }
 
+    internal bool preventInputsUntilGround = false;
+
     [SerializeField] GameObject[] models = null;
 
     public void MoveX(float f)
@@ -84,12 +86,30 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
+    private Vector3 lastNormal;
+    private bool isOnWall = false;
+
+    private void TryToWallJump(ref Vector3 velocity)
+    {
+        Physics.Raycast(transform.position, transform.forward);
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
+        //if (isOnWall)
+        //{
+        //    velocity = lastNormal;
+        //    velocity.y = 0.9f;
+        //    velocity = velocity.normalized * speedScale * 3;
+        //    isOnWall = false;
+        //    preventInputsUntilGround = true;
+        //}
+    }
+
     void Update()
     {
         DashUpdate();
 
         if (controller.isGrounded)
         {
+            preventInputsUntilGround = false;
             // We are grounded, so recalculate
             // move direction directly from axes
 
@@ -110,11 +130,14 @@ public class CharacterMovements : MonoBehaviour
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
-        }
+        }                                                                                 
         else
         {
-            // Move in mid-air if input
-            moveDirection.x = inputSpeed * speedScale * airControlRatio;
+            // Move in mid-air with input
+             moveDirection.x = inputSpeed * speedScale * airControlRatio;
+
+            if (isOnWall)
+                moveDirection.y += gravity / 2f * Time.deltaTime;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
@@ -122,21 +145,14 @@ public class CharacterMovements : MonoBehaviour
             //moveDirection -= jumpLastVelocity;
             moveDirection.y -= gravity * Time.deltaTime;
 
-            if (moveDirection.y < 0f)
+            TryToWallJump(ref moveDirection);
+
+            if (!preventInputsUntilGround && moveDirection.y < 0f)
                 moveDirection.y -= accelerationWhenFalling;
 
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
-    }
-
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        //// Moves cube
-        //if (hit.gameObject.tag == "Cube")
-        //{
-        //    hit.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(hit.moveDirection.x * 10, 0f, 0f), ForceMode.Force);
-        //}
     }
 }

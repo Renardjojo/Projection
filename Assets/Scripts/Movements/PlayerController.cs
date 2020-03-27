@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public event Action                     onTransposed;
     public event Action                     onUntransposed;
     public event Action<Vector3>            OnInteractButton;
+    public event Action<GameObject>         OnInteractCube;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,16 @@ public class PlayerController : MonoBehaviour
             OnInteractButton += button.TryToPress;
         }
 
+        TakableBox[] takableBoxes = GameObject.FindObjectsOfType<TakableBox>();
+        foreach (TakableBox box in takableBoxes)
+        {
+            OnInteractCube += box.BoxInteraction;
+            if (box.IsTaken)
+                box.Drop();
+            else
+                box.TryToTakeBox(body, 10f);
+        }
+
         RemoveComponentToUnconstrolShadow();
 
         controlledObject = body;
@@ -54,19 +65,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO : TOREMOVE
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            TakableBox[] takableBoxes = GameObject.FindObjectsOfType<TakableBox>();
 
-            foreach (TakableBox box in takableBoxes)
-            {
-                if (box.IsTaken)
-                    box.Drop();
-                else
-                    box.TryToTakeBox(body, 10f);
-            }
-        }
     }
 
     public void MoveX(float value)
@@ -121,6 +120,7 @@ public class PlayerController : MonoBehaviour
     public void Interact()
     {
         OnInteractButton(controlledObject.transform.position);
+        OnInteractCube(controlledObject);
     }
 
     private void AddComponenetToControlShadow()
