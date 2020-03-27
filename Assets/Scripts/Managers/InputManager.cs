@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 
 public enum KeyboardCommand : byte
 {
@@ -55,6 +55,7 @@ public class CommandGamepadCodeDict : SerializableDictionary<GamepadCommand, Gam
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private PlayerController       controlledPlayer    = null;
+    [SerializeField] private CinemachineVirtualCamera CMCam             = null;
     [SerializeField] private bool                   useKeyboard         = true;
     [SerializeField] private bool                   useGamepad          = true;
     [SerializeField] private CommandKeyCodeDict     keyboardControls    = null;
@@ -155,6 +156,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Jump:
+                controlledPlayer.Jump();
                 break;
 
             case KeyboardCommand.Dash:
@@ -162,6 +164,8 @@ public class InputManager : MonoBehaviour
 
             case KeyboardCommand.Swap:
                 controlledPlayer.Transpose();
+                if (CMCam)
+                    CMCam.Follow = controlledPlayer.controlledObject.transform;
                 break;
 
             case KeyboardCommand.Interact:
@@ -201,7 +205,6 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Jump:
-                controlledPlayer.Jump();
                 break;
 
             case KeyboardCommand.Dash:
@@ -228,6 +231,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Jump:
+                controlledPlayer.Jump(false);
                 break;
 
             case KeyboardCommand.Dash:

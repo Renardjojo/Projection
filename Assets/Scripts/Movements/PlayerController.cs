@@ -8,13 +8,13 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     private GameObject              body;
-
     private CharacterMovements      bodyMoveScript;
 
     private GameObject              shadow;
     private CharacterMovements      shadowMoveScript;
 
-    [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
+    public GameObject controlledObject { get; private set; }
+
     [SerializeField] private TimeManager timeManagerScript;
 
 
@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
 
         RemoveComponentToUnconstrolShadow();
 
-        checkPointPosition = body.transform.position;
+        controlledObject = body;
+
+        checkPointPosition = controlledObject.transform.position;
     }
 
     // Update is called once per frame
@@ -99,6 +101,11 @@ public class PlayerController : MonoBehaviour
     
     public void Transpose()
     {
+        if (controlledObject == body)
+            controlledObject = shadow;
+        else
+            controlledObject = body;
+
         isTransposed = !isTransposed;
 
         if (isTransposed)
@@ -108,19 +115,18 @@ public class PlayerController : MonoBehaviour
             AddComponenetToControlShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
         }
+
         else
         {
             onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
         }
-
-        cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
     }
 
     public void Interact()
     {
-        OnInteractButton(body.transform.position);
+        OnInteractButton(controlledObject.transform.position);
     }
 
     private void AddComponenetToControlShadow()
