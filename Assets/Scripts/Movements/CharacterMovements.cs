@@ -54,7 +54,7 @@ public class CharacterMovements : MonoBehaviour
         defaultZValue = gameObject.transform.localPosition.z;
     }
 
-    void Update()
+    private void DashUpdate()
     {
         if (dashCurrentTime >= dashMaxTime)
         {
@@ -70,6 +70,11 @@ public class CharacterMovements : MonoBehaviour
             dashCurrentTime += Time.deltaTime;
             return;
         }
+    }
+
+    void Update()
+    {
+        DashUpdate();
 
         if (controller.isGrounded)
         {
@@ -79,6 +84,7 @@ public class CharacterMovements : MonoBehaviour
             moveDirection = new Vector3(inputSpeed, 0.0f, 0f);
             moveDirection *= speedScale;
 
+            // Try to jump
             if (JumpFlag)
             {
                 moveDirection.y = jumpSpeed;
@@ -95,6 +101,7 @@ public class CharacterMovements : MonoBehaviour
         }
         else
         {
+            // Move in mid-air if input
             if (!Mathf.Approximately(inputSpeed, 0f))
                 moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
@@ -104,7 +111,7 @@ public class CharacterMovements : MonoBehaviour
             //moveDirection -= jumpLastVelocity;
             moveDirection.y -= gravity * Time.deltaTime;
 
-            if (moveDirection.y < 0)
+            if (moveDirection.y < 0f)
                 moveDirection.y -= 0.1f;
 
             // Move the player.       

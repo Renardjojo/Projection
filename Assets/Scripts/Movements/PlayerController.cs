@@ -9,11 +9,9 @@ public class PlayerController : MonoBehaviour
 {
     private GameObject              body;
     private CharacterMovements      bodyMoveScript;
-    private Rigidbody               bodyRigidbody;
 
     private GameObject              shadow;
     private CharacterMovements      shadowMoveScript;
-    private Rigidbody               shadowRigidbody;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
 
@@ -55,7 +53,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            TakableBox[] takableBoxes = GameObject.FindObjectsOfType<TakableBox>();
 
+            foreach (TakableBox box in takableBoxes)
+            {
+                box.TryToTakeBox(body, 10f);
+            }
+        }
     }
 
     public void MoveX(float value)
@@ -74,11 +80,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.Jump();
+            shadowMoveScript.JumpFlag = true;
         }
         else
         {
-            bodyMoveScript.Jump();
+            bodyMoveScript.JumpFlag = true;
         }
     }
     
