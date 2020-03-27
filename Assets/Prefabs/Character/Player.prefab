@@ -128,6 +128,7 @@ MonoBehaviour:
   dashMaxTime: 1
   dashCooldown: 2
   airControlRatio: 1
+  models: []
   speedScale: 3
   jumpSpeed: 8
   gravity: 20
@@ -326,6 +327,9 @@ MonoBehaviour:
   dashMaxTime: 1
   dashCooldown: 2
   airControlRatio: 0.9
+  models:
+  - {fileID: 5896068872503170043}
+  - {fileID: 3959608899253342698}
   speedScale: 3
   jumpSpeed: 8
   gravity: 20
@@ -439,6 +443,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee540e45b21cd094aaf3c0488a3e5c76, type: 3}
+--- !u!1 &5896068872503170043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ee540e45b21cd094aaf3c0488a3e5c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 2518328514437270258}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7460303760671957480 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ee540e45b21cd094aaf3c0488a3e5c76,
@@ -529,6 +539,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee540e45b21cd094aaf3c0488a3e5c76, type: 3}
+--- !u!1 &3959608899253342698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: ee540e45b21cd094aaf3c0488a3e5c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 5031284148970965219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &47290580550444025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: ee540e45b21cd094aaf3c0488a3e5c76,

@@ -20,9 +20,21 @@ public class CharacterMovements : MonoBehaviour
     internal bool JumpFlag { get; set; }
     internal bool DashFlag { get; set; }
 
+    [SerializeField] GameObject[] models = null;
+
     public void MoveX(float f)
     {
         inputSpeed = f;
+        if (f > 0.1)
+        {
+            foreach (GameObject obj in models)
+                obj.transform.rotation = Quaternion.Euler(0, 90f, 0);
+        }
+        if (f < - 0.1)
+        {
+            foreach (GameObject obj in models)
+                obj.transform.rotation = Quaternion.Euler(0, -90f, 0);
+        }
     }
 
     //private Rigidbody rb = null;
@@ -122,10 +134,10 @@ public class CharacterMovements : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // Moves cube
-        if (hit.gameObject.tag == "Cube")
-        {
-            hit.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(hit.moveDirection.x * 10, 0f, 0f), ForceMode.Force);
-        }
+        //// Moves cube
+        //if (hit.gameObject.tag == "Cube")
+        //{
+        //    hit.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(hit.moveDirection.x * 10, 0f, 0f), ForceMode.Force);
+        //}
     }
 }

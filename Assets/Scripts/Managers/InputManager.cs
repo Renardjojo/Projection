@@ -279,7 +279,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Jump:
-                controlledPlayer.Jump();
+                //controlledPlayer.Jump();
                 break;
 
             case GamepadCommand.Dash:
@@ -305,6 +305,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Jump:
+                controlledPlayer.Jump(false);
                 break;
 
             case GamepadCommand.Dash:

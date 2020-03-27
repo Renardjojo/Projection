@@ -85,15 +85,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump()
+    public void Jump(bool bJump = true)
     {
         if (isTransposed)
         {
-            shadowMoveScript.JumpFlag = true;
+            shadowMoveScript.JumpFlag = bJump;
         }
         else
         {
-            bodyMoveScript.JumpFlag = true;
+            bodyMoveScript.JumpFlag = bJump;
         }
     }
     
