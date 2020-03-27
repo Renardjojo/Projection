@@ -1074,8 +1074,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651056, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
+      propertyPath: m_CameraActivatedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069956384379651056, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
+        type: 3}
       propertyPath: m_ShowDebugText
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069956384379651056, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
+        type: 3}
+      propertyPath: m_CameraActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069956384379651056, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
+        type: 3}
+      propertyPath: m_CameraActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c3e6ca446ba54f4e8981d1275e9961a, type: 3}
@@ -1098,8 +1113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlledPlayer: {fileID: 7240604001910613592}
+  CMCam: {fileID: 948575940}
   useKeyboard: 1
-  useGamepad: 1
+  useGamepad: 0
   keyboardControls:
     m_keys: 00010203040506
     m_values: 71000000640000003001000020000000660000006500000072000000
@@ -3501,6 +3517,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerClone
       objectReference: {fileID: 0}
+    - target: {fileID: 8748844514958683167, guid: fdb9acb65b0ca584291f16fb853d5017,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8748844514965419459, guid: fdb9acb65b0ca584291f16fb853d5017,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3589,11 +3610,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.94
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748844514958683167, guid: fdb9acb65b0ca584291f16fb853d5017,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdb9acb65b0ca584291f16fb853d5017, type: 3}

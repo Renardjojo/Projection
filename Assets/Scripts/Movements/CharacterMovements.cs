@@ -133,8 +133,7 @@ public class CharacterMovements : MonoBehaviour
         }                                                                                 
         else
         {
-            // Move in mid-air if input
-            //if (!Mathf.Approximately(inputSpeed, 0f))
+            // Move in mid-air with input
              moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
             if (isOnWall)
