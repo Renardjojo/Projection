@@ -17,7 +17,7 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField]
     private float airControlRatio = 0.05f;
 
-    internal bool JumpFlag {get; set;}
+    internal bool JumpFlag { get; set; }
     internal bool DashFlag { get; set; }
 
     public void MoveX(float f)
@@ -112,7 +112,7 @@ public class CharacterMovements : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
 
             if (moveDirection.y < 0f)
-                moveDirection.y -= 0.1f;
+                moveDirection.y -= accelerationWhenFalling;
 
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);

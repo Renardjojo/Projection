@@ -8,14 +8,17 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     private GameObject              body;
+
     private CharacterMovements      bodyMoveScript;
 
     private GameObject              shadow;
     private CharacterMovements      shadowMoveScript;
 
     [SerializeField] private CinemachineVirtualCamera  cameraSetting = null;
+    [SerializeField] private TimeManager timeManagerScript;
 
-                        private CheckPoint checkPointPosition = null;
+
+                        private Vector3 checkPointPosition;
     [SerializeField]    private UnityEvent OnIsDead;
 
     bool isTransposed = false;
@@ -48,6 +51,8 @@ public class PlayerController : MonoBehaviour
         }
 
         RemoveComponentToUnconstrolShadow();
+
+        checkPointPosition = body.transform.position;
     }
 
     // Update is called once per frame
@@ -95,14 +100,15 @@ public class PlayerController : MonoBehaviour
         if (isTransposed)
         {
             bodyMoveScript.MoveX(0f);
-
             onTransposed?.Invoke();
             AddComponenetToControlShadow();
+            timeManagerScript.EnableSlowMotionInFirstPlan(true);
         }
         else
         {
             onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
+            timeManagerScript.EnableSlowMotionInFirstPlan(false);
         }
 
         cameraSetting   .Follow = isTransposed ? shadow.transform : body.transform;
@@ -123,26 +129,14 @@ public class PlayerController : MonoBehaviour
         shadowMoveScript.enabled = false;
     }
 
-    public void TryToRespawn ()
+    public void Kill()
     {
-        if (checkPointPosition != null)
-        {
-            checkPointPosition.RespawnPlayer(body);
-        }
-        else
-        {
-            KillPlayer();
-        }
-    }
-
-    public void AffectNewCheckPoint(GameObject other)
-    {
-        checkPointPosition = other.GetComponent<CheckPoint>();
-    }
-
-    public void KillPlayer()
-    {
+        body.transform.localPosition = checkPointPosition;
         OnIsDead?.Invoke();
     }
 
+    public void UseCheckPointPosition(Vector3 position)
+    {
+        checkPointPosition = position;
+    }
 }

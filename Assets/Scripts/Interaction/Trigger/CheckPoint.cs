@@ -11,14 +11,10 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]    private GameObject flag;
                         private Material flagMaterial;
     [SerializeField]    private GameObject bodyPlayer;
-                                float radiusZone = 1f;
+    [SerializeField]    private PlayerController playerControllerScript;
+
+                        float radiusZone = 1f;
                         private bool isActivate = false;
-    [SerializeField]    private UnityEvent OnCheckPointIsActivate;
-    [SerializeField]    private UnityEvent OnPlayerRespawn;
-    [SerializeField]    private UnityEvent OnPlayerCantRespawn;
-
-    [SerializeField, Range(0, 100)] private uint numberPlayerRespawn = 3;
-
 
     private void Awake()
     {
@@ -39,7 +35,7 @@ public class CheckPoint : MonoBehaviour
         {
             isActivate = true;
             flagMaterial.color = onColor;
-            OnCheckPointIsActivate?.Invoke();
+            playerControllerScript.UseCheckPointPosition(transform.position);
         }
     }
 
@@ -49,23 +45,6 @@ public class CheckPoint : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, radiusZone);
     }
 
-    public void RespawnPlayer (GameObject player)
-    {
-        if (numberPlayerRespawn > 0)
-        {
-            numberPlayerRespawn--;
-
-            if (numberPlayerRespawn == 0)
-            {
-                OnPlayerCantRespawn?.Invoke();
-            }
-            else
-            {
-                player.transform.position = transform.position;
-                OnPlayerRespawn?.Invoke();
-            }
-        }
-    }
 
     public void SetFlag(bool flag)
     {

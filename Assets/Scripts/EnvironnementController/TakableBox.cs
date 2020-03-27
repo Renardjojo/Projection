@@ -11,13 +11,12 @@ public class TakableBox : MonoBehaviour
 
     internal void TryToTakeBox(GameObject newOwner, float maxDistancce)
     {
+        //Debug.Log("JEO");
         //if (Physics.Raycast(newOwner.transform.position, newOwner.transform.forward, maxDistancce))
         if ((newOwner.transform.position - transform.position).sqrMagnitude < 3*3)
         {
             Take(newOwner);                 
         }
-        else
-            Debug.Log("OP");
     }
 
     public void Take(GameObject newOwner)

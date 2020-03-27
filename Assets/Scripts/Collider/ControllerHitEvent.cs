@@ -33,4 +33,16 @@ public class ControllerHitEvent : MonoBehaviour
             }
         }
     }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        for (int i = 0; i < listCollisionEventWithSpecificTag.Length; i++)
+        {
+            if (collision.gameObject.tag == listCollisionEventWithSpecificTag[i].collisionWithTag)
+            {
+                listCollisionEventWithSpecificTag[i].OnHit?.Invoke();
+            }
+        }
+    }
 }
