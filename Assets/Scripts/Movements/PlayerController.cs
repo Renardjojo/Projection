@@ -58,13 +58,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // TODO : TOREMOVE
         if (Input.GetKeyDown(KeyCode.G))
         {
             TakableBox[] takableBoxes = GameObject.FindObjectsOfType<TakableBox>();
 
             foreach (TakableBox box in takableBoxes)
             {
-                box.TryToTakeBox(body, 10f);
+                if (box.IsTaken)
+                    box.Drop();
+                else
+                    box.TryToTakeBox(body, 10f);
             }
         }
     }

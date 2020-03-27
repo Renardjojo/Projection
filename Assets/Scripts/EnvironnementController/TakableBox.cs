@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class TakableBox : MonoBehaviour
 {
+    [SerializeField]
+    private float interactionRadius = 1.75f;
+
     private GameObject owner = null;
     private Rigidbody rb = null;
 
-    internal bool IsTaken { get { return owner == null; } }
+    internal bool IsTaken { get { return owner != null; } }
 
     internal void TryToTakeBox(GameObject newOwner, float maxDistancce)
     {
-        //Debug.Log("JEO");
         //if (Physics.Raycast(newOwner.transform.position, newOwner.transform.forward, maxDistancce))
-        if ((newOwner.transform.position - transform.position).sqrMagnitude < 3*3)
+        if ((newOwner.transform.position - transform.position).sqrMagnitude < interactionRadius  * interactionRadius)
         {
             Take(newOwner);                 
         }
@@ -21,6 +23,7 @@ public class TakableBox : MonoBehaviour
 
     public void Take(GameObject newOwner)
     {
+        rb.detectCollisions = false;
         rb.useGravity  = false;
         rb.isKinematic = true;
         owner = newOwner;
@@ -30,6 +33,7 @@ public class TakableBox : MonoBehaviour
     {
         if (owner != null)
         {
+            rb.detectCollisions = true;
             rb.useGravity  = true;
             rb.isKinematic = false;
             owner = null;
@@ -55,4 +59,10 @@ public class TakableBox : MonoBehaviour
             transform.position = owner.transform.position + owner.transform.forward * 1f;
         }
     }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, interactionRadius);
+    }
+
 }
