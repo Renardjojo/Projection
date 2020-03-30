@@ -334,6 +334,11 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Transpose:
+                if (!hasTransposed)
+                {
+                    controlledPlayer.Transpose();
+                    hasTransposed = true;
+                }
                 break;
 
             case GamepadCommand.Interact:
@@ -357,6 +362,11 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Transpose:
+                if (!hasTransposed)
+                {
+                    controlledPlayer.Transpose();
+                    hasTransposed = true;
+                }
                 break;
 
             case GamepadCommand.Interact:
