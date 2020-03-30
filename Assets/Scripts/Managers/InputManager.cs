@@ -149,7 +149,9 @@ public class InputManager : MonoBehaviour
         }
 
         if (hasTransposed && CMCam)
+        {
             CMCam.Follow = controlledPlayer.controlledObject.transform;
+        }
 
     }
 
@@ -171,8 +173,7 @@ public class InputManager : MonoBehaviour
 
             case KeyboardCommand.Transpose:
                 controlledPlayer.Transpose();
-                if (CMCam)
-                    CMCam.Follow = controlledPlayer.controlledObject.transform;
+
                 if (useGamepad)
                     hasTransposed = true;
                 break;
@@ -282,7 +283,10 @@ public class InputManager : MonoBehaviour
 
             case GamepadCommand.Transpose:
                 if (!hasTransposed)
+                {
                     controlledPlayer.Transpose();
+                    hasTransposed = true;
+                }
                 break;
 
             case GamepadCommand.Interact:
@@ -334,11 +338,6 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Transpose:
-                if (!hasTransposed)
-                {
-                    controlledPlayer.Transpose();
-                    hasTransposed = true;
-                }
                 break;
 
             case GamepadCommand.Interact:
@@ -362,11 +361,6 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Transpose:
-                if (!hasTransposed)
-                {
-                    controlledPlayer.Transpose();
-                    hasTransposed = true;
-                }
                 break;
 
             case GamepadCommand.Interact:
