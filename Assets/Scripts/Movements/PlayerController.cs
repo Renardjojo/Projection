@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public event Action<Vector3>            OnInteractButton;
     public event Action<GameObject>         OnInteractCube;
 
+    private Vector3 shadowOffset = 2f * Vector3.forward;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour
         bodyMoveScript  = body.GetComponent<CharacterMovements>();
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
-        shadow          = body.transform.Find("Shadow").gameObject;
+        //shadow          = body.transform.Find("Shadow").gameObject;
         shadowMoveScript= shadow.GetComponent<CharacterMovements>();
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
 
@@ -65,7 +67,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!isTransposed)
+        {
+            shadow.transform.rotation = body.transform.rotation;
+            shadow.transform.position = body.transform.position + shadowOffset;
+        }
     }
 
     public void MoveX(float value)
@@ -103,6 +109,9 @@ public class PlayerController : MonoBehaviour
 
         if (isTransposed)
         {
+            // To set shadow's velocity to players's
+            shadowMoveScript.CopyFrom(bodyMoveScript);
+
             bodyMoveScript.MoveX(0f);
             onTransposed?.Invoke();
             AddComponenetToControlShadow();
@@ -111,6 +120,9 @@ public class PlayerController : MonoBehaviour
 
         else
         {
+            shadowOffset = shadow.transform.position - body.transform.position;
+
+            shadowMoveScript.MoveX(0f);
             onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(false);

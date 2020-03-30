@@ -22,24 +22,23 @@ public class CharacterMovements : MonoBehaviour
 
     internal bool preventInputsUntilGround = false;
 
-    [SerializeField] GameObject[] models = null;
-
     public void MoveX(float f)
     {
         inputSpeed = f;
         if (f > 0.1)
         {
-            foreach (GameObject obj in models)
-                obj.transform.rotation = Quaternion.Euler(0, 90f, 0);
+            transform.rotation = Quaternion.Euler(0, 90f, 0);
+            //foreach (GameObject obj in models)
+            //    obj.transform.rotation = Quaternion.Euler(0, 90f, 0);
         }
         if (f < - 0.1)
         {
-            foreach (GameObject obj in models)
-                obj.transform.rotation = Quaternion.Euler(0, -90f, 0);
+            transform.rotation = Quaternion.Euler(0, -90f, 0);
+            //foreach (GameObject obj in models)
+            //    obj.transform.rotation = Quaternion.Euler(0, -90f, 0);
         }
     }
 
-    //private Rigidbody rb = null;
     private CharacterController controller = null;
 
     [SerializeField]
@@ -51,9 +50,18 @@ public class CharacterMovements : MonoBehaviour
     // This is not physically correct, but it gives a better video game like jump.
     [SerializeField] private float accelerationWhenFalling = 0.1f;
 
-    private Vector3 moveDirection = Vector3.zero;
+    public Vector3 moveDirection = Vector3.zero;
 
     private float defaultZValue;
+
+    public void CopyFrom(CharacterMovements other)
+    {
+        JumpFlag = other.JumpFlag;
+        inputSpeed = other.inputSpeed;
+        isOnWall = other.isOnWall;
+
+        moveDirection = other.moveDirection;
+    }
 
     private void Awake()
     {
