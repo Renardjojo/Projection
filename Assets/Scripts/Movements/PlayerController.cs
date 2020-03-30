@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject     body;
     [SerializeField] private GameObject     shadow;
+    [SerializeField] private float          maxShadowDistance;
     [SerializeField] private TimeManager    timeManagerScript;
     [SerializeField] private UnityEvent     OnIsDead;
 
@@ -82,7 +83,20 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.MoveX(value);
+            if (value != 0f)
+            {
+                float tmp = Math.Abs(shadow.transform.position.x + value * shadowMoveScript.speedScale * Time.deltaTime - bodyMoveScript.transform.position.x);
+                if (tmp < maxShadowDistance)
+                    shadowMoveScript.MoveX(value);
+
+                tmp = Math.Abs(shadow.transform.position.x + value * shadowMoveScript.speedScale * Time.deltaTime - bodyMoveScript.transform.position.x);
+
+                if (tmp >= maxShadowDistance)
+                    shadowMoveScript.MoveX(-value);
+            }
+
+            else
+                shadowMoveScript.MoveX(0f);
         }
 
         else
