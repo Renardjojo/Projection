@@ -24,6 +24,9 @@ public class CharacterMovements : MonoBehaviour
 
     public void MoveX(float f)
     {
+        if (preventInputsUntilGround)
+            return;
+
         inputSpeed = f;
         if (f > 0.1)
         {
@@ -50,7 +53,7 @@ public class CharacterMovements : MonoBehaviour
     // This is not physically correct, but it gives a better video game like jump.
     [SerializeField] private float accelerationWhenFalling = 0.1f;
 
-    public Vector3 moveDirection = Vector3.zero;
+    private Vector3 moveDirection = Vector3.zero;
 
     private float defaultZValue;
 
@@ -94,21 +97,48 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
-    private Vector3 lastNormal;
+    [SerializeField] private float wallDetectionDistance = 1f;
+    [SerializeField] private float wallJumpNormalSpeed = 5f;
+    [SerializeField] private float wallJumpUpSpeed = 5f;
+
     private bool isOnWall = false;
+    internal bool WallJumpFlag { get; set; }
 
     private void TryToWallJump(ref Vector3 velocity)
     {
-        Physics.Raycast(transform.position, transform.forward);
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
-        //if (isOnWall)
-        //{
-        //    velocity = lastNormal;
-        //    velocity.y = 0.9f;
-        //    velocity = velocity.normalized * speedScale * 3;
-        //    isOnWall = false;
-        //    preventInputsUntilGround = true;
-        //}
+        // ======== Detect Wall ======== //
+        Ray ray = new Ray();
+        ray.origin = transform.position;
+        ray.direction = transform.forward;
+            
+        RaycastHit hitInfo; 
+        if (Physics.Raycast(ray, out hitInfo, wallDetectionDistance))
+        {
+            preventInputsUntilGround = false;
+            isOnWall = true;
+        }
+        else
+            isOnWall = false;
+
+        // ======== If input, then jump ======== //
+        // TODO : TODELETE GETKEYDOWN
+        if (isOnWall && WallJumpFlag)
+        {
+            velocity = hitInfo.normal * wallJumpNormalSpeed + Vector3.up * wallJumpUpSpeed;
+            preventInputsUntilGround = true;
+            isOnWall = false;
+            WallJumpFlag = false;
+
+            // rotate
+            if (velocity.x > 0.1)
+            {
+                transform.rotation = Quaternion.Euler(0, 90f, 0);
+            }
+            if (velocity.x < -0.1)
+            {
+                transform.rotation = Quaternion.Euler(0, -90f, 0);
+            }
+        }
     }
 
     void Update()
@@ -142,10 +172,11 @@ public class CharacterMovements : MonoBehaviour
         else
         {
             // Move in mid-air with input
+            if (!preventInputsUntilGround)
              moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
-            if (isOnWall)
-                moveDirection.y += gravity / 2f * Time.deltaTime;
+            //if (isOnWall)
+            //    moveDirection.y += gravity / 2f * Time.deltaTime;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
@@ -155,12 +186,24 @@ public class CharacterMovements : MonoBehaviour
 
             TryToWallJump(ref moveDirection);
 
-            if (!preventInputsUntilGround && moveDirection.y < 0f)
+            if (moveDirection.y < 0f)
                 moveDirection.y -= accelerationWhenFalling;
+
+            if (isOnWall && moveDirection.y < 0f)
+            {
+                moveDirection.y += gravity / 2f * Time.deltaTime + accelerationWhenFalling;
+            }
 
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // if collision with ceil, then set y velocity to 0
+        if (moveDirection.y > 0f && hit.normal.y < - 0.3f)
+            moveDirection.y = 0f;        
     }
 }
