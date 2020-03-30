@@ -86,7 +86,6 @@ public class PlayerController : MonoBehaviour
             if (value != 0f)
             {
                 float tmp = Math.Abs(shadow.transform.position.x + value * shadowMoveScript.speedScale * Time.deltaTime - bodyMoveScript.transform.position.x);
-                Debug.Log("body - shadow distance = " + tmp + " | value = " + value.ToString());
                 if (tmp < maxShadowDistance)
                     shadowMoveScript.MoveX(value);
 

@@ -45,7 +45,8 @@ public class CharacterMovements : MonoBehaviour
     private CharacterController controller = null;
 
     [SerializeField]
-    private float speedScale = 3.0f;
+    // MUST BE CHANGED TO PRIVATE, LATER --> CHECK PLAYERCONTROLLER.CS FIRST
+    public float speedScale = 3.0f;
     [SerializeField]
     private float jumpSpeed = 8.0f;
     [SerializeField] private float gravity = 20.0f;
