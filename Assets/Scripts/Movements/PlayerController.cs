@@ -137,11 +137,15 @@ public class PlayerController : MonoBehaviour
 
     private void AddComponenetToControlShadow()
     {
+        shadow.GetComponent<CapsuleCollider>().enabled = true;
+        shadow.GetComponent<CharacterController>().enabled = true;
         shadowMoveScript.enabled = true;
     }
 
     private void RemoveComponentToUnconstrolShadow()
     {
+        shadow.GetComponent<CapsuleCollider>().enabled = false;
+        shadow.GetComponent<CharacterController>().enabled = false;
         shadowMoveScript.enabled = false;
     }
 
