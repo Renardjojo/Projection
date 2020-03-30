@@ -8,7 +8,7 @@ using UnityEditor;
 [System.Serializable]
 public struct HitEventInfo
 {
-    [TagSelector]
+    //[TagSelector]
     public string collisionWithTag;
     public UnityEvent OnHit;
 
