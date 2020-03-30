@@ -10,7 +10,8 @@ public enum KeyboardCommand : byte
     Run,
     Jump,
     Transpose,
-    Interact
+    Interact,
+    ResetShadow
 }
 
 public enum GamepadCommand : byte
@@ -18,7 +19,8 @@ public enum GamepadCommand : byte
     Move = 0,
     Jump,
     Transpose,
-    Interact
+    Interact,
+    ResetShadow
 }
 
 
@@ -180,6 +182,10 @@ public class InputManager : MonoBehaviour
                 if (useGamepad)
                     hasInteracted = true;
                 break;
+
+            case KeyboardCommand.ResetShadow:
+                controlledPlayer.ResetShadow();
+                break;
         }
 
         
@@ -228,6 +234,10 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Interact:
+                break;
+
+            case KeyboardCommand.ResetShadow:
+                controlledPlayer.ResetShadow();
                 break;
         }
     }
@@ -278,6 +288,10 @@ public class InputManager : MonoBehaviour
             case GamepadCommand.Interact:
                 if (!hasInteracted)
                     controlledPlayer.Interact();
+                break;
+
+            case GamepadCommand.ResetShadow:
+                controlledPlayer.ResetShadow();
                 break;
         }
     }
