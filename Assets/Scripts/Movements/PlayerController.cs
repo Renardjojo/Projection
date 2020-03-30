@@ -142,6 +142,16 @@ public class PlayerController : MonoBehaviour
         OnInteractCube(controlledObject);
     }
 
+    public void ResetShadow()
+    {
+        // Prevent the shadow from being blocked (in light...)
+        if (controlledObject == body)
+        {
+            // Reset shadow location
+            shadowOffset = new Vector3(0f, 0f, 2f);
+        }
+    }
+
     private void AddComponenetToControlShadow()
     {
         shadow.GetComponent<CapsuleCollider>().enabled = true;
