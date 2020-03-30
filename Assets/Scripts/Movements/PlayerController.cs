@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
             if (box.IsTaken)
                 box.Drop();
             else
-                box.TryToTakeBox(body, 10f);
+                box.TryToTakeBox(body);
         }
 
         RemoveComponentToUnconstrolShadow();
