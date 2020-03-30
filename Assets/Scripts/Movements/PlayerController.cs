@@ -96,10 +96,12 @@ public class PlayerController : MonoBehaviour
         if (isTransposed)
         {
             shadowMoveScript.JumpFlag = bJump;
+            shadowMoveScript.WallJumpFlag = bJump;
         }
         else
         {
             bodyMoveScript.JumpFlag = bJump;
+            bodyMoveScript.WallJumpFlag = bJump;
         }
     }
     

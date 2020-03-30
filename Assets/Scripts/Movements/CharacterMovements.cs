@@ -108,7 +108,7 @@ public class CharacterMovements : MonoBehaviour
     {
         // ======== Detect Wall ======== //
         Ray ray = new Ray();
-        ray.origin = transform.position;
+        ray.origin = transform.position - Vector3.up * 0.5f /* + capsule.size / 2f */;
         ray.direction = transform.forward;
             
         RaycastHit hitInfo; 
@@ -121,8 +121,7 @@ public class CharacterMovements : MonoBehaviour
             isOnWall = false;
 
         // ======== If input, then jump ======== //
-        // TODO : TODELETE GETKEYDOWN
-        if (isOnWall && WallJumpFlag)
+        if (isOnWall && WallJumpFlag && !controller.isGrounded)
         {
             velocity = hitInfo.normal * wallJumpNormalSpeed + Vector3.up * wallJumpUpSpeed;
             preventInputsUntilGround = true;
@@ -159,6 +158,7 @@ public class CharacterMovements : MonoBehaviour
             {
                 moveDirection.y = jumpSpeed;
                 JumpFlag = false;
+                WallJumpFlag = false;
             }
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
@@ -173,7 +173,7 @@ public class CharacterMovements : MonoBehaviour
         {
             // Move in mid-air with input
             if (!preventInputsUntilGround)
-             moveDirection.x = inputSpeed * speedScale * airControlRatio;
+                moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
             //if (isOnWall)
             //    moveDirection.y += gravity / 2f * Time.deltaTime;
@@ -204,6 +204,12 @@ public class CharacterMovements : MonoBehaviour
     {
         // if collision with ceil, then set y velocity to 0
         if (moveDirection.y > 0f && hit.normal.y < - 0.3f)
-            moveDirection.y = 0f;        
+            moveDirection.y = 0f;
+
+        if (moveDirection.x > 0f && hit.normal.x < -0.3f)
+            moveDirection.x = 0f;
+
+        if (moveDirection.x < 0f && hit.normal.x > 0.3f)
+            moveDirection.x = 0f;
     }
 }
