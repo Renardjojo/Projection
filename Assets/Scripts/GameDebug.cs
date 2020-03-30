@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameDebug 
 {
-    public static void AssertInTransform(bool isError, Transform trans, string errorMessage)
+    public static void AssertInTransform(bool isSuccess, Transform trans, string errorMessage)
     {
-        if (!isError)
+        if (!isSuccess)
         {
             string objectHierarchy = "";
             Transform o = trans;

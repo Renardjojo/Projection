@@ -106,6 +106,9 @@ public class CharacterMovements : MonoBehaviour
 
     private void TryToWallJump(ref Vector3 velocity)
     {
+        if (controller.isGrounded)
+            return;
+
         // ======== Detect Wall ======== //
         Ray ray = new Ray();
         ray.origin = transform.position - Vector3.up * 0.5f /* + capsule.size / 2f */;

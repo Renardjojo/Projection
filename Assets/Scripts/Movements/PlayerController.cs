@@ -138,8 +138,11 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        OnInteractButton(controlledObject.transform.position);
-        OnInteractCube(controlledObject);
+        if (controlledObject == shadow)
+        {
+            OnInteractButton(controlledObject.transform.position);
+            OnInteractCube(controlledObject);
+        }
     }
 
     public void ResetShadow()

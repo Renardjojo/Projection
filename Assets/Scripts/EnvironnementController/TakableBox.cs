@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class TakableBox : MonoBehaviour
 {
-    [SerializeField]
-    private float interactionRadius = 1.75f;
+    [SerializeField] private float interactionRadius = 1.75f;
+
 
     private GameObject owner = null;
     private Rigidbody rb = null;
@@ -17,10 +17,10 @@ public class TakableBox : MonoBehaviour
         if (IsTaken)
             Drop();
         else
-            TryToTakeBox(owner, 10f);
+            TryToTakeBox(owner);
     }
 
-    internal void TryToTakeBox(GameObject newOwner, float maxDistancce)
+    internal void TryToTakeBox(GameObject newOwner)
     {
         //if (Physics.Raycast(newOwner.transform.position, newOwner.transform.forward, maxDistancce))
         if ((newOwner.transform.position - transform.position).sqrMagnitude < interactionRadius  * interactionRadius)

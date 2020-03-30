@@ -163,7 +163,7 @@ PrefabInstance:
     - target: {fileID: 4855250686136370000, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.88
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136370000, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
@@ -648,6 +648,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603ced6c25f3d7841b3b98625646cd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &214105661 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4855250686136370001, guid: f66ad53629d8d0b48bce8cc4f81a0341,
+    type: 3}
+  m_PrefabInstance: {fileID: 1924627767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &214105667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214105661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5331d3adc944e1a4d93fed6950eb9254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadow: {fileID: 1546288075}
+  shadowMovementsToObject: 1
+  objectMovementsToShadow: 0
 --- !u!1 &261328850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,7 +1364,7 @@ MonoBehaviour:
     m_values: 71000000640000003001000020000000660000006500000072000000
   gamepadControls:
     m_keys: 0001020304
-    m_values: 0700060502
+    m_values: 0700050206
 --- !u!4 &640690086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5515122045319780604, guid: ac462870c4979ab4eacfa95943a34a4e,
@@ -3120,6 +3141,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.2204459e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1546288075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4855250686136370001, guid: f66ad53629d8d0b48bce8cc4f81a0341,
+    type: 3}
+  m_PrefabInstance: {fileID: 1356026}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1550532599 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1037235656955503747, guid: e6d25b08c82e0d84c9e1debe893ceccd,
@@ -3680,12 +3707,12 @@ PrefabInstance:
     - target: {fileID: 4855250686136370000, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.88
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136370000, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.214
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136370000, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
@@ -3735,12 +3762,17 @@ PrefabInstance:
     - target: {fileID: 4855250686136370003, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_UseGravity
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136370003, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855250686136370003, guid: f66ad53629d8d0b48bce8cc4f81a0341,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136369999, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
