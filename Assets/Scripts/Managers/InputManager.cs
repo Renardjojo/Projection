@@ -149,10 +149,7 @@ public class InputManager : MonoBehaviour
         }
 
         if (hasTransposed && CMCam)
-        {
             CMCam.Follow = controlledPlayer.controlledObject.transform;
-        }
-
     }
 
 
@@ -173,15 +170,12 @@ public class InputManager : MonoBehaviour
 
             case KeyboardCommand.Transpose:
                 controlledPlayer.Transpose();
-
-                if (useGamepad)
-                    hasTransposed = true;
+                hasTransposed = true;
                 break;
 
             case KeyboardCommand.Interact:
                 controlledPlayer.Interact();
-                if (useGamepad)
-                    hasInteracted = true;
+                hasInteracted = true;
                 break;
 
             case KeyboardCommand.ResetShadow:
@@ -209,8 +203,7 @@ public class InputManager : MonoBehaviour
                 else
                     controlledPlayer.MoveX(-1f);
 
-                if (useGamepad)
-                    hasMoved = true;
+                hasMoved = true;
                 break;
 
             case KeyboardCommand.MoveRight:
@@ -224,8 +217,7 @@ public class InputManager : MonoBehaviour
                 else
                     controlledPlayer.MoveX(1f);
 
-                if (useGamepad)
-                    hasMoved = true;
+                hasMoved = true;
                 break;
 
             case KeyboardCommand.Jump:
@@ -252,8 +244,7 @@ public class InputManager : MonoBehaviour
             case KeyboardCommand.MoveLeft:
             case KeyboardCommand.MoveRight:
                 controlledPlayer.MoveX(0f);
-                if (useGamepad)
-                    hasMoved = true;
+                hasMoved = true;
                 break;
 
             case KeyboardCommand.Jump:
@@ -264,6 +255,8 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Interact:
+                controlledPlayer.Interact();
+                hasInteracted = true;
                 break;
         }
     }
