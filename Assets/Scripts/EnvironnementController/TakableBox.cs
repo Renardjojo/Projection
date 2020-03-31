@@ -12,21 +12,23 @@ public class TakableBox : MonoBehaviour
 
     internal bool IsTaken { get { return owner != null; } }
 
-    internal void BoxInteraction(GameObject owner)
-    {
-        if (IsTaken)
-            Drop();
-        else
-            TryToTakeBox(owner);
-    }
+    //internal void BoxInteraction(GameObject owner)
+    //{
+    //    if (IsTaken)
+    //        Drop();
+    //    else
+    //        TryToTakeBox(owner);
+    //}
 
-    internal void TryToTakeBox(GameObject newOwner)
+    internal bool TryToTakeBox(GameObject newOwner)
     {
         //if (Physics.Raycast(newOwner.transform.position, newOwner.transform.forward, maxDistancce))
         if ((newOwner.transform.position - transform.position).sqrMagnitude < interactionRadius  * interactionRadius)
         {
-            Take(newOwner);                 
+            Take(newOwner);
+            return true;
         }
+        return false;
     }
 
     public void Take(GameObject newOwner)
