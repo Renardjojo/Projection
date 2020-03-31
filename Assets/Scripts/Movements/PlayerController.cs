@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public event Action                     onTransposed;
     public event Action                     onUntransposed;
     public event Action<Vector3>            OnInteractButton;
-    public event Action<GameObject>         OnInteractCube;
 
     private Vector3 shadowOffset = 2f * Vector3.forward;
 
@@ -45,16 +44,6 @@ public class PlayerController : MonoBehaviour
         foreach (Button button in components2)
         {
             OnInteractButton += button.TryToPress;
-        }
-
-        TakableBox[] takableBoxes = GameObject.FindObjectsOfType<TakableBox>();
-        foreach (TakableBox box in takableBoxes)
-        {
-            OnInteractCube += box.BoxInteraction;
-            if (box.IsTaken)
-                box.Drop();
-            else
-                box.TryToTakeBox(body);
         }
 
         RemoveComponentToUnconstrolShadow();
@@ -121,6 +110,11 @@ public class PlayerController : MonoBehaviour
     
     public void Transpose()
     {
+        if (currentBox != null)
+        {
+            DropBox();
+        }
+
         if (controlledObject == body)
             controlledObject = shadow;
         else
@@ -150,12 +144,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private TakableBox currentBox = null;
+
+    public void InteractWithBoxes()
+    {
+        if (currentBox != null)
+        {
+            DropBox();
+        }
+        else
+        {
+            TakeClosestBox();
+        }
+    }
+
+    public void DropBox()
+    {
+        currentBox.Drop();
+        currentBox = null;
+    }
+
+    public void TakeClosestBox()
+    {
+        TakableBox[] boxes = GameObject.FindObjectsOfType<TakableBox>();
+        foreach (TakableBox box in boxes)
+        {
+            if (box.TryToTakeBox(controlledObject))
+            {
+                currentBox = box;
+                break;
+            }
+        }
+    }
+
     public void Interact()
     {
         if (controlledObject == shadow)
         {
             OnInteractButton(controlledObject.transform.position);
-            OnInteractCube(controlledObject);
+            InteractWithBoxes();
+            //OnInteractCube(controlledObject);
         }
     }
 
