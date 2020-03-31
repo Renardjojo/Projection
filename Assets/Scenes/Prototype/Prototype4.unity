@@ -148,7 +148,7 @@ PrefabInstance:
     - target: {fileID: 4855250686136370001, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_Name
-      value: Cube (1)
+      value: Cube Shadow
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136370001, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
@@ -4803,6 +4803,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8748844514958683166, guid: fdb9acb65b0ca584291f16fb853d5017,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748844514958683166, guid: fdb9acb65b0ca584291f16fb853d5017,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
     - target: {fileID: 8748844514965419459, guid: fdb9acb65b0ca584291f16fb853d5017,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4885,16 +4895,6 @@ PrefabInstance:
     - target: {fileID: 1932135562, guid: fdb9acb65b0ca584291f16fb853d5017, type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748844514958683166, guid: fdb9acb65b0ca584291f16fb853d5017,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -11.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 8748844514958683166, guid: fdb9acb65b0ca584291f16fb853d5017,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.94
       objectReference: {fileID: 0}
     - target: {fileID: 8748844514958683155, guid: fdb9acb65b0ca584291f16fb853d5017,
         type: 3}
@@ -5001,6 +5001,11 @@ PrefabInstance:
       propertyPath: accelerationWhenFalling
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3496722967129653466, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: wallFriction
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5130895124295681729, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
       propertyPath: m_StepOffset
@@ -5016,7 +5021,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2544343660083584312, guid: 018ad8c3af6012e4797ef77b357ee034, type: 3}
+    - {fileID: 4774106392021444494, guid: 018ad8c3af6012e4797ef77b357ee034, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 018ad8c3af6012e4797ef77b357ee034, type: 3}
 --- !u!1001 &2547154510185308003
 PrefabInstance:
