@@ -1419,6 +1419,7 @@ GameObject:
   - component: {fileID: 645700246}
   - component: {fileID: 645700245}
   - component: {fileID: 645700244}
+  - component: {fileID: 645700247}
   m_Layer: 0
   m_Name: Obstacle1 (1)
   m_TagString: Untagged
@@ -1498,6 +1499,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645700242}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &645700247
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645700242}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &735857600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5631906228330554646, guid: cdf34600e1360f04698200fe40d6af10,
@@ -4683,6 +4700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: wallJumpNormalSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3496722967129653466, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: accelerationWhenFalling
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5130895124295681729, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}

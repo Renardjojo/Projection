@@ -17,6 +17,9 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField]
     private float airControlRatio = 0.05f;
 
+    [SerializeField, Range(0f, 1f)]
+    private float wallFriction = 0.5f;
+
     internal bool JumpFlag { get; set; }
     internal bool DashFlag { get; set; }
 
@@ -195,7 +198,7 @@ public class CharacterMovements : MonoBehaviour
 
             if (isOnWall && moveDirection.y < 0f)
             {
-                moveDirection.y += gravity / 2f * Time.deltaTime + accelerationWhenFalling;
+                moveDirection.y *= wallFriction;
             }
 
             // Move the player.       
