@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
     public void DropBox()
     {
-        currentBox.Drop();
+        currentBox.Drop(controlledObject.GetComponent<Collider>());
         currentBox = null;
     }
 
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour
         TakableBox[] boxes = GameObject.FindObjectsOfType<TakableBox>();
         foreach (TakableBox box in boxes)
         {
-            if (box.TryToTakeBox(controlledObject))
+            if (box.TryToTakeBox(controlledObject, controlledObject.GetComponent<Collider>()))
             {
                 currentBox = box;
                 break;
@@ -199,14 +199,14 @@ public class PlayerController : MonoBehaviour
 
     private void AddComponenetToControlShadow()
     {
-        shadow.GetComponent<CapsuleCollider>().enabled = true;
+        //shadow.GetComponent<CapsuleCollider>().enabled = true;
         shadow.GetComponent<CharacterController>().enabled = true;
         shadowMoveScript.enabled = true;
     }
 
     private void RemoveComponentToUnconstrolShadow()
     {
-        shadow.GetComponent<CapsuleCollider>().enabled = false;
+        //shadow.GetComponent<CapsuleCollider>().enabled = false;
         shadow.GetComponent<CharacterController>().enabled = false;
         shadowMoveScript.enabled = false;
     }
