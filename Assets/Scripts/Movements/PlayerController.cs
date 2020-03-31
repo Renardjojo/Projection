@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
+    private float                           initialHeight;
     private bool                            isTransposed;
 
     public event Action                     onTransposed;
@@ -49,8 +50,8 @@ public class PlayerController : MonoBehaviour
         RemoveComponentToUnconstrolShadow();
 
         controlledObject = body;
-
         checkPointPosition = controlledObject.transform.position;
+        initialHeight = controlledObject.transform.position.y;
         isTransposed = false;
     }
 
@@ -63,13 +64,14 @@ public class PlayerController : MonoBehaviour
             shadow.transform.position = body.transform.position + shadowOffset;
 
             // So the shadow does not fall through the floor
-            if (shadow.transform.position.y < 1f)
-                shadow.transform.position = new Vector3(shadow.transform.position.x, 1f, shadow.transform.position.z);
+            if (shadow.transform.position.y < initialHeight)
+                shadowOffset.y += initialHeight - shadow.transform.position.y;
         }
     }
 
     public void MoveX(float value)
     {
+        /*
         if (isTransposed)
         {
             if (value != 0f)
@@ -92,6 +94,12 @@ public class PlayerController : MonoBehaviour
         {
             bodyMoveScript.MoveX(value);
         }
+        */
+
+        if (isTransposed)
+            shadowMoveScript.MoveX(value);
+        else
+            bodyMoveScript.MoveX(value);
     }
 
     public void Jump(bool bJump = true)
