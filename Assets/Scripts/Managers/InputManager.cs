@@ -255,8 +255,6 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Interact:
-                controlledPlayer.Interact();
-                hasInteracted = true;
                 break;
         }
     }
