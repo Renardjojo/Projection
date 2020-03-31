@@ -5,155 +5,54 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovements : MonoBehaviour
 {
-    private float inputSpeed = 0f;
+    /* ==== User-defined data members ==== */
+    [SerializeField] private float  airControlRatio     = .05f;
+    [Range(0f, 1f)]
+    [SerializeField] private float  wallFriction        = .5f;
+    // MUST BE CHANGED TO PRIVATE, LATER --> CHECK PLAYERCONTROLLER.CS WITH CTRL+F FIRST
+    [SerializeField] public float   speedScale          = 3f;
+    [SerializeField] private float  jumpSpeed           = 8f;
+    [SerializeField] private float  gravity             = 20f;
+    [SerializeField] private float  wallDetectionRange  = 1f;
+    [SerializeField] private float  wallJumpNormalSpeed = 5f;
+    [SerializeField] private float  wallJumpUpSpeed     = 5f;
+    // This is not physically correct, but it gives a better video-game-like jump.
+    [SerializeField] private float  fallAcceleration    = .1f;
 
-    [SerializeField]
-    private float dashMaxTime = 1f;
-    private float dashCurrentTime = 0f;
-    [SerializeField]
-    private float dashCooldown = 0f;
-    private float dashCooldownLeft = 0f;
+    /* ==== Private data members ==== */
+    private CharacterController     controller          = null;
+    private Vector3                 moveDirection       = Vector3.zero;
+    private float                   inputSpeed          = 0f;
+    private float                   defaultZValue       = 0f;
+    private bool                    isOnWall            = false;
 
-    [SerializeField]
-    private float airControlRatio = 0.05f;
+    /* ==== Public data members ==== */
+    internal bool                   disableInputs       = false;
+    internal bool                   JumpFlag            { get; set; }
+    internal bool                   WallJumpFlag        { get; set; }
 
-    [SerializeField, Range(0f, 1f)]
-    private float wallFriction = 0.5f;
 
-    internal bool JumpFlag { get; set; }
-    internal bool DashFlag { get; set; }
 
-    internal bool preventInputsUntilGround = false;
 
-    public void MoveX(float f)
-    {
-        if (preventInputsUntilGround)
-            return;
-
-        inputSpeed = f;
-        if (f > 0.1)
-        {
-            transform.rotation = Quaternion.Euler(0, 90f, 0);
-            //foreach (GameObject obj in models)
-            //    obj.transform.rotation = Quaternion.Euler(0, 90f, 0);
-        }
-        if (f < - 0.1)
-        {
-            transform.rotation = Quaternion.Euler(0, -90f, 0);
-            //foreach (GameObject obj in models)
-            //    obj.transform.rotation = Quaternion.Euler(0, -90f, 0);
-        }
-    }
-
-    private CharacterController controller = null;
-
-    [SerializeField]
-    // MUST BE CHANGED TO PRIVATE, LATER --> CHECK PLAYERCONTROLLER.CS FIRST
-    public float speedScale = 3.0f;
-    [SerializeField]
-    private float jumpSpeed = 8.0f;
-    [SerializeField] private float gravity = 20.0f;
-
-    // This is not physically correct, but it gives a better video game like jump.
-    [SerializeField] private float accelerationWhenFalling = 0.1f;
-
-    private Vector3 moveDirection = Vector3.zero;
-
-    private float defaultZValue;
-
-    public void CopyFrom(CharacterMovements other)
-    {
-        JumpFlag = other.JumpFlag;
-        inputSpeed = other.inputSpeed;
-        isOnWall = other.isOnWall;
-
-        moveDirection = other.moveDirection;
-    }
-
+    /* ==== Unity methods ==== */
     private void Awake()
     {
-        JumpFlag = false;
-        DashFlag = false;
-
-        controller = GetComponent<CharacterController>();
+        JumpFlag    = false;
+        controller  = GetComponent<CharacterController>();
     }
+
 
     private void Start()
     {
         defaultZValue = gameObject.transform.localPosition.z;
     }
 
-    private void DashUpdate()
-    {
-        if (dashCurrentTime >= dashMaxTime)
-        {
-            dashCurrentTime = 0f;
-            dashCooldownLeft = dashCooldown;
-        }
-
-        dashCooldownLeft -= Time.deltaTime;
-
-        if (DashFlag && moveDirection.sqrMagnitude != 0f && dashCooldownLeft <= 0)
-        {
-            controller.Move(moveDirection.normalized * Time.deltaTime * 10);
-            dashCurrentTime += Time.deltaTime;
-            return;
-        }
-    }
-
-    [SerializeField] private float wallDetectionDistance = 1f;
-    [SerializeField] private float wallJumpNormalSpeed = 5f;
-    [SerializeField] private float wallJumpUpSpeed = 5f;
-
-    private bool isOnWall = false;
-    internal bool WallJumpFlag { get; set; }
-
-    private void TryToWallJump(ref Vector3 velocity)
-    {
-        if (controller.isGrounded)
-            return;
-
-        // ======== Detect Wall ======== //
-        Ray ray = new Ray();
-        ray.origin = transform.position - Vector3.up * 0.5f /* + capsule.size / 2f */;
-        ray.direction = transform.forward;
-            
-        RaycastHit hitInfo; 
-        if (Physics.Raycast(ray, out hitInfo, wallDetectionDistance))
-        {
-            preventInputsUntilGround = false;
-            isOnWall = true;
-        }
-        else
-            isOnWall = false;
-
-        // ======== If input, then jump ======== //
-        if (isOnWall && WallJumpFlag && !controller.isGrounded)
-        {
-            velocity = hitInfo.normal * wallJumpNormalSpeed + Vector3.up * wallJumpUpSpeed;
-            preventInputsUntilGround = true;
-            isOnWall = false;
-            WallJumpFlag = false;
-
-            // rotate
-            if (velocity.x > 0.1)
-            {
-                transform.rotation = Quaternion.Euler(0, 90f, 0);
-            }
-            if (velocity.x < -0.1)
-            {
-                transform.rotation = Quaternion.Euler(0, -90f, 0);
-            }
-        }
-    }
 
     void Update()
     {
-        DashUpdate();
-
         if (controller.isGrounded)
         {
-            preventInputsUntilGround = false;
+            disableInputs = false;
             // We are grounded, so recalculate
             // move direction directly from axes
 
@@ -164,8 +63,8 @@ public class CharacterMovements : MonoBehaviour
             if (JumpFlag)
             {
                 moveDirection.y = jumpSpeed;
-                JumpFlag = false;
-                WallJumpFlag = false;
+                JumpFlag        = false;
+                WallJumpFlag    = false;
             }
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
@@ -175,11 +74,12 @@ public class CharacterMovements : MonoBehaviour
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
-        }                                                                                 
+        }
+
         else
         {
             // Move in mid-air with input
-            if (!preventInputsUntilGround)
+            if (!disableInputs)
                 moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
             //if (isOnWall)
@@ -194,7 +94,7 @@ public class CharacterMovements : MonoBehaviour
             TryToWallJump(ref moveDirection);
 
             if (moveDirection.y < 0f)
-                moveDirection.y -= accelerationWhenFalling;
+                moveDirection.y -= fallAcceleration;
 
             if (isOnWall && moveDirection.y < 0f)
             {
@@ -203,20 +103,89 @@ public class CharacterMovements : MonoBehaviour
 
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
+            // to lock Z axis, not lockable by rigid body constraints or any other methods.
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue);
         }
     }
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         // if collision with ceil, then set y velocity to 0
-        if (moveDirection.y > 0f && hit.normal.y < - 0.3f)
+        if (moveDirection.y > 0f && hit.normal.y < -.3f)
             moveDirection.y = 0f;
 
-        if (moveDirection.x > 0f && hit.normal.x < -0.3f)
+        if ((moveDirection.x > 0f && hit.normal.x < -.3f) ||
+            (moveDirection.x < 0f && hit.normal.x > .3f))
             moveDirection.x = 0f;
+    }
 
-        if (moveDirection.x < 0f && hit.normal.x > 0.3f)
-            moveDirection.x = 0f;
+
+    /* ==== Character's abilities ==== */
+    public void MoveX(float f)
+    {
+        if (disableInputs)
+            return;
+
+        inputSpeed = f;
+        if (.1f < f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            //foreach (GameObject obj in models)
+            //    obj.transform.rotation = Quaternion.Euler(0, 90f, 0);
+        }
+
+        else if (f < -.1f)
+        {
+            transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+            //foreach (GameObject obj in models)
+            //    obj.transform.rotation = Quaternion.Euler(0, -90f, 0);
+        }
+    }
+
+
+    public void CopyFrom(CharacterMovements other)
+    {
+        JumpFlag        = other.JumpFlag;
+        inputSpeed      = other.inputSpeed;
+        isOnWall        = other.isOnWall;
+        moveDirection   = other.moveDirection;
+    }
+
+
+    private void TryToWallJump(ref Vector3 velocity)
+    {
+        if (controller.isGrounded)
+            return;
+
+        // ======== Detect Wall ======== //
+        Ray ray         = new Ray();
+        ray.origin      = transform.position - Vector3.up * 0.5f;
+        ray.direction   = transform.forward;
+            
+        RaycastHit hitInfo; 
+        if (Physics.Raycast(ray, out hitInfo, wallDetectionRange))
+        {
+            disableInputs = false;
+            isOnWall = true;
+        }
+
+        else
+            isOnWall = false;
+
+        // ======== If input, then jump ======== //
+        if (isOnWall && WallJumpFlag && !controller.isGrounded)
+        {
+            velocity        = hitInfo.normal * wallJumpNormalSpeed + Vector3.up * wallJumpUpSpeed;
+            disableInputs   = true;
+            isOnWall = WallJumpFlag = false;
+
+            // Rotate
+            if (velocity.x > .1f)
+                transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+
+            else if (velocity.x < -.1f)
+                transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+        }
     }
 }
