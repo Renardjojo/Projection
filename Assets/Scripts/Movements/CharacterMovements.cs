@@ -30,6 +30,7 @@ public class CharacterMovements : MonoBehaviour
     internal bool                   disableInputs       = false;
     internal bool                   JumpFlag            { get; set; }
     internal bool                   WallJumpFlag        { get; set; }
+    internal CharacterController    Controller          { get; }
 
     
 

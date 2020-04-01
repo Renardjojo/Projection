@@ -108,6 +108,16 @@ public class PlayerController : MonoBehaviour
 
     public void Transpose()
     {
+        if (!isTransposed)
+        {
+            //shadowMoveScript.Controller.
+
+            if (Physics.Raycast(body.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.NameToLayer("LightScreen")))
+            {
+                return;
+            }
+        }
+
         if (currentBox != null)
         {
             DropBox();
