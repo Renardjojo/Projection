@@ -112,9 +112,9 @@ public class PlayerController : MonoBehaviour
     {
         if (!isTransposed)
         {
-            //shadowMoveScript.Controller.
-
-            if (Physics.Raycast(body.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.NameToLayer("LightScreen")))
+            RaycastHit hitInfo;
+            Debug.DrawRay(shadow.transform.position, - Vector3.forward, Color.red, Mathf.Infinity);
+            if (Physics.Raycast(shadow.transform.position, -Vector3.forward, out hitInfo, Mathf.Infinity, 1 << 10 /* LightScreen layer */)) 
             {
                 return;
             }
