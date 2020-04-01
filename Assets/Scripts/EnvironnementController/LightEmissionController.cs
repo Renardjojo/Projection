@@ -17,7 +17,7 @@ public class LightEmissionController : MonoBehaviour
     void Awake()
     {
         material = GetComponent<MeshRenderer>().material;
-        material.SetColor("_EmissionColor", offColor);
+        material.SetColor("_EmissiveColor", offColor);
         material.EnableKeyword("_EMISSION");
         material.color = Color.black;
     }
@@ -26,7 +26,7 @@ public class LightEmissionController : MonoBehaviour
     {
         //if (lerpSpeed == 1f)
         //{
-            material.SetColor("_EmissionColor", onColor);
+            material.SetColor("_EmissiveColor", onColor);
         //}
         //else
         //{
@@ -39,7 +39,7 @@ public class LightEmissionController : MonoBehaviour
     {
         //if (lerpSpeed == 1f)
         //{
-            material.SetColor("_EmissionColor", offColor);
+            material.SetColor("_EmissiveColor", offColor);
         //}
         //else
         //{
