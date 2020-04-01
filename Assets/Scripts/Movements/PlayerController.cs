@@ -73,10 +73,12 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
+            bodyToShadow[2] = 0f;
             if (bodyToShadow.magnitude > maxShadowDistance)
             {
-                bodyToShadow *= maxShadowDistance / bodyToShadow.magnitude;
-                shadow.transform.position = body.transform.position + bodyToShadow;
+                bodyToShadow *= maxShadowDistance / bodyToShadow.magnitude - 1f;
+                shadow.transform.position += bodyToShadow;
+                shadowMoveScript.moveDirection = Vector3.zero;
             }
         }
     }
