@@ -13,7 +13,6 @@ public class Laser : MonoBehaviour
 {
     [SerializeField, Tooltip("Work on start only")] float  laserRadius = 0.2f;
     [SerializeField, Tooltip("Work on start only")] bool   isActivate  = true;
-    [SerializeField, Tooltip("Work on start only")] Color  laserColor  = Color.red;
     [SerializeField] float laserOffSet = 0.61f;
     [SerializeField] float maxLaserLenght = 1000f;
 
@@ -25,7 +24,7 @@ public class Laser : MonoBehaviour
     {
         laserRay = transform.Find("LaserRay").gameObject;
         GameDebug.AssertInTransform(laserRay != null, transform, "There must be a gameObject named \"LaserRay\" with a CharacterMovements");
-        laserRay.GetComponent<MeshRenderer>().material.SetColor("_EmissiveColor", laserColor);
+
         laserRay.transform.localScale = new Vector3(laserRadius, 1f, laserRadius);
         laserRay.SetActive(isActivate);
     }
