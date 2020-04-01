@@ -221,7 +221,11 @@ public class PlayerController : MonoBehaviour
 
     public void Kill()
     {
-        body.transform.localPosition = checkPointPosition;
+        CharacterController charController = body.GetComponent<CharacterController>();
+        charController.enabled = false;
+        charController.transform.position = checkPointPosition;
+        charController.enabled = true;
+
         OnIsDead?.Invoke();
     }
 
