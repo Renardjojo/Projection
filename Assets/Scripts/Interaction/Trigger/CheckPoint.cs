@@ -19,7 +19,7 @@ public class CheckPoint : MonoBehaviour
     private void Awake()
     {
         flagMaterial = flag.GetComponent<MeshRenderer>().material;
-        flagMaterial.color = offColor;
+        flagMaterial.SetColor("_BaseColor", offColor);
     }
 
     // Start is called before the first frame update
@@ -34,7 +34,7 @@ public class CheckPoint : MonoBehaviour
         if (!isActivate && (bodyPlayer.transform.position - transform.position).sqrMagnitude < radiusZone)
         {
             isActivate = true;
-            flagMaterial.color = onColor;
+            flagMaterial.SetColor("_BaseColor", onColor);
             playerControllerScript.UseCheckPointPosition(transform.position);
         }
     }
@@ -50,12 +50,12 @@ public class CheckPoint : MonoBehaviour
     {
         if (flag)
         {
-            flagMaterial.color = onColor;
+            flagMaterial.SetColor("_BaseColor", onColor);
             isActivate = true;
         }
         else
         {
-            flagMaterial.color = offColor;
+            flagMaterial.SetColor("_BaseColor", offColor);
             isActivate = false;
         }
     }
