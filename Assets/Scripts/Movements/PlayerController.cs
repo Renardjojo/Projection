@@ -110,6 +110,16 @@ public class PlayerController : MonoBehaviour
 
     public void Transpose()
     {
+        if (!isTransposed)
+        {
+            RaycastHit hitInfo;
+            Debug.DrawRay(shadow.transform.position, - Vector3.forward, Color.red, Mathf.Infinity);
+            if (Physics.Raycast(shadow.transform.position, -Vector3.forward, out hitInfo, Mathf.Infinity, 1 << 10 /* LightScreen layer */)) 
+            {
+                return;
+            }
+        }
+
         if (currentBox != null)
         {
             DropBox();
