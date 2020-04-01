@@ -18,7 +18,7 @@ Shader "Custom/StencilDrawOnlyIf"
 			Stencil
 			{
 				Ref[_StencilRef]
-				Comp equal
+				Comp NotEqual
 				Pass keep
 			}
 

@@ -7,7 +7,7 @@ Shader "Custom/StencilWritingShader"
 	}
 
 	SubShader{
-		Tags { "RenderType" = "Opaque" "Queue" = "Geometry"}
+		Tags{ "RenderType" = "Opaque" "Queue" = "Geometry"}
 		Pass {
 			ColorMask 0
 
