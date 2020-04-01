@@ -31,7 +31,7 @@ public class CharacterMovements : MonoBehaviour
     internal bool                   JumpFlag            { get; set; }
     internal bool                   WallJumpFlag        { get; set; }
 
-
+    
 
 
     /* ==== Unity methods ==== */
@@ -166,8 +166,8 @@ public class CharacterMovements : MonoBehaviour
         RaycastHit hitInfo; 
         if (Physics.Raycast(ray, out hitInfo, wallDetectionRange))
         {
-            disableInputs = false;
-            isOnWall = true;
+            disableInputs   = false;
+            isOnWall        = true;
         }
 
         else
