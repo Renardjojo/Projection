@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8748844514958683152}
   - component: {fileID: 8748844514958683153}
   - component: {fileID: 9150267088770193653}
+  - component: {fileID: 2914891992542697218}
   m_Layer: 0
   m_Name: Body
   m_TagString: BodyClone
@@ -59,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6569072437cd40844a6b90b639f9b1c8, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,6 +110,36 @@ MonoBehaviour:
   pc: {fileID: 0}
   delay: 3
   slownessWhenSwitch: 2
+--- !u!114 &2914891992542697218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8748844514958683167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11a62227d70fb5e4e9797919df6db1e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listCollisionEventWithSpecificTag:
+  - collisionWithTag: BodyPlayer
+    OnHit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_MethodName: Kill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!1 &8748844514965419456
 GameObject:
   m_ObjectHideFlags: 0
