@@ -4,11 +4,11 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject     body;
-    [SerializeField] private GameObject     shadow;
-    [SerializeField] private float          maxShadowDistance;
-    [SerializeField] private TimeManager    timeManagerScript;
-    [SerializeField] private UnityEvent     OnIsDead;
+    [SerializeField] private GameObject     body                = null;
+    [SerializeField] private GameObject     shadow              = null;
+    [SerializeField] private float          maxShadowDistance   = 5f;
+    [SerializeField] private TimeManager    timeManagerScript   = null;
+    [SerializeField] private UnityEvent     OnIsDead            = null;
 
     private CharacterMovements              bodyMoveScript;
     private CharacterMovements              shadowMoveScript;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector3                         checkPointPosition;
     private float                           initialHeight;
     private bool                            isTransposed;
+    private TakableBox                      currentBox          = null;
 
     public event Action                     onTransposed;
     public event Action                     onUntransposed;
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        body            = transform.Find("Body").gameObject;
-        bodyMoveScript  = body.GetComponent<CharacterMovements>();
+        body                = transform.Find("Body").gameObject;
+        bodyMoveScript      = body.GetComponent<CharacterMovements>();
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
         //shadow          = body.transform.Find("Shadow").gameObject;
@@ -49,14 +50,15 @@ public class PlayerController : MonoBehaviour
 
         RemoveComponentToUnconstrolShadow();
 
-        controlledObject = body;
-        checkPointPosition = controlledObject.transform.position;
-        initialHeight = controlledObject.transform.position.y;
-        isTransposed = false;
+        controlledObject    = body;
+        checkPointPosition  = controlledObject.transform.position;
+        initialHeight       = controlledObject.transform.position.y;
+        isTransposed        = false;
     }
 
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!isTransposed)
         {
@@ -67,40 +69,27 @@ public class PlayerController : MonoBehaviour
             if (shadow.transform.position.y < initialHeight)
                 shadowOffset.y += initialHeight - shadow.transform.position.y;
         }
-    }
-
-    public void MoveX(float value)
-    {
-        /*
-        if (isTransposed)
-        {
-            if (value != 0f)
-            {
-                float tmp = Math.Abs(shadow.transform.position.x + value * shadowMoveScript.speedScale * Time.deltaTime - bodyMoveScript.transform.position.x);
-                if (tmp < maxShadowDistance)
-                    shadowMoveScript.MoveX(value);
-
-                tmp = Math.Abs(shadow.transform.position.x + value * shadowMoveScript.speedScale * Time.deltaTime - bodyMoveScript.transform.position.x);
-
-                if (tmp >= maxShadowDistance)
-                    shadowMoveScript.MoveX(-value);
-            }
-
-            else
-                shadowMoveScript.MoveX(0f);
-        }
 
         else
         {
-            bodyMoveScript.MoveX(value);
+            Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
+            if (bodyToShadow.magnitude > maxShadowDistance)
+            {
+                bodyToShadow *= maxShadowDistance / bodyToShadow.magnitude;
+                shadow.transform.position = body.transform.position + bodyToShadow;
+            }
         }
-        */
+    }
 
+
+    public void MoveX(float value)
+    {
         if (isTransposed)
             shadowMoveScript.MoveX(value);
         else
             bodyMoveScript.MoveX(value);
     }
+
 
     public void Jump(bool bJump = true)
     {
@@ -116,6 +105,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+
     public void Transpose()
     {
         if (currentBox != null)
@@ -152,7 +142,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private TakableBox currentBox = null;
 
     public void InteractWithBoxes()
     {
