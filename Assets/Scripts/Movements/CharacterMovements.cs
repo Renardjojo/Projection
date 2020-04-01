@@ -6,32 +6,31 @@ using UnityEngine;
 public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
-    [SerializeField] private float  airControlRatio     = .05f;
+    [SerializeField] public float   airControlRatio     = .05f;
     [Range(0f, 1f)]
-    [SerializeField] private float  wallFriction        = .5f;
-    // MUST BE CHANGED TO PRIVATE, LATER --> CHECK PLAYERCONTROLLER.CS WITH CTRL+F FIRST
+    [SerializeField] public float   wallFriction        = .5f;
     [SerializeField] public float   speedScale          = 3f;
-    [SerializeField] private float  jumpSpeed           = 8f;
-    [SerializeField] private float  gravity             = 20f;
-    [SerializeField] private float  wallDetectionRange  = 1f;
-    [SerializeField] private float  wallJumpNormalSpeed = 5f;
-    [SerializeField] private float  wallJumpUpSpeed     = 5f;
+    [SerializeField] public float   jumpSpeed           = 8f;
+    [SerializeField] public float   gravity             = 20f;
+    [SerializeField] public float   wallDetectionRange  = 1f;
+    [SerializeField] public float   wallJumpNormalSpeed = 5f;
+    [SerializeField] public float   wallJumpUpSpeed     = 5f;
     // This is not physically correct, but it gives a better video-game-like jump.
     [SerializeField] private float  fallAcceleration    = .1f;
 
     /* ==== Private data members ==== */
-    private CharacterController     controller          = null;
-    private Vector3                 moveDirection       = Vector3.zero;
-    private float                   inputSpeed          = 0f;
-    private float                   defaultZValue       = 0f;
-    private bool                    isOnWall            = false;
+    public CharacterController      controller          = null;
+    public Vector3                  moveDirection       = Vector3.zero;
+    public float                    inputSpeed          = 0f;
+    public float                    defaultZValue       = 0f;
+    public bool                     isOnWall            = false;
 
     /* ==== Public data members ==== */
     internal bool                   disableInputs       = false;
     internal bool                   JumpFlag            { get; set; }
     internal bool                   WallJumpFlag        { get; set; }
 
-
+    
 
 
     /* ==== Unity methods ==== */
@@ -166,8 +165,8 @@ public class CharacterMovements : MonoBehaviour
         RaycastHit hitInfo; 
         if (Physics.Raycast(ray, out hitInfo, wallDetectionRange))
         {
-            disableInputs = false;
-            isOnWall = true;
+            disableInputs   = false;
+            isOnWall        = true;
         }
 
         else
