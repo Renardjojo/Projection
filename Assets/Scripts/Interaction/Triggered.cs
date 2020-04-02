@@ -9,7 +9,7 @@ public class AndTriggerList
     public List<Trigger> andList;
 }
 
-class Triggered : MonoBehaviour
+public class Triggered : MonoBehaviour
 {
     [SerializeField] protected List<AndTriggerList> orTriggerList       = null;
     [SerializeField] protected UnityEvent           OnActivatedEvent    = null;

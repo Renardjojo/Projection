@@ -9,6 +9,7 @@ public struct TagObjectEvent
     public UnityEvent OnLaserHit;
 }
 
+[ExecuteInEditMode]
 public class Laser : MonoBehaviour
 {
     [SerializeField, Tooltip("Work on start only")] float  laserRadius = 0.2f;
