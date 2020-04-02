@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
         if (controlledObject == body)
         {
             // Reset shadow location
-            shadowOffset = new Vector3(0f, 0f, shadowMoveScript.defaultZValue);
+            shadowOffset = new Vector3(0f, 0f, defaultZOffset);
         }
     }
 
