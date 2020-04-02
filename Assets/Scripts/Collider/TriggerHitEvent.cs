@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
 
-[RequireComponent(typeof(Rigidbody))]
-public class HitEvent : MonoBehaviour
+[RequireComponent(typeof(Collider))]
+public class TriggerHitEvent : MonoBehaviour
 {
     [SerializeField] private HitEventInfo[] listCollisionEventWithSpecificTag; 
 
@@ -13,7 +13,7 @@ public class HitEvent : MonoBehaviour
     void Update()
     {}
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         for (int i = 0; i < listCollisionEventWithSpecificTag.Length; i++)
         {
