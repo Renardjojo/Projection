@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public event Action                     onUntransposed;
     public event Action<Vector3>            OnInteractButton;
 
+    private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
 
     // Start is called before the first frame update
@@ -54,6 +55,9 @@ public class PlayerController : MonoBehaviour
         checkPointPosition  = controlledObject.transform.position;
         initialHeight       = controlledObject.transform.position.y;
         isTransposed        = false;
+
+        defaultZOffset = shadow.transform.position.z - body.transform.position.z;
+        shadowOffset = defaultZOffset * Vector3.forward;
     }
 
 
@@ -201,7 +205,7 @@ public class PlayerController : MonoBehaviour
         if (controlledObject == body)
         {
             // Reset shadow location
-            shadowOffset = new Vector3(0f, 0f, 2f);
+            shadowOffset = new Vector3(0f, 0f, shadowMoveScript.defaultZValue);
         }
     }
 
