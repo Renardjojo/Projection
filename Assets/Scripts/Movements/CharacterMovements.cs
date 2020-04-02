@@ -95,7 +95,7 @@ public class CharacterMovements : MonoBehaviour
             if (moveDirection.y < 0f)
                 moveDirection.y -= fallAcceleration;
 
-            if (isOnWall && moveDirection.y < 0f)
+            if (canWallJump && isOnWall && moveDirection.y < 0f)
             {
                 moveDirection.y *= wallFriction;
             }
