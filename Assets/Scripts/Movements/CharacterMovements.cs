@@ -12,9 +12,12 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField] public float   speedScale          = 3f;
     [SerializeField] public float   jumpSpeed           = 8f;
     [SerializeField] public float   gravity             = 20f;
+
+    [SerializeField] private bool   canWallJump         = true;
     [SerializeField] public float   wallDetectionRange  = 1f;
     [SerializeField] public float   wallJumpNormalSpeed = 5f;
     [SerializeField] public float   wallJumpUpSpeed     = 5f;
+
     // This is not physically correct, but it gives a better video-game-like jump.
     [SerializeField] private float  fallAcceleration    = .1f;
 
@@ -82,13 +85,9 @@ public class CharacterMovements : MonoBehaviour
             if (!disableInputs)
                 moveDirection.x = inputSpeed * speedScale * airControlRatio;
 
-            //if (isOnWall)
-            //    moveDirection.y += gravity / 2f * Time.deltaTime;
-
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
-            //moveDirection -= jumpLastVelocity;
             moveDirection.y -= gravity * Time.deltaTime;
 
             TryToWallJump(ref moveDirection);
@@ -155,7 +154,7 @@ public class CharacterMovements : MonoBehaviour
 
     private void TryToWallJump(ref Vector3 velocity)
     {
-        if (controller.isGrounded)
+        if (!canWallJump || controller.isGrounded)
             return;
 
         // ======== Detect Wall ======== //

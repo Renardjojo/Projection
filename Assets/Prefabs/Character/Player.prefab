@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2544343660075631850}
   - component: {fileID: 2544343660075631851}
+  - component: {fileID: 1668286794}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -47,13 +48,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 2544343660083584310}
   shadow: {fileID: 2544343661859167753}
-  maxShadowDistance: 0
+  maxShadowDistance: 15
   timeManagerScript: {fileID: 0}
   OnIsDead:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1668286794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2544343660075631849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5353b28a4d9ffc440a95d799062ebaf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPlayer: {fileID: 2544343660083584310}
+  shadowPlayer: {fileID: 2544343661859167753}
+  cinemachineVirtualCamera: {fileID: 0}
+  distanceOffSet: 5
 --- !u!1 &2544343660083584310
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2544343660083584310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.5}
+  m_LocalPosition: {x: 0, y: 0, z: -2.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1897543773579501359}
@@ -147,9 +164,9 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.29
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -170,6 +187,7 @@ MonoBehaviour:
   speedScale: 3
   jumpSpeed: 8
   gravity: 20
+  canWallJump: 1
   wallDetectionRange: 1
   wallJumpNormalSpeed: 5
   wallJumpUpSpeed: 5
@@ -206,7 +224,8 @@ GameObject:
   - component: {fileID: 2544343661859167756}
   - component: {fileID: 5130895124295681729}
   - component: {fileID: 7067846240628138565}
-  m_Layer: 0
+  - component: {fileID: 1770871754}
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: ShadowPlayer
   m_Icon: {fileID: 0}
@@ -285,9 +304,9 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -308,6 +327,7 @@ MonoBehaviour:
   speedScale: 3
   jumpSpeed: 8
   gravity: 20
+  canWallJump: 0
   wallDetectionRange: 1
   wallJumpNormalSpeed: 5
   wallJumpUpSpeed: 5
@@ -317,6 +337,20 @@ MonoBehaviour:
   inputSpeed: 0
   defaultZValue: 0
   isOnWall: 0
+--- !u!136 &1770871754
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2544343661859167753}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 2.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4039600199635498532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -328,6 +362,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chell Shadow
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ee540e45b21cd094aaf3c0488a3e5c76,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2534866581884222612, guid: ee540e45b21cd094aaf3c0488a3e5c76,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
@@ -403,27 +447,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
+      objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
     - target: {fileID: -2416733968201007103, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
+      objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
     - target: {fileID: -2416733968201007103, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
+      objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
     - target: {fileID: -2416733968201007103, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
+      objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
     - target: {fileID: -2416733968201007103, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
       propertyPath: m_Materials.Array.data[4]
       value: 
-      objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
+      objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee540e45b21cd094aaf3c0488a3e5c76, type: 3}
 --- !u!4 &9040200220415581502 stripped
