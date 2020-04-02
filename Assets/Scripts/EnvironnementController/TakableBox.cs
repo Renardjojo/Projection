@@ -29,8 +29,6 @@ public class TakableBox : MonoBehaviour
     private Collider playerCollider = null;
     public void Take(GameObject newOwner, Collider takerCollider)
     {
-        Debug.Log("box  " + colliderBox);
-        Debug.Log("take  " + takerCollider);
         Physics.IgnoreCollision(colliderBox, takerCollider, true);
         //rb.detectCollisions = false;
         rb.useGravity  = false;
@@ -44,7 +42,6 @@ public class TakableBox : MonoBehaviour
     {
         if (owner != null)
         {
-            Debug.Log("drop  " + takerCollider);
             Physics.IgnoreCollision(colliderBox, takerCollider, false);
             //rb.detectCollisions = true;
             rb.useGravity  = true;

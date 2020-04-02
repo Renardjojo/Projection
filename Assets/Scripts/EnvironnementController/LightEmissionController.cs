@@ -5,59 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class LightEmissionController : MonoBehaviour
 {
-    [SerializeField] private Color      onColor     = Color.green;
-    [SerializeField] private Color      offColor    = Color.red;
-    //[SerializeField]
-    //[Range(0.001f, 1f)]
-    //[Tooltip("Define lerp speed by second. This value move from 0 to 1. Lerp at 0 is not possible. Lerp at 1 chang immediatly the color")]
-    //                private float      lerpSpeed   = 1f;
-                    private Material   material;
+    [SerializeField] private Material onColor;
+    [SerializeField] private Material offColor;
+                     private Renderer renderer;
 
     // Start is called before the first frame update
     void Awake()
     {
-        material = GetComponent<MeshRenderer>().material;
-        material.SetColor("_EmissiveColor", offColor);
-        material.EnableKeyword("_EMISSION");
-        material.color = Color.black;
+        renderer = GetComponent<Renderer>();
+    }
+
+    void Start()
+    {
+        renderer.sharedMaterial = offColor;
     }
 
     public void SetOn()
     {
-        //if (lerpSpeed == 1f)
-        //{
-            material.SetColor("_EmissiveColor", onColor);
-        //}
-        //else
-        //{
-        //    StopAllCoroutines();
-        //    StartCoroutine(EmissionLerpCorroutine(true));
-        //}
+        renderer.sharedMaterial = onColor;
     }
 
     public void SetOff()
     {
-        //if (lerpSpeed == 1f)
-        //{
-            material.SetColor("_EmissiveColor", offColor);
-        //}
-        //else
-        //{
-        //    StopAllCoroutines();
-        //    StartCoroutine(EmissionLerpCorroutine(true));
-        //}
+        renderer.sharedMaterial = offColor;
     }
-
-    //private IEnumerator EmissionLerpCorroutine(bool OnTowardOff)
-    //{
-    //    float lerpStep = 0f;
-    //    yield return new WaitWhile(EmissionLerp(lerpStep, OnTowardOff));
-    //}
-
-    //bool EmissionLerp(float step, bool OnTowardOff)
-    //{
-    //    if (OnTowardOff)
-    //    material.SetColor("_EmissionColor", onColor);
-    //    return step < 1f;
-    //}
 }

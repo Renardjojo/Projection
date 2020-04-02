@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8989691137494684565}
   - component: {fileID: 601244874340286477}
   - component: {fileID: 2221266213044915716}
+  - component: {fileID: 1231687676536082920}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -108,10 +109,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserRadius: 0.5
   isActivate: 1
-  laserColor: {r: 1, g: 0, b: 0, a: 1}
   laserOffSet: 1.5
   maxLaserLenght: 1000
   tagObjectEventList: []
+--- !u!114 &1231687676536082920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613312036680346506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orTriggerList: []
+  OnActivatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2221266213044915716}
+        m_MethodName: setActivate
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDisabledEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2221266213044915716}
+        m_MethodName: setActivate
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6654798583003716539
 GameObject:
   m_ObjectHideFlags: 0
