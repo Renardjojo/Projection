@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7186733541383138845}
   - component: {fileID: 144260194764752585}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LightScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orTriggerList: []
+  orTriggerList:
+  - andList:
+    - {fileID: 0}
   OnActivatedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -196,7 +198,7 @@ GameObject:
   - component: {fileID: 7186733541985603671}
   - component: {fileID: 7186733541985603664}
   - component: {fileID: 7186733541985603665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
