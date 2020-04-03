@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Vector3                         checkPointPosition;
     private float                           initialHeight;
     private bool                            isTransposed;
+    public  bool                            IsTransposed { get { return isTransposed; } }
     private TakableBox                      currentBox          = null;
 
     public event Action                     onTransposed;
@@ -111,16 +112,18 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    internal bool IsShadowCollidingWithLightScreen()
+    {
+        return Physics.Raycast(shadow.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("ScreenLight"));
+    }
 
     public void Transpose()
     {
-        if (!isTransposed)
+        // Can't tranpose if currently controlling player 
+        // when the shadow is in the light screen, since it disappears.
+        if (!isTransposed && IsShadowCollidingWithLightScreen())
         {
-            RaycastHit hitInfo;
-            if (Physics.Raycast(shadow.transform.position, Vector3.forward, out hitInfo, Mathf.Infinity, LayerMask.GetMask("ScreenLight"))) 
-            {
-                return;
-            }
+            return;
         }
 
         if (currentBox != null)
