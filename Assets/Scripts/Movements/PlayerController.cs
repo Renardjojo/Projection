@@ -225,12 +225,12 @@ public class PlayerController : MonoBehaviour
 
     public void Kill()
     {
-        CharacterController charController = body.GetComponent<CharacterController>();
+        CharacterController charController = bodyMoveScript.controller;
         charController.enabled = false;
         charController.transform.position = checkPointPosition;
         charController.enabled = true;
 
-        charController = shadow.GetComponent<CharacterController>();
+        charController = shadowMoveScript.controller;
         charController.enabled = false;
         charController.transform.position = checkPointPosition;
         charController.enabled = true;
