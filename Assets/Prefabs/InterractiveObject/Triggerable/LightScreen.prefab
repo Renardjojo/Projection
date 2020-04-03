@@ -116,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7186733541383138845}
   - component: {fileID: 144260194764752585}
+  - component: {fileID: 8671689490211596269}
   m_Layer: 10
   m_Name: LightScreen
   m_TagString: Untagged
@@ -184,8 +185,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8671689490211596269}
+        m_MethodName: OnActivation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8671689490211596269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7186733541383138846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36320bd911f8ff40a0568e2bcf80e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7186733541985603667
 GameObject:
   m_ObjectHideFlags: 0
