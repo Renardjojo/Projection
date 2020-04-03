@@ -222,13 +222,18 @@ public class PlayerController : MonoBehaviour
     private void RemoveComponentToUnconstrolShadow()
     {
         //shadow.GetComponent<CapsuleCollider>().enabled = false;
-        shadow.GetComponent<CharacterController>().enabled = false;
+        //shadow.GetComponent<CharacterController>().enabled = false;
         shadowMoveScript.enabled = false;
     }
 
     public void Kill()
     {
-        CharacterController charController = body.GetComponent<CharacterController>();
+        CharacterController charController = bodyMoveScript.controller;
+        charController.enabled = false;
+        charController.transform.position = checkPointPosition;
+        charController.enabled = true;
+
+        charController = shadowMoveScript.controller;
         charController.enabled = false;
         charController.transform.position = checkPointPosition;
         charController.enabled = true;
