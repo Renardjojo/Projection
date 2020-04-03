@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
-public struct TagObjectEvent
+public struct TagObjectHitEvent
 {
     public string tag;
-    public UnityEvent OnLaserHit;
+    public UnityEvent OnHit;
 }
 
 [ExecuteInEditMode]
@@ -17,7 +17,7 @@ public class Laser : MonoBehaviour
     [SerializeField] float laserOffSet = 0.61f;
     [SerializeField] float maxLaserLenght = 1000f;
 
-    [SerializeField] TagObjectEvent[] tagObjectEventList;
+    [SerializeField] TagObjectHitEvent[] tagObjectEventList;
     GameObject laserRay;
 
 
@@ -55,7 +55,7 @@ public class Laser : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == tagObjectEventList[i].tag)
                 {
-                    tagObjectEventList[i].OnLaserHit?.Invoke();
+                    tagObjectEventList[i].OnHit?.Invoke();
                     break;
                 }
             }
