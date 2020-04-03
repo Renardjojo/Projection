@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.UI.Button))]
 public class QuitButton : MonoBehaviour
 {
     // Start is called before the first frame update

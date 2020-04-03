@@ -5,13 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class StartButton : MonoBehaviour
+[RequireComponent(typeof(UnityEngine.UI.Button))]
+public class ChangeSceneButton : MonoBehaviour
 {
-    private string startGameScene = "Prototype4";
+    [SerializeField]
+    private string newScene = "Prototype4";
 
     // Start is called before the first frame update
     void Start()
     {
+        UnityEngine.UI.Button btn = GetComponent<UnityEngine.UI.Button>();
+        btn.onClick.AddListener(TaskOnClick);
     }
 
     // Update is called once per frame
@@ -20,22 +24,17 @@ public class StartButton : MonoBehaviour
         
     }
 
-    public void StartGame()
+    void TaskOnClick()
     {
-        if (Application.CanStreamedLevelBeLoaded(startGameScene))
+        if (Application.CanStreamedLevelBeLoaded(newScene))
         {
-            LoadNewScene(startGameScene);
+            SceneManager.LoadScene(newScene, LoadSceneMode.Single);
         }
         else
         {
             Debug.LogError("The Main Scene could not be loaded." +
-                "Make sure " + startGameScene + " exists."
+                "Make sure " + newScene + " exists."
                 + "also, check file -> build settings to make sure it is valid.");
         }
-    }
-
-    internal void LoadNewScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
