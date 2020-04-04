@@ -147,14 +147,19 @@ public class PlayerController : MonoBehaviour
         }
 
         if (controlledObject == body)
+        {
             controlledObject = shadow;
+        }
         else
+        {
             controlledObject = body;
+        }
 
         isTransposed = !isTransposed;
 
         if (isTransposed)
         {
+            bodyAnimator.SetFloat("Speed", 0f);
             // To set shadow's velocity to players's
             shadowMoveScript.CopyFrom(bodyMoveScript);
 
