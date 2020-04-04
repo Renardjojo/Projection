@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent     OnIsDead            = null;
 
     private CharacterMovements              bodyMoveScript;
+    private Animator                        bodyAnimator;
+
     private CharacterMovements              shadowMoveScript;
+    private Animator                        shadowAnimator;
+
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
@@ -32,11 +36,15 @@ public class PlayerController : MonoBehaviour
     {
         body                = transform.Find("Body").gameObject;
         bodyMoveScript      = body.GetComponent<CharacterMovements>();
-        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"body\" with a CharacterMovements");
+        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
+        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
         //shadow          = body.transform.Find("Shadow").gameObject;
-        shadowMoveScript= shadow.GetComponent<CharacterMovements>();
+        shadowMoveScript = shadow.GetComponent<CharacterMovements>();
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -92,9 +100,16 @@ public class PlayerController : MonoBehaviour
     public void MoveX(float value)
     {
         if (isTransposed)
+        {
             shadowMoveScript.MoveX(value);
+            shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
+        }
         else
+        {
             bodyMoveScript.MoveX(value);
+            bodyAnimator.SetFloat("Speed", Mathf.Abs(value));
+            shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
+        }
     }
 
 
