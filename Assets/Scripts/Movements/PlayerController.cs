@@ -237,6 +237,13 @@ public class PlayerController : MonoBehaviour
             // Reset shadow location
             shadowOffset = new Vector3(0f, 0f, defaultZOffset);
         }
+        else
+        {
+ 
+            shadowOffset = new Vector3(0f, 0f, defaultZOffset);
+            shadow.transform.localPosition = shadowOffset;
+                                                     
+        }
     }
 
     private void AddComponenetToControlShadow()
