@@ -52,7 +52,11 @@ public class CharacterMovements : MonoBehaviour
 
     public void DirectMove(Vector3 motion)
     {
-        controller.Move(motion);
+        if (controller != null)
+        {
+            controller.Move(motion);
+        }
+        
     }
 
     void Update()
