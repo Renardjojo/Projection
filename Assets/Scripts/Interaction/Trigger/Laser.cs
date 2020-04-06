@@ -72,7 +72,7 @@ public class Laser : MonoBehaviour
         if (Physics.Raycast(transform.position + transform.forward * laserOffSet, transform.forward, out hit, Mathf.Infinity))
         {
             laserRay.transform.position = startPosition + transform.forward * (hit.distance / 2f);
-            laserRay.transform.localScale = new Vector3(laserRadius, hit.distance / 2f, laserRadius);
+            laserRay.transform.localScale = new Vector3(laserRadius, hit.distance / 2f / transform.localScale.y, laserRadius);
 
             for (int i = 0; i < tagObjectEventList.Count; i++)
             {
