@@ -242,7 +242,9 @@ public class PlayerController : MonoBehaviour
     private void AddComponenetToControlShadow()
     {
         //shadow.GetComponent<CapsuleCollider>().enabled = true;
-        shadow.GetComponent<CharacterController>().enabled = true;
+        //shadow.GetComponent<CharacterController>().enabled = true;
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("ShadowPlayer"), LayerMask.NameToLayer("Shadow"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("ShadowPlayer"), LayerMask.NameToLayer("ScreenLight"), false);
         shadowMoveScript.enabled = true;
     }
 
@@ -250,6 +252,8 @@ public class PlayerController : MonoBehaviour
     {
         //shadow.GetComponent<CapsuleCollider>().enabled = false;
         //shadow.GetComponent<CharacterController>().enabled = false;
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("ShadowPlayer"), LayerMask.NameToLayer("Shadow"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("ShadowPlayer"), LayerMask.NameToLayer("ScreenLight"), true);
         shadowMoveScript.enabled = false;
     }
 
