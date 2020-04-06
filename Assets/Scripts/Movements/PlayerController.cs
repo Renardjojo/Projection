@@ -11,12 +11,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent     OnIsDead            = null;
 
     private CharacterMovements              bodyMoveScript;
+    private Animator                        bodyAnimator;
+
     private CharacterMovements              shadowMoveScript;
+    private Animator                        shadowAnimator;
+
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
     private float                           initialHeight;
     private bool                            isTransposed;
+    public  bool                            IsTransposed { get { return isTransposed; } }
     private TakableBox                      currentBox          = null;
 
     public event Action                     onTransposed;
@@ -31,11 +36,15 @@ public class PlayerController : MonoBehaviour
     {
         body                = transform.Find("Body").gameObject;
         bodyMoveScript      = body.GetComponent<CharacterMovements>();
-        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"body\" with a CharacterMovements");
+        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
+        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
         //shadow          = body.transform.Find("Shadow").gameObject;
-        shadowMoveScript= shadow.GetComponent<CharacterMovements>();
+        shadowMoveScript = shadow.GetComponent<CharacterMovements>();
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -67,7 +76,9 @@ public class PlayerController : MonoBehaviour
         if (!isTransposed)
         {
             shadow.transform.rotation = body.transform.rotation;
-            shadow.transform.position = body.transform.position + shadowOffset;
+            //shadow.transform.position = body.transform.position + shadowOffset;
+            shadowMoveScript.DirectMove(body.transform.position + shadowOffset - shadow.transform.position);
+            shadowOffset = shadow.transform.position - body.transform.position;
 
             // So the shadow does not fall through the floor
             if (shadow.transform.position.y < initialHeight)
@@ -91,9 +102,16 @@ public class PlayerController : MonoBehaviour
     public void MoveX(float value)
     {
         if (isTransposed)
+        {
             shadowMoveScript.MoveX(value);
+            shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
+        }
         else
+        {
             bodyMoveScript.MoveX(value);
+            bodyAnimator.SetFloat("Speed", Mathf.Abs(value));
+            shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
+        }
     }
 
 
@@ -111,16 +129,18 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    internal bool IsShadowCollidingWithLightScreen()
+    {
+        return Physics.Raycast(shadow.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("ScreenLight"));
+    }
 
     public void Transpose()
     {
-        if (!isTransposed)
+        // Can't tranpose if currently controlling player 
+        // when the shadow is in the light screen, since it disappears.
+        if (!isTransposed && IsShadowCollidingWithLightScreen())
         {
-            RaycastHit hitInfo;
-            if (Physics.Raycast(shadow.transform.position, Vector3.forward, out hitInfo, Mathf.Infinity, LayerMask.GetMask("ScreenLight"))) 
-            {
-                return;
-            }
+            return;
         }
 
         if (currentBox != null)
@@ -129,14 +149,19 @@ public class PlayerController : MonoBehaviour
         }
 
         if (controlledObject == body)
+        {
             controlledObject = shadow;
+        }
         else
+        {
             controlledObject = body;
+        }
 
         isTransposed = !isTransposed;
 
         if (isTransposed)
         {
+            bodyAnimator.SetFloat("Speed", 0f);
             // To set shadow's velocity to players's
             shadowMoveScript.CopyFrom(bodyMoveScript);
 
@@ -219,13 +244,18 @@ public class PlayerController : MonoBehaviour
     private void RemoveComponentToUnconstrolShadow()
     {
         //shadow.GetComponent<CapsuleCollider>().enabled = false;
-        shadow.GetComponent<CharacterController>().enabled = false;
+        //shadow.GetComponent<CharacterController>().enabled = false;
         shadowMoveScript.enabled = false;
     }
 
     public void Kill()
     {
-        CharacterController charController = body.GetComponent<CharacterController>();
+        CharacterController charController = bodyMoveScript.controller;
+        charController.enabled = false;
+        charController.transform.position = checkPointPosition;
+        charController.enabled = true;
+
+        charController = shadowMoveScript.controller;
         charController.enabled = false;
         charController.transform.position = checkPointPosition;
         charController.enabled = true;
