@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
+[Serializable]
 public struct TagObjectEvent
 {
     public string tag;
-    public UnityEvent OnLaserHit;
+    public UnityEvent OnHit;
 }
+
 
 [ExecuteInEditMode]
 public class Laser : MonoBehaviour
@@ -18,6 +20,7 @@ public class Laser : MonoBehaviour
     [SerializeField] float maxLaserLenght = 1000f;
 
     [SerializeField] List<TagObjectEvent> tagObjectEventList = null;
+
     GameObject laserRay;
 
 
@@ -51,8 +54,8 @@ public class Laser : MonoBehaviour
 
         if (!containsBodyPlayer)
         {
-            tagObjectEventList.Add(new TagObjectEvent() { tag = "BodyPlayer", OnLaserHit = new UnityEvent() });
-            tagObjectEventList[tagObjectEventList.Count - 1].OnLaserHit.AddListener(pc.Kill);
+            tagObjectEventList.Add(new TagObjectEvent() { tag = "BodyPlayer", OnHit = new UnityEvent() });
+            tagObjectEventList[tagObjectEventList.Count - 1].OnHit.AddListener(pc.Kill);
         }
     }
 
@@ -75,7 +78,7 @@ public class Laser : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == tagObjectEventList[i].tag)
                 {
-                    tagObjectEventList[i].OnLaserHit?.Invoke();
+                    tagObjectEventList[i].OnHit?.Invoke();
                     break;
                 }
             }

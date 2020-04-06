@@ -50,6 +50,10 @@ public class CharacterMovements : MonoBehaviour
         defaultZValue = gameObject.transform.localPosition.z;
     }
 
+    public void DirectMove(Vector3 motion)
+    {
+        controller.Move(motion);
+    }
 
     void Update()
     {
