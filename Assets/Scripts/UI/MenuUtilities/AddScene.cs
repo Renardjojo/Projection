@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(UnityEngine.UI.Button))]
-public class AddSceneButton : MonoBehaviour
+public class AddScene : MonoBehaviour
 {
     [SerializeField]
     private string addedSceneName = "InGameMenu";
