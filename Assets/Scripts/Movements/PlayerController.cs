@@ -76,7 +76,8 @@ public class PlayerController : MonoBehaviour
         if (!isTransposed)
         {
             shadow.transform.rotation = body.transform.rotation;
-            shadow.transform.position = body.transform.position + shadowOffset;
+            //shadow.transform.position = body.transform.position + shadowOffset;
+            shadowMoveScript.DirectMove(body.transform.position + shadowOffset - shadow.transform.position);
 
             // So the shadow does not fall through the floor
             if (shadow.transform.position.y < initialHeight)
