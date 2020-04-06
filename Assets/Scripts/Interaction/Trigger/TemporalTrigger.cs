@@ -27,7 +27,7 @@ public class TemporalTrigger : Trigger
 
     private void Update()
     {
-        currentTimer += Time.deltaTime;
+        currentTimer += Time.deltaTime * Time.timeScale;
 
         if (isActivate)
         {
