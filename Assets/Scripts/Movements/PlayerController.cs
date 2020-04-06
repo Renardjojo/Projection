@@ -19,9 +19,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
-    private float                           initialHeight;
-    private bool                            isTransposed;
-    public  bool                            IsTransposed { get { return isTransposed; } }
+    public  bool                            isTransposed { get; private set; }
+    private bool                            resetFlag = false;
     private TakableBox                      currentBox          = null;
 
     public event Action                     onTransposed;
@@ -30,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
+
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
         controlledObject    = body;
         checkPointPosition  = controlledObject.transform.position;
-        initialHeight       = controlledObject.transform.position.y;
         isTransposed        = false;
 
         defaultZOffset = shadow.transform.position.z - body.transform.position.z;
@@ -76,13 +75,8 @@ public class PlayerController : MonoBehaviour
         if (!isTransposed)
         {
             shadow.transform.rotation = body.transform.rotation;
-            //shadow.transform.position = body.transform.position + shadowOffset;
             shadowMoveScript.DirectMove(body.transform.position + shadowOffset - shadow.transform.position);
             shadowOffset = shadow.transform.position - body.transform.position;
-
-            // So the shadow does not fall through the floor
-            if (shadow.transform.position.y < initialHeight)
-                shadowOffset.y += initialHeight - shadow.transform.position.y;
         }
 
         else
@@ -95,6 +89,13 @@ public class PlayerController : MonoBehaviour
                 shadow.transform.position += bodyToShadow;
                 shadowMoveScript.moveDirection = Vector3.zero;
             }
+        }
+
+        if (resetFlag)
+        {
+            shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, defaultZOffset);
+            shadowOffset = new Vector3(0f, 0f, defaultZOffset);
+            resetFlag = false;
         }
     }
 
@@ -231,19 +232,7 @@ public class PlayerController : MonoBehaviour
 
     public void ResetShadow()
     {
-        // Prevent the shadow from being blocked (in light...)
-        if (controlledObject == body)
-        {
-            // Reset shadow location
-            shadowOffset = new Vector3(0f, 0f, defaultZOffset);
-        }
-        else
-        {
- 
-            shadowOffset = new Vector3(0f, 0f, defaultZOffset);
-            shadow.transform.localPosition = shadowOffset;
-                                                     
-        }
+        resetFlag = true;
     }
 
     private void AddComponenetToControlShadow()
