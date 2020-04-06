@@ -121,11 +121,16 @@ public class PlayerController : MonoBehaviour
         {
             shadowMoveScript.JumpFlag = bJump;
             shadowMoveScript.WallJumpFlag = bJump;
+
+            //shadowAnimator.SetTrigger("Jump");
         }
         else
         {
             bodyMoveScript.JumpFlag = bJump;
             bodyMoveScript.WallJumpFlag = bJump;
+
+            //bodyAnimator.SetTrigger("Jump");
+            //shadowAnimator.SetTrigger("Jump");
         }
     }
     
