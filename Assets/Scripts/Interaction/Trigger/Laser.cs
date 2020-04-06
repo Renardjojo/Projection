@@ -1,13 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public struct TagObjectHitEvent
+[Serializable]
+public struct TagObjectEvent
 {
     public string tag;
     public UnityEvent OnHit;
 }
+
 
 [ExecuteInEditMode]
 public class Laser : MonoBehaviour
@@ -17,7 +19,8 @@ public class Laser : MonoBehaviour
     [SerializeField] float laserOffSet = 0.61f;
     [SerializeField] float maxLaserLenght = 1000f;
 
-    [SerializeField] TagObjectHitEvent[] tagObjectEventList;
+    [SerializeField] List<TagObjectEvent> tagObjectEventList = null;
+
     GameObject laserRay;
 
 
@@ -33,7 +36,27 @@ public class Laser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerController pc = GameObject.FindObjectOfType<PlayerController>();
+
+        if (!pc)
+            Debug.Log("Not found");
+
+        bool containsBodyPlayer = false;
+
+        foreach (TagObjectEvent toe in tagObjectEventList)
+        {
+            if (toe.tag == "BodyPlayer")
+            {
+                containsBodyPlayer = true;
+                break;
+            }
+        }
+
+        if (!containsBodyPlayer)
+        {
+            tagObjectEventList.Add(new TagObjectEvent() { tag = "BodyPlayer", OnHit = new UnityEvent() });
+            tagObjectEventList[tagObjectEventList.Count - 1].OnHit.AddListener(pc.Kill);
+        }
     }
 
     // Update is called once per frame
@@ -51,7 +74,7 @@ public class Laser : MonoBehaviour
             laserRay.transform.position = startPosition + transform.forward * (hit.distance / 2f);
             laserRay.transform.localScale = new Vector3(laserRadius, hit.distance / 2f, laserRadius);
 
-            for (int i = 0; i < tagObjectEventList.Length; i++)
+            for (int i = 0; i < tagObjectEventList.Count; i++)
             {
                 if (hit.transform.gameObject.tag == tagObjectEventList[i].tag)
                 {
