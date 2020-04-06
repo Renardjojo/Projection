@@ -18,6 +18,9 @@ public class CharacterMovements : MonoBehaviour
     [SerializeField] public float   wallJumpNormalSpeed = 5f;
     [SerializeField] public float   wallJumpUpSpeed     = 5f;
 
+    [SerializeField] public bool    avoidSlowMotion     = false;
+    [SerializeField] public TimeManager timeManager;
+
     // This is not physically correct, but it gives a better video-game-like jump.
     [SerializeField] private float  fallAcceleration    = .1f;
 
@@ -48,6 +51,18 @@ public class CharacterMovements : MonoBehaviour
     private void Start()
     {
         defaultZValue = gameObject.transform.localPosition.z;
+
+        if (avoidSlowMotion)
+        {
+            float multiplicator = 1f / timeManager.getTimeScaleInFirstPlanWhenSwitch();
+
+            speedScale          *= multiplicator;
+            jumpSpeed           *= multiplicator;
+            gravity             *= multiplicator * multiplicator;
+            wallJumpNormalSpeed *= multiplicator;
+            wallJumpUpSpeed     *= multiplicator;
+            fallAcceleration    *= multiplicator;
+        }
     }
 
     public void DirectMove(Vector3 motion)

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-
     [SerializeField, Range(0f, 1f), Tooltip("0 = Time paused. 1 = Normal time")]
     private float timeScaleInFirstPlanWhenSwitch = 0.5f;
 
@@ -49,4 +48,6 @@ public class TimeManager : MonoBehaviour
         }
         isActivate = !isActivate;
     }
+
+    public float getTimeScaleInFirstPlanWhenSwitch() { return timeScaleInFirstPlanWhenSwitch;  }
 }
