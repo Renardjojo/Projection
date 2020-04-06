@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2154562641637030800}
   - component: {fileID: 1195633722119733195}
   m_Layer: 0
-  m_Name: Laser (1)
+  m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,11 +107,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ed4735847eff24fb04165cc02b6501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserRadius: 0.3
+  laserRadius: 0.15
   isActivate: 1
   laserOffSet: 0.5
   maxLaserLenght: 10
-  tagObjectEventList: []
+  tagObjectEventList:
+  - tag: BodyPlayer
+    OnHit:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!114 &1195633722119733195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +189,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3288405504258965963}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 2.1541502}
-  m_LocalScale: {x: 0.3, y: 1.6541499, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: 5.500001}
+  m_LocalScale: {x: 0.15, y: 5, z: 0.15}
   m_Children: []
   m_Father: {fileID: 192685995658186234}
   m_RootOrder: 1
