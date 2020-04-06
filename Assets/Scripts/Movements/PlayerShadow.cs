@@ -27,10 +27,8 @@ public class PlayerShadow : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("Collision");
         if (collider.gameObject.layer == LayerMask.NameToLayer("ScreenLight"))
         {
-            Debug.Log("Collision with  light");
             pc.ResetShadow();    
         }
     }
