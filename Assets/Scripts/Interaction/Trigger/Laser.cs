@@ -48,6 +48,7 @@ public class Laser : MonoBehaviour
             if (toe.tag == "BodyPlayer")
             {
                 containsBodyPlayer = true;
+                toe.OnHit.AddListener(pc.Kill);
                 break;
             }
         }
