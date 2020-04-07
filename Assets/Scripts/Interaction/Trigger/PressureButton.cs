@@ -85,7 +85,6 @@ public class PressureButton : Trigger
         else if (!isOn && currentCollidingObjects >= necessaryCollidingObjects)
         {
             Enable();
-            Debug.Log("Activated");
         }
     }
 
@@ -95,7 +94,6 @@ public class PressureButton : Trigger
         timeElapsed += Time.deltaTime;
         if (timeElapsed >= automaticTimer)
         {
-            Debug.Log("Deactivated");
             timeElapsed = 0f;
             inCountdown = false;
             Disable();

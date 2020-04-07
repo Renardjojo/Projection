@@ -6,40 +6,34 @@ using UnityEngine;
 public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
-    [SerializeField] public float   airControlRatio     = .05f;
-    [Range(0f, 1f)]
-    [SerializeField] public float   wallFriction        = .5f;
-    [SerializeField] public float   speedScale          = 3f;
-    [SerializeField] public float   jumpSpeed           = 8f;
-    [SerializeField] public float   gravity             = 20f;
+    public float   AirControlRatio     {get; set;}
+    public float   WallFriction        {get; set;}
+    public float   SpeedScale          {get; set;}
+    public float   JumpSpeed           {get; set;}
+    public float   Gravity             {get; set;}
 
-    [SerializeField] private bool   canWallJump         = true;
-    [SerializeField] public float   wallDetectionRange  = 1f;
-    [SerializeField] public float   wallJumpNormalSpeed = 5f;
-    [SerializeField] public float   wallJumpUpSpeed     = 5f;
-
-    [SerializeField] public bool    avoidSlowMotion     = false;
-    [SerializeField] public TimeManager timeManager;
+    public  bool   CanWallJump         {get; set;}
+    public float   WallDetectionRange  {get; set;}
+    public float   WallJumpNormalSpeed {get; set;}
+    public float   WallJumpUpSpeed     {get; set;}
 
     // This is not physically correct, but it gives a better video-game-like jump.
-    [SerializeField] private float  fallAcceleration    = .1f;
+    public float  FallAcceleration     {get; set;}
 
     /* ==== Private data members ==== */
-    public CharacterController      controller          = null;
-    public Vector3                  moveDirection       = Vector3.zero;
-    public float                    inputSpeed          = 0f;
-    public float                    defaultZValue       = 0f;
-    public bool                     isOnWall            = false;
+    private float                    inputSpeed          = 0f;
+    private float                    defaultZValue       = 0f;
+    private bool                     isOnWall            = false;
 
     /* ==== Public data members ==== */
+    internal CharacterController    controller          = null;
     internal bool                   disableInputs       = false;
+    internal Vector3                moveDirection       = Vector3.zero;
     internal bool                   JumpFlag            { get; set; }
     internal bool                   WallJumpFlag        { get; set; }
     internal CharacterController    Controller          { get; }
 
     
-
-
     /* ==== Unity methods ==== */
     private void Awake()
     {
@@ -51,18 +45,6 @@ public class CharacterMovements : MonoBehaviour
     private void Start()
     {
         defaultZValue = gameObject.transform.localPosition.z;
-
-        if (avoidSlowMotion)
-        {
-            float multiplicator = 1f / timeManager.getTimeScaleInFirstPlanWhenSwitch();
-
-            speedScale          *= multiplicator;
-            jumpSpeed           *= multiplicator;
-            gravity             *= multiplicator * multiplicator;
-            wallJumpNormalSpeed *= multiplicator;
-            wallJumpUpSpeed     *= multiplicator;
-            fallAcceleration    *= multiplicator;
-        }
     }
 
     public void DirectMove(Vector3 motion)
@@ -70,8 +52,7 @@ public class CharacterMovements : MonoBehaviour
         if (controller != null)
         {
             controller.Move(motion);
-        }
-        
+        }    
     }
 
     void Update()
@@ -83,12 +64,12 @@ public class CharacterMovements : MonoBehaviour
             // move direction directly from axes
 
             moveDirection = new Vector3(inputSpeed, 0.0f, 0f);
-            moveDirection *= speedScale;
+            moveDirection *= SpeedScale;
 
             // Try to jump
             if (JumpFlag)
             {
-                moveDirection.y = jumpSpeed;
+                moveDirection.y = JumpSpeed;
                 JumpFlag        = false;
                 WallJumpFlag    = false;
             }
@@ -96,7 +77,7 @@ public class CharacterMovements : MonoBehaviour
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
-            moveDirection.y -= gravity * Time.deltaTime;
+            moveDirection.y -= Gravity * Time.deltaTime;
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
@@ -106,21 +87,21 @@ public class CharacterMovements : MonoBehaviour
         {
             // Move in mid-air with input
             if (!disableInputs)
-                moveDirection.x = inputSpeed * speedScale * airControlRatio;
+                moveDirection.x = inputSpeed * SpeedScale * AirControlRatio;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
-            moveDirection.y -= gravity * Time.deltaTime;
+            moveDirection.y -= Gravity * Time.deltaTime;
 
             TryToWallJump(ref moveDirection);
 
             if (moveDirection.y < 0f)
-                moveDirection.y -= fallAcceleration;
+                moveDirection.y -= FallAcceleration;
 
-            if (canWallJump && isOnWall && moveDirection.y < 0f)
+            if (CanWallJump && isOnWall && moveDirection.y < 0f)
             {
-                moveDirection.y *= wallFriction;
+                moveDirection.y *= WallFriction;
             }
 
             // Move the player.       
@@ -177,7 +158,7 @@ public class CharacterMovements : MonoBehaviour
 
     private void TryToWallJump(ref Vector3 velocity)
     {
-        if (!canWallJump || controller.isGrounded)
+        if (!CanWallJump || controller.isGrounded)
             return;
 
         // ======== Detect Wall ======== //
@@ -186,7 +167,7 @@ public class CharacterMovements : MonoBehaviour
         ray.direction   = transform.forward;
             
         RaycastHit hitInfo; 
-        if (Physics.Raycast(ray, out hitInfo, wallDetectionRange))
+        if (Physics.Raycast(ray, out hitInfo, WallDetectionRange))
         {
             disableInputs   = false;
             isOnWall        = true;
@@ -198,7 +179,7 @@ public class CharacterMovements : MonoBehaviour
         // ======== If input, then jump ======== //
         if (isOnWall && WallJumpFlag && !controller.isGrounded)
         {
-            velocity        = hitInfo.normal * wallJumpNormalSpeed + Vector3.up * wallJumpUpSpeed;
+            velocity        = hitInfo.normal * WallJumpNormalSpeed + Vector3.up * WallJumpUpSpeed;
             disableInputs   = true;
             isOnWall = WallJumpFlag = false;
 
