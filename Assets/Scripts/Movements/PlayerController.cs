@@ -2,6 +2,21 @@
 using UnityEngine.Events;
 using System;
 
+/*
+[System.Serializable]
+struct AudioPlayerComponent
+{
+    public AudioClip walkSound;
+    public AudioClip runSound;
+    public AudioClip spawnSound;
+    public AudioClip deadSound;
+    public AudioClip jumpStartSound;
+    public AudioClip jumpEndSound;
+    public AudioClip transposeBodyToShadowSound;
+    public AudioClip transposeShadowToBodySound;
+    public AudioClip interractSound;
+}*/
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject     body                = null;
@@ -9,13 +24,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float          maxShadowDistance   = 5f;
     [SerializeField] private TimeManager    timeManagerScript   = null;
     [SerializeField] private UnityEvent     OnIsDead            = null;
+    //[SerializeField] private AudioPlayerComponent audioPlayerComponent;
+
 
     private CharacterMovements              bodyMoveScript;
     private Animator                        bodyAnimator;
 
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
-
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
