@@ -45,7 +45,7 @@ public class RotatingPlatform : MonoBehaviour
 
             float delta = (Time.time - lastTime) / (duration);
 
-            // Be aware of rotation bugs caused by 
+            // Be aware of rotation bugs caused by Gimbal lock
             newRot.x = Mathf.LerpAngle(lastRotation, targetRotation, delta);
 
             transform.eulerAngles = newRot;
