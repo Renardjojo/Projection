@@ -2,23 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CharacterMovementProperties
+{
+    [SerializeField] public float airControlRatio = .05f;
+    [Range(0f, 1f)]
+    [SerializeField] public float wallFriction = .5f;
+    [SerializeField] public float speedScale = 3f;
+    [SerializeField] public float jumpSpeed = 8f;
+    [SerializeField] public float gravity = 20f;
+
+    [SerializeField] public bool canWallJump = true;
+    [SerializeField] public float wallDetectionRange = 1f;
+    [SerializeField] public float wallJumpNormalSpeed = 5f;
+    [SerializeField] public float wallJumpUpSpeed = 5f;
+    [SerializeField] public float fallAcceleration = .1f;
+
+    [SerializeField] public bool avoidSlowMotion = false;
+
+    internal CharacterMovementProperties(bool bAvoidSlowMotion)
+    {
+        avoidSlowMotion = bAvoidSlowMotion;
+    }
+
+    internal void scaleMotion(float ratio)
+    {
+        speedScale           *= ratio;
+        jumpSpeed            *= ratio;
+        gravity              *= ratio * ratio;
+        wallJumpNormalSpeed  *= ratio;
+        wallJumpUpSpeed      *= ratio;
+        fallAcceleration     *= ratio;
+    }
+}
+
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
-    public float   AirControlRatio     {get; set;}
-    public float   WallFriction        {get; set;}
-    public float   SpeedScale          {get; set;}
-    public float   JumpSpeed           {get; set;}
-    public float   Gravity             {get; set;}
+    internal CharacterMovementProperties properties;
 
-    public  bool   CanWallJump         {get; set;}
-    public float   WallDetectionRange  {get; set;}
-    public float   WallJumpNormalSpeed {get; set;}
-    public float   WallJumpUpSpeed     {get; set;}
+    //public float   AirControlRatio     {get; set;}
+    //public float   WallFriction        {get; set;}
+    //public float   SpeedScale          {get; set;}
+    //public float   JumpSpeed           {get; set;}
+    //public float   Gravity             {get; set;}
 
-    // This is not physically correct, but it gives a better video-game-like jump.
-    public float  FallAcceleration     {get; set;}
+    //public  bool   CanWallJump         {get; set;}
+    //public float   WallDetectionRange  {get; set;}
+    //public float   WallJumpNormalSpeed {get; set;}
+    //public float   WallJumpUpSpeed     {get; set;}
+
+    //// This is not physically correct, but it gives a better video-game-like jump.
+    //public float  FallAcceleration     {get; set;}
 
     /* ==== Private data members ==== */
     private float                    inputSpeed          = 0f;
@@ -64,12 +100,12 @@ public class CharacterMovements : MonoBehaviour
             // move direction directly from axes
 
             moveDirection = new Vector3(inputSpeed, 0.0f, 0f);
-            moveDirection *= SpeedScale;
+            moveDirection *= properties.speedScale;
 
             // Try to jump
             if (JumpFlag)
             {
-                moveDirection.y = JumpSpeed;
+                moveDirection.y = properties.jumpSpeed;
                 JumpFlag        = false;
                 WallJumpFlag    = false;
             }
@@ -77,7 +113,7 @@ public class CharacterMovements : MonoBehaviour
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
-            moveDirection.y -= Gravity * Time.deltaTime;
+            moveDirection.y -= properties.gravity * Time.deltaTime;
             // Move the player.       
             controller.Move(moveDirection * Time.deltaTime);
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
@@ -87,21 +123,21 @@ public class CharacterMovements : MonoBehaviour
         {
             // Move in mid-air with input
             if (!disableInputs)
-                moveDirection.x = inputSpeed * SpeedScale * AirControlRatio;
+                moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
-            moveDirection.y -= Gravity * Time.deltaTime;
+            moveDirection.y -= properties.gravity * Time.deltaTime;
 
             TryToWallJump(ref moveDirection);
 
             if (moveDirection.y < 0f)
-                moveDirection.y -= FallAcceleration;
+                moveDirection.y -= properties.fallAcceleration;
 
-            if (CanWallJump && isOnWall && moveDirection.y < 0f)
+            if (properties.canWallJump && isOnWall && moveDirection.y < 0f)
             {
-                moveDirection.y *= WallFriction;
+                moveDirection.y *= properties.wallFriction;
             }
 
             // Move the player.       
@@ -158,7 +194,7 @@ public class CharacterMovements : MonoBehaviour
 
     private void TryToWallJump(ref Vector3 velocity)
     {
-        if (!CanWallJump || controller.isGrounded)
+        if (!properties.canWallJump || controller.isGrounded)
             return;
 
         // ======== Detect Wall ======== //
@@ -167,7 +203,7 @@ public class CharacterMovements : MonoBehaviour
         ray.direction   = transform.forward;
             
         RaycastHit hitInfo; 
-        if (Physics.Raycast(ray, out hitInfo, WallDetectionRange))
+        if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange))
         {
             disableInputs   = false;
             isOnWall        = true;
@@ -179,7 +215,7 @@ public class CharacterMovements : MonoBehaviour
         // ======== If input, then jump ======== //
         if (isOnWall && WallJumpFlag && !controller.isGrounded)
         {
-            velocity        = hitInfo.normal * WallJumpNormalSpeed + Vector3.up * WallJumpUpSpeed;
+            velocity        = hitInfo.normal * properties.wallJumpNormalSpeed + Vector3.up * properties.wallJumpUpSpeed;
             disableInputs   = true;
             isOnWall = WallJumpFlag = false;
 

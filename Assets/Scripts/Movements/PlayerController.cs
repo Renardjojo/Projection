@@ -2,44 +2,6 @@
 using UnityEngine.Events;
 using System;
 
-[System.Serializable]
-public class MovementBodyProperties
-{
-    [SerializeField] public float airControlRatio = .05f;
-    [Range(0f, 1f)]
-    [SerializeField] public float wallFriction = .5f;
-    [SerializeField] public float speedScale = 3f;
-    [SerializeField] public float jumpSpeed = 8f;
-    [SerializeField] public float gravity = 20f;
-
-    [SerializeField] public bool canWallJump = true;
-    [SerializeField] public float wallDetectionRange = 1f;
-    [SerializeField] public float wallJumpNormalSpeed = 5f;
-    [SerializeField] public float wallJumpUpSpeed = 5f;
-    [SerializeField] public float fallAcceleration = .1f;
-
-    [SerializeField] public bool avoidSlowMotion = false;
-}
-
-[System.Serializable]
-public class MovementShadowProperties
-{
-    [SerializeField] public float airControlRatio = .05f;
-    [Range(0f, 1f)]
-    [SerializeField] public float wallFriction = .5f;
-    [SerializeField] public float speedScale = 3f;
-    [SerializeField] public float jumpSpeed = 8f;
-    [SerializeField] public float gravity = 20f;
-
-    [SerializeField] public bool canWallJump = true;
-    [SerializeField] public float wallDetectionRange = 1f;
-    [SerializeField] public float wallJumpNormalSpeed = 5f;
-    [SerializeField] public float wallJumpUpSpeed = 5f;
-    [SerializeField] public float fallAcceleration = .1f;
-
-    [SerializeField] public bool avoidSlowMotion = true;
-}
-
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float          maxShadowDistance   = 5f;
@@ -47,12 +9,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent     OnIsDead            = null;
 
     private GameObject                      body = null;
-    [SerializeField] private MovementBodyProperties bodyMovementProperties;
+    [SerializeField] private CharacterMovementProperties bodyMovementProperties = new CharacterMovementProperties(false);
     private CharacterMovements              bodyMoveScript;
     private Animator                        bodyAnimator;
 
     private GameObject                      shadow = null;
-    [SerializeField] private MovementShadowProperties shadowMovementProperties;
+    [SerializeField] private CharacterMovementProperties shadowMovementProperties = new CharacterMovementProperties(true);
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
 
@@ -108,27 +70,13 @@ public class PlayerController : MonoBehaviour
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
 
         /*Initialize body movement script*/
-        bodyMoveScript.AirControlRatio  = bodyMovementProperties.airControlRatio;
-        bodyMoveScript.WallFriction     = bodyMovementProperties.wallFriction;
-        bodyMoveScript.SpeedScale       = bodyMovementProperties.speedScale;
-        bodyMoveScript.JumpSpeed        = bodyMovementProperties.jumpSpeed;
-        bodyMoveScript.Gravity          = bodyMovementProperties.gravity;
-        bodyMoveScript.CanWallJump          = bodyMovementProperties.canWallJump;
-        bodyMoveScript.WallDetectionRange   = bodyMovementProperties.wallDetectionRange;
-        bodyMoveScript.WallJumpNormalSpeed  = bodyMovementProperties.wallJumpNormalSpeed;
-        bodyMoveScript.WallJumpUpSpeed      = bodyMovementProperties.wallJumpUpSpeed;
-        bodyMoveScript.FallAcceleration     = bodyMovementProperties.fallAcceleration;
+        bodyMoveScript.properties = bodyMovementProperties;
 
         if (bodyMovementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
-            bodyMoveScript.SpeedScale           *= multiplicator;
-            bodyMoveScript.JumpSpeed            *= multiplicator;
-            bodyMoveScript.Gravity              *= multiplicator * multiplicator;
-            bodyMoveScript.WallJumpNormalSpeed  *= multiplicator;
-            bodyMoveScript.WallJumpUpSpeed      *= multiplicator;
-            bodyMoveScript.FallAcceleration     *= multiplicator;
+            bodyMovementProperties.scaleMotion(multiplicator);
         }
 
         /*Find the animator component*/
@@ -144,27 +92,13 @@ public class PlayerController : MonoBehaviour
         GameDebug.AssertInTransform(shadow != null && shadowMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
 
         /*Initialize shadow movement script*/
-        shadowMoveScript.AirControlRatio    = shadowMovementProperties.airControlRatio;
-        shadowMoveScript.WallFriction       = shadowMovementProperties.wallFriction;
-        shadowMoveScript.SpeedScale         = shadowMovementProperties.speedScale;
-        shadowMoveScript.JumpSpeed          = shadowMovementProperties.jumpSpeed;
-        shadowMoveScript.Gravity            = shadowMovementProperties.gravity;
-        shadowMoveScript.CanWallJump            = shadowMovementProperties.canWallJump;
-        shadowMoveScript.WallDetectionRange     = shadowMovementProperties.wallDetectionRange;
-        shadowMoveScript.WallJumpNormalSpeed    = shadowMovementProperties.wallJumpNormalSpeed;
-        shadowMoveScript.WallJumpUpSpeed        = shadowMovementProperties.wallJumpUpSpeed;
-        shadowMoveScript.FallAcceleration       = shadowMovementProperties.fallAcceleration;
+        shadowMoveScript.properties = shadowMovementProperties;
 
         if (shadowMovementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
-            shadowMoveScript.SpeedScale         *= multiplicator;
-            shadowMoveScript.JumpSpeed          *= multiplicator;
-            shadowMoveScript.Gravity            *= multiplicator * multiplicator;
-            shadowMoveScript.WallJumpNormalSpeed*= multiplicator;
-            shadowMoveScript.WallJumpUpSpeed    *= multiplicator;
-            shadowMoveScript.FallAcceleration   *= multiplicator;
+            shadowMovementProperties.scaleMotion(multiplicator);
         }
 
         /*Find the animator component*/
