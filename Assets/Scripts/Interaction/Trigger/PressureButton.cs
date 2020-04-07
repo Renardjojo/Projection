@@ -8,14 +8,26 @@ public class PressureButton : Trigger
 {
     [SerializeField] private String[] tagsWithCollisionEnabled = new string[] { "BodyPlayer" };
     [SerializeField] private uint necessaryCollidingObjects = 1;
-    private uint currentCollidingObjects = 0;
+    [Range(0f, 10f)]
+    [Tooltip("Duration the pressure button will remain active, after stepping of it (in seconds)")]
+    [SerializeField] private float automaticTimer = 0f;
 
-
-    // Start is called before the first frame update
+    private bool    inCountdown;
+    private uint    currentCollidingObjects = 0;
+    private float   timeElapsed;
 
     private void Awake()
     {
-        isOn = false;
+        isOn        = false;
+        timeElapsed = 0f;
+        inCountdown = false;
+    }
+
+
+    private void Update()
+    {
+        if (inCountdown)
+            UpdateCountdown();
     }
 
     //  Returns false if we should ignore the collision.
@@ -68,12 +80,23 @@ public class PressureButton : Trigger
     private void UpdateButton()
     {
         if (isOn && currentCollidingObjects < necessaryCollidingObjects)
-        {
-            Disable();
-        }
+            inCountdown = true;
+
         else if (!isOn && currentCollidingObjects >= necessaryCollidingObjects)
         {
             Enable();
+        }
+    }
+
+
+    private void UpdateCountdown()
+    {
+        timeElapsed += Time.deltaTime;
+        if (timeElapsed >= automaticTimer)
+        {
+            timeElapsed = 0f;
+            inCountdown = false;
+            Disable();
         }
     }
 }
