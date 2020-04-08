@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class PhysicLeverSub : MonoBehaviour
@@ -8,23 +9,6 @@ public class PhysicLeverSub : MonoBehaviour
     private PhysicLever lever = null;
     [SerializeField]
     private GameObject rotatedObject = null;
-
-    private void Awake()
-    {
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,10 +19,7 @@ public class PhysicLeverSub : MonoBehaviour
 
             rotatedObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, dot < 0 ? 15 : -15));
 
-            if (dot < 0)
-                lever.Enable();
-            else
-                lever.Disable();
+            lever.IsOn = (dot < 0);
         }
     }
 }

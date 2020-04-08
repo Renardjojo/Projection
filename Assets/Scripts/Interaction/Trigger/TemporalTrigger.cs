@@ -4,48 +4,40 @@ using UnityEngine;
 
 public class TemporalTrigger : Trigger
 {
+    [Tooltip("Time difference before this object starts switching on and off")]
     [SerializeField, Range(0f, 60f)] private float timeOffSet = 0f;
+    [Tooltip("Time this object will remain on (s)")]
     [SerializeField, Range(0f, 60f)] private float OnDuration  = 2f;
+    [Tooltip("Time this object will remain off (s)")]
     [SerializeField, Range(0f, 60f)] private float OffDuration = 1f;
-
-    float currentTimer = 0f;
-    [SerializeField] bool isActivate = false;
 
     private void Start()
     {
-        if (isActivate)
-        {
-            currentTimer = timeOffSet % OnDuration;
-            Enable();
-        }
-        else
-        {
-            currentTimer = timeOffSet % OffDuration;
-            Disable();
-        }
+        timeElapsed = timeOffSet % (IsOn ? OnDuration : OffDuration);
     }
 
     private void Update()
     {
-        currentTimer += Time.deltaTime * Time.timeScale;
+        timeElapsed += Time.deltaTime * Time.timeScale;
 
-        if (isActivate)
+        if (IsOn)
         {
-            if (currentTimer >= OnDuration)
+            if (timeElapsed >= OnDuration)
             {
-                currentTimer -= OnDuration;
-                isActivate = false;
-                Disable();
+                timeElapsed -= OnDuration;
+                IsOn = false;
             }
         }
+
         else
         {
-            if (currentTimer >= OffDuration)
+            if (timeElapsed >= OffDuration)
             {
-                currentTimer -= OffDuration;
-                isActivate = true;
-                Enable();
+                timeElapsed -= OffDuration;
+                IsOn = true;
             }
         }
+
+        base.Update();
     }
 }

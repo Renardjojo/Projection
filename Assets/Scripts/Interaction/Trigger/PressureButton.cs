@@ -8,7 +8,7 @@ public class PressureButton : Trigger
 {
     [SerializeField] private String[] tagsWithCollisionEnabled = new string[] { "BodyPlayer" };
     [SerializeField] private uint necessaryCollidingObjects = 1;
-    private uint    currentCollidingObjects = 0;
+    private uint currentCollidingObjects = 0;
 
     //  Returns false if we should ignore the collision.
     //  Else, returns true
@@ -65,7 +65,4 @@ public class PressureButton : Trigger
         else if (!IsOn && currentCollidingObjects >= necessaryCollidingObjects)
             IsOn = true;
     }
-
-
-    
 }
