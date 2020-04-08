@@ -35,8 +35,9 @@ class AudioPlayerComponent
 
 }
 
+/*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
 [System.Serializable]
-class ShadowProperties
+public class ShadowProperties
 {
     public CharacterMovementProperties  movementProperties      = new CharacterMovementProperties(true);
     internal bool                       activateShadow          = true;
@@ -63,7 +64,8 @@ public class PlayerController : MonoBehaviour
     private Animator                        bodyAnimator;
 
     private GameObject                      shadow = null;
-    [SerializeField] private ShadowProperties shadowProperties;
+    /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE. TODO : INTEGERT ZOOOMCAMERASCRIPT ON THIS SCRIPT*/
+    public ShadowProperties shadowProperties;
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
 
@@ -459,6 +461,7 @@ public class PlayerController : MonoBehaviour
     {
         shadowProperties.activateShadow = false;
         shadow.transform.Find("body").gameObject.SetActive(false);
+        ResetShadow();
     }
 
     public void SwitchShadowState()
