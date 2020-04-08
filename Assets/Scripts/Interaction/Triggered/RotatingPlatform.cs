@@ -5,6 +5,8 @@ using UnityEngine;
 public class RotatingPlatform : MonoBehaviour
 {
 
+    [SerializeField] float maxRotation = 180f;
+
     private Vector3 defaultRotation;
     private float lastTime = 0f;
     private float targetRotation = 0f;
@@ -28,7 +30,7 @@ public class RotatingPlatform : MonoBehaviour
             lastRotation = targetRotation;
             bIsFaceType1 = !bIsFaceType1;
             if (bIsFaceType1)
-                targetRotation = 180;
+                targetRotation = maxRotation;
             else
                 targetRotation = 0;
 
