@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
     {
         // Can't tranpose if currently controlling player 
         // when the shadow is in the light screen, since it disappears.
-        if (!isTransposed && IsShadowCollidingWithLightScreen())
+        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && !shadow.active))
         {
             return;
         }
