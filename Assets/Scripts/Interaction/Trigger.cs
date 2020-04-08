@@ -22,27 +22,36 @@ public abstract class Trigger : MonoBehaviour
         { return isOn; }
 
         set
-        { isOn = value; applyDelay = true; }
+        {
+            isOn = value;
+            applyDelay = true;
+        }
     }
 
 
     /* ==== Protected data members ==== */
-
-    protected bool applyDelay = false;
-    protected float timeElapsed = 0f;
+    private bool applyDelay;
+    protected float timeElapsed;
 
 
     /* ==== Actions ==== */
-    public event Action OnTriggered   = null;
+    public event Action OnTriggered = null;
     public event Action OnUntriggered = null;
 
 
     /* ==== Methods ==== */
-    private void Update()
+    private void Awake()
+    {
+        applyDelay = false;
+        timeElapsed = 0f;
+    }
+
+
+    protected void Update()
     {
         if (applyDelay)
         {
-            timeElapsed += Time.deltaTime * Time.timeScale;
+            timeElapsed += Time.deltaTime;
 
             if (isOn && timeElapsed >= activationDelay)
             {
@@ -67,5 +76,3 @@ public abstract class Trigger : MonoBehaviour
         applyDelay = true;
     }
 }
-
-
