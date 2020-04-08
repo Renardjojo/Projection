@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
 
         if (resetFlag)
         {
-            shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, defaultZOffset);
+            shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z + defaultZOffset);
             shadowOffset = new Vector3(0f, 0f, defaultZOffset);
             resetFlag = false;
         }
