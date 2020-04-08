@@ -46,37 +46,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4146d3be9bf5647ada4bb1e35c8a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShadowDistance: 15
+  maxShadowDistance: 16
   timeManagerScript: {fileID: 0}
   OnIsDead:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  bodyMovementProperties:
-    airControlRatio: 0.9
-    wallFriction: 0.5
-    speedScale: 3
-    jumpSpeed: 8
-    gravity: 20
-    canWallJump: 1
-    wallDetectionRange: 1
-    wallJumpNormalSpeed: 5
-    wallJumpUpSpeed: 5
-    fallAcceleration: 0.1
-    avoidSlowMotion: 0
-  shadowMovementProperties:
-    airControlRatio: 0.9
-    wallFriction: 0.5
-    speedScale: 3
-    jumpSpeed: 8
-    gravity: 20
-    canWallJump: 1
-    wallDetectionRange: 1
-    wallJumpNormalSpeed: 5
-    wallJumpUpSpeed: 5
-    fallAcceleration: 0.1
-    avoidSlowMotion: 1
+  audioPlayerComponent:
+    walkingFootSound: {fileID: 0}
+    walkSoundDelay: 1
+    walkSoundOffSet: 0
+    spawnSound: {fileID: 0}
+    deadSound: {fileID: 0}
+    jumpStartSound: {fileID: 0}
+    transposeBodyToShadowSound: {fileID: 0}
+    transposeShadowToBodySound: {fileID: 0}
+    interractSound: {fileID: 0}
+  bodyProperties:
+    movementProperties:
+      airControlRatio: 0.9
+      wallFriction: 0.5
+      speedScale: 5
+      jumpSpeed: 12
+      gravity: 20
+      canWallJump: 1
+      wallDetectionRange: 1
+      wallJumpNormalSpeed: 5
+      wallJumpUpSpeed: 12
+      fallAcceleration: 0.3
+      avoidSlowMotion: 0
+  shadowProperties:
+    movementProperties:
+      airControlRatio: 0.9
+      wallFriction: 0.5
+      speedScale: 3
+      jumpSpeed: 8
+      gravity: 20
+      canWallJump: 0
+      wallDetectionRange: 1
+      wallJumpNormalSpeed: 5
+      wallJumpUpSpeed: 5
+      fallAcceleration: 0.1
+      avoidSlowMotion: 1
+    activateShadowOnStart: 1
 --- !u!114 &1668286794
 MonoBehaviour:
   m_ObjectHideFlags: 0

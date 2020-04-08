@@ -35,6 +35,21 @@ class AudioPlayerComponent
 
 }
 
+/*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
+[System.Serializable]
+public class ShadowProperties
+{
+    public CharacterMovementProperties  movementProperties      = new CharacterMovementProperties(true);
+    internal bool                       activateShadow          = true;
+    public bool                         activateShadowOnStart   = true;
+}
+
+[System.Serializable]
+class BodyProperties
+{
+    public CharacterMovementProperties movementProperties = new CharacterMovementProperties(false);
+}
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float          maxShadowDistance   = 5f;
@@ -44,12 +59,13 @@ public class PlayerController : MonoBehaviour
 
 
     private GameObject                      body = null;
-    [SerializeField] private CharacterMovementProperties bodyMovementProperties = new CharacterMovementProperties(false);
+    [SerializeField] private BodyProperties bodyProperties;
     private CharacterMovements              bodyMoveScript;
     private Animator                        bodyAnimator;
 
     private GameObject                      shadow = null;
-    [SerializeField] private CharacterMovementProperties shadowMovementProperties = new CharacterMovementProperties(true);
+    /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE. TODO : INTEGERT ZOOOMCAMERASCRIPT ON THIS SCRIPT*/
+    public ShadowProperties shadowProperties;
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
 
@@ -163,13 +179,13 @@ public class PlayerController : MonoBehaviour
         GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
 
         /*Initialize body movement script*/
-        bodyMoveScript.properties = bodyMovementProperties;
+        bodyMoveScript.properties = bodyProperties.movementProperties;
 
-        if (bodyMovementProperties.avoidSlowMotion)
+        if (bodyProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
-            bodyMovementProperties.scaleMotion(multiplicator);
+            bodyProperties.movementProperties.scaleMotion(multiplicator);
         }
 
         /*Find the animator component*/
@@ -185,18 +201,27 @@ public class PlayerController : MonoBehaviour
         GameDebug.AssertInTransform(shadow != null && shadowMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
 
         /*Initialize shadow movement script*/
-        shadowMoveScript.properties = shadowMovementProperties;
+        shadowMoveScript.properties = shadowProperties.movementProperties;
 
-        if (shadowMovementProperties.avoidSlowMotion)
+        if (shadowProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
-            shadowMovementProperties.scaleMotion(multiplicator);
+            shadowProperties.movementProperties.scaleMotion(multiplicator);
         }
 
         /*Find the animator component*/
         shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
         GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
+
+        if (shadowProperties.activateShadowOnStart)
+        {
+            EnableShadow();
+        }
+        else
+        {
+            DisableShadow();
+        }
     }
 
 
@@ -290,7 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         // Can't tranpose if currently controlling player 
         // when the shadow is in the light screen, since it disappears.
-        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && !shadow.active))
+        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
         {
             return;
         }
@@ -424,5 +449,35 @@ public class PlayerController : MonoBehaviour
         audioPlayerComponent.spawnSourceAudio?.Play();
 
         checkPointPosition = position;
+    }
+
+    public void EnableShadow ()
+    {
+        shadowProperties.activateShadow = true;
+        shadow.transform.Find("body").gameObject.SetActive(true);
+    }
+
+    public void DisableShadow ()
+    {
+        if (controlledObject == shadow)
+            Transpose();
+
+        shadowProperties.activateShadow = false;
+        shadow.transform.Find("body").gameObject.SetActive(false);
+        ResetShadow();
+    }
+
+    public void SwitchShadowState()
+    {
+        shadowProperties.activateShadow = !shadowProperties.activateShadow;
+
+        if (shadowProperties.activateShadow)
+        {
+            EnableShadow();
+        }
+        else
+        {
+            DisableShadow();
+        }
     }
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RotatingPlatform : MonoBehaviour
 {
-
+    // if axisRotationID is 0, the platform will rotate around the x axis
+    // if it is 1, around the y axis
+    // if it is 2, around the z axis
+    [SerializeField, Range(0,2), Tooltip("0 = rotate around x axis\n1 = rotate around y axis\n2 = rotate around z axis")] int axisRotationID = 2;
     [SerializeField] float maxRotation = 180f;
 
     private Vector3 defaultRotation;
@@ -48,7 +51,7 @@ public class RotatingPlatform : MonoBehaviour
             float delta = (Time.time - lastTime) / (duration);
 
             // Be aware of rotation bugs caused by Gimbal lock
-            newRot.x = Mathf.LerpAngle(lastRotation, targetRotation, delta);
+            newRot[axisRotationID] = Mathf.LerpAngle(lastRotation, targetRotation, delta);
 
             transform.eulerAngles = newRot;
 
