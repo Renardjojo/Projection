@@ -19,17 +19,19 @@ struct AudioPlayerComponent
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject     body                = null;
-    [SerializeField] private GameObject     shadow              = null;
     [SerializeField] private float          maxShadowDistance   = 5f;
     [SerializeField] private TimeManager    timeManagerScript   = null;
     [SerializeField] private UnityEvent     OnIsDead            = null;
     //[SerializeField] private AudioPlayerComponent audioPlayerComponent;
 
 
+    private GameObject                      body = null;
+    [SerializeField] private CharacterMovementProperties bodyMovementProperties = new CharacterMovementProperties(false);
     private CharacterMovements              bodyMoveScript;
     private Animator                        bodyAnimator;
 
+    private GameObject                      shadow = null;
+    [SerializeField] private CharacterMovementProperties shadowMovementProperties = new CharacterMovementProperties(true);
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
 
@@ -50,17 +52,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        body                = transform.Find("Body").gameObject;
-        bodyMoveScript      = body.GetComponent<CharacterMovements>();
-        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
-        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
 
-        //shadow          = body.transform.Find("Shadow").gameObject;
-        shadowMoveScript = shadow.GetComponent<CharacterMovements>();
-        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
-        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
+        InitializeBody();
+        InitializeShadow();
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -82,6 +76,50 @@ public class PlayerController : MonoBehaviour
 
         defaultZOffset = shadow.transform.position.z - body.transform.position.z;
         shadowOffset = defaultZOffset * Vector3.forward;
+    }
+
+    private void InitializeBody()
+    {
+        /*Find the body and the character movement script component*/
+        body = transform.Find("Body").gameObject;
+        bodyMoveScript = body.GetComponent<CharacterMovements>();
+        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
+
+        /*Initialize body movement script*/
+        bodyMoveScript.properties = bodyMovementProperties;
+
+        if (bodyMovementProperties.avoidSlowMotion)
+        {
+            float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
+
+            bodyMovementProperties.scaleMotion(multiplicator);
+        }
+
+        /*Find the animator component*/
+        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
+    }
+    
+    private void InitializeShadow()
+    {
+        /*Find the shadow and the character movement script component*/
+        shadow = transform.Find("Shadow").gameObject;
+        shadowMoveScript = shadow.GetComponent<CharacterMovements>();
+        GameDebug.AssertInTransform(shadow != null && shadowMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
+
+        /*Initialize shadow movement script*/
+        shadowMoveScript.properties = shadowMovementProperties;
+
+        if (shadowMovementProperties.avoidSlowMotion)
+        {
+            float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
+
+            shadowMovementProperties.scaleMotion(multiplicator);
+        }
+
+        /*Find the animator component*/
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
     }
 
 

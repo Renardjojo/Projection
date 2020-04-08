@@ -48,6 +48,7 @@ public class Laser : MonoBehaviour
             if (toe.tag == "BodyPlayer")
             {
                 containsBodyPlayer = true;
+                toe.OnHit.AddListener(pc.Kill);
                 break;
             }
         }
@@ -86,7 +87,7 @@ public class Laser : MonoBehaviour
         else
         {
             laserRay.transform.position = startPosition + transform.forward * (maxLaserLenght / 2f);
-            laserRay.transform.localScale = new Vector3(laserRadius, maxLaserLenght / 2f, laserRadius);
+            laserRay.transform.localScale = new Vector3(laserRadius, maxLaserLenght / 2f / transform.localScale.y, laserRadius);
         }
     }
 
