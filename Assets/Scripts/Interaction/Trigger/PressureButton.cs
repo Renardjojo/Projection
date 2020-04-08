@@ -25,19 +25,6 @@ public class PressureButton : Trigger
         return false;
     }
 
-    private bool IsInputCollision(Collision collision)
-    {
-        foreach (String tag in tagsWithCollisionEnabled)
-        {
-            if (collision.gameObject.CompareTag(tag))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     internal void OnTriggerEnter(Collider collision)
     {
         if (IsInputCollision(collision))

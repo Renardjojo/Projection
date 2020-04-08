@@ -2,20 +2,72 @@
 using UnityEngine.Events;
 using System;
 
+
+[System.Serializable]
+class AudioPlayerComponent
+{
+    public      AudioClip walkingFootSound = null;
+    internal    AudioSource walkingFootSoundSourceAudio;
+    public      float walkSoundDelay = 1f;
+    public      float walkSoundOffSet = 0f;
+    internal    float walkDelay = 0f;
+
+    public      AudioClip spawnSound = null;
+    internal    AudioSource spawnSourceAudio;
+
+    public      AudioClip deadSound = null;
+    internal    AudioSource deadSourceAudio;
+
+    public      AudioClip jumpStartSound = null;
+    internal    AudioSource jumpStartSourceAudio;
+
+   /* public      AudioClip jumpEndSound = null;
+    internal    AudioSource jumpEndSourceAudio;*/
+
+    public      AudioClip transposeBodyToShadowSound = null;
+    internal    AudioSource transposeBodyToShadowSourceAudio;
+
+    public      AudioClip transposeShadowToBodySound = null;
+    internal    AudioSource transposeShadowToBodySourceAudio;
+
+    public      AudioClip interractSound = null;
+    internal    AudioSource interractSourceAudio;
+
+}
+
+/*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
+[System.Serializable]
+public class ShadowProperties
+{
+    public CharacterMovementProperties  movementProperties      = new CharacterMovementProperties(true);
+    internal bool                       activateShadow          = true;
+    public bool                         activateShadowOnStart   = true;
+}
+
+[System.Serializable]
+class BodyProperties
+{
+    public CharacterMovementProperties movementProperties = new CharacterMovementProperties(false);
+}
+
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject     body                = null;
-    [SerializeField] private GameObject     shadow              = null;
     [SerializeField] private float          maxShadowDistance   = 5f;
     [SerializeField] private TimeManager    timeManagerScript   = null;
     [SerializeField] private UnityEvent     OnIsDead            = null;
+    [SerializeField] private AudioPlayerComponent audioPlayerComponent;
 
+
+    private GameObject                      body = null;
+    [SerializeField] private BodyProperties bodyProperties;
     private CharacterMovements              bodyMoveScript;
     private Animator                        bodyAnimator;
 
+    private GameObject                      shadow = null;
+    /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE. TODO : INTEGERT ZOOOMCAMERASCRIPT ON THIS SCRIPT*/
+    public ShadowProperties shadowProperties;
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
-
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
@@ -30,21 +82,70 @@ public class PlayerController : MonoBehaviour
     private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
 
+    private void Awake()
+    {
+        initializeSoundComponent();
+    }
+
+    void initializeSoundComponent()
+    {
+        if (audioPlayerComponent.walkingFootSound != null)
+        {
+            audioPlayerComponent.walkingFootSoundSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.walkingFootSoundSourceAudio.clip = audioPlayerComponent.walkingFootSound;
+
+            audioPlayerComponent.walkDelay = audioPlayerComponent.walkSoundOffSet % audioPlayerComponent.walkSoundDelay;
+        }
+
+        if (audioPlayerComponent.spawnSound != null)
+        {
+            audioPlayerComponent.spawnSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.spawnSourceAudio.clip = audioPlayerComponent.spawnSound;
+        }
+
+        if (audioPlayerComponent.deadSound != null)
+        {
+            audioPlayerComponent.deadSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.deadSourceAudio.clip = audioPlayerComponent.deadSound;
+        }
+
+        if (audioPlayerComponent.jumpStartSound != null)
+        {
+            audioPlayerComponent.jumpStartSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.jumpStartSourceAudio.clip = audioPlayerComponent.jumpStartSound;
+        }
+
+        /*
+        if (audioPlayerComponent.jumpEndSound != null)
+        {
+            audioPlayerComponent.jumpEndSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.jumpEndSourceAudio.clip = audioPlayerComponent.jumpEndSound;
+        }*/
+
+        if (audioPlayerComponent.transposeBodyToShadowSound != null)
+        {
+            audioPlayerComponent.transposeBodyToShadowSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.transposeBodyToShadowSourceAudio.clip = audioPlayerComponent.transposeBodyToShadowSound;
+        }
+
+        if (audioPlayerComponent.transposeShadowToBodySound != null)
+        {
+            audioPlayerComponent.transposeShadowToBodySourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.transposeShadowToBodySourceAudio.clip = audioPlayerComponent.transposeShadowToBodySound;
+        }
+
+        if (audioPlayerComponent.interractSound != null)
+        {
+            audioPlayerComponent.interractSourceAudio = gameObject.AddComponent<AudioSource>();
+            audioPlayerComponent.interractSourceAudio.clip = audioPlayerComponent.interractSound;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        body                = transform.Find("Body").gameObject;
-        bodyMoveScript      = body.GetComponent<CharacterMovements>();
-        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
-        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
-
-        //shadow          = body.transform.Find("Shadow").gameObject;
-        shadowMoveScript = shadow.GetComponent<CharacterMovements>();
-        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
-        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a CharacterMovements");
+        InitializeBody();
+        InitializeShadow();
 
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
@@ -66,6 +167,61 @@ public class PlayerController : MonoBehaviour
 
         defaultZOffset = shadow.transform.position.z - body.transform.position.z;
         shadowOffset = defaultZOffset * Vector3.forward;
+
+        audioPlayerComponent.spawnSourceAudio?.Play();
+    }
+
+    private void InitializeBody()
+    {
+        /*Find the body and the character movement script component*/
+        body = transform.Find("Body").gameObject;
+        bodyMoveScript = body.GetComponent<CharacterMovements>();
+        GameDebug.AssertInTransform(body != null && bodyMoveScript != null, transform, "There must be a gameObject named \"Body\" with a CharacterMovements");
+
+        /*Initialize body movement script*/
+        bodyMoveScript.properties = bodyProperties.movementProperties;
+
+        if (bodyProperties.movementProperties.avoidSlowMotion)
+        {
+            float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
+
+            bodyProperties.movementProperties.scaleMotion(multiplicator);
+        }
+
+        /*Find the animator component*/
+        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
+    }
+    
+    private void InitializeShadow()
+    {
+        /*Find the shadow and the character movement script component*/
+        shadow = transform.Find("Shadow").gameObject;
+        shadowMoveScript = shadow.GetComponent<CharacterMovements>();
+        GameDebug.AssertInTransform(shadow != null && shadowMoveScript != null, transform, "There must be a gameObject named \"shadow\" with a CharacterMovements");
+
+        /*Initialize shadow movement script*/
+        shadowMoveScript.properties = shadowProperties.movementProperties;
+
+        if (shadowProperties.movementProperties.avoidSlowMotion)
+        {
+            float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
+
+            shadowProperties.movementProperties.scaleMotion(multiplicator);
+        }
+
+        /*Find the animator component*/
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
+
+        if (shadowProperties.activateShadowOnStart)
+        {
+            EnableShadow();
+        }
+        else
+        {
+            DisableShadow();
+        }
     }
 
 
@@ -102,6 +258,17 @@ public class PlayerController : MonoBehaviour
 
     public void MoveX(float value)
     {
+        if (value != 0f)
+        {
+            audioPlayerComponent.walkDelay += Time.deltaTime * Time.timeScale;
+
+            if (audioPlayerComponent.walkDelay >= (audioPlayerComponent.walkSoundDelay * (Mathf.Abs(Mathf.Abs(value) - 1f) + 1f)))
+            {
+                audioPlayerComponent.walkDelay = 0f;
+                audioPlayerComponent.walkingFootSoundSourceAudio?.Play();
+            }
+        }
+
         if (isTransposed)
         {
             shadowMoveScript.MoveX(value);
@@ -120,6 +287,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
+            audioPlayerComponent.jumpStartSourceAudio?.Play();
+
             shadowMoveScript.JumpFlag = bJump;
             shadowMoveScript.WallJumpFlag = bJump;
 
@@ -127,6 +296,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            audioPlayerComponent.jumpStartSourceAudio?.Play();
+
             bodyMoveScript.JumpFlag = bJump;
             bodyMoveScript.WallJumpFlag = bJump;
 
@@ -144,7 +315,7 @@ public class PlayerController : MonoBehaviour
     {
         // Can't tranpose if currently controlling player 
         // when the shadow is in the light screen, since it disappears.
-        if (!isTransposed && IsShadowCollidingWithLightScreen())
+        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
         {
             return;
         }
@@ -167,6 +338,7 @@ public class PlayerController : MonoBehaviour
 
         if (isTransposed)
         {
+            audioPlayerComponent.transposeBodyToShadowSourceAudio?.Play();
             bodyAnimator.SetFloat("Speed", 0f);
             // To set shadow's velocity to players's
             shadowMoveScript.CopyFrom(bodyMoveScript);
@@ -179,6 +351,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
+            audioPlayerComponent.transposeShadowToBodySourceAudio?.Play();
             shadowOffset = shadow.transform.position - body.transform.position;
 
             shadowMoveScript.MoveX(0f);
@@ -224,6 +397,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controlledObject == shadow)
         {
+            audioPlayerComponent.interractSourceAudio?.Play();
             OnInteractButton(controlledObject.transform.position);
             InteractWithBoxes();
             //OnInteractCube(controlledObject);
@@ -255,6 +429,8 @@ public class PlayerController : MonoBehaviour
 
     public void Kill()
     {
+        audioPlayerComponent.deadSourceAudio?.Play();
+
         CharacterController charController = bodyMoveScript.controller;
         charController.enabled = false;
         charController.transform.position = checkPointPosition;
@@ -270,6 +446,38 @@ public class PlayerController : MonoBehaviour
 
     public void UseCheckPointPosition(Vector3 position)
     {
+        audioPlayerComponent.spawnSourceAudio?.Play();
+
         checkPointPosition = position;
+    }
+
+    public void EnableShadow ()
+    {
+        shadowProperties.activateShadow = true;
+        shadow.transform.Find("body").gameObject.SetActive(true);
+    }
+
+    public void DisableShadow ()
+    {
+        if (controlledObject == shadow)
+            Transpose();
+
+        shadowProperties.activateShadow = false;
+        shadow.transform.Find("body").gameObject.SetActive(false);
+        ResetShadow();
+    }
+
+    public void SwitchShadowState()
+    {
+        shadowProperties.activateShadow = !shadowProperties.activateShadow;
+
+        if (shadowProperties.activateShadow)
+        {
+            EnableShadow();
+        }
+        else
+        {
+            DisableShadow();
+        }
     }
 }

@@ -382,8 +382,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.18216662, g: 0.5471698, b: 0, a: 1}
+    m_SelectedColor: {r: 1, g: 0.66638047, b: 0.13679248, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -677,8 +677,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.18216662, g: 0.5471698, b: 0, a: 1}
+    m_SelectedColor: {r: 1, g: 0.66638047, b: 0.13679248, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -749,6 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 926cdbc1293d52249bc0e38b7ff34cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene: InGameMenu
 --- !u!1 &1642582925
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +842,7 @@ GameObject:
   - component: {fileID: 1821357134}
   - component: {fileID: 1821357133}
   - component: {fileID: 1821357136}
+  - component: {fileID: 1821357137}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -890,8 +892,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.18216662, g: 0.5471698, b: 0, a: 1}
+    m_SelectedColor: {r: 1, g: 0.66638047, b: 0.13679248, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -959,10 +961,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1821357131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75643dde26272ed4d9ec6f0e7baff054, type: 3}
+  m_Script: {fileID: 11500000, guid: 7dea2dca2215630439c3f360585b1e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   addedSceneName: Settings
+--- !u!114 &1821357137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821357131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926cdbc1293d52249bc0e38b7ff34cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: InGameMenu
 --- !u!1 &1931041721
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,12 +1008,12 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: LeftHorizontal
-  m_VerticalAxis: LeftVertical
+  m_HorizontalAxis: Debug Horizontal
+  m_VerticalAxis: Debug Vertical
   m_SubmitButton: A
   m_CancelButton: B
-  m_InputActionsPerSecond: 0
-  m_RepeatDelay: 0
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
 --- !u!114 &1931041723
 MonoBehaviour:
@@ -1012,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1642566793}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1931041724

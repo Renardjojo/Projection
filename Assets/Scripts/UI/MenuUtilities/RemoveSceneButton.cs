@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UnityEngine.UI.Button))]
 public class RemoveSceneButton : MonoBehaviour
 {
+    [SerializeField]
+    private string scene = "InGameMenu";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +17,8 @@ public class RemoveSceneButton : MonoBehaviour
         btn.onClick.AddListener(TaskOnClick);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void TaskOnClick()
     {
-        SceneManager.UnloadSceneAsync("InGameMenu");
+        SceneManager.UnloadSceneAsync(scene);
     }
 }

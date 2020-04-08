@@ -46,15 +46,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c4146d3be9bf5647ada4bb1e35c8a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 2544343660083584310}
-  shadow: {fileID: 2544343661859167753}
-  maxShadowDistance: 15
+  maxShadowDistance: 16
   timeManagerScript: {fileID: 0}
   OnIsDead:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  audioPlayerComponent:
+    walkingFootSound: {fileID: 0}
+    walkSoundDelay: 1
+    walkSoundOffSet: 0
+    spawnSound: {fileID: 0}
+    deadSound: {fileID: 0}
+    jumpStartSound: {fileID: 0}
+    transposeBodyToShadowSound: {fileID: 0}
+    transposeShadowToBodySound: {fileID: 0}
+    interractSound: {fileID: 0}
+  bodyProperties:
+    movementProperties:
+      airControlRatio: 0.9
+      wallFriction: 0.5
+      speedScale: 5
+      jumpSpeed: 12
+      gravity: 20
+      canWallJump: 1
+      wallDetectionRange: 1
+      wallJumpNormalSpeed: 5
+      wallJumpUpSpeed: 12
+      fallAcceleration: 0.3
+      avoidSlowMotion: 0
+  shadowProperties:
+    movementProperties:
+      airControlRatio: 0.9
+      wallFriction: 0.5
+      speedScale: 3
+      jumpSpeed: 8
+      gravity: 20
+      canWallJump: 0
+      wallDetectionRange: 1
+      wallJumpNormalSpeed: 5
+      wallJumpUpSpeed: 5
+      fallAcceleration: 0.1
+      avoidSlowMotion: 1
+    activateShadowOnStart: 1
 --- !u!114 &1668286794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,23 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcd927a56cd0a6478f264f1a2e444e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airControlRatio: 0.9
-  wallFriction: 0.5
-  speedScale: 5
-  jumpSpeed: 12
-  gravity: 20
-  canWallJump: 1
-  wallDetectionRange: 1
-  wallJumpNormalSpeed: 5
-  wallJumpUpSpeed: 11
-  avoidSlowMotion: 0
-  timeManager: {fileID: 0}
-  fallAcceleration: 0.1
-  controller: {fileID: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  inputSpeed: 0
-  defaultZValue: 0
-  isOnWall: 0
 --- !u!136 &5008251940947576427
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -230,23 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbcd927a56cd0a6478f264f1a2e444e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airControlRatio: 1
-  wallFriction: 0.5
-  speedScale: 10
-  jumpSpeed: 24
-  gravity: 20
-  canWallJump: 0
-  wallDetectionRange: 1
-  wallJumpNormalSpeed: 10
-  wallJumpUpSpeed: 24
-  avoidSlowMotion: 0
-  timeManager: {fileID: 0}
-  fallAcceleration: 0.1
-  controller: {fileID: 0}
-  moveDirection: {x: 0, y: 0, z: 0}
-  inputSpeed: 0
-  defaultZValue: 0
-  isOnWall: 0
 --- !u!136 &1770871754
 CapsuleCollider:
   m_ObjectHideFlags: 0
