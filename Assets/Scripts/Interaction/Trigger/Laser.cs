@@ -93,6 +93,7 @@ public class Laser : MonoBehaviour
 
     public void setActivate(bool flag)
     {
+        Debug.Log(flag ? "Activated" : "Deactivated");
         isActivate = flag;
         laserRay.SetActive(isActivate);
     }

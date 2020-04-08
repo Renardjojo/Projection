@@ -20,12 +20,12 @@ public class Button : Trigger
         // wait for activationLength seconds
         yield return new WaitForSeconds(activationLength);
 
-        Disable();
+        IsOn = false;
     }
 
     public void Press()
     {
-        Enable();
+        IsOn = true;
 
         if (releaseCoroutine != null)
             StopCoroutine(releaseCoroutine);
