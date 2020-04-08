@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AddScene : MonoBehaviour
+public class AddSceneButton : MonoBehaviour
 {
     [SerializeField]
     private string addedSceneName = "InGameMenu";
 
     private Scene scene;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        if (Input.GetButtonDown("Menu"))
-        {
-            Load();
-        }
+        UnityEngine.UI.Button btn = GetComponent<UnityEngine.UI.Button>();
+        btn.onClick.AddListener(Load);
     }
 
     void Load()

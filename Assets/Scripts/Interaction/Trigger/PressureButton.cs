@@ -45,19 +45,6 @@ public class PressureButton : Trigger
         return false;
     }
 
-    private bool IsInputCollision(Collision collision)
-    {
-        foreach (String tag in tagsWithCollisionEnabled)
-        {
-            if (collision.gameObject.CompareTag(tag))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     internal void OnTriggerEnter(Collider collision)
     {
         if (IsInputCollision(collision))
@@ -91,7 +78,7 @@ public class PressureButton : Trigger
 
     private void UpdateCountdown()
     {
-        timeElapsed += Time.deltaTime;
+        timeElapsed += Time.deltaTime / Time.timeScale;
         if (timeElapsed >= automaticTimer)
         {
             timeElapsed = 0f;
