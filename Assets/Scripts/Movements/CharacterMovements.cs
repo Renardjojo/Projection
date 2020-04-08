@@ -164,7 +164,10 @@ public class CharacterMovements : MonoBehaviour
     public void MoveX(float f)
     {
         if (disableInputs)
+        {
+            inputSpeed = 0f;
             return;
+        }
 
         inputSpeed = f;
         if (.1f < f)
