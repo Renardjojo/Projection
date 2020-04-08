@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterMovementProperties
 {
-    [SerializeField] public float airControlRatio = .05f;
+    [SerializeField] public float airControlRatio = .9f;
     [Range(0f, 1f)]
     [SerializeField] public float wallFriction = .5f;
     [SerializeField] public float speedScale = 3f;
