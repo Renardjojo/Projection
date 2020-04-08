@@ -40,7 +40,7 @@ public class Triggered : MonoBehaviour
             bool And = true;
             foreach (Trigger trig in andTriggerList.andList)
             {
-                And &= trig.isOn;
+                And &= trig.IsOn;
             }
             Or |= And;
         }
@@ -60,7 +60,7 @@ public class Triggered : MonoBehaviour
             bool And = true;
             foreach (Trigger trig in andTriggerList.andList)
             {
-                And &= trig.isOn;
+                And &= trig.IsOn;
             }
             Or |= And;
         }
