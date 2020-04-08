@@ -28388,7 +28388,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-85510
+  m_Name: pb_Mesh206246
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -44370,6 +44370,31 @@ PrefabInstance:
       propertyPath: shadowProperties.movementProperties.jumpSpeed
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.movementProperties.wallJumpUpSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.movementProperties.wallJumpUpSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.movementProperties.canWallJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.movementProperties.wallFriction
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: maxShadowDistance
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2544343660083584311, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
       propertyPath: m_LocalRotation.y
@@ -53900,7 +53925,7 @@ PrefabInstance:
     - target: {fileID: 5926456578921156113, guid: 2a23371f519285e4f952f7d0c563b621,
         type: 3}
       propertyPath: automaticTimer
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5926456578921156112, guid: 2a23371f519285e4f952f7d0c563b621,
         type: 3}
@@ -66986,7 +67011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810583682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -174, y: -1, z: 1.5200005}
+  m_LocalPosition: {x: -174, y: -1, z: 1.77}
   m_LocalScale: {x: 1, y: 1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 2004332038}
