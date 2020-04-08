@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
     private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
 
+    private bool activateShadow = true;
+
     private void Awake()
     {
         initializeSoundComponent();
@@ -290,7 +292,7 @@ public class PlayerController : MonoBehaviour
     {
         // Can't tranpose if currently controlling player 
         // when the shadow is in the light screen, since it disappears.
-        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && !shadow.active))
+        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && (!shadow.active || !activateShadow)))
         {
             return;
         }
@@ -424,5 +426,31 @@ public class PlayerController : MonoBehaviour
         audioPlayerComponent.spawnSourceAudio?.Play();
 
         checkPointPosition = position;
+    }
+
+    public void EnableShadow ()
+    {
+        activateShadow = true;
+        shadow.transform.Find("body").gameObject.SetActive(true);
+    }
+
+    public void DisableShadow ()
+    {
+        activateShadow = false;
+        shadow.transform.Find("body").gameObject.SetActive(false);
+    }
+
+    public void SwitchShadowState()
+    {
+        activateShadow = !activateShadow;
+
+        if (activateShadow)
+        {
+            EnableShadow();
+        }
+        else
+        {
+            DisableShadow();
+        }
     }
 }
