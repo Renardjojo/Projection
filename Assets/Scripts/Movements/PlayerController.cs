@@ -245,6 +245,10 @@ public class PlayerController : MonoBehaviour
                 shadow.transform.position += bodyToShadow;
                 shadowMoveScript.moveDirection = Vector3.zero;
             }
+
+            // Remove the player velocity on x to prevent the player from moving/sliding (if on ground)
+            // If the player is not on ground, it should have disableInputs = false;
+            bodyMoveScript.MoveX(0f); 
         }
 
         if (resetFlag)
@@ -343,7 +347,8 @@ public class PlayerController : MonoBehaviour
             // To set shadow's velocity to players's
             shadowMoveScript.CopyFrom(bodyMoveScript);
 
-            bodyMoveScript.MoveX(0f);
+            //bodyMoveScript.MoveX(0f);
+            bodyMoveScript.disableInputs = true;
             onTransposed?.Invoke();
             AddComponenetToControlShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
