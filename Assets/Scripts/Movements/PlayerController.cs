@@ -459,6 +459,9 @@ public class PlayerController : MonoBehaviour
 
     public void DisableShadow ()
     {
+        if (controlledObject == shadow)
+            Transpose();
+
         shadowProperties.activateShadow = false;
         shadow.transform.Find("body").gameObject.SetActive(false);
         ResetShadow();
