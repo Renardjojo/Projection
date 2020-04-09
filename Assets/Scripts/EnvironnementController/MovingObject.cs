@@ -76,6 +76,11 @@ public class MovingObject : MonoBehaviour
         isMoving = value;
     }
 
+    public void ToggleMovementState()
+    {
+        isMoving = !isMoving;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawLine(useCurrentPoisitionToStart ? transform.position : startPosition, endPosition);
