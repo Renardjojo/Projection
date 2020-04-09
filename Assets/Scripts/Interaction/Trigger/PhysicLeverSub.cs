@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PhysicLeverSub : MonoBehaviour
 {
-    [SerializeField]
-    private PhysicLever lever = null;
-    [SerializeField]
-    private GameObject rotatedObject = null;
+    [SerializeField] private PhysicLever lever = null;
+    [SerializeField] private GameObject baseSphere = null;
+    [SerializeField, Range(1f, 80f)] private float leverAngle = 20f;
+    [SerializeField, Range(0f, 5f)] private float leverLerpWait = 2f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,9 +17,24 @@ public class PhysicLeverSub : MonoBehaviour
         {
             float dot = 2 * Vector3.Dot(charController.velocity, transform.right /* normal of the lever direction, so normal of transform.up, and since we are in 2D, it is the transform.up = transform.right */);
 
-            rotatedObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, dot < 0 ? 15 : -15));
+            //transform.localRotation = Quaternion.Euler(new Vector3(0, 0, dot < 0 ? 15 : -15));
 
             lever.IsOn = (dot < 0);
+            StopAllCoroutines();
+            StartCoroutine(RotateLever(lever.IsOn));
+        }
+    }
+
+    IEnumerator RotateLever(bool movement)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < leverLerpWait)
+        {
+            baseSphere.transform.localRotation = Quaternion.Lerp(baseSphere.transform.rotation, Quaternion.Euler(new Vector3(0, 0, movement ? leverAngle : -leverAngle)), (elapsedTime / leverLerpWait));
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
     }
 }

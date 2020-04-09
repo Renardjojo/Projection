@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5960123690339301846}
-  - component: {fileID: 8937825781502511603}
+  - component: {fileID: 5919737924726040106}
   m_Layer: 0
   m_Name: LeverPhysic
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8937825781502511603
+--- !u!114 &5919737924726040106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b80d13596247d469f572315a0c9a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOn: 0
+  activationDelay: 0
+  deactivationDelay: 0
 --- !u!1 &4807414080115255131
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +323,7 @@ GameObject:
   - component: {fileID: 4117387595449137545}
   - component: {fileID: 6010648340515055973}
   - component: {fileID: 4612989837460773993}
-  - component: {fileID: 1663154517}
+  - component: {fileID: 3708454291357548444}
   m_Layer: 0
   m_Name: handle
   m_TagString: Untagged
@@ -401,7 +404,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1663154517
+--- !u!114 &3708454291357548444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,5 +416,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162a7a0013fdab54398909c70453f6db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever: {fileID: 8937825781502511603}
-  rotatedObject: {fileID: 6261612213980983176}
+  lever: {fileID: 5919737924726040106}
+  baseSphere: {fileID: 6261612213980983176}
