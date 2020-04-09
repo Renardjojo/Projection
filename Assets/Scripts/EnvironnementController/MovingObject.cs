@@ -9,6 +9,7 @@ public class MovingObject : MonoBehaviour
     [SerializeField] bool       useCurrentPoisitionToStart = true;
     [SerializeField] Vector3    endPosition;
     [SerializeField] bool       moveTowardEndPosition = true; //false if move toward sart position
+    [SerializeField] bool       backAndForth = true;
 
     [SerializeField]
     [Range(0f, 1f)]
@@ -35,20 +36,34 @@ public class MovingObject : MonoBehaviour
         {
             if (moveTowardEndPosition)
             {
-                step += moveSpeed * Time.deltaTime;
+                step += moveSpeed * Time.deltaTime * Time.timeScale;
                 if (step > 1f)
                 {
-                    step = 1f;
-                    moveTowardEndPosition = false;
+                    if (backAndForth)
+                    {
+                        step = 1f;
+                        moveTowardEndPosition = false;
+                    }
+                    else
+                    {
+                        isMoving = false;
+                    }
                 }
             }
             else
             {
-                step -= moveSpeed * Time.deltaTime;
+                step -= moveSpeed * Time.deltaTime * Time.timeScale;
                 if (step < 0f)
                 {
-                    step = 0f;
-                    moveTowardEndPosition = true;
+                    if (backAndForth)
+                    {
+                        step = 0f;
+                        moveTowardEndPosition = true;
+                    }
+                    else
+                    {
+                        isMoving = false;
+                    }
                 }
             }
 
@@ -59,6 +74,11 @@ public class MovingObject : MonoBehaviour
     public void EnableMovement(bool value)
     {
         isMoving = value;
+    }
+
+    public void ToggleMovementState()
+    {
+        isMoving = !isMoving;
     }
 
     private void OnDrawGizmosSelected()

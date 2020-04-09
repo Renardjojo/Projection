@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5353b28a4d9ffc440a95d799062ebaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPlayer: {fileID: 2544343660083584310}
-  shadowPlayer: {fileID: 2544343661859167753}
+  mainEntity: {fileID: 2544343660083584310}
+  secondEntity: {fileID: 2544343661859167753}
   cinemachineVirtualCamera: {fileID: 0}
   distanceOffSet: 5
 --- !u!1 &2544343660083584310
@@ -339,6 +339,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 301a3a76866a51b4a85065c83da99b6e, type: 2}
+    - target: {fileID: -6057140222963153312, guid: ff30f32637ca90942b21504c181efc2d,
+        type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5286657273311963485, guid: ff30f32637ca90942b21504c181efc2d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

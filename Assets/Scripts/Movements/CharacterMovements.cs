@@ -17,6 +17,7 @@ public class CharacterMovementProperties
     [SerializeField] public float wallJumpNormalSpeed = 5f;
     [SerializeField] public float wallJumpUpSpeed = 5f;
     [SerializeField] public float fallAcceleration = .1f;
+    [SerializeField] public float airControlRatioWhenWallJump = 100f;
 
     [SerializeField] public bool avoidSlowMotion = false;
 
@@ -99,7 +100,11 @@ public class CharacterMovements : MonoBehaviour
             // We are grounded, so recalculate
             // move direction directly from axes
 
-            moveDirection = new Vector3(inputSpeed, 0.0f, 0f);
+            if (!disableInputs)
+                moveDirection = new Vector3(inputSpeed, 0f, 0f);
+            else
+                moveDirection = Vector3.zero;
+
             moveDirection *= properties.speedScale;
 
             // Try to jump
@@ -124,6 +129,10 @@ public class CharacterMovements : MonoBehaviour
             // Move in mid-air with input
             if (!disableInputs)
                 moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
+            else
+            {
+                moveDirection.x += inputSpeed * properties.speedScale * properties.airControlRatio / properties.airControlRatioWhenWallJump;
+            }
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
@@ -163,13 +172,11 @@ public class CharacterMovements : MonoBehaviour
     /* ==== Character's abilities ==== */
     public void MoveX(float f)
     {
-        if (disableInputs)
-        {
-            inputSpeed = 0f;
-            return;
-        }
-
         inputSpeed = f;
+
+        if (disableInputs)
+            return;
+
         if (.1f < f)
         {
             transform.rotation = Quaternion.Euler(0f, 90f, 0f);

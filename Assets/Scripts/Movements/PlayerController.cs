@@ -2,7 +2,6 @@
 using UnityEngine.Events;
 using System;
 
-
 [System.Serializable]
 class AudioPlayerComponent
 {
@@ -37,7 +36,7 @@ class AudioPlayerComponent
 
 /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
 [System.Serializable]
-public class ShadowProperties
+class ShadowProperties
 {
     public CharacterMovementProperties  movementProperties      = new CharacterMovementProperties(true);
     internal bool                       activateShadow          = true;
@@ -65,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject                      shadow = null;
     /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE. TODO : INTEGERT ZOOOMCAMERASCRIPT ON THIS SCRIPT*/
-    public ShadowProperties shadowProperties;
+    [SerializeField] private ShadowProperties shadowProperties;
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
 
@@ -82,9 +81,13 @@ public class PlayerController : MonoBehaviour
     private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
 
+    ZoomCameraBetweenEntities               zoomCameraBetweenEntitiesScript;
+
     private void Awake()
     {
         initializeSoundComponent();
+
+        zoomCameraBetweenEntitiesScript = GetComponent<ZoomCameraBetweenEntities>();
     }
 
     void initializeSoundComponent()
@@ -181,16 +184,21 @@ public class PlayerController : MonoBehaviour
         /*Initialize body movement script*/
         bodyMoveScript.properties = bodyProperties.movementProperties;
 
+        /*Find the animator component*/
+        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
+
         if (bodyProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
             bodyProperties.movementProperties.scaleMotion(multiplicator);
+            bodyAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
-
-        /*Find the animator component*/
-        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
+        else
+        {
+            bodyAnimator.updateMode = AnimatorUpdateMode.Normal;
+        }
     }
     
     private void InitializeShadow()
@@ -203,16 +211,23 @@ public class PlayerController : MonoBehaviour
         /*Initialize shadow movement script*/
         shadowMoveScript.properties = shadowProperties.movementProperties;
 
+        /*Find the animator component*/
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
+
+
         if (shadowProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
             shadowProperties.movementProperties.scaleMotion(multiplicator);
+            shadowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+        else
+        {
+            shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
         }
 
-        /*Find the animator component*/
-        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
 
         if (shadowProperties.activateShadowOnStart)
         {
@@ -245,11 +260,15 @@ public class PlayerController : MonoBehaviour
                 shadow.transform.position += bodyToShadow;
                 shadowMoveScript.moveDirection = Vector3.zero;
             }
+
+            // Remove the player velocity on x to prevent the player from moving/sliding (if on ground)
+            // If the player is not on ground, it should have disableInputs = false;
+            bodyMoveScript.MoveX(0f); 
         }
 
         if (resetFlag)
         {
-            shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, defaultZOffset);
+            shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z + defaultZOffset);
             shadowOffset = new Vector3(0f, 0f, defaultZOffset);
             resetFlag = false;
         }
@@ -343,7 +362,8 @@ public class PlayerController : MonoBehaviour
             // To set shadow's velocity to players's
             shadowMoveScript.CopyFrom(bodyMoveScript);
 
-            bodyMoveScript.MoveX(0f);
+            //bodyMoveScript.MoveX(0f);
+            bodyMoveScript.disableInputs = true;
             onTransposed?.Invoke();
             AddComponenetToControlShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
@@ -455,6 +475,7 @@ public class PlayerController : MonoBehaviour
     {
         shadowProperties.activateShadow = true;
         shadow.transform.Find("body").gameObject.SetActive(true);
+        zoomCameraBetweenEntitiesScript ?.EnableCameraZoom();
     }
 
     public void DisableShadow ()
@@ -465,6 +486,8 @@ public class PlayerController : MonoBehaviour
         shadowProperties.activateShadow = false;
         shadow.transform.Find("body").gameObject.SetActive(false);
         ResetShadow();
+
+        zoomCameraBetweenEntitiesScript ?.DisableCameraZoom();
     }
 
     public void SwitchShadowState()
@@ -479,5 +502,7 @@ public class PlayerController : MonoBehaviour
         {
             DisableShadow();
         }
+
+        zoomCameraBetweenEntitiesScript ?.SwitchCameraZoomState();
     }
 }

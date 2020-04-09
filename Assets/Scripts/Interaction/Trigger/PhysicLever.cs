@@ -27,9 +27,4 @@ public class PhysicLever : Trigger
         hingeJoint.spring = js;
     }
     */
-
-    void Update()
-    {
-
-    }
 }
