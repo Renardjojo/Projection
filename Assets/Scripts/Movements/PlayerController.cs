@@ -211,6 +211,11 @@ public class PlayerController : MonoBehaviour
         /*Initialize shadow movement script*/
         shadowMoveScript.properties = shadowProperties.movementProperties;
 
+        /*Find the animator component*/
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
+
+
         if (shadowProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
@@ -223,9 +228,6 @@ public class PlayerController : MonoBehaviour
             shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
         }
 
-        /*Find the animator component*/
-        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
 
         if (shadowProperties.activateShadowOnStart)
         {
