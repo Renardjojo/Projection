@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 507214606}
   - component: {fileID: 507214605}
   - component: {fileID: 507214604}
+  - component: {fileID: 507214607}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -915,6 +916,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507214602}
   m_CullTransparentMesh: 0
+--- !u!114 &507214607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507214602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f834101be62df45abeb82a4366874b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &514686523
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +940,7 @@ GameObject:
   - component: {fileID: 514686527}
   - component: {fileID: 514686526}
   - component: {fileID: 514686525}
+  - component: {fileID: 514686528}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -1053,6 +1067,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514686523}
   m_CullTransparentMesh: 0
+--- !u!114 &514686528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514686523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08cdbc3356dd08141a235ca980e44181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &542290772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,6 +1371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 699571015}
   - component: {fileID: 699571016}
+  - component: {fileID: 699571017}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1426,6 +1453,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &699571017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699571014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41dc1163153024346bdb0d000718900c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &725570143
 GameObject:
   m_ObjectHideFlags: 0
