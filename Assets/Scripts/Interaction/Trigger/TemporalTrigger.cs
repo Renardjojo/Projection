@@ -24,7 +24,7 @@ public class TemporalTrigger : Trigger
         {
             if (timeElapsed >= OnDuration)
             {
-                timeElapsed -= OnDuration;
+                timeElapsed = 0f;
                 IsOn = false;
             }
         }
@@ -33,7 +33,7 @@ public class TemporalTrigger : Trigger
         {
             if (timeElapsed >= OffDuration)
             {
-                timeElapsed -= OffDuration;
+                timeElapsed = 0f;
                 IsOn = true;
             }
         }

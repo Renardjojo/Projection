@@ -46,6 +46,17 @@ public abstract class Trigger : MonoBehaviour
         timeElapsed = 0f;
     }
 
+    private void Start()
+    {
+        if(isOn)
+        {
+            OnTriggered?.Invoke();
+        }
+        else
+        {
+            OnUntriggered?.Invoke();
+        }
+    }
 
     protected void Update()
     {
