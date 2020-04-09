@@ -2,7 +2,6 @@
 using UnityEngine.Events;
 using System;
 
-
 [System.Serializable]
 class AudioPlayerComponent
 {
@@ -185,16 +184,21 @@ public class PlayerController : MonoBehaviour
         /*Initialize body movement script*/
         bodyMoveScript.properties = bodyProperties.movementProperties;
 
+        /*Find the animator component*/
+        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
+
         if (bodyProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
             bodyProperties.movementProperties.scaleMotion(multiplicator);
+            bodyAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
-
-        /*Find the animator component*/
-        bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
+        else
+        {
+            bodyAnimator.updateMode = AnimatorUpdateMode.Normal;
+        }
     }
     
     private void InitializeShadow()
@@ -207,16 +211,23 @@ public class PlayerController : MonoBehaviour
         /*Initialize shadow movement script*/
         shadowMoveScript.properties = shadowProperties.movementProperties;
 
+        /*Find the animator component*/
+        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
+
+
         if (shadowProperties.movementProperties.avoidSlowMotion)
         {
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
             shadowProperties.movementProperties.scaleMotion(multiplicator);
+            shadowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+        else
+        {
+            shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
         }
 
-        /*Find the animator component*/
-        shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
-        GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
 
         if (shadowProperties.activateShadowOnStart)
         {
