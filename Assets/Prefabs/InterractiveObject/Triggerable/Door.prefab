@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6246549372081256219}
   - component: {fileID: 6276103455325330899}
   - component: {fileID: 6380881319591388890}
-  - component: {fileID: 5844932720744745867}
+  - component: {fileID: 8735265043828331813}
   m_Layer: 0
   m_Name: Door
   m_TagString: ground
@@ -109,7 +109,7 @@ MonoBehaviour:
   OnActivatedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5844932720744745867}
+      - m_Target: {fileID: 0}
         m_MethodName: Open
         m_Mode: 1
         m_Arguments:
@@ -125,7 +125,7 @@ MonoBehaviour:
   OnDisabledEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5844932720744745867}
+      - m_Target: {fileID: 0}
         m_MethodName: Close
         m_Mode: 1
         m_Arguments:
@@ -138,7 +138,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &5844932720744745867
+--- !u!114 &8735265043828331813
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,6 +147,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2303652447490896759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b375f401667ed428eb4788d5f0a2b3, type: 3}
+  m_Script: {fileID: 11500000, guid: b2e9b7f188d1e6f4f80f7c4c20e2b4ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0, z: 0}
+  useCurrentPoisitionToStart: 1
+  endPosition: {x: 0, y: 0, z: 1}
+  moveTowardEndPosition: 1
+  backAndForth: 0
+  moveSpeed: 0.5
+  isMoving: 0
