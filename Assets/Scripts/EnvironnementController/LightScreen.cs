@@ -6,6 +6,9 @@ public class LightScreen : MonoBehaviour
 {
     private PlayerController pc;
 
+    [SerializeField] private GameObject plan1;
+    [SerializeField] private GameObject plan2;
+
     private void Awake()
     {
         pc = GameObject.FindObjectOfType<PlayerController>();
@@ -23,11 +26,22 @@ public class LightScreen : MonoBehaviour
         
     }
 
-    public void OnActivation()
+    void OnActivation()
     {
         if (pc.IsShadowCollidingWithLightScreen())
         {
             pc.ResetShadow();
+        }
+    }
+
+    public void SetActivation(bool flag)
+    {
+        plan1.SetActive(flag);
+        plan2.SetActive(flag);
+
+        if (flag)
+        {
+            OnActivation();
         }
     }
 }

@@ -36,7 +36,7 @@ public class MovingObject : MonoBehaviour
         {
             if (moveTowardEndPosition)
             {
-                step += moveSpeed * Time.deltaTime;
+                step += moveSpeed * Time.deltaTime * Time.timeScale;
                 if (step > 1f)
                 {
                     if (backAndForth)
@@ -52,7 +52,7 @@ public class MovingObject : MonoBehaviour
             }
             else
             {
-                step -= moveSpeed * Time.deltaTime;
+                step -= moveSpeed * Time.deltaTime * Time.timeScale;
                 if (step < 0f)
                 {
                     if (backAndForth)
