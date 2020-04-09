@@ -21,7 +21,7 @@ public class ScreenLightSub : MonoBehaviour
         PlayerController player = other.GetComponentInParent<PlayerController>();
         if (player != null)
         {
-            player.Kill();
+            player.ResetShadow();
         }
     }
 }
