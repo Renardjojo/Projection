@@ -7,7 +7,6 @@ public enum KeyboardCommand : byte
 {
     MoveLeft = 0,
     MoveRight,
-    Run,
     Jump,
     Transpose,
     Interact,
@@ -74,8 +73,13 @@ public class InputManager : MonoBehaviour
     {
         if (!controlledPlayer)
         {
-            useKeyboard = useGamepad = false;
-            Debug.Log("No player was passed");
+            controlledPlayer = GameObject.FindObjectOfType<PlayerController>();
+
+            if (!controlledPlayer)
+            {
+                useKeyboard = useGamepad = false;
+                Debug.Log("No player was passed");
+            }
         }
 
         if (useKeyboard)
@@ -193,30 +197,12 @@ public class InputManager : MonoBehaviour
         switch (command)
         {
             case KeyboardCommand.MoveLeft:
-                if (keyboardControls.ContainsKey(KeyboardCommand.Run)
-                    && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
-                {
-                    // controlledPlayer.Sprint(-1f);
-                    controlledPlayer.MoveX(-2f);
-                }
-
-                else
-                    controlledPlayer.MoveX(-1f);
-
+                controlledPlayer.MoveX(-1f);
                 hasMoved = true;
                 break;
 
             case KeyboardCommand.MoveRight:
-                if (keyboardControls.ContainsKey(KeyboardCommand.Run)
-                    && Input.GetKey(keyboardControls[KeyboardCommand.Run]))
-                {
-                    // controlledPlayer.Sprint(1f);
-                    controlledPlayer.MoveX(2f);
-                }
-
-                else
-                    controlledPlayer.MoveX(1f);
-
+                controlledPlayer.MoveX(1f);
                 hasMoved = true;
                 break;
 
@@ -230,7 +216,6 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.ResetShadow:
-                controlledPlayer.ResetShadow();
                 break;
         }
     }
