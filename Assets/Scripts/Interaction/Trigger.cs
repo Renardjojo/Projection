@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System;
 
-public abstract class Trigger : MonoBehaviour
+public abstract class Trigger : SoundPlayer
 {
     /* ==== User accessible members ==== */
-    [Tooltip("Initial state")]
-    [SerializeField] private bool isOn;
+    [Header("Initial state")]
+    [SerializeField]
+    private bool isOn;
 
     [Header("Delays")]
     [Tooltip("Time after which this will react, once this is set \"on\"(seconds)")]
@@ -16,22 +17,8 @@ public abstract class Trigger : MonoBehaviour
     [Range(0f, 10f), SerializeField]
     protected float deactivationDelay = 0f;
 
-    [Tooltip("Audio played when the trigger is switched on")]
-    [SerializeField]
-    private AudioClip switchedOnSound;
-
-    [Tooltip("Audio played when the trigger is switched off")]
-    [SerializeField]
-    private AudioClip switchedOffSound;
-
-    [Tooltip("Whether to use the \"Switched On\" sound for both state changes")]
-    [SerializeField]
-    private bool useSameSound;
-
 
     /* ==== Private data members ==== */
-    private AudioSource switchedOnAudio;
-    private AudioSource switchedOffAudio;
     protected float timeElapsed;
     private bool applyDelay;
 
@@ -109,7 +96,7 @@ public abstract class Trigger : MonoBehaviour
     }
 
 
-    private void PlaySound()
+    protected override void PlaySound()
     {
         if (isOn || useSameSound)
             switchedOnAudio?.Play();
