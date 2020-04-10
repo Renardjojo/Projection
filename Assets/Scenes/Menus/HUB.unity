@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 44503666}
   - component: {fileID: 44503665}
   - component: {fileID: 44503668}
+  - component: {fileID: 44503669}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -661,9 +662,9 @@ MonoBehaviour:
   OnActivatedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 44503667}
-        m_MethodName: set_intensity
-        m_Mode: 4
+      - m_Target: {fileID: 44503669}
+        m_MethodName: SetLightActivate
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -703,23 +704,23 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnDisabledEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 44503667}
-        m_MethodName: set_intensity
-        m_Mode: 4
+      - m_Target: {fileID: 44503669}
+        m_MethodName: SetLightActivate
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 6
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 875999924}
         m_MethodName: EnableShadow
@@ -756,6 +757,47 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &44503669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44503663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e79647a1c52d75e429afa409fa627611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightToControl: {fileID: 44503667}
+  lightControlState: 0
+  lightOffIntensity: 0
+  lightOnIntensity: 6
+  lightCurveFallOut:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  fallOutDelay: 2
 --- !u!43 &69105080
 Mesh:
   m_ObjectHideFlags: 0
@@ -12052,13 +12094,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646765006}
-  m_LocalRotation: {x: 0.17425, y: -0, z: -0, w: 0.98470145}
-  m_LocalPosition: {x: -30.04, y: 5.98, z: -1.71}
+  m_LocalRotation: {x: -0.015551483, y: 0.46424127, z: -0.07548633, w: 0.8823492}
+  m_LocalPosition: {x: -34, y: 2.09, z: 2.451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 20.070002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.444, y: 55.320004, z: -8.499001}
 --- !u!43 &661772891
 Mesh:
   m_ObjectHideFlags: 0
@@ -27039,17 +27081,9 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 01000000
-  m_SelectedEdges:
-  - a: 4
-    b: 5
-  - a: 6
-    b: 4
-  - a: 5
-    b: 7
-  - a: 7
-    b: 6
-  m_SelectedVertices: 04000000050000000600000007000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!23 &1328550499
 MeshRenderer:
   m_ObjectHideFlags: 0
