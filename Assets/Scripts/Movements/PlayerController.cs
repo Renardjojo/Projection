@@ -334,7 +334,9 @@ public class PlayerController : MonoBehaviour
     {
         // Can't tranpose if currently controlling player 
         // when the shadow is in the light screen, since it disappears.
-        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
+        if (!isTransposed && IsShadowCollidingWithLightScreen() ||
+            (isTransposed && !body.active) ||
+            (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
         {
             return;
         }
@@ -343,17 +345,9 @@ public class PlayerController : MonoBehaviour
         {
             DropBox();
         }
-
-        if (controlledObject == body)
-        {
-            controlledObject = shadow;
-        }
-        else
-        {
-            controlledObject = body;
-        }
-
-        isTransposed = !isTransposed;
+        
+        controlledObject    = (controlledObject == body) ? shadow : body;
+        isTransposed        = !isTransposed;
 
         if (isTransposed)
         {
@@ -378,6 +372,9 @@ public class PlayerController : MonoBehaviour
             onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
+
+            bodyAnimator.Play("Idle", -1, 0f);
+            shadowAnimator.Play("Idle", -1, 0f);
         }
     }
 
