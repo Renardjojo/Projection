@@ -12,17 +12,6 @@ public class QualityControls : MonoBehaviour
 
     void ChangeInputs(int value)
     {
-        switch (value)
-        {
-            case 0:
-                // Low
-                break;
-            case 1:
-                // Medium
-                break;
-            case 2:
-                // High
-                break;
-        }
+        QualitySettings.SetQualityLevel(value * 2, true);
     }
 }
