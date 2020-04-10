@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2148007058543281083}
   - component: {fileID: 8897063764707871413}
-  - component: {fileID: 4350712577075237962}
-  - component: {fileID: 3012906848412764275}
+  - component: {fileID: 3331160888462672721}
   m_Layer: 0
   m_Name: LevelDoor
   m_TagString: Untagged
@@ -52,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f348bdbb508f4fc46ae70b46ae2fed08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4350712577075237962
+--- !u!114 &3331160888462672721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +60,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2148007058543281084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5c60b373046a3f4ca4ed1783b810b81, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c7c546df59fb4448baa6e3a41efb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isOn: 0
@@ -70,24 +69,8 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
-  interactionRadius: 1.5
-  activationLength: 1
---- !u!114 &3012906848412764275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2148007058543281084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orTriggerList:
-  - andList:
-    - {fileID: 4350712577075237962}
-  OnActivatedEvent:
+  interactionRadius: 2
+  OnPressEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8897063764707871413}
@@ -98,14 +81,9 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  OnDisabledEvent:
-    m_PersistentCalls:
-      m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &2148007059282685826
@@ -1323,17 +1301,9 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 05000000
-  m_SelectedEdges:
-  - a: 20
-    b: 21
-  - a: 22
-    b: 20
-  - a: 21
-    b: 23
-  - a: 23
-    b: 22
-  m_SelectedVertices: 14000000150000001600000017000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!64 &2148007060361986993
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
     public event Action                     onTransposed;
     public event Action                     onUntransposed;
     public event Action<Vector3>            OnInteractButton;
+    public event Action<Vector3>            OnInteractLevelDoor;
 
     private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
@@ -172,6 +173,13 @@ public class PlayerController : MonoBehaviour
         {
             OnInteractButton += button.TryToPress;
         }
+
+        LevelDoorController[] components3 = GameObject.FindObjectsOfType<LevelDoorController>();
+        foreach (LevelDoorController door in components3)
+        {
+            OnInteractLevelDoor += door.TryToPress;
+        }
+        
 
         RemoveComponentToUnconstrolShadow();
 
@@ -427,11 +435,15 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        //if (controlledObject == shadow)
+        if (controlledObject == shadow)
         {
             audioPlayerComponent.interractSourceAudio?.Play();
             OnInteractButton(controlledObject.transform.position);
             InteractWithBoxes();
+        }
+        else
+        {
+            OnInteractLevelDoor(controlledObject.transform.position);
         }
     }
 
