@@ -75,7 +75,19 @@ MonoBehaviour:
       wallJumpNormalSpeed: 5
       wallJumpUpSpeed: 12
       fallAcceleration: 0.3
+      airControlRatioWhenWallJump: 100
       avoidSlowMotion: 0
+    eventComponent:
+      OnIsDead:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      OnTransposed:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
   shadowProperties:
     movementProperties:
       airControlRatio: 0.9
@@ -88,8 +100,20 @@ MonoBehaviour:
       wallJumpNormalSpeed: 5
       wallJumpUpSpeed: 5
       fallAcceleration: 0.1
+      airControlRatioWhenWallJump: 100
       avoidSlowMotion: 1
     activateShadowOnStart: 1
+    eventComponent:
+      OnIsDead:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      OnTransposed:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
 --- !u!114 &1668286794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2544343660083584310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8916007, z: -2.53}
+  m_LocalPosition: {x: 0, y: 0, z: -2.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9156471349960609081}
@@ -211,7 +235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2544343661859167753}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.8916007, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5477241046965127715}
