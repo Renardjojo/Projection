@@ -34,6 +34,15 @@ class AudioPlayerComponent
 
 }
 
+
+[System.Serializable]
+class EventComponent
+{
+    public UnityEvent OnIsDead      = null;
+    public UnityEvent OnTransposed  = null;
+}
+
+
 /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
 [System.Serializable]
 class ShadowProperties
@@ -41,12 +50,14 @@ class ShadowProperties
     public CharacterMovementProperties  movementProperties      = new CharacterMovementProperties(true);
     internal bool                       activateShadow          = true;
     public bool                         activateShadowOnStart   = true;
+    public EventComponent               eventComponent;
 }
 
 [System.Serializable]
 class BodyProperties
 {
     public CharacterMovementProperties movementProperties = new CharacterMovementProperties(false);
+    public EventComponent eventComponent;
 }
 
 public class PlayerController : MonoBehaviour
@@ -334,7 +345,9 @@ public class PlayerController : MonoBehaviour
     {
         // Can't tranpose if currently controlling player 
         // when the shadow is in the light screen, since it disappears.
-        if (!isTransposed && IsShadowCollidingWithLightScreen() || (isTransposed && !body.active) || (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
+        if (!isTransposed && IsShadowCollidingWithLightScreen() ||
+            (isTransposed && !body.active) ||
+            (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
         {
             return;
         }
@@ -343,17 +356,9 @@ public class PlayerController : MonoBehaviour
         {
             DropBox();
         }
-
-        if (controlledObject == body)
-        {
-            controlledObject = shadow;
-        }
-        else
-        {
-            controlledObject = body;
-        }
-
-        isTransposed = !isTransposed;
+        
+        controlledObject    = (controlledObject == body) ? shadow : body;
+        isTransposed        = !isTransposed;
 
         if (isTransposed)
         {
@@ -367,6 +372,8 @@ public class PlayerController : MonoBehaviour
             onTransposed?.Invoke();
             AddComponenetToControlShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
+
+            shadowProperties.eventComponent.OnTransposed?.Invoke();
         }
 
         else
@@ -378,6 +385,11 @@ public class PlayerController : MonoBehaviour
             onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
+
+            bodyAnimator.Play("Idle", -1, 0f);
+            shadowAnimator.Play("Idle", -1, 0f);
+
+            bodyProperties.eventComponent.OnTransposed?.Invoke();
         }
     }
 
