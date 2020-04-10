@@ -30,7 +30,7 @@ public class InputsControl : MonoBehaviour
                 break;
             case 3:
                 // Default : gamepad + qwerty
-                PlayerPrefs.SetInt("inputs", 0b0000_0000_0000_0110);
+                PlayerPrefs.SetInt("inputs", 0b0000_0000_0000_0111);
                 break;
         }
     }
