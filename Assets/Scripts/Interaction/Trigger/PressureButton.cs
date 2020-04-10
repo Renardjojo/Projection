@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 using System;
 
 public class PressureButton : Trigger
 {
+    [Header("Triggering parameters")]
+    [Tooltip("Objects with the following tags will be able to use this button")]
     [SerializeField] private String[] tagsWithCollisionEnabled = new string[] { "BodyPlayer" };
+    [Tooltip("Number of objects which must be on the button to trigger it")]
     [SerializeField] private uint necessaryCollidingObjects = 1;
+
     private uint currentCollidingObjects = 0;
 
     //  Returns false if we should ignore the collision.

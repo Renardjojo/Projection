@@ -16,6 +16,27 @@ public abstract class Trigger : MonoBehaviour
     [Range(0f, 10f), SerializeField]
     protected float deactivationDelay = 0f;
 
+    [Tooltip("Audio played when the trigger is switched on")]
+    [SerializeField]
+    private AudioClip switchedOnSound;
+
+    [Tooltip("Audio played when the trigger is switched off")]
+    [SerializeField]
+    private AudioClip switchedOffSound;
+
+    [Tooltip("Whether to use the \"Switched On\" sound for both state changes")]
+    [SerializeField]
+    private bool useSameSound;
+
+
+    /* ==== Private data members ==== */
+    private AudioSource switchedOnAudio;
+    private AudioSource switchedOffAudio;
+    protected float timeElapsed;
+    private bool applyDelay;
+
+
+    /* ==== Property ==== */
     public bool IsOn
     {
         get
@@ -23,15 +44,14 @@ public abstract class Trigger : MonoBehaviour
 
         set
         {
-            isOn = value;
-            applyDelay = true;
+            if (isOn != value)
+            {
+                isOn        = value;
+                applyDelay  = true;
+                PlaySound();
+            }
         }
     }
-
-
-    /* ==== Protected data members ==== */
-    private bool applyDelay;
-    protected float timeElapsed;
 
 
     /* ==== Actions ==== */
@@ -42,21 +62,29 @@ public abstract class Trigger : MonoBehaviour
     /* ==== Methods ==== */
     private void Awake()
     {
-        applyDelay = false;
         timeElapsed = 0f;
+        applyDelay = false;
+
+        if (switchedOnSound)
+        {
+            switchedOnAudio = gameObject.AddComponent<AudioSource>();
+            switchedOnAudio.clip = switchedOnSound;
+        }
+
+        if (!useSameSound && switchedOffSound)
+        {
+            switchedOffAudio = gameObject.AddComponent<AudioSource>();
+            switchedOffAudio.clip = switchedOffSound;
+        }
     }
+
 
     private void Start()
     {
-        if(isOn)
-        {
-            OnTriggered?.Invoke();
-        }
-        else
-        {
-            OnUntriggered?.Invoke();
-        }
+        if (isOn)   OnTriggered?.Invoke();
+        else        OnUntriggered?.Invoke();
     }
+
 
     protected void Update()
     {
@@ -78,6 +106,15 @@ public abstract class Trigger : MonoBehaviour
                 applyDelay = false;
             }
         }
+    }
+
+
+    private void PlaySound()
+    {
+        if (isOn || useSameSound)
+            switchedOnAudio?.Play();
+        else 
+            switchedOffAudio?.Play();
     }
 
 

@@ -34,6 +34,15 @@ class AudioPlayerComponent
 
 }
 
+
+[System.Serializable]
+class EventComponent
+{
+    public UnityEvent OnIsDead      = null;
+    public UnityEvent OnTransposed  = null;
+}
+
+
 /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
 [System.Serializable]
 class ShadowProperties
@@ -41,12 +50,14 @@ class ShadowProperties
     public CharacterMovementProperties  movementProperties      = new CharacterMovementProperties(true);
     internal bool                       activateShadow          = true;
     public bool                         activateShadowOnStart   = true;
+    public EventComponent               eventComponent;
 }
 
 [System.Serializable]
 class BodyProperties
 {
     public CharacterMovementProperties movementProperties = new CharacterMovementProperties(false);
+    public EventComponent eventComponent;
 }
 
 public class PlayerController : MonoBehaviour
@@ -361,6 +372,8 @@ public class PlayerController : MonoBehaviour
             onTransposed?.Invoke();
             AddComponenetToControlShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
+
+            shadowProperties.eventComponent.OnTransposed?.Invoke();
         }
 
         else
@@ -375,6 +388,8 @@ public class PlayerController : MonoBehaviour
 
             bodyAnimator.Play("Idle", -1, 0f);
             shadowAnimator.Play("Idle", -1, 0f);
+
+            bodyProperties.eventComponent.OnTransposed?.Invoke();
         }
     }
 
