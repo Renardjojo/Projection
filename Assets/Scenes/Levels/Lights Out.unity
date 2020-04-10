@@ -1275,6 +1275,9 @@ MonoBehaviour:
   isOn: 1
   activationDelay: 2
   deactivationDelay: 2
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   timeOffSet: 6
   OnDuration: 2
   OffDuration: 2
@@ -1410,7 +1413,7 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
-  displayLightIntensity: 5
+  displayLightIntensity: 0
   displayAreaLightEmissiveMesh: 0
   areaLightCookie: {fileID: 0}
   areaLightShadowCone: 120
@@ -1438,7 +1441,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6856,6 +6859,9 @@ MonoBehaviour:
   isOn: 1
   activationDelay: 2
   deactivationDelay: 2
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   timeOffSet: 6
   OnDuration: 2
   OffDuration: 2
@@ -13138,17 +13144,17 @@ PrefabInstance:
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 162.34116
+      value: 158.6013
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.6929212
+      value: -3.4338112
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 49.802048
+      value: 49.599476
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
@@ -13651,34 +13657,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &352659163 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 477984564608047949, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
-    type: 3}
-  m_PrefabInstance: {fileID: 352659160}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &352659164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352659163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b822dbfe6c4f040ba3b09e1fceb2d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlledPlayer: {fileID: 875999924}
-  CMCam: {fileID: 352659161}
-  useKeyboard: 1
-  useGamepad: 1
-  keyboardControls:
-    m_keys: 00010203040506
-    m_values: 71000000640000003001000020000000660000006500000072000000
-  gamepadControls:
-    m_keys: 0001020304
-    m_values: 0700050206
 --- !u!1 &358136793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2544343660083584310, guid: 018ad8c3af6012e4797ef77b357ee034,
@@ -32001,6 +31979,9 @@ MonoBehaviour:
   isOn: 0
   activationDelay: 2
   deactivationDelay: 2
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   timeOffSet: 0
   OnDuration: 2
   OffDuration: 3
@@ -42849,6 +42830,9 @@ MonoBehaviour:
   isOn: 0
   activationDelay: 2
   deactivationDelay: 2
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   timeOffSet: 0
   OnDuration: 2
   OffDuration: 3
@@ -46626,7 +46610,7 @@ PrefabInstance:
     - target: {fileID: 2544343660075631850, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.43
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2544343660075631850, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
@@ -46925,6 +46909,9 @@ MonoBehaviour:
   isOn: 0
   activationDelay: 2
   deactivationDelay: 2
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   timeOffSet: 0
   OnDuration: 2
   OffDuration: 3
@@ -50113,6 +50100,9 @@ MonoBehaviour:
   isOn: 1
   activationDelay: 2
   deactivationDelay: 2
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   timeOffSet: 6
   OnDuration: 2
   OffDuration: 2
@@ -53146,17 +53136,17 @@ PrefabInstance:
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.736801
+      value: -1.0030546
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.103954
+      value: 5.363064
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.6510773
+      value: -5.853648
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
