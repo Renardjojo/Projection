@@ -427,12 +427,11 @@ public class PlayerController : MonoBehaviour
 
     public void Interact()
     {
-        if (controlledObject == shadow)
+        //if (controlledObject == shadow)
         {
             audioPlayerComponent.interractSourceAudio?.Play();
             OnInteractButton(controlledObject.transform.position);
             InteractWithBoxes();
-            //OnInteractCube(controlledObject);
         }
     }
 
