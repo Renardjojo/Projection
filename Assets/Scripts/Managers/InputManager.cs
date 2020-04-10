@@ -59,6 +59,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private bool                   useGamepad          = true;
     [SerializeField] private CommandKeyCodeDict     keyboardControls    = null;
     [SerializeField] private CommandGamepadCodeDict gamepadControls     = null;
+    [SerializeField] private bool                   useInspectorValues  = false;
     
     private Dictionary<KeyCode, KeyboardCommand>    keyboardInputs      = null;
     private Dictionary<string, GamepadCommand>      gamepadButtonInputs = null;
@@ -68,6 +69,13 @@ public class InputManager : MonoBehaviour
     private bool hasMoved;
     private bool hasTransposed;
     private bool hasInteracted;
+
+    // const masks
+    private static int isGamepadMask = 0b0000_0000_0000_0100;
+    private static int isKeyboardMask = 0b0000_0000_0000_0010;
+    private static int isAzertyKeyboardMask = 0b0000_0000_0000_0001;
+
+    private int currentInputOptionsData = 0b0000_0000_0000_0000; // gamepad
 
     private void Awake()
     {
@@ -82,37 +90,123 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (useKeyboard)
-        {
-            // Initialize keyboard inputs
-            keyboardInputs = new Dictionary<KeyCode, KeyboardCommand>();
-
-            foreach (KeyValuePair<KeyboardCommand, KeyCode> kpv in keyboardControls)
-                keyboardInputs.Add(kpv.Value, kpv.Key);
-        }
-
+        // Loads inspector values
         if (useGamepad)
         {
-            // Initialize gamepad inputs
-            gamepadButtonInputs = new Dictionary<string, GamepadCommand>();
-            gamepadAxisInputs   = new Dictionary<string, GamepadCommand>();
+            currentInputOptionsData |= isGamepadMask;
+        }
+        if (useKeyboard)
+        {
+            currentInputOptionsData |= isKeyboardMask;
+        }
 
-            foreach (KeyValuePair<GamepadCommand, GamepadCode> kvp in gamepadControls)
+        LoadInputs(currentInputOptionsData);
+    }
+
+    public void LoadInputs(int inputOptionsData)
+    {
+        useGamepad  =  (inputOptionsData & isGamepadMask) != 0;
+        useKeyboard = (inputOptionsData & isKeyboardMask) != 0;
+
+        if (useGamepad) 
+        {
+            CommandGamepadCodeDict lgamepadControls = new CommandGamepadCodeDict();
+            lgamepadControls.Add(GamepadCommand.Move, GamepadCode.LeftHorizontal);
+            lgamepadControls.Add(GamepadCommand.Jump, GamepadCode.A);
+            lgamepadControls.Add(GamepadCommand.Transpose, GamepadCode.LeftBumper);
+            lgamepadControls.Add(GamepadCommand.Interact, GamepadCode.X);
+            lgamepadControls.Add(GamepadCommand.ResetShadow, GamepadCode.RightBumper);
+
+            //// Initialize gamepad inputs
+            var inputs = ConvertToGamepadInputs(lgamepadControls);
+            gamepadButtonInputs = inputs.gamepadButtonInputs;
+            gamepadAxisInputs = inputs.gamepadAxisInputs;
+        }
+        
+        if (useKeyboard) // 
+        {
+            CommandKeyCodeDict lkeyboardControls = new CommandKeyCodeDict();
+            lkeyboardControls.Add(KeyboardCommand.Interact, KeyCode.E);
+            lkeyboardControls.Add(KeyboardCommand.ResetShadow, KeyCode.R);
+            lkeyboardControls.Add(KeyboardCommand.Transpose, KeyCode.F);
+            lkeyboardControls.Add(KeyboardCommand.Jump, KeyCode.Space);
+
+            // We already know the input is a keyboard, so we don't have to compute inputOptionsData & isKeyboardMask
+            if ((inputOptionsData & isAzertyKeyboardMask) != 0 /* hex */) // is azerty
             {
-                // Button
-                if (kvp.Value < GamepadCode.LeftHorizontal)
-                    gamepadButtonInputs.Add(kvp.Value.ToString("g"), kvp.Key);
+                lkeyboardControls.Add(KeyboardCommand.MoveLeft, KeyCode.Q);
+                lkeyboardControls.Add(KeyboardCommand.MoveRight, KeyCode.D);
 
-                // Axis
-                else
-                    gamepadAxisInputs.Add(kvp.Value.ToString("g"), kvp.Key);
+                // set azerty
+                keyboardInputs = ConvertToKeyboardInputs(lkeyboardControls);
+            }
+            else // is qwerty
+            {
+                lkeyboardControls.Add(KeyboardCommand.MoveLeft, KeyCode.A);
+                lkeyboardControls.Add(KeyboardCommand.MoveRight, KeyCode.D);
+
+                // set qwerty
+                keyboardInputs = ConvertToKeyboardInputs(lkeyboardControls);
             }
         }
     }
 
+    public static (Dictionary<string, GamepadCommand> gamepadButtonInputs,           
+                   Dictionary<string, GamepadCommand> gamepadAxisInputs)    // Return a tuple
+                   ConvertToGamepadInputs(CommandGamepadCodeDict lGamepadControls)
+    {
+        Dictionary<string, GamepadCommand> lGamepadButtonInputs = new Dictionary<string, GamepadCommand>();
+        Dictionary<string, GamepadCommand> lGamepadAxisInputs = new Dictionary<string, GamepadCommand>();
+
+        foreach (KeyValuePair<GamepadCommand, GamepadCode> kvp in lGamepadControls)
+        {
+            // Button
+            if (kvp.Value < GamepadCode.LeftHorizontal)
+            {
+                lGamepadButtonInputs.Add(kvp.Value.ToString("g"), kvp.Key);
+            }
+
+            // Axis
+            else
+                lGamepadAxisInputs.Add(kvp.Value.ToString("g"), kvp.Key);
+        }
+
+        return (lGamepadButtonInputs, lGamepadAxisInputs);
+    }
+
+    public static Dictionary<KeyCode, KeyboardCommand> ConvertToKeyboardInputs(CommandKeyCodeDict lKeyboardControls)
+    {
+        Dictionary<KeyCode, KeyboardCommand> lKeyboardInputs = new Dictionary<KeyCode, KeyboardCommand>();
+        foreach (KeyValuePair<KeyboardCommand, KeyCode> kpv in lKeyboardControls)
+            lKeyboardInputs.Add(kpv.Value, kpv.Key);
+
+        return lKeyboardInputs;
+    }
 
     private void Update()
     {
+        if (!useInspectorValues)
+        {
+            int tempInputOptions = PlayerPrefs.GetInt("inputs");
+            if (tempInputOptions != currentInputOptionsData)
+            {
+                if (useKeyboard) // is keyboard
+                {
+                    keyboardControls.Clear();
+                    keyboardInputs.Clear();
+                }
+                if (useGamepad) // is keyboard
+                {
+                    gamepadControls.Clear();
+                    gamepadButtonInputs.Clear();
+                    gamepadAxisInputs.Clear();
+                }
+
+                currentInputOptionsData = tempInputOptions;
+                LoadInputs(currentInputOptionsData);
+            }
+        }
+
         hasMoved = hasTransposed = hasInteracted = false;
 
         if (useKeyboard)
@@ -186,8 +280,6 @@ public class InputManager : MonoBehaviour
                 controlledPlayer.ResetShadow();
                 break;
         }
-
-        
     }
 
 

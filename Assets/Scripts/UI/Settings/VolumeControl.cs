@@ -9,7 +9,6 @@ public class VolumeControl : MonoBehaviour
     void Awake()
     {
         GetComponent<UnityEngine.UI.Slider>().onValueChanged.AddListener(ChangeVolume);
-        Debug.Log("Hello !");
     }
 
     void ChangeVolume(float value)
