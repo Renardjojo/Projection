@@ -2027,7 +2027,7 @@ PrefabInstance:
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.581151
+      value: -27.71885
       objectReference: {fileID: 0}
     - target: {fileID: 1069956384379651057, guid: 9c3e6ca446ba54f4e8981d1275e9961a,
         type: 3}
@@ -2862,6 +2862,18 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &720098081 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3701831395072581953, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1536025045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &735857600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5631906228330554646, guid: cdf34600e1360f04698200fe40d6af10,
@@ -5077,7 +5089,7 @@ PrefabInstance:
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.581151
+      value: -27.71885
       objectReference: {fileID: 0}
     - target: {fileID: 1386692158611732179, guid: b9d4e9ebeec6dbd4c892e389cba69fe3,
         type: 3}
@@ -8455,7 +8467,7 @@ PrefabInstance:
     - target: {fileID: 2544343660075631850, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.89
+      value: -24.41
       objectReference: {fileID: 0}
     - target: {fileID: 2544343660075631850, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
@@ -8515,12 +8527,12 @@ PrefabInstance:
     - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
       propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
       propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
         type: 3}
@@ -8667,6 +8679,68 @@ PrefabInstance:
       propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: IsTransposed
       objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 720098081}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_profile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Rendering.VolumeProfile, Unity.RenderPipelines.Core.Runtime
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: bodyProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 1bc20d316a7426a4d9a2b5bd0f823ddc,
+        type: 2}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 720098081}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_profile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Rendering.VolumeProfile, Unity.RenderPipelines.Core.Runtime
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544343660075631851, guid: 018ad8c3af6012e4797ef77b357ee034,
+        type: 3}
+      propertyPath: shadowProperties.eventComponent.OnTransposed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: d9e524a5bb7681b4197062d409995c91,
+        type: 2}
     - target: {fileID: 1668286794, guid: 018ad8c3af6012e4797ef77b357ee034, type: 3}
       propertyPath: cinemachineVirtualCamera
       value: 
