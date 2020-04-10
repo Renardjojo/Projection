@@ -87,20 +87,38 @@ public class InputManager : MonoBehaviour
             {
                 useKeyboard = useGamepad = false;
                 Debug.Log("No player was passed");
+            }                                                
+        }
+
+        if (useInspectorValues)
+        {
+            if (useGamepad)
+            {
+                //// Initialize gamepad inputs
+                var inputs = ConvertToGamepadInputs(gamepadControls);
+                gamepadButtonInputs = inputs.gamepadButtonInputs;
+                gamepadAxisInputs = inputs.gamepadAxisInputs;
+            }
+            if (useKeyboard)
+            {
+                keyboardInputs = ConvertToKeyboardInputs(keyboardControls);
             }
         }
 
-        // Loads inspector values
-        if (useGamepad)
+        else
         {
-            currentInputOptionsData |= isGamepadMask;
-        }
-        if (useKeyboard)
-        {
-            currentInputOptionsData |= isKeyboardMask;
-        }
+            // Loads inspector values
+            if (useGamepad)
+            {
+                currentInputOptionsData |= isGamepadMask;
+            }
+            if (useKeyboard)
+            {
+                currentInputOptionsData |= isKeyboardMask;
+            }
 
-        LoadInputs(currentInputOptionsData);
+            LoadInputs(currentInputOptionsData);
+        }
     }
 
     public void LoadInputs(int inputOptionsData)
