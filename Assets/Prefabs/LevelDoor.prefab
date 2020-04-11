@@ -63,12 +63,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c7c546df59fb4448baa6e3a41efb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOn: 0
-  activationDelay: 0
-  deactivationDelay: 0
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  isOn: 0
+  activationDelay: 0
+  deactivationDelay: 0
   interactionRadius: 2
   OnPressEvent:
     m_PersistentCalls:
@@ -81,11 +81,12 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: MainMenu
+          m_StringArgument: HUB
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  isEndDoor: 0
 --- !u!1 &2148007059282685826
 GameObject:
   m_ObjectHideFlags: 0
