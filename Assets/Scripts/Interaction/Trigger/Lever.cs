@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Lever : Trigger
 {
+    [SerializeField] private GameObject baseSphere = null;
+    [SerializeField, Range(1f, 80f)] private float leverAngle = 20f;
+    [SerializeField, Range(0f, 5f)] private float leverLerpWait = 2f;
+
     [SerializeField] private float interactionRadius = 2f;
 
     private float interactionRadius2;
@@ -18,6 +22,8 @@ public class Lever : Trigger
         if ((playerPos - transform.position).sqrMagnitude < interactionRadius2)
         {
             Toggle();
+            StopAllCoroutines();
+            StartCoroutine(RotateLever(IsOn));
         }
     }
 
@@ -30,5 +36,18 @@ public class Lever : Trigger
     public void OnDrawGizmosSelected()
     {
         
+    }
+
+    IEnumerator RotateLever(bool movement)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < leverLerpWait)
+        {
+            baseSphere.transform.localRotation = Quaternion.Lerp(baseSphere.transform.rotation, Quaternion.Euler(new Vector3(0, 0, movement ? leverAngle : -leverAngle)), (elapsedTime / leverLerpWait));
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 }
