@@ -47,7 +47,7 @@ CapsuleCollider:
   m_Radius: 0.2
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9150267088770193653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,11 +185,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chell (1)
       objectReference: {fileID: 0}
-    - target: {fileID: -5975033157549033438, guid: ee540e45b21cd094aaf3c0488a3e5c76,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -259,6 +254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.025999999
+      objectReference: {fileID: 0}
+    - target: {fileID: -5975033157549033438, guid: ee540e45b21cd094aaf3c0488a3e5c76,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2416733968201007103, guid: ee540e45b21cd094aaf3c0488a3e5c76,
         type: 3}
