@@ -213,7 +213,7 @@ public class CharacterMovements : MonoBehaviour
         ray.direction   = transform.forward;
             
         RaycastHit hitInfo; 
-        if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange))
+        if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && hitInfo.collider.tag == "Wall")
         {
             disableInputs   = false;
             isOnWall        = true;
