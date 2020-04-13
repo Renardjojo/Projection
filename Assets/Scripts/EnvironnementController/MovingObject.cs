@@ -90,5 +90,6 @@ public class MovingObject : MonoBehaviour
     {
         transform.position = startPosition;
         step = 0f;
+        moveTowardEndPosition = true;
     }
 }
