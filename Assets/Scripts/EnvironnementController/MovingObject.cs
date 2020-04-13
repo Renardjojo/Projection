@@ -86,10 +86,11 @@ public class MovingObject : MonoBehaviour
         Gizmos.DrawLine(useCurrentPoisitionToStart ? transform.position : startPosition, endPosition);
     }
 
-    public void ResetPosition()
+    public void ResetPosition(bool _isMoving)
     {
         transform.position = startPosition;
         step = 0f;
         moveTowardEndPosition = true;
+        isMoving = _isMoving;
     }
 }
