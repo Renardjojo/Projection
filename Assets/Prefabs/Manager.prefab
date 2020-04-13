@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 8762677050326248344}
   - component: {fileID: 2729321391797541466}
   - component: {fileID: 623617851}
+  - component: {fileID: 5686472174058919878}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -115,6 +116,51 @@ MonoBehaviour:
     m_keys: 0001020304
     m_values: 0700050206
   useInspectorValues: 0
+--- !u!114 &5686472174058919878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477984564608047949}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b3eca683a95544fa0a272703e8f842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputManager: {fileID: 623617851}
+  currentInputOptionsID: 0
+  presets:
+  - keyboardControls:
+      m_keys: 000102030405
+      m_values: 710000006400000020000000660000006500000072000000
+    gamepadControls:
+      m_keys: 0001020304
+      m_values: 0700050206
+  - keyboardControls:
+      m_keys: 000102030405
+      m_values: 610000006400000020000000660000006500000072000000
+    gamepadControls:
+      m_keys: 0001020304
+      m_values: 0700050206
+  - keyboardControls:
+      m_keys: 
+      m_values: 
+    gamepadControls:
+      m_keys: 0001020304
+      m_values: 0700050206
+  - keyboardControls:
+      m_keys: 000102030405
+      m_values: 710000006400000020000000660000006500000072000000
+    gamepadControls:
+      m_keys: 
+      m_values: 
+  - keyboardControls:
+      m_keys: 000102030405
+      m_values: 610000006400000020000000660000006500000072000000
+    gamepadControls:
+      m_keys: 
+      m_values: 
 --- !u!1 &3048744697992939749
 GameObject:
   m_ObjectHideFlags: 0
