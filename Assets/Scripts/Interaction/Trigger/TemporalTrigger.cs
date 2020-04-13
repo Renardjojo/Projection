@@ -11,29 +11,32 @@ public class TemporalTrigger : Trigger
     [Tooltip("Time this object will remain off (s)")]
     [SerializeField, Range(0f, 60f)] private float OffDuration = 1f;
 
+    private float timeElapsedForTempoTrigger = 0f;
+
     private void Start()
     {
-        timeElapsed = timeOffSet % (IsOn ? OnDuration : OffDuration);
+        timeElapsedForTempoTrigger = timeOffSet % (OffDuration + OnDuration);
+        timeElapsedForTempoTrigger %= (IsOn ? OffDuration : OnDuration);
     }
 
     private void Update()
     {
-        timeElapsed += Time.deltaTime * Time.timeScale;
+        timeElapsedForTempoTrigger += Time.deltaTime * Time.timeScale;
 
         if (IsOn)
         {
-            if (timeElapsed >= OnDuration)
+            if (timeElapsedForTempoTrigger >= OffDuration)
             {
-                timeElapsed = 0f;
+                timeElapsedForTempoTrigger -= OffDuration;
                 IsOn = false;
             }
         }
 
         else
         {
-            if (timeElapsed >= OffDuration)
+            if (timeElapsedForTempoTrigger >= OnDuration)
             {
-                timeElapsed = 0f;
+                timeElapsedForTempoTrigger -= OnDuration;
                 IsOn = true;
             }
         }
