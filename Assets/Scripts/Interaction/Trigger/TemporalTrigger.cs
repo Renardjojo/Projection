@@ -16,7 +16,6 @@ public class TemporalTrigger : Trigger
     private void Start()
     {
         timeElapsedForTempoTrigger = timeOffSet % (OffDuration + OnDuration);
-        timeElapsedForTempoTrigger %= (IsOn ? OffDuration : OnDuration);
     }
 
     private void Update()
@@ -25,18 +24,18 @@ public class TemporalTrigger : Trigger
 
         if (IsOn)
         {
-            if (timeElapsedForTempoTrigger >= OffDuration)
+            if (timeElapsedForTempoTrigger >= OnDuration)
             {
-                timeElapsedForTempoTrigger -= OffDuration;
+                timeElapsedForTempoTrigger -= OnDuration;
                 IsOn = false;
             }
         }
 
         else
         {
-            if (timeElapsedForTempoTrigger >= OnDuration)
+            if (timeElapsedForTempoTrigger >= OffDuration)
             {
-                timeElapsedForTempoTrigger -= OnDuration;
+                timeElapsedForTempoTrigger -= OffDuration;
                 IsOn = true;
             }
         }
