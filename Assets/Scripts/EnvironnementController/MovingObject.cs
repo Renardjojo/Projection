@@ -89,5 +89,6 @@ public class MovingObject : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = startPosition;
+        step = 0f;
     }
 }
