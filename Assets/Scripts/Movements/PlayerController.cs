@@ -443,7 +443,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            OnInteractLevelDoor(controlledObject.transform.position);
+            OnInteractLevelDoor?.Invoke(controlledObject.transform.position);
         }
     }
 
