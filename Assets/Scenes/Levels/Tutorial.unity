@@ -3015,7 +3015,7 @@ PrefabInstance:
     - target: {fileID: 2271701577773859628, guid: ac462870c4979ab4eacfa95943a34a4e,
         type: 3}
       propertyPath: moveSpeed
-      value: 0.182
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2271701577773859628, guid: ac462870c4979ab4eacfa95943a34a4e,
         type: 3}
@@ -16354,6 +16354,11 @@ PrefabInstance:
       propertyPath: endPosition.y
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8735265043828331813, guid: cdf34600e1360f04698200fe40d6af10,
+        type: 3}
+      propertyPath: endPosition.z
+      value: -0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 6380881319591388890, guid: cdf34600e1360f04698200fe40d6af10,
         type: 3}
       propertyPath: orTriggerList.Array.size
@@ -16411,12 +16416,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 797fd340d4516a4488b84816b72efa72, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf34600e1360f04698200fe40d6af10, type: 3}
---- !u!1 &1492062412 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5402325492357000204, guid: af182ddbc581b0245a93166965bd79d0,
-    type: 3}
-  m_PrefabInstance: {fileID: 242890834}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1502078258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16442,7 +16441,7 @@ PrefabInstance:
     - target: {fileID: 1037235656955503747, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.499
+      value: -0.645
       objectReference: {fileID: 0}
     - target: {fileID: 1037235656955503747, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
@@ -16488,7 +16487,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bodyPlayer
       value: 
-      objectReference: {fileID: 1492062412}
+      objectReference: {fileID: 1795912139}
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
       propertyPath: playerControllerScript
