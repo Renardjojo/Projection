@@ -346,6 +346,9 @@ public class PlayerController : MonoBehaviour
     
     internal bool IsShadowCollidingWithLightScreen()
     {
+        if (shadow == null)
+            return false;
+
         return Physics.Raycast(shadow.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask("ScreenLight"));
     }
 
