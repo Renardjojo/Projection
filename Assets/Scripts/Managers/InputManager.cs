@@ -258,7 +258,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case KeyboardCommand.Jump:
-                controlledPlayer.Jump(false);
+                //controlledPlayer.Jump(false);
                 break;
 
             case KeyboardCommand.Transpose:
@@ -335,7 +335,7 @@ public class InputManager : MonoBehaviour
                 break;
 
             case GamepadCommand.Jump:
-                controlledPlayer.Jump(false);
+                //controlledPlayer.Jump(false);
                 break;
 
             case GamepadCommand.Transpose:
