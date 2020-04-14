@@ -144,16 +144,26 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4855250686136369999, guid: f66ad53629d8d0b48bce8cc4f81a0341,
+    - target: {fileID: 4855250686136370003, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
-      propertyPath: interactionRadius
-      value: 1.75
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: 4855250686136370003, guid: f66ad53629d8d0b48bce8cc4f81a0341,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4855250686136369997, guid: f66ad53629d8d0b48bce8cc4f81a0341,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
+    - target: {fileID: 4855250686136369999, guid: f66ad53629d8d0b48bce8cc4f81a0341,
+        type: 3}
+      propertyPath: interactionRadius
+      value: 1.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f66ad53629d8d0b48bce8cc4f81a0341, type: 3}
 --- !u!1 &7775566458826866656 stripped
