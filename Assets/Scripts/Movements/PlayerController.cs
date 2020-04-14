@@ -326,8 +326,7 @@ public class PlayerController : MonoBehaviour
             audioPlayerComponent.jumpStartSourceAudio?.Play();
 
             shadowMoveScript.JumpFlag = bJump;
-            shadowMoveScript.WallJumpFlag = bJump;
-
+            shadowMoveScript.TryToWallJump();
             //shadowAnimator.SetTrigger("Jump");
         }
         else
@@ -335,7 +334,9 @@ public class PlayerController : MonoBehaviour
             audioPlayerComponent.jumpStartSourceAudio?.Play();
 
             bodyMoveScript.JumpFlag = bJump;
-            bodyMoveScript.WallJumpFlag = bJump;
+            //bodyMoveScript.WallJumpFlag = bJump;
+
+            bodyMoveScript.TryToWallJump();
 
             //bodyAnimator.SetTrigger("Jump");
             //shadowAnimator.SetTrigger("Jump");

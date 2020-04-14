@@ -12,12 +12,14 @@ public class CharacterMovementProperties
     [SerializeField] public float jumpSpeed = 8f;
     [SerializeField] public float gravity = 20f;
 
-    [SerializeField] public bool canWallJump = true;
+    [SerializeField] public bool  canWallJump = true;
+    [SerializeField] public float inputWallJumpSaveDelay = 0.2f;
     [SerializeField] public float wallDetectionRange = 1f;
     [SerializeField] public float wallJumpNormalSpeed = 5f;
     [SerializeField] public float wallJumpUpSpeed = 5f;
     [SerializeField] public float fallAcceleration = .1f;
     [SerializeField] public float airControlRatioWhenWallJump = 100f;
+
 
     [SerializeField] public bool avoidSlowMotion = false;
 
@@ -42,6 +44,7 @@ public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
     internal CharacterMovementProperties properties;
+    Coroutine wallJumpDelayCorroutine;
 
     //public float   AirControlRatio     {get; set;}
     //public float   WallFriction        {get; set;}
@@ -252,5 +255,35 @@ public class CharacterMovements : MonoBehaviour
             else if (velocity.x < -.1f)
                 transform.rotation = Quaternion.Euler(0f, -90f, 0f);
         }
+    }
+
+    public void TryToWallJump()
+    {
+        if (wallJumpDelayCorroutine != null)
+            StopCoroutine(wallJumpDelayCorroutine);
+        
+        wallJumpDelayCorroutine = StartCoroutine(AllowWallJumpDelayCorroutine());
+    }
+
+    IEnumerator AllowWallJumpDelayCorroutine()
+    {
+        float timer = 0f;
+        WallJumpFlag = true;
+
+        while (timer < properties.inputWallJumpSaveDelay && WallJumpFlag)
+        {
+            timer += Time.deltaTime;
+            Debug.Log(timer);
+            yield return null;
+        }
+
+        
+        WallJumpFlag = false;
+    }
+
+    bool test (ref float a)
+    {
+        a += Time.deltaTime;
+        return (a < properties.inputWallJumpSaveDelay) && WallJumpFlag;
     }
 }
