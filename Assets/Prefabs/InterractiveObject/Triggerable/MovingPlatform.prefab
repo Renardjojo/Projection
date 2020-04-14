@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2271701577773859628}
   m_Layer: 0
   m_Name: MovingPlatform
-  m_TagString: Untagged
+  m_TagString: MovingWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,5 +154,6 @@ MonoBehaviour:
   useCurrentPoisitionToStart: 1
   endPosition: {x: 0, y: 0, z: 0}
   moveTowardEndPosition: 1
+  backAndForth: 1
   moveSpeed: 0.5
   isMoving: 1

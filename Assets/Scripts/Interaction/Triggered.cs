@@ -25,8 +25,11 @@ public class Triggered : MonoBehaviour
             {
                 GameDebug.AssertInTransform(trig != null, gameObject.transform, "Trigger should not be null");
 
-                trig.OnTriggered += TryToActivate;
-                trig.OnUntriggered += TryToDeactivate;
+                if (trig)
+                {
+                    trig.OnTriggered    += TryToActivate;
+                    trig.OnUntriggered  += TryToDeactivate;
+                }
             }
         }
     }
