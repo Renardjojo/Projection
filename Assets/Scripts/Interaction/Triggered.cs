@@ -23,8 +23,6 @@ public class Triggered : MonoBehaviour
         {
             foreach (Trigger trig in andTriggerList.andList)
             {
-                GameDebug.AssertInTransform(trig != null, gameObject.transform, "Trigger should not be null");
-
                 if (trig)
                 {
                     trig.OnTriggered    += TryToActivate;
@@ -40,18 +38,21 @@ public class Triggered : MonoBehaviour
 
         foreach (AndTriggerList andTriggerList in orTriggerList)
         {
+            if (andTriggerList.andList.Count == 0)
+                continue;
+
             bool And = true;
+
             foreach (Trigger trig in andTriggerList.andList)
             {
-                And &= trig.IsOn;
+                if (trig)
+                    And &= trig.IsOn;
             }
             Or |= And;
         }
 
         if (Or)
-        {
             OnActivated();
-        }
     }
 
     public void TryToDeactivate()
@@ -60,18 +61,21 @@ public class Triggered : MonoBehaviour
 
         foreach (AndTriggerList andTriggerList in orTriggerList)
         {
+            if (andTriggerList.andList.Count == 0)
+                continue;
+
             bool And = true;
+            
             foreach (Trigger trig in andTriggerList.andList)
             {
-                And &= trig.IsOn;
+                if (trig)
+                    And &= trig.IsOn;
             }
             Or |= And;
         }
 
         if (!Or)
-        {
             OnDisabled();
-        }
     }
 
     public void OnActivated()
