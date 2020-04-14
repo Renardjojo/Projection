@@ -54,10 +54,8 @@ public class MainMenuController : MonoBehaviour
         if (Input.anyKey )
         {
             SceneManager.UnloadSceneAsync("MainMenu");
-            if (isOnHub)
-            {
-                GameObject.Find("GameManager/Manager/InputManager").SetActive(true);
-            }
+
+            GameObject.Find("GameManager/Manager/InputManager").SetActive(true);
         }
     }
 }
