@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEditor.PackageManager.Requests;
 
 [System.Serializable]
 class AudioPlayerComponent
@@ -496,6 +497,7 @@ public class PlayerController : MonoBehaviour
     {
         shadowProperties.activateShadow = true;
         shadow.transform.Find("body").gameObject.SetActive(true);
+        resetFlag = true;
     }
 
     public void DisableShadow ()
@@ -505,7 +507,6 @@ public class PlayerController : MonoBehaviour
 
         shadowProperties.activateShadow = false;
         shadow.transform.Find("body").gameObject.SetActive(false);
-        ResetShadow();
     }
 
     public void SwitchShadowState()
