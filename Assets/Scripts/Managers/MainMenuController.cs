@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    bool isOnHub = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,16 +15,18 @@ public class MainMenuController : MonoBehaviour
         if (PlayerPrefs.GetInt("PlayerHaveLoadTutoScene") == 1)
         {
             newScene = "HUB";
+            isOnHub = true;
         }
         else
         {
             newScene = "Tutorial";
             PlayerPrefs.SetInt("PlayerHaveLoadTutoScene", 1);
+            isOnHub = false;
         }
 
         if (Application.CanStreamedLevelBeLoaded(newScene))
         {
-            SceneManager.LoadScene(newScene, LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync(newScene, LoadSceneMode.Additive);
         }
         else
         {
@@ -30,11 +34,30 @@ public class MainMenuController : MonoBehaviour
                 "Make sure " + newScene + " exists."
                 + "also, check file -> build settings to make sure it is valid.");
         }
+
+         StartCoroutine(WaitForSceneLoad(SceneManager.GetSceneByName(newScene)));
+    }   
+
+    IEnumerator WaitForSceneLoad(Scene scene)
+    {
+        while (!scene.isLoaded)
+        {
+            yield return null;
+        }
+        SceneManager.SetActiveScene(scene);
+        GameObject.Find("GameManager/Manager/InputManager").SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.anyKey )
+        {
+            SceneManager.UnloadSceneAsync("MainMenu");
+            if (isOnHub)
+            {
+                GameObject.Find("GameManager/Manager/InputManager").SetActive(true);
+            }
+        }
     }
 }
