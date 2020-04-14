@@ -257,12 +257,19 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
-    public void TryToWallJump()
+    public void Jump()
     {
-        if (wallJumpDelayCorroutine != null)
-            StopCoroutine(wallJumpDelayCorroutine);
-        
-        wallJumpDelayCorroutine = StartCoroutine(AllowWallJumpDelayCorroutine());
+        if (!controller.isGrounded)
+        {
+            if (wallJumpDelayCorroutine != null)
+                StopCoroutine(wallJumpDelayCorroutine);
+
+            wallJumpDelayCorroutine = StartCoroutine(AllowWallJumpDelayCorroutine());
+        }
+        else
+        {
+            JumpFlag = true;
+        }
     }
 
     IEnumerator AllowWallJumpDelayCorroutine()
@@ -273,17 +280,9 @@ public class CharacterMovements : MonoBehaviour
         while (timer < properties.inputWallJumpSaveDelay && WallJumpFlag)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
             yield return null;
         }
 
-        
         WallJumpFlag = false;
-    }
-
-    bool test (ref float a)
-    {
-        a += Time.deltaTime;
-        return (a < properties.inputWallJumpSaveDelay) && WallJumpFlag;
     }
 }
