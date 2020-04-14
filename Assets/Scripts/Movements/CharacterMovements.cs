@@ -115,15 +115,31 @@ public class CharacterMovements : MonoBehaviour
                 WallJumpFlag    = false;
             }
 
+
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
             // as an acceleration (ms^-2)
             moveDirection.y -= properties.gravity * Time.deltaTime;
-            // Move the player.       
-            controller.Move(moveDirection * Time.deltaTime);
+            // Move the player.
+
+            // ======== Detect MovingWall ======== //
+            Ray ray = new Ray();
+            ray.origin = transform.position;
+            ray.direction = -transform.up * 10f;
+
+            RaycastHit hitInfo;
+            if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && (hitInfo.collider.tag == "MovingWall"))
+            {
+                controller.Move((moveDirection * Time.deltaTime) + hitInfo.collider.GetComponent<MovingObject>().frameDisplacement);
+            }
+            else
+            {
+                controller.Move(moveDirection * Time.deltaTime);
+            }
+
+
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue); // to lock Z axis, not lockable by rigid body constraints or any other methods.
         }
-
         else
         {
             // Move in mid-air with input
@@ -213,7 +229,7 @@ public class CharacterMovements : MonoBehaviour
         ray.direction   = transform.forward;
             
         RaycastHit hitInfo; 
-        if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && hitInfo.collider.tag == "Wall")
+        if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && (hitInfo.collider.tag == "Wall" || hitInfo.collider.tag == "MovingWall"))
         {
             disableInputs   = false;
             isOnWall        = true;

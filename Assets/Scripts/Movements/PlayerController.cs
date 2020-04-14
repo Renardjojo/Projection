@@ -43,7 +43,6 @@ class EventComponent
 }
 
 
-/*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE*/
 [System.Serializable]
 class ShadowProperties
 {
@@ -74,7 +73,6 @@ public class PlayerController : MonoBehaviour
     private Animator                        bodyAnimator;
 
     private GameObject                      shadow = null;
-    /*MUST BE IN PRIVATE BUT ZOOM CAMERA MUST USE THIS VALUE. TODO : INTEGERT ZOOOMCAMERASCRIPT ON THIS SCRIPT*/
     [SerializeField] private ShadowProperties shadowProperties;
     private CharacterMovements              shadowMoveScript;
     private Animator                        shadowAnimator;
