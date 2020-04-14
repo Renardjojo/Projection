@@ -206,11 +206,6 @@ public class PlayerController : MonoBehaviour
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
             bodyProperties.movementProperties.scaleMotion(multiplicator);
-            bodyAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
-        }
-        else
-        {
-            bodyAnimator.updateMode = AnimatorUpdateMode.Normal;
         }
     }
     
@@ -234,13 +229,7 @@ public class PlayerController : MonoBehaviour
             float multiplicator = 1f / GameObject.Find("Manager/TimeManager").GetComponent<TimeManager>().getTimeScaleInFirstPlanWhenSwitch();
 
             shadowProperties.movementProperties.scaleMotion(multiplicator);
-            shadowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
-        else
-        {
-            shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
-        }
-
 
         if (shadowProperties.activateShadowOnStart)
         {
@@ -372,6 +361,7 @@ public class PlayerController : MonoBehaviour
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
 
             shadowProperties.eventComponent.OnTransposed?.Invoke();
+            shadowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
 
         else
@@ -384,6 +374,7 @@ public class PlayerController : MonoBehaviour
             RemoveComponentToUnconstrolShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
 
+            shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
             bodyAnimator.Play("Idle", -1, 0f);
             shadowAnimator.Play("Idle", -1, 0f);
 
