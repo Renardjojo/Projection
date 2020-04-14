@@ -91,13 +91,9 @@ public class PlayerController : MonoBehaviour
     private float defaultZOffset = 0f; 
     private Vector3 shadowOffset = 2f * Vector3.forward;
 
-    ZoomCameraBetweenEntities               zoomCameraBetweenEntitiesScript;
-
     private void Awake()
     {
         initializeSoundComponent();
-
-        zoomCameraBetweenEntitiesScript = GetComponent<ZoomCameraBetweenEntities>();
     }
 
     void initializeSoundComponent()
@@ -499,7 +495,6 @@ public class PlayerController : MonoBehaviour
     {
         shadowProperties.activateShadow = true;
         shadow.transform.Find("body").gameObject.SetActive(true);
-        zoomCameraBetweenEntitiesScript ?.EnableCameraZoom();
     }
 
     public void DisableShadow ()
@@ -510,8 +505,6 @@ public class PlayerController : MonoBehaviour
         shadowProperties.activateShadow = false;
         shadow.transform.Find("body").gameObject.SetActive(false);
         ResetShadow();
-
-        zoomCameraBetweenEntitiesScript ?.DisableCameraZoom();
     }
 
     public void SwitchShadowState()
@@ -526,7 +519,5 @@ public class PlayerController : MonoBehaviour
         {
             DisableShadow();
         }
-
-        zoomCameraBetweenEntitiesScript ?.SwitchCameraZoomState();
     }
 }
