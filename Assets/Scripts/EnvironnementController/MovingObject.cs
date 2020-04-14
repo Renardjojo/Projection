@@ -15,6 +15,7 @@ public class MovingObject : MonoBehaviour
     [Range(0f, 1f)]
     [Tooltip("Define the platform spedd between 0 and 1 by second")]
     private float moveSpeed = 0.5f;
+    internal Vector3 frameDisplacement;
 
     float step = 0f; //bewteen 0 and 1. 0 on start position and 1 on end position
     [SerializeField] bool isMoving = true;
@@ -32,6 +33,7 @@ public class MovingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float stepExFram = step;
         if (isMoving)
         {
             if (moveTowardEndPosition)
@@ -67,7 +69,8 @@ public class MovingObject : MonoBehaviour
                 }
             }
 
-            transform.position = startPosition + (endPosition - startPosition) * step;
+            frameDisplacement = (endPosition - startPosition) * (step - stepExFram);
+            transform.position += frameDisplacement;
         }
     }
 

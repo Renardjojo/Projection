@@ -22,6 +22,7 @@ public class ScreenLightSub : MonoBehaviour
         if (player != null)
         {
             player.ResetShadow();
+            player.Transpose();
         }
     }
 }
