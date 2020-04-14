@@ -89,7 +89,7 @@ public class CharacterMovements : MonoBehaviour
 
     public void DirectMove(Vector3 motion)
     {
-        if (controller != null)
+        if (controller != null && controller.gameObject.activeSelf)
         {
             controller.Move(motion);
         }    
@@ -279,11 +279,5 @@ public class CharacterMovements : MonoBehaviour
 
         
         WallJumpFlag = false;
-    }
-
-    bool test (ref float a)
-    {
-        a += Time.deltaTime;
-        return (a < properties.inputWallJumpSaveDelay) && WallJumpFlag;
     }
 }
