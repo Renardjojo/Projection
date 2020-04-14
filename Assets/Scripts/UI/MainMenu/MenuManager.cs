@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField]
     private SubMenu[] subMenus = null;
 
     private bool isSubmenuOpened()
@@ -23,8 +22,13 @@ public class MenuManager : MonoBehaviour
         return false;
     }
 
-    private void Start()
+    private void Awake()
     {
+        subMenus = GetComponentsInChildren<SubMenu>(true);
+    }
+
+    private void Start()
+    { 
         GameDebug.AssertInTransform(subMenus != null, transform, "subMenus should not be null");
         GameDebug.AssertInTransform(subMenus.Length != 0, transform, "subMenus should have at least one element");
         GameDebug.AssertInTransform(subMenus[0] != null, transform, "First element of subMenus should not be null");
