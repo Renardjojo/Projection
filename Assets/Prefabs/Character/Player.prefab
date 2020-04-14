@@ -67,10 +67,11 @@ MonoBehaviour:
     movementProperties:
       airControlRatio: 0.9
       wallFriction: 0.5
-      speedScale: 5
+      speedScale: 0.5
       jumpSpeed: 12
       gravity: 20
       canWallJump: 1
+      inputWallJumpSaveDelay: 0.2
       wallDetectionRange: 1
       wallJumpNormalSpeed: 5
       wallJumpUpSpeed: 12
@@ -96,6 +97,7 @@ MonoBehaviour:
       jumpSpeed: 8
       gravity: 20
       canWallJump: 0
+      inputWallJumpSaveDelay: 0.5
       wallDetectionRange: 1
       wallJumpNormalSpeed: 5
       wallJumpUpSpeed: 5
@@ -293,11 +295,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2544343661859167754}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: ff30f32637ca90942b21504c181efc2d,
-        type: 3}
-      propertyPath: m_Name
-      value: body
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ff30f32637ca90942b21504c181efc2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -357,6 +354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ff30f32637ca90942b21504c181efc2d,
+        type: 3}
+      propertyPath: m_Name
+      value: body
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: ff30f32637ca90942b21504c181efc2d,
         type: 3}
@@ -388,11 +390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2544343660083584311}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: ff30f32637ca90942b21504c181efc2d,
-        type: 3}
-      propertyPath: m_Name
-      value: body
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ff30f32637ca90942b21504c181efc2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -452,6 +449,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ff30f32637ca90942b21504c181efc2d,
+        type: 3}
+      propertyPath: m_Name
+      value: body
       objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: ff30f32637ca90942b21504c181efc2d,
         type: 3}
