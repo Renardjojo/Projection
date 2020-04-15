@@ -10,6 +10,14 @@ public class MenuManager : MonoBehaviour
 {
     private SubMenu[] subMenus = null;
 
+    private float oldTimeScale;
+    private AnimatorUpdateMode oldAnimatorUpdateMode;
+
+    [SerializeField]
+    private PlayerController controller = null;
+    [SerializeField]
+    private InputManager inputManager = null;
+
     private bool isSubmenuOpened()
     {
         foreach (SubMenu sub in subMenus)
@@ -29,9 +37,42 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     { 
-        GameDebug.AssertInTransform(subMenus != null, transform, "subMenus should not be null");
-        GameDebug.AssertInTransform(subMenus.Length != 0, transform, "subMenus should have at least one element");
-        GameDebug.AssertInTransform(subMenus[0] != null, transform, "First element of subMenus should not be null");
+        GameDebug.AssertInTransform(subMenus != null,       transform, "subMenus should not be null");
+        GameDebug.AssertInTransform(subMenus.Length != 0,   transform, "subMenus should have at least one element");
+        GameDebug.AssertInTransform(subMenus[0] != null,    transform, "First element of subMenus should not be null");
+    }
+
+    public void OpenMenu(SubMenu sub)
+    {
+        // === Saving old stats to restore them later === //
+
+        // Saving and updating animator update mode
+        oldAnimatorUpdateMode = controller.shadowAnimator.updateMode;
+        controller.SetShadowAnimatorNormalMode(AnimatorUpdateMode.Normal);
+
+        // Saving and updating time scale
+        oldTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
+
+        // Disabling inputs 
+        controller.enabled   = false;
+        inputManager.enabled = false;
+
+        subMenus[0].EnableMenu();
+    }
+
+    public void CloseMenu(SubMenu sub)
+    {
+        // Restoring animation
+        controller.SetShadowAnimatorNormalMode(oldAnimatorUpdateMode);
+        // Restoring time scale
+        Time.timeScale = oldTimeScale;
+
+        // Enabling inputs
+        controller.enabled   = true;
+        inputManager.enabled = true;
+
+        sub.DisableMenu();
     }
 
     private void Update()
@@ -40,16 +81,18 @@ public class MenuManager : MonoBehaviour
         {
             if (isSubmenuOpened())
             {
+                // Close all opened menus
                 foreach (SubMenu sub in subMenus)
                 {
-                    sub.DisableMenu();
+                    CloseMenu(sub);
                 }
             }
             else
             {
+                // Open the first menu
                 if (subMenus.Length != 0)
                 {
-                    subMenus[0].EnableMenu();
+                    OpenMenu(subMenus[0]);
                 }
             }
         }

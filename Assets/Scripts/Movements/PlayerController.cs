@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     private GameObject                      shadow = null;
     [SerializeField] private ShadowProperties shadowProperties;
     private CharacterMovements              shadowMoveScript;
-    private Animator                        shadowAnimator;
+    public Animator                        shadowAnimator { get; private set; }
 
     public GameObject                       controlledObject { get; private set; }
     private Vector3                         checkPointPosition;
@@ -95,6 +95,14 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         initializeSoundComponent();
+    }
+
+    // Prevents the animator to be fully accessible by making it public ;
+    // We don't want to change the animation in another script, 
+    // just wether it is affected by the timescale or not.
+    internal void SetShadowAnimatorNormalMode(AnimatorUpdateMode mode)
+    {
+        shadowAnimator.updateMode = mode;
     }
 
     void initializeSoundComponent()
@@ -243,8 +251,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
         if (!isTransposed)
         {
@@ -266,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
             // Remove the player velocity on x to prevent the player from moving/sliding (if on ground)
             // If the player is not on ground, it should have disableInputs = false;
-            bodyMoveScript.MoveX(0f); 
+            bodyMoveScript.MoveX(0f);
         }
 
         if (resetFlag)
@@ -276,7 +283,6 @@ public class PlayerController : MonoBehaviour
             resetFlag = false;
         }
     }
-
 
     public void MoveX(float value)
     {
