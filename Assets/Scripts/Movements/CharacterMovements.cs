@@ -37,6 +37,7 @@ public class CharacterMovementProperties
         wallJumpNormalSpeed  *= ratio;
         wallJumpUpSpeed      *= ratio;
         fallAcceleration     *= ratio;
+        maxVelocity          *= ratio;
     }
 }
 
@@ -174,8 +175,6 @@ public class CharacterMovements : MonoBehaviour
             // to lock Z axis, not lockable by rigid body constraints or any other methods.
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, defaultZValue);
         }
-
-        Debug.Log(controller.velocity.magnitude);
     }
 
 
