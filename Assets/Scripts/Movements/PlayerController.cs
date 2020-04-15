@@ -157,14 +157,14 @@ public class PlayerController : MonoBehaviour
             audioPlayerComponent.interractSourceAudio = gameObject.AddComponent<AudioSource>();
             audioPlayerComponent.interractSourceAudio.clip = audioPlayerComponent.interractSound;
         }
+
+        InitializeBody();
+        InitializeShadow();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        InitializeBody();
-        InitializeShadow();
-
         Lever[] components = GameObject.FindObjectsOfType<Lever>();
         foreach (Lever lever in components)
         {
