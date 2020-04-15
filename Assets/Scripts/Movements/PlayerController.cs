@@ -285,6 +285,18 @@ public class PlayerController : MonoBehaviour
             shadowOffset = new Vector3(0f, 0f, defaultZOffset);
             resetFlag = false;
         }
+
+        //Avoid collision bug. If the entity his projected to fast, it is kill
+        if(isTransposed && shadowMoveScript.controller.velocity.magnitude > shadowMoveScript.properties.maxVelocity)
+        {
+            ResetShadow();
+            Transpose();
+        }
+        //Kill the player if he fall in void
+        else if (!isTransposed && bodyMoveScript.controller.velocity.magnitude > bodyMoveScript.properties.maxVelocity)
+        {
+            Kill();
+        }
     }
 
     public void MoveX(float value)

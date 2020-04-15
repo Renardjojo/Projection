@@ -19,6 +19,7 @@ public class CharacterMovementProperties
     [SerializeField] public float wallJumpUpSpeed = 5f;
     [SerializeField] public float fallAcceleration = .1f;
     [SerializeField] public float airControlRatioWhenWallJump = 100f;
+    [SerializeField] public float maxVelocity = 70f;
 
 
     [SerializeField] public bool avoidSlowMotion = false;
@@ -36,6 +37,7 @@ public class CharacterMovementProperties
         wallJumpNormalSpeed  *= ratio;
         wallJumpUpSpeed      *= ratio;
         fallAcceleration     *= ratio;
+        maxVelocity          *= ratio;
     }
 }
 
