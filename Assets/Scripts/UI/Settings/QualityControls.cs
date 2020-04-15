@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UnityEngine.UI.Dropdown))]
 public class QualityControls : MonoBehaviour
 {
     // Start is called before the first frame update
