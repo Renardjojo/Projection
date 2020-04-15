@@ -40,6 +40,9 @@ public class MenuManager : MonoBehaviour
         GameDebug.AssertInTransform(subMenus != null,       transform, "subMenus should not be null");
         GameDebug.AssertInTransform(subMenus.Length != 0,   transform, "subMenus should have at least one element");
         GameDebug.AssertInTransform(subMenus[0] != null,    transform, "First element of subMenus should not be null");
+
+        GameDebug.AssertInTransform(controller   != null, transform, "controller should not be null");
+        GameDebug.AssertInTransform(inputManager != null, transform, "inputManager shoud not be null");
     }
 
     public void OpenMenu(SubMenu sub)
