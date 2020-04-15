@@ -274,7 +274,10 @@ public class PlayerController : MonoBehaviour
             // If the player is not on ground, it should have disableInputs = false;
             bodyMoveScript.MoveX(0f);
         }
+    }
 
+    public void FixedUpdate()
+    {
         if (resetFlag)
         {
             shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z + defaultZOffset);
