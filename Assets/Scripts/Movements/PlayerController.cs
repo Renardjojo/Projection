@@ -346,7 +346,7 @@ public class PlayerController : MonoBehaviour
         // when the shadow is in the light screen, since it disappears.
         if (!isTransposed && IsShadowCollidingWithLightScreen() ||
             (isTransposed && !body.active) ||
-            (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
+            (!isTransposed && ((shadow && !shadow.active) || (shadowProperties != null && !shadowProperties.activateShadow))))
         {
             return;
         }
