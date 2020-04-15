@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEditor.PackageManager.Requests;
 
 [System.Serializable]
 class AudioPlayerComponent
@@ -274,7 +275,10 @@ public class PlayerController : MonoBehaviour
             // If the player is not on ground, it should have disableInputs = false;
             bodyMoveScript.MoveX(0f);
         }
+    }
 
+    public void FixedUpdate()
+    {
         if (resetFlag)
         {
             shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z + defaultZOffset);
@@ -352,7 +356,7 @@ public class PlayerController : MonoBehaviour
         // when the shadow is in the light screen, since it disappears.
         if (!isTransposed && IsShadowCollidingWithLightScreen() ||
             (isTransposed && !body.active) ||
-            (!isTransposed && (!shadow.active || !shadowProperties.activateShadow)))
+            (!isTransposed && ((shadow && !shadow.active) || (shadowProperties != null && !shadowProperties.activateShadow))))
         {
             return;
         }
@@ -497,6 +501,7 @@ public class PlayerController : MonoBehaviour
     {
         shadowProperties.activateShadow = true;
         shadow.transform.Find("body").gameObject.SetActive(true);
+        resetFlag = true;
     }
 
     public void DisableShadow ()
@@ -506,7 +511,6 @@ public class PlayerController : MonoBehaviour
 
         shadowProperties.activateShadow = false;
         shadow.transform.Find("body").gameObject.SetActive(false);
-        ResetShadow();
     }
 
     public void SwitchShadowState()

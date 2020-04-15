@@ -90,7 +90,7 @@ public class CharacterMovements : MonoBehaviour
 
     public void DirectMove(Vector3 motion)
     {
-        if (controller != null)
+        if (controller != null && controller.gameObject.activeSelf)
         {
             controller.Move(motion);
         }    
