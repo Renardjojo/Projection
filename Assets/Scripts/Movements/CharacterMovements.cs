@@ -3,6 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class AudioComponent
+{
+    public AudioClip walkingFootSound1 = null;
+    internal AudioSource walkingFootSoundSourceAudio1;
+    public AudioClip walkingFootSound2 = null;
+    internal AudioSource walkingFootSoundSourceAudio2;
+
+    internal bool isPlayerFirstSound = true;
+    public float walkSoundDelay = 0.3f;
+    public float walkSoundOffSet = 0f;
+    internal float walkDelay = 0f;
+
+    public AudioClip spawnSound = null;
+    internal AudioSource spawnSourceAudio;
+
+    public AudioClip deadSound = null;
+    internal AudioSource deadSourceAudio;
+
+    public AudioClip jumpStartSound = null;
+    internal AudioSource jumpStartSourceAudio;
+
+    /*public      AudioClip jumpEndSound = null;
+     internal    AudioSource jumpEndSourceAudio;*/
+
+    public AudioClip transposeSound = null;
+    internal AudioSource transposeSourceAudio;
+
+    public AudioClip interractSound = null;
+    internal AudioSource interractSourceAudio;
+
+    public AudioClip resetPositionSound = null;
+    internal AudioSource resetPositionSourceAudio;
+}
+
+[System.Serializable]
 public class CharacterMovementProperties
 {
     [SerializeField] public float airControlRatio = .9f;
@@ -45,7 +80,8 @@ public class CharacterMovementProperties
 public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
-    internal CharacterMovementProperties properties;
+    internal CharacterMovementProperties    properties;
+    internal AudioComponent                 audio;
     Coroutine wallJumpDelayCorroutine;
 
     //public float   AirControlRatio     {get; set;}
@@ -87,6 +123,70 @@ public class CharacterMovements : MonoBehaviour
     private void Start()
     {
         defaultZValue = gameObject.transform.localPosition.z;
+        initializeSoundComponent();
+    }
+
+
+    void initializeSoundComponent()
+    {
+        if (audio.walkingFootSound1 != null)
+        {
+            audio.walkingFootSoundSourceAudio1 = gameObject.AddComponent<AudioSource>();
+            audio.walkingFootSoundSourceAudio1.clip = audio.walkingFootSound1;
+
+            audio.walkDelay = audio.walkSoundOffSet % audio.walkSoundDelay;
+        }
+
+        if (audio.walkingFootSound2 != null)
+        {
+            audio.walkingFootSoundSourceAudio2 = gameObject.AddComponent<AudioSource>();
+            audio.walkingFootSoundSourceAudio2.clip = audio.walkingFootSound2;
+
+            audio.walkDelay = audio.walkSoundOffSet % audio.walkSoundDelay;
+        }
+
+        if (audio.spawnSound != null)
+        {
+            audio.spawnSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.spawnSourceAudio.clip = audio.spawnSound;
+        }
+
+        if (audio.deadSound != null)
+        {
+            audio.deadSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.deadSourceAudio.clip = audio.deadSound;
+        }
+
+        if (audio.jumpStartSound != null)
+        {
+            audio.jumpStartSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.jumpStartSourceAudio.clip = audio.jumpStartSound;
+        }
+
+        /*
+        if (audio.jumpEndSound != null)
+        {
+            audio.jumpEndSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.jumpEndSourceAudio.clip = audio.jumpEndSound;
+        }*/
+
+        if (audio.transposeSound != null)
+        {
+            audio.transposeSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.transposeSourceAudio.clip = audio.transposeSound;
+        }
+
+        if (audio.interractSound != null)
+        {
+            audio.interractSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.interractSourceAudio.clip = audio.interractSound;
+        }
+
+        if (audio.resetPositionSound != null)
+        {
+            audio.resetPositionSourceAudio = gameObject.AddComponent<AudioSource>();
+            audio.resetPositionSourceAudio.clip = audio.resetPositionSound;
+        }
     }
 
     public void DirectMove(Vector3 motion)
@@ -115,6 +215,8 @@ public class CharacterMovements : MonoBehaviour
             // Try to jump
             if (JumpFlag)
             {
+                audio.jumpStartSourceAudio?.Play();
+
                 moveDirection.y = properties.jumpSpeed;
                 JumpFlag        = false;
                 WallJumpFlag    = false;
@@ -193,6 +295,29 @@ public class CharacterMovements : MonoBehaviour
     /* ==== Character's abilities ==== */
     public void MoveX(float f)
     {
+        if (f != 0f && controller.isGrounded)
+        {
+            audio.walkDelay += Time.unscaledDeltaTime;
+
+            if (audio.walkDelay >= (audio.walkSoundDelay * (Mathf.Abs(Mathf.Abs(f) - 1f) + 1f)))
+            {
+                audio.walkDelay = 0f;
+
+                if (audio.isPlayerFirstSound)
+                {
+                    Debug.Log("2 " + f + controller.isGrounded);
+                    audio.walkingFootSoundSourceAudio1?.Play();
+                }
+                else
+                {
+                    Debug.Log("1 " + f + controller.isGrounded);
+                    audio.walkingFootSoundSourceAudio2?.Play();
+                }
+
+                audio.isPlayerFirstSound = !audio.isPlayerFirstSound;
+            }
+        }
+
         inputSpeed = f;
 
         if (disableInputs)

@@ -33,6 +33,14 @@ public class Button : Trigger
         releaseCoroutine = StartCoroutine(ReleaseCoroutine());
     }
 
+    public void Release()
+    {
+        if (releaseCoroutine != null)
+            StopCoroutine(releaseCoroutine);
+
+        IsOn = false;
+    }
+
     public void TryToPress(Vector3 playerPos)
     {
         if ((playerPos - transform.position).sqrMagnitude < interactionRadius2)

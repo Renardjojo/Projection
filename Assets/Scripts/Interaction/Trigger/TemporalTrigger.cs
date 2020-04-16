@@ -18,7 +18,7 @@ public class TemporalTrigger : Trigger
         timeElapsedForTempoTrigger = timeOffSet % (OffDuration + OnDuration);
     }
 
-    private void Update()
+    private new void Update()
     {
         timeElapsedForTempoTrigger += Time.deltaTime * Time.timeScale;
 

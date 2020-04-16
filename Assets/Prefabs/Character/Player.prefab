@@ -54,14 +54,16 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   audioPlayerComponent:
-    walkingFootSound: {fileID: 0}
-    walkSoundDelay: 1
+    walkingFootSound: {fileID: 8300000, guid: c4bcf356ac580304dadb225c4d4ce4d2, type: 3}
+    walkSoundDelay: 0.3
     walkSoundOffSet: 0
     spawnSound: {fileID: 0}
-    deadSound: {fileID: 0}
-    jumpStartSound: {fileID: 0}
-    transposeBodyToShadowSound: {fileID: 0}
-    transposeShadowToBodySound: {fileID: 0}
+    deadSound: {fileID: 8300000, guid: a86d8e1c901d0af42a91fcad8424aa62, type: 3}
+    jumpStartSound: {fileID: 8300000, guid: e0a3d9ccebad6834b8234179f51345f5, type: 3}
+    transposeBodyToShadowSound: {fileID: 8300000, guid: 8d4d53062d4767542a25d55a9c26cf38,
+      type: 3}
+    transposeShadowToBodySound: {fileID: 8300000, guid: 8d4d53062d4767542a25d55a9c26cf38,
+      type: 3}
     interractSound: {fileID: 0}
   bodyProperties:
     movementProperties:
@@ -77,6 +79,7 @@ MonoBehaviour:
       wallJumpUpSpeed: 12
       fallAcceleration: 0.3
       airControlRatioWhenWallJump: 100
+      maxVelocity: 70
       avoidSlowMotion: 0
     eventComponent:
       OnIsDead:
@@ -103,6 +106,7 @@ MonoBehaviour:
       wallJumpUpSpeed: 5
       fallAcceleration: 0.1
       airControlRatioWhenWallJump: 100
+      maxVelocity: 70
       avoidSlowMotion: 1
     activateShadowOnStart: 1
     eventComponent:
@@ -130,8 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainEntity: {fileID: 2544343660083584310}
   secondEntity: {fileID: 2544343661859167753}
-  cinemachineVirtualCamera: {fileID: 0}
-  distanceOffSet: 5
+  cam: {fileID: 0}
+  distanceOffset: 5
 --- !u!1 &2544343660083584310
 GameObject:
   m_ObjectHideFlags: 0
