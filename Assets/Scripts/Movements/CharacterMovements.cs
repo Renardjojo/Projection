@@ -304,15 +304,9 @@ public class CharacterMovements : MonoBehaviour
                 audio.walkDelay = 0f;
 
                 if (audio.isPlayerFirstSound)
-                {
-                    Debug.Log("2 " + f + controller.isGrounded);
                     audio.walkingFootSoundSourceAudio1?.Play();
-                }
                 else
-                {
-                    Debug.Log("1 " + f + controller.isGrounded);
                     audio.walkingFootSoundSourceAudio2?.Play();
-                }
 
                 audio.isPlayerFirstSound = !audio.isPlayerFirstSound;
             }
