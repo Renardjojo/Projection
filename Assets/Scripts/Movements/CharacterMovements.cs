@@ -55,6 +55,7 @@ public class CharacterMovementProperties
     [SerializeField] public float fallAcceleration = .1f;
     [SerializeField] public float airControlRatioWhenWallJump = 100f;
     [SerializeField] public float maxVelocity = 70f;
+    [SerializeField] public float coyoteTime = 0.1f;
 
 
     [SerializeField] public bool avoidSlowMotion = false;
@@ -111,7 +112,13 @@ public class CharacterMovements : MonoBehaviour
     internal bool                   WallJumpFlag        { get; set; }
     internal CharacterController    Controller          { get; }
 
-    
+    // Corresponds to the last time the player was on ground.
+    // If the player is currently on the ground, 
+    // it means that this value is equal to Time.time .
+    // It is used for the Coyote Time.
+    private float lastGroundTime = 0f;
+
+
     /* ==== Unity methods ==== */
     private void Awake()
     {
@@ -197,10 +204,25 @@ public class CharacterMovements : MonoBehaviour
         }    
     }
 
+    private void TryToJump()
+    {            
+        // Try to jump
+        if (JumpFlag)
+        {
+            audio.jumpStartSourceAudio?.Play();
+
+            moveDirection.y = properties.jumpSpeed;
+            JumpFlag = false;
+            WallJumpFlag = false;
+        }
+    }
+
     void Update()
     {
         if (controller.isGrounded)
         {
+            lastGroundTime = Time.time;
+
             disableInputs = false;
             // We are grounded, so recalculate
             // move direction directly from axes
@@ -212,16 +234,7 @@ public class CharacterMovements : MonoBehaviour
 
             moveDirection *= properties.speedScale;
 
-            // Try to jump
-            if (JumpFlag)
-            {
-                audio.jumpStartSourceAudio?.Play();
-
-                moveDirection.y = properties.jumpSpeed;
-                JumpFlag        = false;
-                WallJumpFlag    = false;
-            }
-
+            TryToJump();
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
             // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
@@ -262,6 +275,7 @@ public class CharacterMovements : MonoBehaviour
             // as an acceleration (ms^-2)
             moveDirection.y -= properties.gravity * Time.deltaTime;
 
+            TryToJump();
             TryToWallJump(ref moveDirection);
 
             if (moveDirection.y < 0f)
@@ -379,8 +393,8 @@ public class CharacterMovements : MonoBehaviour
     }
 
     public void Jump()
-    {
-        if (!controller.isGrounded)
+    {                           
+        if (!controller.isGrounded && Time.time - lastGroundTime > properties.coyoteTime)
         {
             if (wallJumpDelayCorroutine != null)
                 StopCoroutine(wallJumpDelayCorroutine);
