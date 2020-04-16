@@ -11,17 +11,28 @@ public struct TagObjectEvent
 }
 
 
-[ExecuteInEditMode]
 public class Laser : MonoBehaviour
 {
-    [SerializeField, Tooltip("Work on start only")] float  laserRadius = 0.2f;
-    [SerializeField, Tooltip("Work on start only")] bool   isActivate  = true;
-    [SerializeField] float laserOffSet = 0.61f;
-    [SerializeField] float maxLaserLenght = 1000f;
+    [Header("Sound")]
+    [Tooltip("The constant humming of the laser, whose volume depends on the player distance to the laser")]
+    [SerializeField] AudioClip  humming         = null;
+    [Tooltip("Range around the laser where the humming is heard")]
+    [SerializeField] float      hummingRange    = 5f;
+
+    [Header("Laser configuration")]
+    [Tooltip("Can only be changed out of play mode")]
+    [SerializeField] float      laserRadius     = 0.2f;
+    [Tooltip("Can only be changed out of play mode")]
+    [SerializeField] bool       isActivate      = true;
+    [SerializeField] float      laserOffSet     = 0.61f;
+    [SerializeField] float      maxLaserLenght  = 1000f;
 
     [SerializeField] List<TagObjectEvent> tagObjectEventList = null;
 
-    GameObject laserRay;
+    private GameObject          laserRay        = null;
+    private AudioSource         hummingAudio    = null;
+    private PlayerController    pc              = null;
+    private bool                playHumming     = true;
 
 
     private void Awake()
@@ -31,16 +42,33 @@ public class Laser : MonoBehaviour
 
         laserRay.transform.localScale = new Vector3(laserRadius, 1f, laserRadius);
         laserRay.SetActive(isActivate);
+
+        if (humming)
+        {
+            hummingAudio = GetComponent<AudioSource>();
+
+            if (!hummingAudio)          
+                hummingAudio = gameObject.AddComponent<AudioSource>();
+
+            hummingAudio.clip = humming;
+            hummingAudio.loop = true;
+            if (isActivate) hummingAudio.Play();
+        }
+
+        pc = GameObject.FindObjectOfType<PlayerController>();
+
+        if (!pc)
+            Debug.Log("Not found");
+        else
+        {
+            pc.onTransposed += ToggleHumming;
+            pc.onUntransposed += ToggleHumming;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController pc = GameObject.FindObjectOfType<PlayerController>();
-
-        if (!pc)
-            Debug.Log("Not found");
-
         bool containsBodyPlayer = false;
 
         foreach (TagObjectEvent toe in tagObjectEventList)
@@ -89,12 +117,28 @@ public class Laser : MonoBehaviour
             laserRay.transform.position = startPosition + transform.forward * (maxLaserLenght / 2f);
             laserRay.transform.localScale = new Vector3(laserRadius, maxLaserLenght / 2f / transform.localScale.y, laserRadius);
         }
+
+        if (hummingAudio)
+        {
+            float distance = Vector3.Distance(pc.controlledObject.transform.position, transform.position);
+
+            if (distance <= hummingRange)
+                hummingAudio.volume = (hummingRange - distance) / hummingRange;
+
+            else
+                hummingAudio.volume = 0f;
+        }
     }
 
     public void setActivate(bool flag)
     {
         isActivate = flag;
         laserRay.SetActive(isActivate);
+
+        if (isActivate && playHumming)
+            hummingAudio?.Play();
+        else
+            hummingAudio?.Stop();
     }
 
     public void switchState()
@@ -117,5 +161,14 @@ public class Laser : MonoBehaviour
         {
             Debug.DrawRay(startPosition, transform.forward * maxLaserLenght, Color.white);
         }
+    }
+
+    private void ToggleHumming()
+    {
+        playHumming = !playHumming;
+        if (playHumming)
+            hummingAudio?.Play();
+        else
+            hummingAudio?.Stop();
     }
 }
