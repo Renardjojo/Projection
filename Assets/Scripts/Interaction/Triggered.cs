@@ -9,12 +9,12 @@ public class AndTriggerList
     public List<Trigger> andList;
 }
 
-public class Triggered : MonoBehaviour
+public class Triggered : SoundPlayer
 {
-    [SerializeField] protected List<AndTriggerList> orTriggerList       = null;
-    [SerializeField] protected UnityEvent           OnActivatedEvent    = null;
-    [SerializeField] protected UnityEvent           OnDisabledEvent     = null;
-                     protected bool                 isActivate          = false;
+    [SerializeField] protected List<AndTriggerList> orTriggerList = null;
+    [SerializeField] protected UnityEvent OnActivatedEvent = null;
+    [SerializeField] protected UnityEvent OnDisabledEvent = null;
+    protected bool isActivate = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +25,8 @@ public class Triggered : MonoBehaviour
             {
                 if (trig)
                 {
-                    trig.OnTriggered    += TryToActivate;
-                    trig.OnUntriggered  += TryToDeactivate;
+                    trig.OnTriggered += TryToActivate;
+                    trig.OnUntriggered += TryToDeactivate;
                 }
             }
         }
@@ -65,7 +65,7 @@ public class Triggered : MonoBehaviour
                 continue;
 
             bool And = true;
-            
+
             foreach (Trigger trig in andTriggerList.andList)
             {
                 if (trig)
@@ -80,11 +80,23 @@ public class Triggered : MonoBehaviour
 
     public void OnActivated()
     {
+        isActivate = true;
         OnActivatedEvent?.Invoke();
+        PlaySound();
     }
 
     public void OnDisabled()
     {
+        isActivate = false;
         OnDisabledEvent?.Invoke();
+        PlaySound();
+    }
+
+    protected override void PlaySound()
+    {
+        if (isActivate || useSameSound)
+            switchedOnAudio?.Play();
+        else
+            switchedOffAudio?.Play();
     }
 }
