@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ed4735847eff24fb04165cc02b6501, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humming: {fileID: 8300000, guid: cf800b2681df7d54abcb1f64a8b21eca, type: 3}
+  hummingRange: 5
   laserRadius: 0.15
   isActivate: 1
   laserOffSet: 0.5
@@ -130,6 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchedOnSound: {fileID: 8300000, guid: 8df26e21de97b7d4eaecb891b6441c75, type: 3}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 1
   orTriggerList: []
   OnActivatedEvent:
     m_PersistentCalls:
