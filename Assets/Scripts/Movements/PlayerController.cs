@@ -3,45 +3,11 @@ using UnityEngine.Events;
 using System;
 
 [System.Serializable]
-class AudioPlayerComponent
-{
-    public      AudioClip walkingFootSound = null;
-    internal    AudioSource walkingFootSoundSourceAudio;
-    public      float walkSoundDelay = 1f;
-    public      float walkSoundOffSet = 0f;
-    internal    float walkDelay = 0f;
-
-    public      AudioClip spawnSound = null;
-    internal    AudioSource spawnSourceAudio;
-
-    public      AudioClip deadSound = null;
-    internal    AudioSource deadSourceAudio;
-
-    public      AudioClip jumpStartSound = null;
-    internal    AudioSource jumpStartSourceAudio;
-
-   /* public      AudioClip jumpEndSound = null;
-    internal    AudioSource jumpEndSourceAudio;*/
-
-    public      AudioClip transposeBodyToShadowSound = null;
-    internal    AudioSource transposeBodyToShadowSourceAudio;
-
-    public      AudioClip transposeShadowToBodySound = null;
-    internal    AudioSource transposeShadowToBodySourceAudio;
-
-    public      AudioClip interractSound = null;
-    internal    AudioSource interractSourceAudio;
-
-}
-
-
-[System.Serializable]
 class EventComponent
 {
     public UnityEvent OnIsDead      = null;
     public UnityEvent OnTransposed  = null;
 }
-
 
 [System.Serializable]
 class ShadowProperties
@@ -50,13 +16,15 @@ class ShadowProperties
     internal bool                       activateShadow          = true;
     public bool                         activateShadowOnStart   = true;
     public EventComponent               eventComponent;
+    public AudioComponent               audioComponent;
 }
 
 [System.Serializable]
 class BodyProperties
 {
-    public CharacterMovementProperties movementProperties = new CharacterMovementProperties(false);
-    public EventComponent eventComponent;
+    public CharacterMovementProperties  movementProperties = new CharacterMovementProperties(false);
+    public EventComponent               eventComponent;
+    public AudioComponent               audioComponent;
 }
 
 public class PlayerController : MonoBehaviour
@@ -64,7 +32,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float          maxShadowDistance   = 5f;
     [SerializeField] private TimeManager    timeManagerScript   = null;
     [SerializeField] private UnityEvent     OnIsDead            = null;
-    [SerializeField] private AudioPlayerComponent audioPlayerComponent;
 
 
     private GameObject                      body = null;
@@ -93,7 +60,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        initializeSoundComponent();
+        InitializeBody();
+        InitializeShadow();
     }
 
     // Prevents the animator to be fully accessible by making it public ;
@@ -102,63 +70,6 @@ public class PlayerController : MonoBehaviour
     internal void SetShadowAnimatorNormalMode(AnimatorUpdateMode mode)
     {
         shadowAnimator.updateMode = mode;
-    }
-
-    void initializeSoundComponent()
-    {
-        if (audioPlayerComponent.walkingFootSound != null)
-        {
-            audioPlayerComponent.walkingFootSoundSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.walkingFootSoundSourceAudio.clip = audioPlayerComponent.walkingFootSound;
-
-            audioPlayerComponent.walkDelay = audioPlayerComponent.walkSoundOffSet % audioPlayerComponent.walkSoundDelay;
-        }
-
-        if (audioPlayerComponent.spawnSound != null)
-        {
-            audioPlayerComponent.spawnSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.spawnSourceAudio.clip = audioPlayerComponent.spawnSound;
-        }
-
-        if (audioPlayerComponent.deadSound != null)
-        {
-            audioPlayerComponent.deadSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.deadSourceAudio.clip = audioPlayerComponent.deadSound;
-        }
-
-        if (audioPlayerComponent.jumpStartSound != null)
-        {
-            audioPlayerComponent.jumpStartSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.jumpStartSourceAudio.clip = audioPlayerComponent.jumpStartSound;
-        }
-
-        /*
-        if (audioPlayerComponent.jumpEndSound != null)
-        {
-            audioPlayerComponent.jumpEndSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.jumpEndSourceAudio.clip = audioPlayerComponent.jumpEndSound;
-        }*/
-
-        if (audioPlayerComponent.transposeBodyToShadowSound != null)
-        {
-            audioPlayerComponent.transposeBodyToShadowSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.transposeBodyToShadowSourceAudio.clip = audioPlayerComponent.transposeBodyToShadowSound;
-        }
-
-        if (audioPlayerComponent.transposeShadowToBodySound != null)
-        {
-            audioPlayerComponent.transposeShadowToBodySourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.transposeShadowToBodySourceAudio.clip = audioPlayerComponent.transposeShadowToBodySound;
-        }
-
-        if (audioPlayerComponent.interractSound != null)
-        {
-            audioPlayerComponent.interractSourceAudio = gameObject.AddComponent<AudioSource>();
-            audioPlayerComponent.interractSourceAudio.clip = audioPlayerComponent.interractSound;
-        }
-
-        InitializeBody();
-        InitializeShadow();
     }
 
     // Start is called before the first frame update
@@ -191,8 +102,7 @@ public class PlayerController : MonoBehaviour
 
         defaultZOffset = shadow.transform.position.z - body.transform.position.z;
         shadowOffset = defaultZOffset * Vector3.forward;
-
-        audioPlayerComponent.spawnSourceAudio?.Play();
+        bodyProperties.audioComponent.spawnSourceAudio?.Play();
     }
 
     private void InitializeBody()
@@ -204,6 +114,7 @@ public class PlayerController : MonoBehaviour
 
         /*Initialize body movement script*/
         bodyMoveScript.properties = bodyProperties.movementProperties;
+        bodyMoveScript.audio = bodyProperties.audioComponent;
 
         /*Find the animator component*/
         bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
@@ -226,6 +137,7 @@ public class PlayerController : MonoBehaviour
 
         /*Initialize shadow movement script*/
         shadowMoveScript.properties = shadowProperties.movementProperties;
+        shadowMoveScript.audio      = shadowProperties.audioComponent;
 
         /*Find the animator component*/
         shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
@@ -283,6 +195,7 @@ public class PlayerController : MonoBehaviour
             shadow.transform.position = new Vector3(body.transform.position.x, body.transform.position.y, body.transform.position.z + defaultZOffset);
             shadowOffset = new Vector3(0f, 0f, defaultZOffset);
             resetFlag = false;
+            shadowProperties.audioComponent.resetPositionSourceAudio?.Play();
         }
 
         //Avoid collision bug. If the entity his projected to fast, it is kill
@@ -300,17 +213,6 @@ public class PlayerController : MonoBehaviour
 
     public void MoveX(float value)
     {
-        if (value != 0f)
-        {
-            audioPlayerComponent.walkDelay += Time.deltaTime * Time.timeScale;
-
-            if (audioPlayerComponent.walkDelay >= (audioPlayerComponent.walkSoundDelay * (Mathf.Abs(Mathf.Abs(value) - 1f) + 1f)))
-            {
-                audioPlayerComponent.walkDelay = 0f;
-                audioPlayerComponent.walkingFootSoundSourceAudio?.Play();
-            }
-        }
-
         if (isTransposed)
         {
             shadowMoveScript.MoveX(value);
@@ -329,14 +231,10 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            audioPlayerComponent.jumpStartSourceAudio?.Play();
-
             shadowMoveScript.Jump();
         }
         else
         {
-            audioPlayerComponent.jumpStartSourceAudio?.Play();
-
             bodyMoveScript.Jump();
         }
     }
@@ -370,7 +268,7 @@ public class PlayerController : MonoBehaviour
 
         if (isTransposed)
         {
-            audioPlayerComponent.transposeBodyToShadowSourceAudio?.Play();
+            bodyProperties.audioComponent.transposeSourceAudio?.Play();
             bodyAnimator.SetFloat("Speed", 0f);
             // To set shadow's velocity to players's
             shadowMoveScript.CopyFrom(bodyMoveScript);
@@ -387,7 +285,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
-            audioPlayerComponent.transposeShadowToBodySourceAudio?.Play();
+            shadowProperties.audioComponent.transposeSourceAudio?.Play();
             shadowOffset = shadow.transform.position - body.transform.position;
 
             shadowMoveScript.MoveX(0f);
@@ -439,12 +337,13 @@ public class PlayerController : MonoBehaviour
     {
         if (controlledObject == shadow)
         {
-            audioPlayerComponent.interractSourceAudio?.Play();
+            shadowProperties.audioComponent.interractSourceAudio?.Play();
             OnInteractButton(controlledObject.transform.position);
             InteractWithBoxes();
         }
         else
         {
+            bodyProperties.audioComponent.interractSourceAudio?.Play();
             OnInteractLevelDoor?.Invoke(controlledObject.transform.position);
         }
     }
@@ -474,7 +373,7 @@ public class PlayerController : MonoBehaviour
 
     public void Kill()
     {
-        audioPlayerComponent.deadSourceAudio?.Play();
+        bodyProperties.audioComponent.deadSourceAudio?.Play();
 
         CharacterController charController = bodyMoveScript.controller;
         charController.enabled = false;
@@ -491,7 +390,7 @@ public class PlayerController : MonoBehaviour
 
     public void UseCheckPointPosition(Vector3 position)
     {
-        audioPlayerComponent.spawnSourceAudio?.Play();
+        bodyProperties.audioComponent.spawnSourceAudio?.Play();
 
         checkPointPosition = position;
     }
