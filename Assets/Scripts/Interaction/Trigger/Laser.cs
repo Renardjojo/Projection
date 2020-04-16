@@ -86,6 +86,10 @@ public class Laser : MonoBehaviour
             tagObjectEventList.Add(new TagObjectEvent() { tag = "BodyPlayer", OnHit = new UnityEvent() });
             tagObjectEventList[tagObjectEventList.Count - 1].OnHit.AddListener(pc.Kill);
         }
+
+        if (CompareTag("Debug"))
+            Debug.Log("Calling AdjustVolume()");
+        AdjustVolume();
     }
 
     // Update is called once per frame
@@ -118,16 +122,7 @@ public class Laser : MonoBehaviour
             laserRay.transform.localScale = new Vector3(laserRadius, maxLaserLenght / 2f / transform.localScale.y, laserRadius);
         }
 
-        if (hummingAudio)
-        {
-            float distance = Vector3.Distance(pc.controlledObject.transform.position, transform.position);
-
-            if (distance <= hummingRange)
-                hummingAudio.volume = (hummingRange - distance) / hummingRange;
-
-            else
-                hummingAudio.volume = 0f;
-        }
+        AdjustVolume();
     }
 
     public void setActivate(bool flag)
@@ -165,10 +160,32 @@ public class Laser : MonoBehaviour
 
     private void ToggleHumming()
     {
+        if (CompareTag("Debug"))
+            Debug.Log("hummingAudio = " + hummingAudio);
+
         playHumming = !playHumming;
-        if (playHumming)
+        if (playHumming && isActivate)
+        {
+            AdjustVolume();
             hummingAudio?.Play();
+        }
+
         else
             hummingAudio?.Stop();
+    }
+
+
+    private void AdjustVolume()
+    {
+        if (hummingAudio != null && pc.controlledObject)
+        {
+            float distance = Vector3.Distance(pc.controlledObject.transform.position, transform.position);
+
+            if (distance <= hummingRange)
+                hummingAudio.volume = (hummingRange - distance) / hummingRange;
+
+            else
+                hummingAudio.volume = 0f;
+        }
     }
 }
