@@ -62,6 +62,8 @@ public class PlayerController : MonoBehaviour
     {
         InitializeBody();
         InitializeShadow();
+
+        controlledObject = body;
     }
 
     // Prevents the animator to be fully accessible by making it public ;
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         shadowAnimator.updateMode = mode;
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -96,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
         RemoveComponentToUnconstrolShadow();
 
-        controlledObject    = body;
         checkPointPosition  = controlledObject.transform.position;
         isTransposed        = false;
 
