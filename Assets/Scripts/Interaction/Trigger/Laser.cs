@@ -87,8 +87,6 @@ public class Laser : MonoBehaviour
             tagObjectEventList[tagObjectEventList.Count - 1].OnHit.AddListener(pc.Kill);
         }
 
-        if (CompareTag("Debug"))
-            Debug.Log("Calling AdjustVolume()");
         AdjustVolume();
     }
 
@@ -160,9 +158,6 @@ public class Laser : MonoBehaviour
 
     private void ToggleHumming()
     {
-        if (CompareTag("Debug"))
-            Debug.Log("hummingAudio = " + hummingAudio);
-
         playHumming = !playHumming;
         if (playHumming && isActivate)
         {
