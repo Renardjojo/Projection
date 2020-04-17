@@ -117,6 +117,7 @@ public class CharacterMovements : MonoBehaviour
     // it means that this value is equal to Time.time .
     // It is used for the Coyote Time.
     private float lastGroundTime = 0f;
+    private bool isCoyoteTimeAvailable = true; 
 
 
     /* ==== Unity methods ==== */
@@ -214,6 +215,7 @@ public class CharacterMovements : MonoBehaviour
             moveDirection.y = properties.jumpSpeed;
             JumpFlag = false;
             WallJumpFlag = false;
+            isCoyoteTimeAvailable = false;
         }
     }
 
@@ -221,6 +223,7 @@ public class CharacterMovements : MonoBehaviour
     {
         if (controller.isGrounded)
         {
+            isCoyoteTimeAvailable = true;
             lastGroundTime = Time.time;
 
             disableInputs = false;
@@ -392,18 +395,29 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
+    bool TryToUseCoyoteTime()
+    {
+        if (isCoyoteTimeAvailable && Time.time - lastGroundTime < properties.coyoteTime)
+        {
+            isCoyoteTimeAvailable = false;
+            return true;
+        }
+        else
+            return false;
+    }
+
     public void Jump()
     {                           
-        if (!controller.isGrounded && Time.time - lastGroundTime > properties.coyoteTime)
+        if (controller.isGrounded || TryToUseCoyoteTime())
+        {
+            JumpFlag = true;
+        }
+        else
         {
             if (wallJumpDelayCorroutine != null)
                 StopCoroutine(wallJumpDelayCorroutine);
 
             wallJumpDelayCorroutine = StartCoroutine(AllowWallJumpDelayCorroutine());
-        }
-        else
-        {
-            JumpFlag = true;
         }
     }
 
