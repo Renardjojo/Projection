@@ -58,6 +58,8 @@ public class CharacterMovementProperties
     [SerializeField] public float maxVelocity = 70f;
     [SerializeField] public float coyoteTime = 0.1f;
 
+    [SerializeField] public float inputsCooldownAfterWallJump = 0.5f;
+    [SerializeField] public float lerpLengthOnWallJump = 2.2f;
 
     [SerializeField] public bool avoidSlowMotion = false;
 
@@ -222,14 +224,18 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
-    //[SerializeField]
-    private float inputsCooldownAfterWallJump = 0.5f;
+    bool isLerpingWallJump()
+    {
+        return Time.time > lastWallTime + properties.inputsCooldownAfterWallJump // has inputs
+            && Time.time < lastWallTime + properties.inputsCooldownAfterWallJump + properties.lerpLengthOnWallJump; 
+    }
+
     void Update()
     {
         animator?.SetBool("IsJumping", false);
         secondAnimator?.SetBool("IsJumping", false);
 
-        if (disableInputs && Time.time - disableInputsTime > inputsCooldownAfterWallJump)
+        if (disableInputs && Time.time - disableInputsTime > properties.inputsCooldownAfterWallJump)
             disableInputs = false;
 
         if (controller.isGrounded)
@@ -283,11 +289,16 @@ public class CharacterMovements : MonoBehaviour
             secondAnimator?.SetBool("IsGrounded", false);
 
             // Move in mid-air with input
-            if (!disableInputs)
-                moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
+            if (disableInputs)
+                moveDirection.x += inputSpeed * properties.speedScale * properties.airControlRatio / properties.airControlRatioWhenWallJump;
+            else if (isLerpingWallJump())
+            {
+                moveDirection.x = Mathf.Lerp(moveDirection.x, inputSpeed * properties.speedScale, 
+                                            (Time.time - lastWallTime - properties.inputsCooldownAfterWallJump) / properties.lerpLengthOnWallJump);
+            }
             else
             {
-                moveDirection.x += inputSpeed * properties.speedScale * properties.airControlRatio / properties.airControlRatioWhenWallJump;
+                moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
             }
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
