@@ -31,7 +31,7 @@ public class PhysicLeverSub : MonoBehaviour
 
         while (elapsedTime < leverLerpWait)
         {
-            baseSphere.transform.localRotation = Quaternion.Lerp(baseSphere.transform.rotation, Quaternion.Euler(new Vector3(0, 0, movement ? leverAngle : -leverAngle)), (elapsedTime / leverLerpWait));
+            baseSphere.transform.localRotation = Quaternion.Lerp(baseSphere.transform.localRotation, Quaternion.Euler(new Vector3(0, 0, movement ? leverAngle : -leverAngle)), (elapsedTime / leverLerpWait));
 
             elapsedTime += Time.deltaTime;
             yield return null;

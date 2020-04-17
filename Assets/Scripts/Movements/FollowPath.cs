@@ -10,13 +10,21 @@ public class FollowPath : MonoBehaviour
 
     private Queue<float>      storedTime     = new Queue<float>();
     private Queue<Vector3>    storedLocation = new Queue<Vector3>();
-    private Queue<Quaternion> storedRotation = new Queue<Quaternion>();
+    //private Queue<Quaternion> storedRotation = new Queue<Quaternion>();
 
     private Vector3 lastLoc;
     //private Quaternion lastRot;
     private float lastTime;
 
+    // Used in Reset() to reset the position to the initial position
+    private Vector3 initialPosition;
+
     private float timeModifier = 1f;
+
+    private void Awake()
+    {
+        initialPosition = transform.position;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +35,8 @@ public class FollowPath : MonoBehaviour
 
         if (pc)
         {
-            pc.onTransposed   += Slow;
-            pc.onUntransposed += Reset;
+            pc.onTransposed   += AddSlowness;
+            pc.onUntransposed += RemoveSlowness;
         }
     }
 
@@ -77,7 +85,7 @@ public class FollowPath : MonoBehaviour
 
     private float lTime;
 
-    void Slow()
+    private void AddSlowness()
     {
         // Saving last slowing down time
         lTime = Time.time;
@@ -90,8 +98,8 @@ public class FollowPath : MonoBehaviour
         delay -= lTime / slownessWhenSwitch;
     }
 
-    // Warning : Use it only after using Slow()
-    void Reset()
+    // Warning : Use it only after using AddSlowness()
+    private void RemoveSlowness()
     {                                    
         // First recover the old delay
         delay += lTime / slownessWhenSwitch;
@@ -100,5 +108,15 @@ public class FollowPath : MonoBehaviour
 
         // Then reset the timeModifier.
         timeModifier = 1f;
+    }
+
+    public void ResetShadow()
+    {
+        transform.position = initialPosition;
+        storedTime.Clear();
+        storedLocation.Clear();
+
+        lastLoc  = initialPosition;
+        lastTime = Time.time;
     }
 }
