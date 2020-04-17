@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MovingObject : MonoBehaviour
 {
    
     [SerializeField] Vector3    startPosition;
     [SerializeField] bool       useCurrentPoisitionToStart = true;
     [SerializeField] Vector3    endPosition;
+    [SerializeField] bool       endPositionDependingOfStartPosition = false;
     [SerializeField] bool       moveTowardEndPosition = true; //false if move toward sart position
     [SerializeField] bool       backAndForth = true;
 
@@ -15,6 +17,7 @@ public class MovingObject : MonoBehaviour
     [Range(0f, 1f)]
     [Tooltip("Define the platform spedd between 0 and 1 by second")]
     private float moveSpeed = 0.5f;
+    [SerializeField] bool useTimeScale = false;
     internal Vector3 frameDisplacement;
 
     float step = 0f; //bewteen 0 and 1. 0 on start position and 1 on end position
@@ -28,6 +31,20 @@ public class MovingObject : MonoBehaviour
         {
             startPosition = transform.position;
         }
+
+        if (endPositionDependingOfStartPosition)
+        {
+            endPosition += startPosition;
+        }
+
+        if(moveTowardEndPosition)
+        {
+            step = 0f;
+        }
+        else
+        {
+            step = 1f;
+        }
     }
 
     // Update is called once per frame
@@ -38,8 +55,9 @@ public class MovingObject : MonoBehaviour
         {
             if (moveTowardEndPosition)
             {
-                step += moveSpeed * Time.deltaTime * Time.timeScale;
-                if (step > 1f)
+                step += moveSpeed * Time.unscaledDeltaTime * (useTimeScale ? Time.timeScale : 1f);
+
+                if (step >= 1f)
                 {
                     if (backAndForth)
                     {
@@ -54,8 +72,8 @@ public class MovingObject : MonoBehaviour
             }
             else
             {
-                step -= moveSpeed * Time.deltaTime * Time.timeScale;
-                if (step < 0f)
+                step -= moveSpeed * Time.unscaledDeltaTime * (useTimeScale ? Time.timeScale : 1f);
+                if (step <= 0f)
                 {
                     if (backAndForth)
                     {
@@ -86,7 +104,19 @@ public class MovingObject : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawLine(useCurrentPoisitionToStart ? transform.position : startPosition, endPosition);
+        Vector3 start = startPosition;
+        if (useCurrentPoisitionToStart)
+        {
+            start = transform.position;
+        }
+
+        Vector3 end = endPosition;
+        if (endPositionDependingOfStartPosition)
+        {
+            end += startPosition;
+        }
+
+        Gizmos.DrawLine(start, end);
     }
 
     public void ResetPosition(bool _isMoving)
