@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
 
         /*Find the animator component*/
         bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
+        bodyMoveScript.animator = bodyAnimator;
         GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
 
         if (bodyProperties.movementProperties.avoidSlowMotion)
@@ -143,6 +144,7 @@ public class PlayerController : MonoBehaviour
 
         /*Find the animator component*/
         shadowAnimator = shadow.transform.Find("body").GetComponent<Animator>();
+        shadowMoveScript.animator = shadowAnimator;
         GameDebug.AssertInTransform(shadowAnimator != null, shadow.transform, "There must be a gameObject named \"body\" with a Animator");
 
 

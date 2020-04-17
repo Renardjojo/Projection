@@ -16,8 +16,8 @@ public abstract class Trigger : SoundPlayer
 
     /* ==== User accessible members ==== */
     [Header("Initial state")]
-    [SerializeField]
-    private bool isOn = false;
+    [SerializeField] private bool isOn;
+    [SerializeField] private bool isOnNeutralPositionAtStart = false;
 
     [Header("Delays")]
     [Tooltip("Time after which this will react, once this is set \"on\"(seconds)")]
@@ -74,8 +74,8 @@ public abstract class Trigger : SoundPlayer
 
         if (useSameSound)
         {
-            switchedOffAudio = switchedOnAudio;
-            onToOffAudio = offToOnAudio;
+            switchedOffAudio    = switchedOnAudio;
+            onToOffAudio        = offToOnAudio;
         }
 
         else if (switchedOffSound)
@@ -100,8 +100,11 @@ public abstract class Trigger : SoundPlayer
 
     private void Start()
     {
-        if (isOn)   OnTriggered?.Invoke();
-        else        OnUntriggered?.Invoke();
+        if (isOnNeutralPositionAtStart)
+        {
+            if (isOn)   OnTriggered?.Invoke();
+            else        OnUntriggered?.Invoke();
+        }
     }
 
 
