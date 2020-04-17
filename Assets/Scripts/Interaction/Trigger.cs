@@ -5,8 +5,8 @@ public abstract class Trigger : SoundPlayer
 {
     /* ==== User accessible members ==== */
     [Header("Initial state")]
-    [SerializeField]
-    private bool isOn;
+    [SerializeField] private bool isOn;
+    [SerializeField] private bool isOnNeutralPositionAtStart = false;
 
     [Header("Delays")]
     [Tooltip("Time after which this will react, once this is set \"on\"(seconds)")]
@@ -68,8 +68,11 @@ public abstract class Trigger : SoundPlayer
 
     private void Start()
     {
-        if (isOn)   OnTriggered?.Invoke();
-        else        OnUntriggered?.Invoke();
+        if (isOnNeutralPositionAtStart)
+        {
+            if (isOn) OnTriggered?.Invoke();
+            else OnUntriggered?.Invoke();
+        }
     }
 
 
