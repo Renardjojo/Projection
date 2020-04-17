@@ -38,7 +38,9 @@ public class Triggered : SoundPlayer
 
         foreach (AndTriggerList andTriggerList in orTriggerList)
         {
-            if (andTriggerList.andList.Count == 0)
+            // There is a list, but it is empty, or it contains a single null element. Don't evaluate it
+            if (andTriggerList.andList.Count == 0 ||
+                (andTriggerList.andList.Count == 1 && !andTriggerList.andList[0]))
                 continue;
 
             bool And = true;
@@ -61,16 +63,18 @@ public class Triggered : SoundPlayer
 
         foreach (AndTriggerList andTriggerList in orTriggerList)
         {
-            if (andTriggerList.andList.Count == 0)
+            // There is a list, but it is empty, or there is a single null element. Don't evaluate it
+            if (andTriggerList.andList.Count == 0 ||
+                (andTriggerList.andList.Count == 1 && !andTriggerList.andList[0]))
                 continue;
 
             bool And = true;
-
             foreach (Trigger trig in andTriggerList.andList)
             {
                 if (trig)
                     And &= trig.IsOn;
             }
+
             Or |= And;
         }
 
