@@ -107,7 +107,7 @@ public abstract class Trigger : SoundPlayer
 
     private void Start()
     {
-        if (isOnNeutralPositionAtStart)
+        if (!isOnNeutralPositionAtStart)
         {
             if (isOn)   OnTriggered?.Invoke();
             else        OnUntriggered?.Invoke();

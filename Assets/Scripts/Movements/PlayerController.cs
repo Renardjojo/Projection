@@ -226,7 +226,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            shadowMoveScript.MoveX(value);
             bodyMoveScript.MoveX(value);
             bodyAnimator.SetFloat("Speed", Mathf.Abs(value));
             shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
@@ -242,7 +241,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            shadowMoveScript.Jump();
             bodyMoveScript.Jump();
         }
     }
