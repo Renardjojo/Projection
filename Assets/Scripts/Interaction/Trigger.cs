@@ -3,6 +3,17 @@ using System;
 
 public abstract class Trigger : SoundPlayer
 {
+    [Tooltip("A sound played during the transition from on to off")]
+    [SerializeField]
+    protected AudioClip offToOnSound = null;
+
+    [Tooltip("A sound played during the transition from on to off")]
+    [SerializeField]
+    protected AudioClip onToOffSound = null;
+
+    protected AudioSource offToOnAudio;
+    protected AudioSource onToOffAudio;
+
     /* ==== User accessible members ==== */
     [Header("Initial state")]
     [SerializeField] private bool isOn;
@@ -35,6 +46,8 @@ public abstract class Trigger : SoundPlayer
             {
                 isOn        = value;
                 applyDelay  = true;
+                offToOnAudio?.Stop();
+                onToOffAudio?.Stop();
                 PlaySound();
             }
         }
@@ -52,16 +65,35 @@ public abstract class Trigger : SoundPlayer
         timeElapsed = 0f;
         applyDelay = false;
 
+        // SoundPlayer
         if (switchedOnSound)
         {
-            switchedOnAudio = gameObject.AddComponent<AudioSource>();
-            switchedOnAudio.clip = switchedOnSound;
+            switchedOnAudio         = gameObject.AddComponent<AudioSource>();
+            switchedOnAudio.clip    = switchedOnSound;
         }
 
-        if (!useSameSound && switchedOffSound)
+        if (useSameSound)
+        {
+            switchedOffAudio    = switchedOnAudio;
+            onToOffAudio        = offToOnAudio;
+        }
+
+        else if (switchedOffSound)
         {
             switchedOffAudio = gameObject.AddComponent<AudioSource>();
             switchedOffAudio.clip = switchedOffSound;
+        }
+
+        if (offToOnSound)
+        {
+            offToOnAudio        = gameObject.AddComponent<AudioSource>();
+            offToOnAudio.clip   = offToOnSound;
+        }
+
+        if (onToOffSound)
+        {
+            onToOffAudio        = gameObject.AddComponent<AudioSource>();
+            onToOffAudio.clip   = onToOffSound;
         }
     }
 
@@ -70,8 +102,8 @@ public abstract class Trigger : SoundPlayer
     {
         if (isOnNeutralPositionAtStart)
         {
-            if (isOn) OnTriggered?.Invoke();
-            else OnUntriggered?.Invoke();
+            if (isOn)   OnTriggered?.Invoke();
+            else        OnUntriggered?.Invoke();
         }
     }
 
@@ -82,19 +114,30 @@ public abstract class Trigger : SoundPlayer
         {
             timeElapsed += Time.deltaTime;
 
-            if (isOn && timeElapsed >= activationDelay)
+            if (isOn)
             {
-                OnTriggered?.Invoke();
-                timeElapsed = 0f;
-                applyDelay = false;
+                if (timeElapsed >= activationDelay)
+                {
+                    OnTriggered?.Invoke();
+                    offToOnAudio?.Stop();
+                    timeElapsed = 0f;
+                    applyDelay = false;
+                }
+
+                else
+                    offToOnAudio?.Play();
             }
 
             else if (timeElapsed >= deactivationDelay)
             {
                 OnUntriggered?.Invoke();
+                onToOffAudio?.Stop();
                 timeElapsed = 0f;
                 applyDelay = false;
             }
+
+            else
+                onToOffAudio?.Play();
         }
     }
 

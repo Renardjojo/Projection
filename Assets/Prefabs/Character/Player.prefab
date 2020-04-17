@@ -65,9 +65,11 @@ MonoBehaviour:
       wallDetectionRange: 1
       wallJumpNormalSpeed: 5
       wallJumpUpSpeed: 12
+      wallCoyoteTime: 0.25
       fallAcceleration: 0.3
       airControlRatioWhenWallJump: 100
       maxVelocity: 70
+      coyoteTime: 0.3
       avoidSlowMotion: 0
     eventComponent:
       OnIsDead:
@@ -106,9 +108,11 @@ MonoBehaviour:
       wallDetectionRange: 1
       wallJumpNormalSpeed: 5
       wallJumpUpSpeed: 5
+      wallCoyoteTime: 0.25
       fallAcceleration: 0.1
       airControlRatioWhenWallJump: 100
       maxVelocity: 70
+      coyoteTime: 0.3
       avoidSlowMotion: 1
     activateShadowOnStart: 1
     eventComponent:
@@ -380,6 +384,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5286657273311963485, guid: ff30f32637ca90942b21504c181efc2d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40e12d8cd4243554b890001022d1038a, type: 2}
     - target: {fileID: -6057140222963153312, guid: ff30f32637ca90942b21504c181efc2d,
         type: 3}
       propertyPath: m_Controller
@@ -390,11 +399,6 @@ PrefabInstance:
       propertyPath: m_UpdateMode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5286657273311963485, guid: ff30f32637ca90942b21504c181efc2d,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: cd065bf6c55eb1645b6dc117ebbd8d8e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff30f32637ca90942b21504c181efc2d, type: 3}
 --- !u!4 &5477241046965127715 stripped
