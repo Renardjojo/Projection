@@ -16,6 +16,10 @@ public abstract class Trigger : SoundPlayer
     [SerializeField]
     protected float audioSlowFactor = .5f;
 
+    [Tooltip("Volume of the on/off transition sounds")]
+    [Range(0f, 1f)]
+    [SerializeField] private float volume = 1f;
+
     protected AudioSource offToOnAudio;
     protected AudioSource onToOffAudio;
 
@@ -36,7 +40,7 @@ public abstract class Trigger : SoundPlayer
 
     /* ==== Private data members ==== */
     protected float timeElapsed;
-    private bool applyDelay;
+    protected bool applyDelay;
 
 
     /* ==== Property ==== */
@@ -47,6 +51,7 @@ public abstract class Trigger : SoundPlayer
 
         set
         {
+            // The plate has not already been activated or disactivated
             if (isOn != value)
             {
                 isOn        = value;
@@ -94,6 +99,7 @@ public abstract class Trigger : SoundPlayer
             offToOnAudio        = gameObject.AddComponent<AudioSource>();
             offToOnAudio.clip   = offToOnSound;
             offToOnAudio.loop   = true;
+            offToOnAudio.volume = volume;
         }
 
         if (onToOffSound)
@@ -101,6 +107,7 @@ public abstract class Trigger : SoundPlayer
             onToOffAudio        = gameObject.AddComponent<AudioSource>();
             onToOffAudio.clip   = onToOffSound;
             onToOffAudio.loop   = true;
+            onToOffAudio.volume = volume;
         }
     }
 
