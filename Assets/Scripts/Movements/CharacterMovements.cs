@@ -85,6 +85,7 @@ public class CharacterMovements : MonoBehaviour
     internal CharacterMovementProperties    properties;
     internal AudioComponent                 audio;
     internal Animator                       animator;
+    internal Animator                       secondAnimator;
     Coroutine                               wallJumpDelayCorroutine;
 
     //// This is not physically correct, but it gives a better video-game-like jump.
@@ -212,6 +213,9 @@ public class CharacterMovements : MonoBehaviour
             JumpFlag = false;
             WallJumpFlag = false;
             isCoyoteTimeAvailable = false;
+
+            animator?.SetTrigger("Jump");
+            secondAnimator?.SetTrigger("Jump");
         }
     }
 
@@ -225,6 +229,7 @@ public class CharacterMovements : MonoBehaviour
         if (controller.isGrounded)
         {
             animator?.SetBool("IsGrounded", true);
+            secondAnimator?.SetBool("IsGrounded", true);
 
             isCoyoteTimeAvailable = true;
             lastGroundTime = Time.time;
@@ -269,6 +274,7 @@ public class CharacterMovements : MonoBehaviour
         else
         {
             animator?.SetBool("IsGrounded", false);
+            secondAnimator?.SetBool("IsGrounded", false);
 
             // Move in mid-air with input
             if (!disableInputs)
@@ -383,12 +389,14 @@ public class CharacterMovements : MonoBehaviour
             isOnWall = true;
             lastWallNormal = hitInfo.normal;
             animator?.SetBool("IsOnWall", true);
+            secondAnimator?.SetBool("IsOnWall", true);
         }
 
         else
         {
             isOnWall = false;
             animator?.SetBool("IsOnWall", false);
+            secondAnimator?.SetBool("IsOnWall", false);
         }
 
         // ======== If input, then jump ======== //
@@ -401,6 +409,9 @@ public class CharacterMovements : MonoBehaviour
             isOnWall = WallJumpFlag = false;
             animator?.SetBool("IsOnWall", false);
             animator?.SetTrigger("WallJump");
+
+            secondAnimator?.SetBool("IsOnWall", false);
+            secondAnimator?.SetTrigger("WallJump");
 
             // Rotate
             if (velocity.x > .1f)
