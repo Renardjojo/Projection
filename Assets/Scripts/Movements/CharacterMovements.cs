@@ -52,6 +52,7 @@ public class CharacterMovementProperties
     [SerializeField] public float wallDetectionRange = 1f;
     [SerializeField] public float wallJumpNormalSpeed = 5f;
     [SerializeField] public float wallJumpUpSpeed = 5f;
+    [SerializeField] public float wallCoyoteTime = 0.5f;
     [SerializeField] public float fallAcceleration = .1f;
     [SerializeField] public float airControlRatioWhenWallJump = 100f;
     [SerializeField] public float maxVelocity = 70f;
@@ -109,7 +110,11 @@ public class CharacterMovements : MonoBehaviour
     // it means that this value is equal to Time.time .
     // It is used for the Coyote Time.
     private float lastGroundTime = 0f;
-    private bool isCoyoteTimeAvailable = true; 
+    private bool isCoyoteTimeAvailable = true;
+
+    private float lastWallTime = 0f;
+    private bool isWallCoyoteTimeAvailable = true;
+    private Vector3 lastWallNormal;
 
 
     /* ==== Unity methods ==== */
@@ -384,8 +389,11 @@ public class CharacterMovements : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && (hitInfo.collider.tag == "Wall" || hitInfo.collider.tag == "MovingWall"))
         {
+            lastWallTime = Time.time;
+            isWallCoyoteTimeAvailable = true;
             disableInputs = false;
             isOnWall = true;
+            lastWallNormal = hitInfo.normal;
             animator?.SetBool("IsOnWall", true);
             secondAnimator?.SetBool("IsOnWall", true);
         }
@@ -398,9 +406,10 @@ public class CharacterMovements : MonoBehaviour
         }
 
         // ======== If input, then jump ======== //
-        if (isOnWall && WallJumpFlag && !controller.isGrounded)
+        if (WallJumpFlag && !controller.isGrounded && (isOnWall || TryToUseWallCoyoteTime()))
         {
-            velocity        = hitInfo.normal * properties.wallJumpNormalSpeed + Vector3.up * properties.wallJumpUpSpeed;
+            velocity        = lastWallNormal * properties.wallJumpNormalSpeed + Vector3.up * properties.wallJumpUpSpeed;
+            isWallCoyoteTimeAvailable = false;
             disableInputs   = true;
             disableInputsTime = Time.time;
             isOnWall = WallJumpFlag = false;
@@ -424,6 +433,17 @@ public class CharacterMovements : MonoBehaviour
         if (isCoyoteTimeAvailable && Time.time - lastGroundTime < properties.coyoteTime)
         {
             isCoyoteTimeAvailable = false;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    bool TryToUseWallCoyoteTime()
+    {
+        if (isWallCoyoteTimeAvailable && Time.time - lastWallTime < properties.wallCoyoteTime)
+        {
+            isWallCoyoteTimeAvailable = false;
             return true;
         }
         else
