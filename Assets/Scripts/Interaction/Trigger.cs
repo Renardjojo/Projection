@@ -11,6 +11,11 @@ public abstract class Trigger : SoundPlayer
     [SerializeField]
     protected AudioClip onToOffSound = null;
 
+    [Tooltip("The factor applied to the audio when time is slowed")]
+    [Range(.01f, 1f)]
+    [SerializeField]
+    protected float audioSlowFactor = .5f;
+
     protected AudioSource offToOnAudio;
     protected AudioSource onToOffAudio;
 
@@ -88,12 +93,14 @@ public abstract class Trigger : SoundPlayer
         {
             offToOnAudio        = gameObject.AddComponent<AudioSource>();
             offToOnAudio.clip   = offToOnSound;
+            offToOnAudio.loop   = true;
         }
 
         if (onToOffSound)
         {
             onToOffAudio        = gameObject.AddComponent<AudioSource>();
             onToOffAudio.clip   = onToOffSound;
+            onToOffAudio.loop   = true;
         }
     }
 
@@ -110,6 +117,22 @@ public abstract class Trigger : SoundPlayer
 
     protected void Update()
     {
+        if (Time.timeScale < 1f)
+        {
+            if (switchedOnAudio)    switchedOnAudio.pitch   = audioSlowFactor;
+            if (switchedOffAudio)   switchedOffAudio.pitch  = audioSlowFactor;
+            if (offToOnAudio)       offToOnAudio.pitch      = audioSlowFactor;
+            if (onToOffAudio)       onToOffAudio.pitch      = audioSlowFactor;
+        }
+
+        else
+        {
+            if (switchedOnAudio)    switchedOnAudio.pitch   = 1f;
+            if (switchedOffAudio)   switchedOffAudio.pitch  = 1f;
+            if (offToOnAudio)       offToOnAudio.pitch      = 1f;
+            if (onToOffAudio)       onToOffAudio.pitch      = 1f;
+        }
+
         if (applyDelay)
         {
             timeElapsed += Time.deltaTime;
@@ -124,7 +147,7 @@ public abstract class Trigger : SoundPlayer
                     applyDelay = false;
                 }
 
-                else
+                else if (!offToOnAudio.isPlaying)
                     offToOnAudio?.Play();
             }
 
@@ -136,7 +159,7 @@ public abstract class Trigger : SoundPlayer
                 applyDelay = false;
             }
 
-            else
+            else if (!onToOffAudio.isPlaying)
                 onToOffAudio?.Play();
         }
     }
