@@ -83,18 +83,8 @@ public class CharacterMovements : MonoBehaviour
     /* ==== User-defined data members ==== */
     internal CharacterMovementProperties    properties;
     internal AudioComponent                 audio;
-    Coroutine wallJumpDelayCorroutine;
-
-    //public float   AirControlRatio     {get; set;}
-    //public float   WallFriction        {get; set;}
-    //public float   SpeedScale          {get; set;}
-    //public float   JumpSpeed           {get; set;}
-    //public float   Gravity             {get; set;}
-
-    //public  bool   CanWallJump         {get; set;}
-    //public float   WallDetectionRange  {get; set;}
-    //public float   WallJumpNormalSpeed {get; set;}
-    //public float   WallJumpUpSpeed     {get; set;}
+    internal Animator                       animator;
+    Coroutine                               wallJumpDelayCorroutine;
 
     //// This is not physically correct, but it gives a better video-game-like jump.
     //public float  FallAcceleration     {get; set;}
@@ -229,6 +219,8 @@ public class CharacterMovements : MonoBehaviour
 
         if (controller.isGrounded)
         {
+            animator?.SetBool("IsGrounded", true);
+
             isCoyoteTimeAvailable = true;
             lastGroundTime = Time.time;
 
@@ -271,6 +263,8 @@ public class CharacterMovements : MonoBehaviour
         }
         else
         {
+            animator?.SetBool("IsGrounded", false);
+
             // Move in mid-air with input
             if (!disableInputs)
                 moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
@@ -375,15 +369,19 @@ public class CharacterMovements : MonoBehaviour
         ray.origin      = transform.position - Vector3.up * 0.5f;
         ray.direction   = transform.forward;
             
-        RaycastHit hitInfo; 
+        RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && (hitInfo.collider.tag == "Wall" || hitInfo.collider.tag == "MovingWall"))
         {
-            disableInputs   = false;
-            isOnWall        = true;
+            disableInputs = false;
+            isOnWall = true;
+            animator?.SetBool("IsOnWall", true);
         }
 
         else
+        {
             isOnWall = false;
+            animator?.SetBool("IsOnWall", false);
+        }
 
         // ======== If input, then jump ======== //
         if (isOnWall && WallJumpFlag && !controller.isGrounded)
@@ -392,6 +390,8 @@ public class CharacterMovements : MonoBehaviour
             disableInputs   = true;
             disableInputsTime = Time.time;
             isOnWall = WallJumpFlag = false;
+            animator?.SetBool("IsOnWall", false);
+            animator?.SetTrigger("WallJump");
 
             // Rotate
             if (velocity.x > .1f)
