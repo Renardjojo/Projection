@@ -147,7 +147,7 @@ public abstract class Trigger : SoundPlayer
                     applyDelay = false;
                 }
 
-                else if (!offToOnAudio.isPlaying)
+                else if (offToOnAudio && !offToOnAudio.isPlaying)
                     offToOnAudio?.Play();
             }
 
@@ -159,7 +159,7 @@ public abstract class Trigger : SoundPlayer
                 applyDelay = false;
             }
 
-            else if (!onToOffAudio.isPlaying)
+            else if (onToOffAudio && !onToOffAudio.isPlaying)
                 onToOffAudio?.Play();
         }
     }
