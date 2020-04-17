@@ -401,18 +401,24 @@ public class PlayerController : MonoBehaviour
 
     public void EnableShadow ()
     {
-        shadowProperties.activateShadow = true;
-        shadow.transform.Find("body").gameObject.SetActive(true);
-        resetFlag = true;
+        if (!shadowProperties.activateShadow)
+        {
+            shadowProperties.activateShadow = true;
+            shadow.transform.Find("body").gameObject.SetActive(true);
+            resetFlag = true;
+        }
     }
 
     public void DisableShadow ()
     {
-        if (controlledObject == shadow)
-            Transpose();
+        if (shadowProperties.activateShadow)
+        {
+            if (controlledObject == shadow)
+                Transpose();
 
-        shadowProperties.activateShadow = false;
-        shadow.transform.Find("body").gameObject.SetActive(false);
+            shadowProperties.activateShadow = false;
+            shadow.transform.Find("body").gameObject.SetActive(false);
+        }
     }
 
     public void SwitchShadowState()
