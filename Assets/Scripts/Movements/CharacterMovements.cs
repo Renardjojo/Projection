@@ -98,6 +98,7 @@ public class CharacterMovements : MonoBehaviour
     /* ==== Public data members ==== */
     internal CharacterController    controller          = null;
     internal bool                   disableInputs       = false;
+    private float                   disableInputsTime   = 0f;
     internal Vector3                moveDirection       = Vector3.zero;
     internal bool                   JumpFlag            { get; set; }
     internal bool                   WallJumpFlag        { get; set; }
@@ -213,8 +214,13 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
+    //[SerializeField]
+    private float inputsCooldownAfterWallJump = 0.5f;
     void Update()
     {
+        if (disableInputs && Time.time - disableInputsTime > inputsCooldownAfterWallJump)
+            disableInputs = false;
+
         if (controller.isGrounded)
         {
             animator?.SetBool("IsGrounded", true);
@@ -390,6 +396,7 @@ public class CharacterMovements : MonoBehaviour
         {
             velocity        = hitInfo.normal * properties.wallJumpNormalSpeed + Vector3.up * properties.wallJumpUpSpeed;
             disableInputs   = true;
+            disableInputsTime = Time.time;
             isOnWall = WallJumpFlag = false;
             animator?.SetBool("IsOnWall", false);
             animator?.SetTrigger("WallJump");
