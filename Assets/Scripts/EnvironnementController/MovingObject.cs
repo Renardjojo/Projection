@@ -59,12 +59,9 @@ public class MovingObject : MonoBehaviour
 
                 if (step >= 1f)
                 {
-                    if (backAndForth)
-                    {
-                        step = 1f;
-                        moveTowardEndPosition = false;
-                    }
-                    else
+                    step = 1f;
+                    moveTowardEndPosition = false;
+                    if (!backAndForth)
                     {
                         isMoving = false;
                     }
@@ -75,12 +72,9 @@ public class MovingObject : MonoBehaviour
                 step -= moveSpeed * Time.unscaledDeltaTime * (useTimeScale ? Time.timeScale : 1f);
                 if (step <= 0f)
                 {
-                    if (backAndForth)
-                    {
-                        step = 0f;
-                        moveTowardEndPosition = true;
-                    }
-                    else
+                    step = 0f;
+                    moveTowardEndPosition = true;
+                    if (!backAndForth)
                     {
                         isMoving = false;
                     }
