@@ -74,7 +74,7 @@ public class MovingObject : MonoBehaviour
                 {
                     step = 0f;
                     moveTowardEndPosition = true;
-                    if (backAndForth)
+                    if (!backAndForth)
                     {
                         isMoving = false;
                     }
