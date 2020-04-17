@@ -82,9 +82,9 @@ public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
     internal CharacterMovementProperties    properties;
-    internal AudioComponent                 audio;
-    internal Animator                       animator;
-    internal Animator                       secondAnimator;
+    internal AudioComponent                 audio          = null;
+    internal Animator                       animator       = null;
+    internal Animator                       secondAnimator = null;
     Coroutine                               wallJumpDelayCorroutine;
 
     //// This is not physically correct, but it gives a better video-game-like jump.
@@ -211,6 +211,9 @@ public class CharacterMovements : MonoBehaviour
 
             animator?.SetTrigger("Jump");
             secondAnimator?.SetTrigger("Jump");
+
+            animator?.SetBool("IsJumping", true);
+            secondAnimator?.SetBool("IsJumping", true);
         }
     }
 
@@ -218,6 +221,9 @@ public class CharacterMovements : MonoBehaviour
     private float inputsCooldownAfterWallJump = 0.5f;
     void Update()
     {
+        animator?.SetBool("IsJumping", false);
+        secondAnimator?.SetBool("IsJumping", false);
+
         if (disableInputs && Time.time - disableInputsTime > inputsCooldownAfterWallJump)
             disableInputs = false;
 
