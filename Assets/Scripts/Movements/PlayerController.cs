@@ -60,8 +60,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        InitializeBody();
         InitializeShadow();
+        InitializeBody();
+        
 
         controlledObject = body;
     }
@@ -121,6 +122,7 @@ public class PlayerController : MonoBehaviour
         /*Find the animator component*/
         bodyAnimator = body.transform.Find("body").GetComponent<Animator>();
         bodyMoveScript.animator = bodyAnimator;
+        bodyMoveScript.secondAnimator = shadowAnimator;
         GameDebug.AssertInTransform(bodyAnimator != null, body.transform, "There must be a gameObject named \"body\" with a Animator");
 
         if (bodyProperties.movementProperties.avoidSlowMotion)
@@ -224,6 +226,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            shadowMoveScript.MoveX(value);
             bodyMoveScript.MoveX(value);
             bodyAnimator.SetFloat("Speed", Mathf.Abs(value));
             shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
@@ -239,6 +242,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            shadowMoveScript.Jump();
             bodyMoveScript.Jump();
         }
     }
