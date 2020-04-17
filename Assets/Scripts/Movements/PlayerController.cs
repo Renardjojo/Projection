@@ -399,6 +399,7 @@ public class PlayerController : MonoBehaviour
         charController.enabled = true;
 
         OnIsDead?.Invoke();
+        ResetShadow();
     }
 
     public void UseCheckPointPosition(Vector3 position)

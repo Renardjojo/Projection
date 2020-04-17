@@ -28,6 +28,7 @@ public class ChangeSceneButton : MonoBehaviour
     {
         if (Application.CanStreamedLevelBeLoaded(newScene))
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(newScene, LoadSceneMode.Single);
         }
         else
