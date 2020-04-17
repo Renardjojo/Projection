@@ -302,8 +302,6 @@ public class PlayerController : MonoBehaviour
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
 
             shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
-            bodyAnimator.Play("Idle", -1, 0f);
-            shadowAnimator.Play("Idle", -1, 0f);
 
             bodyProperties.eventComponent.OnTransposed?.Invoke();
         }
