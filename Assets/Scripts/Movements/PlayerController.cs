@@ -95,8 +95,7 @@ public class PlayerController : MonoBehaviour
         foreach (LevelDoorController door in components3)
         {
             OnInteractLevelDoor += door.TryToPress;
-        }
-        
+        }        
 
         RemoveComponentToUnconstrolShadow();
 
@@ -105,7 +104,6 @@ public class PlayerController : MonoBehaviour
 
         defaultZOffset = shadow.transform.position.z - body.transform.position.z;
         shadowOffset = defaultZOffset * Vector3.forward;
-        bodyProperties.audioComponent.spawnSourceAudio?.Play();
     }
 
     private void InitializeBody()
@@ -180,11 +178,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
-            bodyToShadow[2] = 0f;
+            bodyToShadow.z = 0f;
+
             if (bodyToShadow.magnitude > maxShadowDistance)
             {
-                bodyToShadow *= maxShadowDistance / bodyToShadow.magnitude - 1f;
-                shadow.transform.position += bodyToShadow;
+                //Found the exedente of distance between the max distance and the actual distance and multiply it by the current vector to get the exedent vector.
+                bodyToShadow *= (bodyToShadow.magnitude / maxShadowDistance) - 1f;
+
+                //Reset the exedent position from the body to the shadow 
+                shadowMoveScript.DirectMove(-bodyToShadow);
                 shadowMoveScript.moveDirection = Vector3.zero;
             }
 
@@ -300,8 +302,6 @@ public class PlayerController : MonoBehaviour
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
 
             shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
-            bodyAnimator.Play("Idle", -1, 0f);
-            shadowAnimator.Play("Idle", -1, 0f);
 
             bodyProperties.eventComponent.OnTransposed?.Invoke();
         }
