@@ -85,7 +85,7 @@ public class CharacterMovements : MonoBehaviour
 {
     /* ==== User-defined data members ==== */
     internal CharacterMovementProperties    properties;
-    internal AudioComponent                 audio          = null;
+    new internal AudioComponent             audio          = null;
     internal Animator                       animator       = null;
     internal Animator                       secondAnimator = null;
     Coroutine                               wallJumpDelayCorroutine;
@@ -131,11 +131,11 @@ public class CharacterMovements : MonoBehaviour
     private void Start()
     {
         defaultZValue = gameObject.transform.localPosition.z;
-        initializeSoundComponent();
+        InitializeSoundComponent();
     }
 
 
-    void initializeSoundComponent()
+    void InitializeSoundComponent()
     {
         if (audio.walkingFootSound1 != null)
         {
@@ -224,7 +224,7 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
-    bool isLerpingWallJump()
+    bool IsLerpingWallJump()
     {
         return Time.time > lastWallTime + properties.inputsCooldownAfterWallJump // has inputs
             && Time.time < lastWallTime + properties.inputsCooldownAfterWallJump + properties.lerpLengthOnWallJump; 
@@ -232,7 +232,6 @@ public class CharacterMovements : MonoBehaviour
 
     void Update()
     {
-
         if (disableInputs && Time.time - disableInputsTime > properties.inputsCooldownAfterWallJump)
             disableInputs = false;
 
@@ -242,12 +241,12 @@ public class CharacterMovements : MonoBehaviour
             secondAnimator?.SetBool("IsGrounded", true);
 
             isCoyoteTimeAvailable = true;
+            disableInputs = false;
+
             lastGroundTime = Time.time;
 
-            disableInputs = false;
             // We are grounded, so recalculate
             // move direction directly from axes
-
             if (!disableInputs)
                 moveDirection = new Vector3(inputSpeed, 0f, 0f);
             else
@@ -268,7 +267,7 @@ public class CharacterMovements : MonoBehaviour
             ray.origin = transform.position;
             ray.direction = -transform.up * properties.wallDetectionRange * 4f;
 
-            RaycastHit hitInfo = new RaycastHit();
+            RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange * 4f) && hitInfo.collider.tag == "MovingWall")
             {
                     controller.Move((moveDirection * Time.deltaTime) + hitInfo.collider.GetComponent<MovingObject>().frameDisplacement);
@@ -286,10 +285,11 @@ public class CharacterMovements : MonoBehaviour
             animator?.SetBool("IsGrounded", false);
             secondAnimator?.SetBool("IsGrounded", false);
 
-            // Move in mid-air with input
+            // Move in mid-air without input
             if (disableInputs)
                 moveDirection.x += inputSpeed * properties.speedScale * properties.airControlRatio / properties.airControlRatioWhenWallJump;
-            else if (isLerpingWallJump())
+
+            else if (IsLerpingWallJump())
             {
                 moveDirection.x = Mathf.Lerp(moveDirection.x, inputSpeed * properties.speedScale, 
                                             (Time.time - lastWallTime - properties.inputsCooldownAfterWallJump) / properties.lerpLengthOnWallJump);
@@ -307,9 +307,13 @@ public class CharacterMovements : MonoBehaviour
             TryToJump();
             TryToWallJump(ref moveDirection);
 
+            // Make the player fall faster, to remove the floating effect
             if (moveDirection.y < 0f)
+            {
                 moveDirection.y -= properties.fallAcceleration;
+            }
 
+            // Is on wall
             if (properties.canWallJump && isOnWall && moveDirection.y < 0f)
             {
                 moveDirection.y *= properties.wallFriction;
@@ -336,7 +340,7 @@ public class CharacterMovements : MonoBehaviour
 
 
     /* ==== Character's abilities ==== */
-    public void MoveX(float f)
+    public void MoveInput(float f)
     {
         if (f != 0f && controller.isGrounded)
         {
@@ -398,6 +402,7 @@ public class CharacterMovements : MonoBehaviour
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && (hitInfo.collider.tag == "Wall" || hitInfo.collider.tag == "MovingWall"))
         {
+            // Is On Wall
             lastWallTime = Time.time;
             isWallCoyoteTimeAvailable = true;
             disableInputs = false;
@@ -409,6 +414,7 @@ public class CharacterMovements : MonoBehaviour
 
         else
         {
+            // Is not on wall
             isOnWall = false;
             animator?.SetBool("IsOnWall", false);
             secondAnimator?.SetBool("IsOnWall", false);
@@ -459,7 +465,8 @@ public class CharacterMovements : MonoBehaviour
             return false;
     }
 
-    public void Jump()
+    // Enables jump flag
+    public void JumpInput()
     {                           
         if (controller.isGrounded || TryToUseCoyoteTime())
         {

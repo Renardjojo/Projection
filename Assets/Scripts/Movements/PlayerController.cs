@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
 
             // Remove the player velocity on x to prevent the player from moving/sliding (if on ground)
             // If the player is not on ground, it should have disableInputs = false;
-            bodyMoveScript.MoveX(0f);
+            bodyMoveScript.MoveInput(0f);
         }
     }
 
@@ -223,12 +223,12 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.MoveX(value);
+            shadowMoveScript.MoveInput(value);
             shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
         }
         else
         {
-            bodyMoveScript.MoveX(value);
+            bodyMoveScript.MoveInput(value);
             bodyAnimator.SetFloat("Speed", Mathf.Abs(value));
             shadowAnimator.SetFloat("Speed", Mathf.Abs(value));
         }
@@ -239,11 +239,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isTransposed)
         {
-            shadowMoveScript.Jump();
+            shadowMoveScript.JumpInput();
         }
         else
         {
-            bodyMoveScript.Jump();
+            bodyMoveScript.JumpInput();
         }
     }
     
@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
             shadowProperties.audioComponent.transposeSourceAudio?.Play();
             shadowOffset = shadow.transform.position - body.transform.position;
 
-            shadowMoveScript.MoveX(0f);
+            shadowMoveScript.MoveInput(0f);
             onUntransposed?.Invoke();
             RemoveComponentToUnconstrolShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(false);
