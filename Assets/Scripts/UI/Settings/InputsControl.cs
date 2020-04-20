@@ -10,13 +10,14 @@ public class InputsControl : MonoBehaviour
     void Awake()
     {
         UnityEngine.UI.Dropdown dropDown = GetComponent<UnityEngine.UI.Dropdown>();
-        dropDown.onValueChanged.AddListener(ChangeInputs);
 
-        int n = PlayerPrefs.GetInt("inputs");
-        dropDown.value = n;
+        int inputIndex = PlayerPrefs.GetInt("inputs", 0);
+        dropDown.value = inputIndex;
+
+        dropDown.onValueChanged.AddListener(ChangeInputs);
     }
 
-    void ChangeInputs(int value)
+    private void ChangeInputs(int value)
     {
         PlayerPrefs.SetInt("inputs", value);
     }

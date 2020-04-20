@@ -9,12 +9,6 @@ public class AddScene : MonoBehaviour
     private string addedSceneName = "InGameMenu";
 
     private Scene scene;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

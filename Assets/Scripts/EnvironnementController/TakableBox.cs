@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
 public class TakableBox : MonoBehaviour
 {
     [SerializeField] private float interactionRadius = 1.75f;
@@ -17,7 +18,6 @@ public class TakableBox : MonoBehaviour
 
     internal bool TryToTakeBox(GameObject newOwner, Collider takerCollider)
     {
-        //if (Physics.Raycast(newOwner.transform.position, newOwner.transform.forward, maxDistancce))
         if ((newOwner.transform.position - transform.position).sqrMagnitude < interactionRadius  * interactionRadius)
         {
             Take(newOwner, takerCollider);
@@ -56,12 +56,6 @@ public class TakableBox : MonoBehaviour
         colliderBox = GetComponent<Collider>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -97,6 +91,14 @@ public class TakableBox : MonoBehaviour
             playerCollider.gameObject.layer = oldPlayerLayer;
             colliderBox.gameObject.layer = oldBoxLayer;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        // Prevent the box from going up if not hot held by the player.
+        // Indeed, if it is not held, only the gravity (and collisions) should affect the box.
+        if (owner == null && rb.velocity.y > 0)
+            rb.velocity = Vector3.zero;
     }
 
     public void OnDrawGizmos()

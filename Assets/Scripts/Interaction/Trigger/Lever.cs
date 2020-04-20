@@ -8,7 +8,7 @@ public class Lever : Trigger
     [SerializeField, Range(1f, 80f)] private float leverAngle = 20f;
     [SerializeField, Range(0f, 5f)] private float leverLerpWait = 2f;
 
-    [SerializeField] private float interactionRadius = 2f;
+    [Header("Range within the player can press the button"), SerializeField] private float interactionRadius = 2f;
 
     private float interactionRadius2;
 
