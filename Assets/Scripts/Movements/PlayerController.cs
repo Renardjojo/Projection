@@ -292,6 +292,8 @@ public class PlayerController : MonoBehaviour
             //Reset the shadow animation if the player is on wall. The shadow can't wall jump
             shadowAnimator.Play("Idle", -1, 0f);
             shadowAnimator.SetBool("IsOnWall", false);
+            shadowAnimator.SetBool("IsOnGround", false);
+            shadowAnimator.SetBool("IsJumping", false);
             shadowMoveScript.isOnWall = false;
             bodyMoveScript.secondAnimator = null;
         }
