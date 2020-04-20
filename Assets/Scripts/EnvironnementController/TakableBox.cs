@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
 public class TakableBox : MonoBehaviour
 {
     [SerializeField] private float interactionRadius = 1.75f;
@@ -17,7 +18,6 @@ public class TakableBox : MonoBehaviour
 
     internal bool TryToTakeBox(GameObject newOwner, Collider takerCollider)
     {
-        //if (Physics.Raycast(newOwner.transform.position, newOwner.transform.forward, maxDistancce))
         if ((newOwner.transform.position - transform.position).sqrMagnitude < interactionRadius  * interactionRadius)
         {
             Take(newOwner, takerCollider);

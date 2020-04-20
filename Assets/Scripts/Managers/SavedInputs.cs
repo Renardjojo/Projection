@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(InputManager))]
+// If enabled, overrides the default InputManager settings depending on currentInputOptionsID.
 public class SavedInputs : MonoBehaviour
 {
     [SerializeField]

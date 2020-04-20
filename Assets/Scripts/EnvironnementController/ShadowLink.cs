@@ -11,8 +11,7 @@ public class ShadowLink : MonoBehaviour
     private Vector3 lastObjectLocation;
     private Vector3 lastShadowLocation;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         GameDebug.AssertInTransform(shadow != null, transform, "Shadow shall not be null");
 
