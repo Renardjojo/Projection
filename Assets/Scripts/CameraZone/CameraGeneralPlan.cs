@@ -7,11 +7,13 @@ using Cinemachine;
 public class CameraGeneralPlan : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera camera;
+    [SerializeField] private ZoomCameraBetweenEntities zoomCameraPlayerScript;
     private Collider collider;
 
     [SerializeField, Range(1f, 15f)] private float generalPlanScale = 7f;
     [SerializeField, Range(0f, 1f)] private float lerpSpeed = 0.8f;
-    float exPlanScale = 5f; 
+    float exPlanScale;
+
 
     private void Awake()
     {
@@ -22,7 +24,8 @@ public class CameraGeneralPlan : MonoBehaviour
     {
         if (camera.Follow.gameObject == other.gameObject)
         {
-            exPlanScale = camera.m_Lens.OrthographicSize;
+            exPlanScale = zoomCameraPlayerScript.minOrthoSize;
+            zoomCameraPlayerScript.minOrthoSize = generalPlanScale;
             StopAllCoroutines();
             StartCoroutine(LerpScale(generalPlanScale));
         }
@@ -32,19 +35,25 @@ public class CameraGeneralPlan : MonoBehaviour
     {
         if (camera.Follow.gameObject == other.gameObject)
         {
+            zoomCameraPlayerScript.minOrthoSize = exPlanScale;
             StopAllCoroutines();
             StartCoroutine(LerpScale(exPlanScale));
         }
     }
 
-    IEnumerator LerpScale(float lerpGaol)
+    public IEnumerator LerpScale(float lerpGaol)
     {
-        while (Mathf.Abs(camera.m_Lens.OrthographicSize - lerpGaol) > 0.01f) //Espilone
+        float lerpStep = 0f;
+
+        zoomCameraPlayerScript.SetActivate(false);
+        while (lerpStep < 1f) //Espilone
         {
-            camera.m_Lens.OrthographicSize = Mathf.Lerp(camera.m_Lens.OrthographicSize, lerpGaol, lerpSpeed * Time.deltaTime);
+            lerpStep += lerpSpeed * Time.unscaledDeltaTime;
+            camera.m_Lens.OrthographicSize = Mathf.Lerp(camera.m_Lens.OrthographicSize, lerpGaol, lerpStep);
             yield return null;
         }
 
+        zoomCameraPlayerScript.SetActivate(true);
         camera.m_Lens.OrthographicSize = lerpGaol;
     }
 }

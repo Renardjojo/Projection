@@ -7,7 +7,8 @@ using UnityEditor;
 [RequireComponent(typeof(Collider))]
 public class TriggerHitEvent : MonoBehaviour
 {
-    [SerializeField] private HitEventInfo[] listCollisionEventWithSpecificTag; 
+    [SerializeField] private HitEventInfo[] listCollisionEventWithSpecificTag;
+    [SerializeField] public bool isTriggering = true;
 
     // Update is called once per frame
     void Update()
@@ -15,11 +16,14 @@ public class TriggerHitEvent : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        for (int i = 0; i < listCollisionEventWithSpecificTag.Length; i++)
+        if (isTriggering)
         {
-            if (collision.gameObject.tag == listCollisionEventWithSpecificTag[i].collisionWithTag)
+            for (int i = 0; i < listCollisionEventWithSpecificTag.Length; i++)
             {
-                listCollisionEventWithSpecificTag[i].OnHit?.Invoke();
+                if (collision.gameObject.tag == listCollisionEventWithSpecificTag[i].collisionWithTag)
+                {
+                    listCollisionEventWithSpecificTag[i].OnHit?.Invoke();
+                }
             }
         }
     }

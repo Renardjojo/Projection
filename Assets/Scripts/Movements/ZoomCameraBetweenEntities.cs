@@ -8,7 +8,10 @@ public class ZoomCameraBetweenEntities : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera   cam             = null;
     [SerializeField] float                      distanceOffset  = 5f;
 
-    float minOrthoSize;
+    bool isActivate = true;
+
+
+    internal float minOrthoSize;
 
     void Awake()
     {
@@ -22,6 +25,11 @@ public class ZoomCameraBetweenEntities : MonoBehaviour
 
     void Update()
     {
+        if(!isActivate)
+        {
+            return;
+        }
+
         float mainToSecondary = (secondEntity.transform.position - mainEntity.transform.position).magnitude;
 
         if (mainToSecondary <= distanceOffset)
@@ -32,5 +40,10 @@ public class ZoomCameraBetweenEntities : MonoBehaviour
         // the shadow on screen horizontally, while not unzooming too much
         else
             cam.m_Lens.OrthographicSize = minOrthoSize + (mainToSecondary - distanceOffset) * 1f / cam.m_Lens.Aspect;
+    }
+
+    public void SetActivate(bool flag)
+    {
+        isActivate = flag;
     }
 }

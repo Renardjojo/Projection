@@ -48,15 +48,9 @@ public class PressureButton : Trigger
     private void UpdateButton()
     {
         if (IsOn && currentCollidingObjects < necessaryCollidingObjects)
-        {
-            if (!applyDelay)
-                IsOn = false;
-        }
+            IsOn = false;
 
         else if (!IsOn && currentCollidingObjects >= necessaryCollidingObjects)
-        {
-            if (!applyDelay)
-                IsOn = true;
-        }
+            IsOn = true;
     }
 }

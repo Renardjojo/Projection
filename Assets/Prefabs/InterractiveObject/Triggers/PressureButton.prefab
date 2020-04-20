@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5926456578921156112}
   - component: {fileID: 5926456578921156113}
   - component: {fileID: 887887026}
+  - component: {fileID: 136640204541763118}
+  - component: {fileID: 8753021220501122651}
   m_Layer: 0
   m_Name: PressureButton
   m_TagString: Untagged
@@ -108,7 +110,11 @@ MonoBehaviour:
   switchedOnSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   switchedOffSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   useSameSound: 1
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   tagsWithCollisionEnabled:
@@ -130,3 +136,74 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &136640204541763118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5926456578921156114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e9b7f188d1e6f4f80f7c4c20e2b4ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0, z: 0}
+  useCurrentPoisitionToStart: 1
+  endPosition: {x: 0, y: -0.1, z: 0}
+  endPositionDependingOfStartPosition: 1
+  moveTowardEndPosition: 1
+  backAndForth: 0
+  moveSpeed: 0.8
+  useTimeScale: 0
+  isMoving: 1
+--- !u!114 &8753021220501122651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5926456578921156114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
+  orTriggerList:
+  - andList:
+    - {fileID: 5926456578921156113}
+  OnActivatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 136640204541763118}
+        m_MethodName: EnableMovement
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  OnDisabledEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 136640204541763118}
+        m_MethodName: ResetPosition
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

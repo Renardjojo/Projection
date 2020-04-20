@@ -9,7 +9,11 @@ public class InputsControl : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        GetComponent<UnityEngine.UI.Dropdown>().onValueChanged.AddListener(ChangeInputs);
+        UnityEngine.UI.Dropdown dropDown = GetComponent<UnityEngine.UI.Dropdown>();
+        dropDown.onValueChanged.AddListener(ChangeInputs);
+
+        int n = PlayerPrefs.GetInt("inputs");
+        dropDown.value = n;
     }
 
     void ChangeInputs(int value)

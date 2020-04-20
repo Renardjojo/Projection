@@ -345,8 +345,8 @@ InputManager:
     m_Name: Debug Vertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
+    negativeButton: s
+    positiveButton: z
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -361,17 +361,17 @@ InputManager:
     m_Name: Debug Vertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
-    axis: 6
+    axis: 1
     joyNum: 0
   - serializedVersion: 3
     m_Name: Debug Horizontal
@@ -387,7 +387,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 5
+    axis: 0
     joyNum: 0
   - serializedVersion: 3
     m_Name: Menu
@@ -397,6 +397,22 @@ InputManager:
     positiveButton: joystick button 7
     altNegativeButton: 
     altPositiveButton: escape
+    gravity: 1000
+    dead: 0.001
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Debug Submit
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 0
+    altNegativeButton: 
+    altPositiveButton: enter
     gravity: 1000
     dead: 0.001
     sensitivity: 1000

@@ -287,8 +287,14 @@ public class PlayerController : MonoBehaviour
             AddComponenetToControlShadow();
             timeManagerScript.EnableSlowMotionInFirstPlan(true);
 
-            shadowProperties.eventComponent.OnTransposed?.Invoke();
+            bodyProperties.eventComponent.OnTransposed?.Invoke();
             shadowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+            //Reset the shadow animation if the player is on wall. The shadow can't wall jump
+            shadowAnimator.Play("Idle", -1, 0f);
+            shadowAnimator.SetBool("IsOnWall", false);
+            shadowMoveScript.isOnWall = false;
+            bodyMoveScript.secondAnimator = null;
         }
 
         else
@@ -303,7 +309,8 @@ public class PlayerController : MonoBehaviour
 
             shadowAnimator.updateMode = AnimatorUpdateMode.Normal;
 
-            bodyProperties.eventComponent.OnTransposed?.Invoke();
+            shadowProperties.eventComponent.OnTransposed?.Invoke();
+            bodyMoveScript.secondAnimator = shadowAnimator;
         }
     }
 
@@ -392,6 +399,7 @@ public class PlayerController : MonoBehaviour
         charController.enabled = true;
 
         OnIsDead?.Invoke();
+        ResetShadow();
     }
 
     public void UseCheckPointPosition(Vector3 position)

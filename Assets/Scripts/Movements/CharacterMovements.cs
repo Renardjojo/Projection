@@ -58,6 +58,8 @@ public class CharacterMovementProperties
     [SerializeField] public float maxVelocity = 70f;
     [SerializeField] public float coyoteTime = 0.1f;
 
+    [SerializeField] public float inputsCooldownAfterWallJump = 0.5f;
+    [SerializeField] public float lerpLengthOnWallJump = 2.2f;
 
     [SerializeField] public bool avoidSlowMotion = false;
 
@@ -87,6 +89,7 @@ public class CharacterMovements : MonoBehaviour
     internal Animator                       animator       = null;
     internal Animator                       secondAnimator = null;
     Coroutine                               wallJumpDelayCorroutine;
+    Coroutine                               jumpAnimationFlagCorroutine;
 
     //// This is not physically correct, but it gives a better video-game-like jump.
     //public float  FallAcceleration     {get; set;}
@@ -94,7 +97,7 @@ public class CharacterMovements : MonoBehaviour
     /* ==== Private data members ==== */
     private float                    inputSpeed          = 0f;
     private float                    defaultZValue       = 0f;
-    private bool                     isOnWall            = false;
+    internal bool                    isOnWall            = false;
 
     /* ==== Public data members ==== */
     internal CharacterController    controller          = null;
@@ -214,22 +217,23 @@ public class CharacterMovements : MonoBehaviour
             WallJumpFlag = false;
             isCoyoteTimeAvailable = false;
 
-            animator?.SetTrigger("Jump");
-            secondAnimator?.SetTrigger("Jump");
+            if(jumpAnimationFlagCorroutine != null)
+                StopCoroutine(jumpAnimationFlagCorroutine);
 
-            animator?.SetBool("IsJumping", true);
-            secondAnimator?.SetBool("IsJumping", true);
+            jumpAnimationFlagCorroutine = StartCoroutine(JumpAnimationFlagCorroutine());
         }
     }
 
-    //[SerializeField]
-    private float inputsCooldownAfterWallJump = 0.5f;
+    bool isLerpingWallJump()
+    {
+        return Time.time > lastWallTime + properties.inputsCooldownAfterWallJump // has inputs
+            && Time.time < lastWallTime + properties.inputsCooldownAfterWallJump + properties.lerpLengthOnWallJump; 
+    }
+
     void Update()
     {
-        animator?.SetBool("IsJumping", false);
-        secondAnimator?.SetBool("IsJumping", false);
 
-        if (disableInputs && Time.time - disableInputsTime > inputsCooldownAfterWallJump)
+        if (disableInputs && Time.time - disableInputsTime > properties.inputsCooldownAfterWallJump)
             disableInputs = false;
 
         if (controller.isGrounded)
@@ -262,12 +266,12 @@ public class CharacterMovements : MonoBehaviour
             // ======== Detect MovingWall ======== //
             Ray ray = new Ray();
             ray.origin = transform.position;
-            ray.direction = -transform.up * 10f;
+            ray.direction = -transform.up * properties.wallDetectionRange * 4f;
 
-            RaycastHit hitInfo;
-            if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange) && (hitInfo.collider.tag == "MovingWall"))
+            RaycastHit hitInfo = new RaycastHit();
+            if (Physics.Raycast(ray, out hitInfo, properties.wallDetectionRange * 4f) && hitInfo.collider.tag == "MovingWall")
             {
-                controller.Move((moveDirection * Time.deltaTime) + hitInfo.collider.GetComponent<MovingObject>().frameDisplacement);
+                    controller.Move((moveDirection * Time.deltaTime) + hitInfo.collider.GetComponent<MovingObject>().frameDisplacement);
             }
             else
             {
@@ -283,11 +287,16 @@ public class CharacterMovements : MonoBehaviour
             secondAnimator?.SetBool("IsGrounded", false);
 
             // Move in mid-air with input
-            if (!disableInputs)
-                moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
+            if (disableInputs)
+                moveDirection.x += inputSpeed * properties.speedScale * properties.airControlRatio / properties.airControlRatioWhenWallJump;
+            else if (isLerpingWallJump())
+            {
+                moveDirection.x = Mathf.Lerp(moveDirection.x, inputSpeed * properties.speedScale, 
+                                            (Time.time - lastWallTime - properties.inputsCooldownAfterWallJump) / properties.lerpLengthOnWallJump);
+            }
             else
             {
-                moveDirection.x += inputSpeed * properties.speedScale * properties.airControlRatio / properties.airControlRatioWhenWallJump;
+                moveDirection.x = inputSpeed * properties.speedScale * properties.airControlRatio;
             }
 
             // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
@@ -477,5 +486,16 @@ public class CharacterMovements : MonoBehaviour
         }
 
         WallJumpFlag = false;
+    }
+
+
+    IEnumerator JumpAnimationFlagCorroutine()
+    {
+        animator?.SetBool("IsJumping", true);
+        secondAnimator?.SetBool("IsJumping", true);
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        animator?.SetBool("IsJumping", false);
+        secondAnimator?.SetBool("IsJumping", false);
     }
 }

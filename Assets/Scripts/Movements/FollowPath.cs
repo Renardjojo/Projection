@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
+    [SerializeField] private TriggerHitEvent triggerHitEvent = null;
     [SerializeField] private GameObject target   = null;
     [SerializeField] private PlayerController pc = null;
     [SerializeField] [Range(0f, 10f)] private float delay = 3f;
@@ -21,18 +22,26 @@ public class FollowPath : MonoBehaviour
 
     private float timeModifier = 1f;
 
+    private float initTime = 0f;
+
     private void Awake()
     {
         initialPosition = transform.position;
+
+        lastLoc = transform.position;
+        //lastRot = transform.rotation;
+        lastTime = 0f;
+
+        initTime = Time.time;
+
+        triggerHitEvent = GetComponent<TriggerHitEvent>();
+        if (triggerHitEvent != null)
+            triggerHitEvent.isTriggering = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        lastLoc = transform.position;
-        //lastRot = transform.rotation;
-        lastTime = 0f;
-
         if (pc)
         {
             pc.onTransposed   += AddSlowness;
@@ -43,7 +52,10 @@ public class FollowPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (triggerHitEvent != null && Time.time - initTime > delay)
+        {
+            triggerHitEvent.isTriggering = true;
+        }
     }
 
     private void FixedUpdate()
@@ -118,5 +130,10 @@ public class FollowPath : MonoBehaviour
 
         lastLoc  = initialPosition;
         lastTime = Time.time;
+
+        initTime = Time.time;
+
+        if (triggerHitEvent != null)
+            triggerHitEvent.isTriggering = false;
     }
 }
