@@ -18,12 +18,6 @@ public class ChangeSceneButton : MonoBehaviour
         btn.onClick.AddListener(TaskOnClick);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void TaskOnClick()
     {
         if (Application.CanStreamedLevelBeLoaded(newScene))

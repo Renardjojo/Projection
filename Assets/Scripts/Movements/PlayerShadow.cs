@@ -13,18 +13,6 @@ public class PlayerShadow : MonoBehaviour
         GameDebug.AssertInTransform(pc != null, transform, "pc should not be null");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-                
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.layer == LayerMask.NameToLayer("ScreenLight"))

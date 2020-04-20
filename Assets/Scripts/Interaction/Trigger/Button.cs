@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Button : Trigger
 {
+    [Header("Range within the player can press the button")]
     [SerializeField] private float interactionRadius = 2f;
+    // When the pressed, the button will be on. 
+    // After waiting activationLength seconds, the button will be off again.
+    [Header("When the pressed, the button will be on. After waiting activationLength seconds, the button will be off again.")]
     [SerializeField] private float activationLength = 1f;
 
     private Coroutine releaseCoroutine = null;
     private float interactionRadius2;
 
-    private void Start()
+    private void Awake()
     {
         interactionRadius2 = interactionRadius * interactionRadius;
     }

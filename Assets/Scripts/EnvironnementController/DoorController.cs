@@ -21,18 +21,6 @@ public class DoorController : MonoBehaviour
     [Tooltip("Define the opening between 0 and 1. 1 for the door is not open when opening and 0 for the door is totaly open")]
     private float opening = 1f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Open()
     {
         gameObject.SetActive(false);
