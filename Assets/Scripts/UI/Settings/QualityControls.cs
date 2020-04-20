@@ -11,13 +11,16 @@ public class QualityControls : MonoBehaviour
     void Awake()
     {
         dropDown = GetComponent<UnityEngine.UI.Dropdown>();
-        dropDown.value = QualitySettings.GetQualityLevel();
+
+        int qualityIndex = PlayerPrefs.GetInt("quality", 1);
+        dropDown.value = qualityIndex;
 
         dropDown.onValueChanged.AddListener(ChangeInputs);
     }
 
-    void ChangeInputs(int value)
+    private void ChangeInputs(int value)
     {
+        PlayerPrefs.SetInt("quality", value);
         QualitySettings.SetQualityLevel(value * 2, true);
     }
 }

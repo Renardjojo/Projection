@@ -11,13 +11,16 @@ public class VolumeControl : MonoBehaviour
     void Awake()
     {
         slider = GetComponent<UnityEngine.UI.Slider>();
-        slider.value = AudioListener.volume;
-        slider.onValueChanged.AddListener(ChangeVolume);
 
+        float volume = PlayerPrefs.GetFloat("volume", 0.5f);
+        slider.value = volume;
+
+        slider.onValueChanged.AddListener(ChangeVolume);
     }
 
-    void ChangeVolume(float value)
+    private void ChangeVolume(float value)
     {
+        PlayerPrefs.SetFloat("volume", value);
         AudioListener.volume = value;
     }
 }
