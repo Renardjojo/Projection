@@ -124,13 +124,18 @@ MonoBehaviour:
   switchedOnSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   switchedOffSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   useSameSound: 1
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   baseSphere: {fileID: 7019788617874921661}
   leverAngle: 20
   leverLerpWait: 2
-  interactionRadius: 0.7
+  interactionRadius: 1.5
 --- !u!1 &7019788617874921661
 GameObject:
   m_ObjectHideFlags: 0
