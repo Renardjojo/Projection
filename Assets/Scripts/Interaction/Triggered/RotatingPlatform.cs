@@ -7,16 +7,19 @@ public class RotatingPlatform : MonoBehaviour
     // if axisRotationID is 0, the platform will rotate around the x axis
     // if it is 1, around the y axis
     // if it is 2, around the z axis
-    [SerializeField, Range(0,2), Tooltip("0 = rotate around x axis\n1 = rotate around y axis\n2 = rotate around z axis")] int axisRotationID = 2;
+    [Tooltip("0 = rotate around x axis\n1 = rotate around y axis\n2 = rotate around z axis")]
+    [Range(0, 2)]
+    [SerializeField] int axisRotationID = 2;
+
     [SerializeField] float maxRotation = 180f;
 
     private Vector3 defaultRotation;
-    private float lastTime = 0f;
-    private float targetRotation = 0f;
-    private float lastRotation   = 0f;
+    private float   lastTime;
+    private float   targetRotation;
+    private float   lastRotation;
 
-    bool bIsRotating = false;
-    bool bIsFaceType1 = false;
+    private bool bIsRotating;
+    private bool bIsFaceType1;
 
     [SerializeField]
     private float duration = 3f;
@@ -24,34 +27,34 @@ public class RotatingPlatform : MonoBehaviour
     private void Awake()
     {
         defaultRotation = transform.rotation.eulerAngles;
+        lastTime = targetRotation = lastRotation = 0f;
+        bIsRotating = bIsFaceType1 = false;
     }
 
     public void Activate()
     {
-        if (!bIsRotating)
-        {
-            lastRotation = targetRotation;
-            bIsFaceType1 = !bIsFaceType1;
-            if (bIsFaceType1)
-                targetRotation = maxRotation;
-            else
-                targetRotation = 0;
+        lastRotation = targetRotation;
+        bIsFaceType1 = !bIsFaceType1;
+        if (bIsFaceType1)
+            targetRotation = maxRotation;
+        else
+            targetRotation = 0;
 
-            lastTime = Time.time;
-            bIsRotating = true;
-        }
+        lastTime = Time.time;
+        bIsRotating = true;
     }
+
 
     private void FixedUpdate()
     {
         if (bIsRotating)
         {
-            Vector3 newRot = defaultRotation;
+            Vector3 newRot = transform.rotation.eulerAngles;
 
             float delta = (Time.time - lastTime) / (duration);
 
             // Be aware of rotation bugs caused by Gimbal lock
-            newRot[axisRotationID] = Mathf.LerpAngle(lastRotation, targetRotation, delta);
+            newRot[axisRotationID] = Mathf.LerpAngle(newRot[axisRotationID], targetRotation, delta);
 
             transform.eulerAngles = newRot;
 
