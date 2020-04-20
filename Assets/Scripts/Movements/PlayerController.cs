@@ -398,6 +398,8 @@ public class PlayerController : MonoBehaviour
         charController.transform.position = checkPointPosition;
         charController.enabled = true;
 
+        bodyMoveScript.moveDirection = Vector3.zero;
+
         OnIsDead?.Invoke();
         ResetShadow();
     }
