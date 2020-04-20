@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
         InitializeShadow();
         InitializeBody();
         
-
         controlledObject = body;
     }
 
@@ -411,13 +410,12 @@ public class PlayerController : MonoBehaviour
         checkPointPosition = position;
     }
 
-    public void EnableShadow ()
+    public void EnableShadow()
     {
         if (!shadowProperties.activateShadow)
         {
             shadowProperties.activateShadow = true;
             shadow.transform.Find("body").gameObject.SetActive(true);
-            resetFlag = true;
         }
     }
 
@@ -430,6 +428,7 @@ public class PlayerController : MonoBehaviour
 
             shadowProperties.activateShadow = false;
             shadow.transform.Find("body").gameObject.SetActive(false);
+            resetFlag = true;
         }
     }
 
