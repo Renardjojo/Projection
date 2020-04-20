@@ -93,6 +93,14 @@ public class TakableBox : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        // Prevent the box from going up if not hot held by the player.
+        // Indeed, if it is not held, only the gravity (and collisions) should affect the box.
+        if (owner == null && rb.velocity.y > 0)
+            rb.velocity = Vector3.zero;
+    }
+
     public void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, interactionRadius);
