@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
         InitializeShadow();
         InitializeBody();
         
-
         controlledObject = body;
     }
 
@@ -293,6 +292,8 @@ public class PlayerController : MonoBehaviour
             //Reset the shadow animation if the player is on wall. The shadow can't wall jump
             shadowAnimator.Play("Idle", -1, 0f);
             shadowAnimator.SetBool("IsOnWall", false);
+            shadowAnimator.SetBool("IsOnGround", false);
+            shadowAnimator.SetBool("IsJumping", false);
             shadowMoveScript.isOnWall = false;
             bodyMoveScript.secondAnimator = null;
         }
@@ -411,13 +412,12 @@ public class PlayerController : MonoBehaviour
         checkPointPosition = position;
     }
 
-    public void EnableShadow ()
+    public void EnableShadow()
     {
         if (!shadowProperties.activateShadow)
         {
             shadowProperties.activateShadow = true;
             shadow.transform.Find("body").gameObject.SetActive(true);
-            resetFlag = true;
         }
     }
 
@@ -430,6 +430,7 @@ public class PlayerController : MonoBehaviour
 
             shadowProperties.activateShadow = false;
             shadow.transform.Find("body").gameObject.SetActive(false);
+            resetFlag = true;
         }
     }
 
