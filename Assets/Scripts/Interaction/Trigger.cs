@@ -16,6 +16,11 @@ public abstract class Trigger : SoundPlayer
     [SerializeField]
     protected float audioSlowFactor = .5f;
 
+    [Tooltip("Volume of the transition audio clips")]
+    [Range(0f, 1f)]
+    [SerializeField]
+    protected float transitionVolume = 1f;
+
     protected AudioSource offToOnAudio;
     protected AudioSource onToOffAudio;
 
@@ -36,7 +41,7 @@ public abstract class Trigger : SoundPlayer
 
     /* ==== Private data members ==== */
     protected float timeElapsed;
-    private bool applyDelay;
+    protected bool applyDelay;
 
 
     /* ==== Property ==== */
@@ -94,6 +99,7 @@ public abstract class Trigger : SoundPlayer
             offToOnAudio        = gameObject.AddComponent<AudioSource>();
             offToOnAudio.clip   = offToOnSound;
             offToOnAudio.loop   = true;
+            offToOnAudio.volume = transitionVolume;
         }
 
         if (onToOffSound)
@@ -101,6 +107,7 @@ public abstract class Trigger : SoundPlayer
             onToOffAudio        = gameObject.AddComponent<AudioSource>();
             onToOffAudio.clip   = onToOffSound;
             onToOffAudio.loop   = true;
+            onToOffAudio.volume = transitionVolume;
         }
     }
 
