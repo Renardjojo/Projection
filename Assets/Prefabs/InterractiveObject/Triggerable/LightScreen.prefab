@@ -150,6 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   orTriggerList:
   - andList:
     - {fileID: 0}
@@ -209,7 +212,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plan1: {fileID: 7186733541185609213}
-  plan2: {fileID: 7186733541985603667}
+  planStencil: {fileID: 7186733541985603667}
+  onMaterial: {fileID: 2100000, guid: a9145b0221dd68c4b9ff3c70c0772250, type: 2}
+  offMaterial: {fileID: 2100000, guid: 30d5ef5aac3f5454b8bd88db715087cb, type: 2}
 --- !u!1 &7186733541985603667
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +227,7 @@ GameObject:
   - component: {fileID: 7186733541985603671}
   - component: {fileID: 7186733541985603664}
   m_Layer: 10
-  m_Name: Plane (2)
+  m_Name: PlaneStencil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

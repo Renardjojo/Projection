@@ -9,8 +9,6 @@ public class LevelDoorController : Trigger
     [SerializeField] private float  interactionRadius = 2f;
     private float                   interactionRadius2;
     [SerializeField] UnityEvent OnPressEvent;
-    [SerializeField, Tooltip("If door is End Door. This Door will activate an boolean with the name of the current scene to save that the player finish the level")]
-    bool isEndDoor = false;
 
     private void Start()
     {
@@ -19,14 +17,11 @@ public class LevelDoorController : Trigger
 
     public void Press()
     {
-        IsOn = true;
-
-        if (isEndDoor)
+        if (IsOn)
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, 1);
+            OnPressEvent?.Invoke();
         }
-
-        OnPressEvent?.Invoke();
     }
 
     public void TryToPress(Vector3 playerPos)

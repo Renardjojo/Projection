@@ -12,15 +12,17 @@ public class MainMenuController : MonoBehaviour
     {
         string newScene;
 
-        if (PlayerPrefs.GetInt("PlayerHaveLoadTutoScene") == 1)
+        // Tutorial already completed
+        if (PlayerPrefs.GetInt("Tutorial") == 1)
         {
             newScene = "HUB";
             isOnHub = true;
         }
+
+        // Tutorial not yet completed
         else
         {
             newScene = "Tutorial";
-            PlayerPrefs.SetInt("PlayerHaveLoadTutoScene", 1);
             isOnHub = false;
         }
 
