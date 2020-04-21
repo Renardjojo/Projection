@@ -16,6 +16,8 @@ public class CheckPoint : MonoBehaviour
                         float radiusZone = 1f;
                         private bool isActivate = false;
 
+    [SerializeField] private UnityEvent OnCheck = null;
+
     private void Awake()
     {
         flagMaterial = flag.GetComponent<MeshRenderer>().material;
@@ -36,6 +38,7 @@ public class CheckPoint : MonoBehaviour
             isActivate = true;
             flagMaterial.SetColor("_BaseColor", onColor);
             playerControllerScript.UseCheckPointPosition(transform.position);
+            OnCheck?.Invoke();
         }
     }
 
