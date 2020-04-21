@@ -118,6 +118,7 @@ public class CharacterMovements : MonoBehaviour
     private float lastWallTime = 0f;
     private bool isWallCoyoteTimeAvailable = true;
     private Vector3 lastWallNormal;
+    private bool isGrounded = true;
 
 
     /* ==== Unity methods ==== */
@@ -230,12 +231,15 @@ public class CharacterMovements : MonoBehaviour
             && Time.time < lastWallTime + properties.inputsCooldownAfterWallJump + properties.lerpLengthOnWallJump; 
     }
 
+
     void Update()
     {
         if (disableInputs && Time.time - disableInputsTime > properties.inputsCooldownAfterWallJump)
             disableInputs = false;
 
-        if (controller.isGrounded)
+        CheckIfEntityIsGrounded();
+
+        if (isGrounded)
         {
             animator?.SetBool("IsGrounded", true);
             secondAnimator?.SetBool("IsGrounded", true);
@@ -326,6 +330,34 @@ public class CharacterMovements : MonoBehaviour
         }
     }
 
+    private void CheckIfEntityIsGrounded ()
+    {
+        float playerCapsuleHeight = controller.height;
+        float groundHeightOffset = 0.1f;
+        float playerCapsuleRadius = controller.radius;
+
+        Vector3 posRay1 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.left * playerCapsuleRadius;
+        Vector3 posRay2 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.right * playerCapsuleRadius;
+
+        // Bit shift the index of the layer of gameobject to get a bit mask
+        int layerMask = 1 << gameObject.layer;
+
+        // This would cast rays only against colliders in layer of the game object.
+        // But instead we want to collide against everything except layer of the game object. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+        Debug.DrawRay(posRay1, Vector3.down * 0.2f, Color.green);
+        Debug.DrawRay(posRay2, Vector3.down * 0.2f, Color.blue);
+
+        if (Physics.Raycast(posRay1, Vector3.down, 0.2f, layerMask) || Physics.Raycast(posRay2, Vector3.down, 0.2f, layerMask))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -342,7 +374,7 @@ public class CharacterMovements : MonoBehaviour
     /* ==== Character's abilities ==== */
     public void MoveInput(float f)
     {
-        if (f != 0f && controller.isGrounded)
+        if (f != 0f && isGrounded)
         {
             audio.walkDelay += Time.unscaledDeltaTime;
 
@@ -391,7 +423,7 @@ public class CharacterMovements : MonoBehaviour
 
     private void TryToWallJump(ref Vector3 velocity)
     {
-        if (!properties.canWallJump || controller.isGrounded)
+        if (!properties.canWallJump || isGrounded)
             return;
 
         // ======== Detect Wall ======== //
@@ -421,7 +453,7 @@ public class CharacterMovements : MonoBehaviour
         }
 
         // ======== If input, then jump ======== //
-        if (WallJumpFlag && !controller.isGrounded && (isOnWall || TryToUseWallCoyoteTime()))
+        if (WallJumpFlag && !isGrounded && (isOnWall || TryToUseWallCoyoteTime()))
         {
             velocity        = lastWallNormal * properties.wallJumpNormalSpeed + Vector3.up * properties.wallJumpUpSpeed;
             isWallCoyoteTimeAvailable = false;
@@ -468,7 +500,7 @@ public class CharacterMovements : MonoBehaviour
     // Enables jump flag
     public void JumpInput()
     {                           
-        if (controller.isGrounded || TryToUseCoyoteTime())
+        if (isGrounded || TryToUseCoyoteTime())
         {
             JumpFlag = true;
         }
