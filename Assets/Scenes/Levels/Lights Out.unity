@@ -1746,7 +1746,7 @@ MonoBehaviour:
   useVolumetric: 1
   featuresFoldout: 1
   showAdditionalSettings: 0
-  displayLightIntensity: 6
+  displayLightIntensity: 0
   displayAreaLightEmissiveMesh: 0
   areaLightCookie: {fileID: 0}
   areaLightShadowCone: 120
@@ -1774,7 +1774,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 6
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -28230,6 +28230,11 @@ PrefabInstance:
       propertyPath: song
       value: 
       objectReference: {fileID: 8300000, guid: 253d540b4a22cae448928c395f2e9054, type: 3}
+    - target: {fileID: 6727528018057054391, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: volume
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af182ddbc581b0245a93166965bd79d0, type: 3}
 --- !u!114 &895312717 stripped
