@@ -79,9 +79,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452f1c3a80071ba43ac9573f52e5d0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 2582433943083563241}
   unselectedColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  changeSelectionClip: {fileID: 0}
+  submitClip: {fileID: 0}
 --- !u!1 &7989678679735982369
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
       value: 0.9960785
       objectReference: {fileID: 0}
@@ -437,6 +443,36 @@ PrefabInstance:
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.9921569
       objectReference: {fileID: 0}
+    - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2998041993508100174}
+    - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySubmitSong
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558548833016, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
@@ -467,6 +503,36 @@ PrefabInstance:
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.9921569
       objectReference: {fileID: 0}
+    - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2998041993508100174}
+    - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySubmitSong
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558639526462, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
@@ -497,6 +563,36 @@ PrefabInstance:
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.9921569
       objectReference: {fileID: 0}
+    - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2998041993508100174}
+    - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySubmitSong
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997558278954304, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
@@ -527,6 +623,36 @@ PrefabInstance:
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.9921569
       objectReference: {fileID: 0}
+    - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2998041993508100174}
+    - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySubmitSong
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172117876849737648, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
         type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
@@ -556,6 +682,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.9921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2998041993508100174}
+    - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySubmitSong
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001997557804983439, guid: 2b4f42309accc0047b5368f2cef8899b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6001997558055651709, guid: 2b4f42309accc0047b5368f2cef8899b,
         type: 3}
