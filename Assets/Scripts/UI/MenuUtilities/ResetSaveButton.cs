@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(UnityEngine.UI.Button))]
 public class ResetSaveButton : MonoBehaviour
 {
-    private void Awake()
+    public void DeleteAllSaves()
     {
-        GetComponent<UnityEngine.UI.Button>().onClick.AddListener(PlayerPrefs.DeleteAll);
+        PlayerPrefs.DeleteAll();
     }
 }
