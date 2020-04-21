@@ -10,7 +10,9 @@ public class SubMenu : MonoBehaviour
     public void EnableMenu()
     {
         // Reset selection to be sure we select the button and set its color
-        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null, null);
+        if (UnityEngine.EventSystems.EventSystem.current != null)
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null, null);
+        
         gameObject.SetActive(true);
 
         if (button != null)
