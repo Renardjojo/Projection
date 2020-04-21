@@ -695,7 +695,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   timeOffSet: 0
@@ -1314,7 +1319,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   timeOffSet: 0
@@ -2446,6 +2456,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.00000023841858
       objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1788203243}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -2551,16 +2586,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 10.555009
       objectReference: {fileID: 0}
-    - target: {fileID: 759210165265987653, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: aa22aa6044afddb4e88f4984d124f12e, type: 2}
-    - target: {fileID: 601244874340286477, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2221266213044915716, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: tagObjectEventList.Array.size
@@ -2637,16 +2662,6 @@ PrefabInstance:
       propertyPath: isActivate
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1256256743518072083, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8577497150267565893, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6654798583003716539, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_IsActive
@@ -2657,30 +2672,25 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+    - target: {fileID: 759210165265987653, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: orTriggerList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: orTriggerList.Array.data[0].andList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1788203243}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+      objectReference: {fileID: 2100000, guid: aa22aa6044afddb4e88f4984d124f12e, type: 2}
+    - target: {fileID: 601244874340286477, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+    - target: {fileID: 1256256743518072083, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8577497150267565893, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac834f49953a0aa44bbdfb5a20556edf, type: 3}
@@ -3323,6 +3333,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightIndicator (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 28cea17ede5c836488a6e838473f15b3, type: 2}
     - target: {fileID: 7051682866048531249, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3393,16 +3413,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.642753
       objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 28cea17ede5c836488a6e838473f15b3, type: 2}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: orTriggerList.Array.size
@@ -3483,7 +3493,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   stringOfSaveToControl: By Your Side
@@ -4488,6 +4503,21 @@ PrefabInstance:
       propertyPath: OnPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Another One
       objectReference: {fileID: 0}
+    - target: {fileID: 2148007060043862703, guid: 6c44002a594734643a473158517cd0d5,
+        type: 3}
+      propertyPath: m_SelectedFaces.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148007060043862703, guid: 6c44002a594734643a473158517cd0d5,
+        type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148007060043862703, guid: 6c44002a594734643a473158517cd0d5,
+        type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2148007060361986992, guid: 6c44002a594734643a473158517cd0d5,
         type: 3}
       propertyPath: m_SelectedFaces.Array.size
@@ -4502,6 +4532,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SelectedVertices.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148007060508849317, guid: 6c44002a594734643a473158517cd0d5,
+        type: 3}
+      propertyPath: m_SelectedFaces.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148007060508849317, guid: 6c44002a594734643a473158517cd0d5,
+        type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148007060508849317, guid: 6c44002a594734643a473158517cd0d5,
+        type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7278466347512903896, guid: 6c44002a594734643a473158517cd0d5,
         type: 3}
@@ -4527,36 +4572,6 @@ PrefabInstance:
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Another One
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148007060043862703, guid: 6c44002a594734643a473158517cd0d5,
-        type: 3}
-      propertyPath: m_SelectedFaces.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148007060043862703, guid: 6c44002a594734643a473158517cd0d5,
-        type: 3}
-      propertyPath: m_SelectedEdges.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148007060043862703, guid: 6c44002a594734643a473158517cd0d5,
-        type: 3}
-      propertyPath: m_SelectedVertices.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148007060508849317, guid: 6c44002a594734643a473158517cd0d5,
-        type: 3}
-      propertyPath: m_SelectedFaces.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148007060508849317, guid: 6c44002a594734643a473158517cd0d5,
-        type: 3}
-      propertyPath: m_SelectedEdges.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2148007060508849317, guid: 6c44002a594734643a473158517cd0d5,
-        type: 3}
-      propertyPath: m_SelectedVertices.Array.size
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6895178437049746868, guid: 6c44002a594734643a473158517cd0d5, type: 3}
@@ -5314,9 +5329,11 @@ MonoBehaviour:
   startPosition: {x: -16.5, y: -0.5, z: 6.5}
   useCurrentPoisitionToStart: 1
   endPosition: {x: -12.5, y: -0.5, z: 6.5}
+  endPositionDependingOfStartPosition: 0
   moveTowardEndPosition: 1
   backAndForth: 1
   moveSpeed: 0.3
+  useTimeScale: 0
   isMoving: 1
 --- !u!1 &234613713 stripped
 GameObject:
@@ -14527,7 +14544,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   timeOffSet: 0
@@ -15573,6 +15595,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -5.684342e-14
       objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1788203243}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -15678,16 +15725,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 10.555009
       objectReference: {fileID: 0}
-    - target: {fileID: 759210165265987653, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: aa22aa6044afddb4e88f4984d124f12e, type: 2}
-    - target: {fileID: 601244874340286477, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2221266213044915716, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: tagObjectEventList.Array.size
@@ -15764,16 +15801,6 @@ PrefabInstance:
       propertyPath: isActivate
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1256256743518072083, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8577497150267565893, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6654798583003716539, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_IsActive
@@ -15784,30 +15811,25 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+    - target: {fileID: 759210165265987653, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: orTriggerList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: orTriggerList.Array.data[0].andList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1788203243}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+      objectReference: {fileID: 2100000, guid: aa22aa6044afddb4e88f4984d124f12e, type: 2}
+    - target: {fileID: 601244874340286477, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+    - target: {fileID: 1256256743518072083, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8577497150267565893, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac834f49953a0aa44bbdfb5a20556edf, type: 3}
@@ -16583,6 +16605,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightIndicator (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor
+      value: 
+      objectReference: {fileID: 2100000, guid: e6605b32e2ca8a14f8e289756ae56e31, type: 2}
     - target: {fileID: 7051682866048531249, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16653,16 +16685,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.642753
       objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor
-      value: 
-      objectReference: {fileID: 2100000, guid: e6605b32e2ca8a14f8e289756ae56e31, type: 2}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: orTriggerList.Array.size
@@ -16743,7 +16765,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   stringOfSaveToControl: Another One
@@ -16759,6 +16786,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightIndicator (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 38ad61195ba36554196e1b596df02fa3, type: 2}
     - target: {fileID: 7051682866048531249, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16829,16 +16866,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.642753
       objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 38ad61195ba36554196e1b596df02fa3, type: 2}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: orTriggerList.Array.size
@@ -16939,7 +16966,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   stringOfSaveToControl: Lights Out
@@ -23333,7 +23365,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   tagsWithCollisionEnabled:
@@ -25645,17 +25682,17 @@ PrefabInstance:
     - target: {fileID: 742833512924836646, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.161811
+      value: -9.191506
       objectReference: {fileID: 0}
     - target: {fileID: 742833512924836646, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.73565
+      value: -39.817238
       objectReference: {fileID: 0}
     - target: {fileID: 742833512924836646, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.667221
+      value: 9.174817
       objectReference: {fileID: 0}
     - target: {fileID: 2225713548024493785, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
@@ -25675,22 +25712,17 @@ PrefabInstance:
     - target: {fileID: 3438960268202845043, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.161811
+      value: -9.191506
       objectReference: {fileID: 0}
     - target: {fileID: 3438960268202845043, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.667221
+      value: 9.174817
       objectReference: {fileID: 0}
     - target: {fileID: 3438960268202845043, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.73565
-      objectReference: {fileID: 0}
-    - target: {fileID: 4136014174854313232, guid: af182ddbc581b0245a93166965bd79d0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      value: -39.817238
       objectReference: {fileID: 0}
     - target: {fileID: 4762817984779835684, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
@@ -25777,7 +25809,7 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 75
       objectReference: {fileID: 0}
-    - target: {fileID: 727266187617521189, guid: af182ddbc581b0245a93166965bd79d0,
+    - target: {fileID: 4136014174854313232, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -25792,25 +25824,10 @@ PrefabInstance:
       propertyPath: displayLightIntensity
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 187681192469620844, guid: af182ddbc581b0245a93166965bd79d0,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: dfee69d2ec9185449bfadcf015d19639, type: 2}
-    - target: {fileID: 187681192469620844, guid: af182ddbc581b0245a93166965bd79d0,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8763825854687882618, guid: af182ddbc581b0245a93166965bd79d0,
+    - target: {fileID: 727266187617521189, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1312336725505674099, guid: af182ddbc581b0245a93166965bd79d0,
-        type: 3}
-      propertyPath: m_CameraDistance
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3277823657703031492, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
@@ -25822,6 +25839,26 @@ PrefabInstance:
       propertyPath: inputManager
       value: 
       objectReference: {fileID: 1156248978}
+    - target: {fileID: 8763825854687882618, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187681192469620844, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: dfee69d2ec9185449bfadcf015d19639, type: 2}
+    - target: {fileID: 187681192469620844, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1312336725505674099, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: m_CameraDistance
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7200601382747460935, guid: af182ddbc581b0245a93166965bd79d0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -25857,6 +25894,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 518435121}
+    - target: {fileID: 6727528018057054391, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: song
+      value: 
+      objectReference: {fileID: 8300000, guid: 4216caaaf96b7bb43a67783d19d0b6cd, type: 3}
+    - target: {fileID: 6727528018057054391, guid: af182ddbc581b0245a93166965bd79d0,
+        type: 3}
+      propertyPath: volume
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af182ddbc581b0245a93166965bd79d0, type: 3}
 --- !u!43 &978290573
@@ -29104,7 +29151,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   timeOffSet: 0
@@ -30697,9 +30749,11 @@ MonoBehaviour:
   startPosition: {x: -18.5, y: -2.5, z: 6.5}
   useCurrentPoisitionToStart: 1
   endPosition: {x: -18.5, y: -1.53, z: 6.5}
+  endPositionDependingOfStartPosition: 0
   moveTowardEndPosition: 1
   backAndForth: 1
   moveSpeed: 0.3
+  useTimeScale: 0
   isMoving: 1
 --- !u!1 &1188907977
 GameObject:
@@ -31184,6 +31238,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor
+      value: 
+      objectReference: {fileID: 2100000, guid: b6ff9916b5e077a4f8fdb24b9fe15e89, type: 2}
     - target: {fileID: 7051682866048531249, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31254,16 +31318,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.642753
       objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor
-      value: 
-      objectReference: {fileID: 2100000, guid: b6ff9916b5e077a4f8fdb24b9fe15e89, type: 2}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: orTriggerList.Array.size
@@ -31344,7 +31398,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   stringOfSaveToControl: Endless Fall
@@ -34240,7 +34299,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   timeOffSet: 0
@@ -34679,6 +34743,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1788203243}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -34784,16 +34873,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 10.555009
       objectReference: {fileID: 0}
-    - target: {fileID: 759210165265987653, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: aa22aa6044afddb4e88f4984d124f12e, type: 2}
-    - target: {fileID: 601244874340286477, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2221266213044915716, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: tagObjectEventList.Array.size
@@ -34870,16 +34949,6 @@ PrefabInstance:
       propertyPath: isActivate
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1256256743518072083, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8577497150267565893, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6654798583003716539, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_IsActive
@@ -34890,30 +34959,25 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+    - target: {fileID: 759210165265987653, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: orTriggerList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: orTriggerList.Array.data[0].andList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
-        type: 3}
-      propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1788203243}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+      objectReference: {fileID: 2100000, guid: aa22aa6044afddb4e88f4984d124f12e, type: 2}
+    - target: {fileID: 601244874340286477, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+    - target: {fileID: 1256256743518072083, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
-      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8577497150267565893, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac834f49953a0aa44bbdfb5a20556edf, type: 3}
@@ -43392,7 +43456,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   tagsWithCollisionEnabled:
@@ -49148,6 +49217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2154d7624cb8f91409b1d97d131f9ae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchedOnSound: {fileID: 0}
+  switchedOffSound: {fileID: 0}
+  useSameSound: 0
   orTriggerList:
   - andList:
     - {fileID: 929347026}
@@ -49535,7 +49607,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   timeOffSet: 0
@@ -50412,6 +50489,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightIndicator (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: offColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
+    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
+        type: 3}
+      propertyPath: onColor
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dff839ca29638f4d87c81012b969e0b, type: 2}
     - target: {fileID: 7051682866048531249, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -50482,16 +50569,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.642753
       objectReference: {fileID: 0}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: offColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 75ac6a41dd52e3049997e755f90d7d24, type: 2}
-    - target: {fileID: 6588285637565826655, guid: a411ed36972e7f74abd4026384961605,
-        type: 3}
-      propertyPath: onColor
-      value: 
-      objectReference: {fileID: 2100000, guid: 2dff839ca29638f4d87c81012b969e0b, type: 2}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: orTriggerList.Array.size
@@ -50572,7 +50649,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   stringOfSaveToControl: Switches
