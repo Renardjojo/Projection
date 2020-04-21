@@ -53,7 +53,7 @@ public class CharacterMovementProperties
     [SerializeField] public float wallJumpNormalSpeed = 5f;
     [SerializeField] public float wallJumpUpSpeed = 5f;
     [SerializeField] public float wallCoyoteTime = 0.5f;
-    [SerializeField] public float fallAcceleration = .1f;
+    [SerializeField] public float fallAcceleration = 5f;
     [SerializeField] public float airControlRatioWhenWallJump = 100f;
     [SerializeField] public float maxVelocity = 70f;
     [SerializeField] public float coyoteTime = 0.1f;
@@ -310,7 +310,7 @@ public class CharacterMovements : MonoBehaviour
             // Make the player fall faster, to remove the floating effect
             if (moveDirection.y < 0f)
             {
-                moveDirection.y -= properties.fallAcceleration;
+                moveDirection.y -= properties.fallAcceleration * Time.deltaTime;
             }
 
             // Is on wall
