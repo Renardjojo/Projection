@@ -13,10 +13,9 @@ public class RotatingPlatform : MonoBehaviour
 
     [SerializeField] float maxRotation = 180f;
 
-    private Vector3 defaultRotation;
     private float   lastTime;
+    private float   originalRotation;
     private float   targetRotation;
-    private float   lastRotation;
 
     private bool bIsRotating;
     private bool bIsFaceType1;
@@ -26,19 +25,18 @@ public class RotatingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        defaultRotation = transform.rotation.eulerAngles;
-        lastTime = targetRotation = lastRotation = 0f;
+        originalRotation = transform.rotation.eulerAngles[axisRotationID];
+        lastTime = targetRotation = 0f;
         bIsRotating = bIsFaceType1 = false;
     }
 
     public void Activate()
     {
-        lastRotation = targetRotation;
         bIsFaceType1 = !bIsFaceType1;
         if (bIsFaceType1)
-            targetRotation = maxRotation;
+            targetRotation = originalRotation + maxRotation;
         else
-            targetRotation = 0;
+            targetRotation = originalRotation;
 
         lastTime = Time.time;
         bIsRotating = true;
