@@ -13,8 +13,10 @@ public class CheckPoint : MonoBehaviour
     [SerializeField]    private GameObject bodyPlayer;
     [SerializeField]    private PlayerController playerControllerScript;
 
-                        float radiusZone = 1f;
+    [SerializeField]    private float radiusZone = 1f;
                         private bool isActivate = false;
+
+    [SerializeField] private UnityEvent OnCheck = null;
 
     private void Awake()
     {
@@ -31,11 +33,12 @@ public class CheckPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isActivate && (bodyPlayer.transform.position - transform.position).sqrMagnitude < radiusZone)
+        if (!isActivate && (bodyPlayer.transform.position - transform.position).sqrMagnitude < radiusZone * radiusZone)
         {
             isActivate = true;
             flagMaterial.SetColor("_BaseColor", onColor);
             playerControllerScript.UseCheckPointPosition(transform.position);
+            OnCheck?.Invoke();
         }
     }
 

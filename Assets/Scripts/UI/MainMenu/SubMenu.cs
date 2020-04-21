@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SubMenu : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Tooltip("First Selected Button")]
     private UnityEngine.UI.Button button = null;
 
     public void EnableMenu()
