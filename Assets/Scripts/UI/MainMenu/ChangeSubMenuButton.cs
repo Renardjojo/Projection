@@ -22,7 +22,7 @@ public class ChangeSubMenuButton : MonoBehaviour
         if (currentSubMenu != null)
             currentSubMenu.DisableMenu();
 
-        if (newSubMenu)
+        if (newSubMenu != null)
             newSubMenu.EnableMenu();
     }
 }

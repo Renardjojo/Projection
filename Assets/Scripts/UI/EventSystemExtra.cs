@@ -81,6 +81,29 @@ public class EventSystemExtra : MonoBehaviour
             RemoveSelectionStyle();
             lastSelection = EventSystem.current.currentSelectedGameObject;
             AddSelectionStyle();
+
+            if (lastSelection != null)
+            {
+                Selectable selectable = lastSelection.GetComponent<Selectable>();
+                Navigation nav = selectable.navigation;
+                {
+                    Selectable currentNext = selectable.navigation.selectOnDown;
+                    while (currentNext != null && !currentNext.gameObject.activeSelf)
+                    {
+                        currentNext = currentNext.navigation.selectOnDown;
+                    }
+                    nav.selectOnDown = currentNext;
+                }
+                {
+                    Selectable currentNext = selectable.navigation.selectOnUp;
+                    while (currentNext != null && !currentNext.gameObject.activeSelf)
+                    {
+                        currentNext = currentNext.navigation.selectOnUp;
+                    }
+                    nav.selectOnUp = currentNext;
+                }
+                selectable.navigation = nav;
+            }
         }
     }
 }
