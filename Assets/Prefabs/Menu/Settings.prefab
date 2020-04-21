@@ -3629,6 +3629,7 @@ GameObject:
   - component: {fileID: 9081974210063411349}
   - component: {fileID: 9081974210063411346}
   - component: {fileID: 8834148426570357689}
+  - component: {fileID: 7191387676009442748}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -3729,6 +3730,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 9081974209062600756}
+--- !u!114 &7191387676009442748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9081974210063411347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2abaf3631bd7ebd4e8585b6e9233d9fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unselectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0, g: 1, b: 0, a: 1}
+  vertical: Debug Vertical
+  horizontal: Debug Horizontal
+  submit: Debug Submit
+  delay: 0.5
+  dead: 0.1
+  selectables:
+  - {fileID: 9081974208798327705}
+  - {fileID: 9081974208437085149}
+  - {fileID: 9081974208446129900}
+  - {fileID: 9081974209876125347}
+  - {fileID: 9081974209062600756}
 --- !u!1 &9081974210078517608
 GameObject:
   m_ObjectHideFlags: 0
