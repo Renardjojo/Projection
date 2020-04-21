@@ -18,6 +18,7 @@ public class CameraGeneralPlan : MonoBehaviour
     private void Awake()
     {
         collider = GetComponent<Collider>();
+        gameObject.layer = LayerMask.NameToLayer("TransparentFX");
     }
 
     private void OnTriggerEnter(Collider other)

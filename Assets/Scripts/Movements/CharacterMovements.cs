@@ -118,7 +118,7 @@ public class CharacterMovements : MonoBehaviour
     private float lastWallTime = 0f;
     private bool isWallCoyoteTimeAvailable = true;
     private Vector3 lastWallNormal;
-    private bool isGrounded = true;
+    private bool isGrounded = false;
 
 
     /* ==== Unity methods ==== */
@@ -333,14 +333,14 @@ public class CharacterMovements : MonoBehaviour
     private void CheckIfEntityIsGrounded ()
     {
         float playerCapsuleHeight = controller.height;
-        float groundHeightOffset = 0.1f;
         float playerCapsuleRadius = controller.radius;
 
-        Vector3 posRay1 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.left * playerCapsuleRadius;
-        Vector3 posRay2 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.right * playerCapsuleRadius;
+        Vector3 posRay1 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.left * (playerCapsuleRadius - 0.1f);
+        Vector3 posRay2 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.right * (playerCapsuleRadius - 0.1f);
 
         // Bit shift the index of the layer of gameobject to get a bit mask
-        int layerMask = 1 << gameObject.layer;
+        int layerMask   = 1 << gameObject.layer;
+        layerMask       |= 1 << LayerMask.NameToLayer("TransparentFX");
 
         // This would cast rays only against colliders in layer of the game object.
         // But instead we want to collide against everything except layer of the game object. The ~ operator does this, it inverts a bitmask.
@@ -348,7 +348,11 @@ public class CharacterMovements : MonoBehaviour
         Debug.DrawRay(posRay1, Vector3.down * 0.2f, Color.green);
         Debug.DrawRay(posRay2, Vector3.down * 0.2f, Color.blue);
 
-        if (Physics.Raycast(posRay1, Vector3.down, 0.2f, layerMask) || Physics.Raycast(posRay2, Vector3.down, 0.2f, layerMask))
+
+        RaycastHit hitInfo1 = new RaycastHit();
+        RaycastHit hitInfo2 = new RaycastHit();
+
+        if (Physics.Raycast(posRay1, Vector3.down, out hitInfo1, 0.2f, layerMask) || Physics.Raycast(posRay2, Vector3.down, out hitInfo2, 0.2f, layerMask))
         {
             isGrounded = true;
         }

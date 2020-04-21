@@ -100,7 +100,14 @@ public class Laser : MonoBehaviour
         // Does the ray intersect any objects excluding the player layer
         Vector3 startPosition = transform.position + transform.forward * laserOffSet;
 
-        if (Physics.Raycast(transform.position + transform.forward * laserOffSet, transform.forward, out hit, Mathf.Infinity))
+        // Bit shift the index of the layer of TransparentFX to get a bit mask
+        int layerMask = 1 << LayerMask.NameToLayer("TransparentFX");
+
+        // This would cast rays only against colliders in layer of TransparentFX.
+        // But instead we want to collide against everything except layer of TransparentFX. The ~ operator does this, it inverts a bitmask.
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(transform.position + transform.forward * laserOffSet, transform.forward, out hit, Mathf.Infinity, layerMask))
         {
             laserRay.transform.position = startPosition + transform.forward * (hit.distance / 2f);
             laserRay.transform.localScale = new Vector3(laserRadius, hit.distance / 2f / transform.localScale.y, laserRadius);
@@ -138,22 +145,6 @@ public class Laser : MonoBehaviour
     {
         isActivate = !isActivate;
         laserRay.SetActive(isActivate);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        RaycastHit hit;
-        // Does the ray intersect any objects excluding the player layer
-        Vector3 startPosition = transform.position + transform.forward * laserOffSet;
-
-        if (Physics.Raycast(transform.position + transform.forward * laserOffSet, transform.forward, out hit, Mathf.Infinity))
-        {
-            Debug.DrawRay(startPosition, transform.forward * hit.distance, Color.yellow);
-        }
-        else
-        {
-            Debug.DrawRay(startPosition, transform.forward * maxLaserLenght, Color.white);
-        }
     }
 
     private void ToggleHumming()
