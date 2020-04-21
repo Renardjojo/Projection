@@ -6,11 +6,31 @@ using UnityEngine;
 
 public class EventSystemExtra : MonoBehaviour
 {
-    [SerializeField] private EventSystem eventSystem = null;
     [SerializeField] private Color unselectedColor = new Color(0.44f, 0.43f, 0.43f);
-    [SerializeField] private Color selectedColor = Color.white;
+    [SerializeField] private Color selectedColor   = Color.white;
+
+    [SerializeField] private AudioClip changeSelectionClip   = null;
+    private AudioSource                changeSelectionSource = null;
+
+    [SerializeField] 
+    private AudioClip   submitClip   = null;
+    private AudioSource submitSource = null;
 
     private GameObject lastSelection = null;
+
+    private void Awake()
+    {
+        changeSelectionSource = gameObject.AddComponent<AudioSource>();
+        changeSelectionSource.clip = changeSelectionClip;
+
+        submitSource = gameObject.AddComponent<AudioSource>();
+        submitSource.clip = submitClip;
+    }
+
+    public void PlaySubmitSong()
+    {
+        submitSource.Play();
+    }
 
     private UnityEngine.UI.Text GetTextFromButton()
     {
@@ -49,12 +69,14 @@ public class EventSystemExtra : MonoBehaviour
         {
             text.color = selectedColor;
         }
-    }
 
+        changeSelectionSource.Play();
+    }
+                                                                  
     // Update is called once per frame
     void Update()
     {
-        if (lastSelection != EventSystem.current)
+        if (lastSelection != EventSystem.current.currentSelectedGameObject)
         {
             RemoveSelectionStyle();
             lastSelection = EventSystem.current.currentSelectedGameObject;
