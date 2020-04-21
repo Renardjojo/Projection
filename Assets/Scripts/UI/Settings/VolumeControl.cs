@@ -21,6 +21,6 @@ public class VolumeControl : MonoBehaviour
     private void ChangeVolume(float value)
     {
         PlayerPrefs.SetFloat("volume", value);
-        AudioListener.volume = value;
+        AudioListener.volume = value * 2;
     }
 }
