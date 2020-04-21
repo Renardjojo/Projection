@@ -18,7 +18,7 @@ public class LevelMusicManager : MonoBehaviour
     [Range(1f, 10f)]
     [SerializeField] private float lowpassResonanceQ = 1f;
     [Range(0f, 1f)]
-    [SerializeField] private float filterVolume = 1f;
+    [SerializeField] private float filterVolume = .5f;
 
     private new AudioSource audio;
     private AudioLowPassFilter filter;
@@ -38,11 +38,12 @@ public class LevelMusicManager : MonoBehaviour
             filter.enabled              = false;
 
             audio.Play();
-        }
 
-        PlayerController pc = FindObjectOfType<PlayerController>();
-        pc.onTransposed     += TurnFilterOn;
-        pc.onUntransposed   += TurnFilterOff;
+            PlayerController pc = FindObjectOfType<PlayerController>();
+
+            pc.onTransposed     += TurnFilterOn;
+            pc.onUntransposed   += TurnFilterOff;
+        }
     }
     
     
