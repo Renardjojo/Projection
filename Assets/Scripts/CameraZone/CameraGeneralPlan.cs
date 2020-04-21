@@ -10,7 +10,7 @@ public class CameraGeneralPlan : MonoBehaviour
     [SerializeField] private ZoomCameraBetweenEntities zoomCameraPlayerScript;
     private Collider collider;
 
-    [SerializeField, Range(1f, 15f)] private float generalPlanScale = 7f;
+    [SerializeField, Range(1f, 25f)] private float generalPlanScale = 7f;
     [SerializeField, Range(0f, 1f)] private float lerpSpeed = 0.8f;
     float exPlanScale;
 
