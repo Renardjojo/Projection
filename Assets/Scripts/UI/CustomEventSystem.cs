@@ -21,7 +21,7 @@ public class CustomEventSystem : MonoBehaviour
 
     private UnityEngine.UI.Text[] texts = null;
 
-    int currentSelection = 0;
+    uint currentSelection = 0;
 
     private void Awake()
     {
@@ -34,17 +34,21 @@ public class CustomEventSystem : MonoBehaviour
 
         timeTillMoveTick = delay;
 
-        TakeNextSelectionTillValid();
+        if (!IsValidButton(currentSelection))
+            TakeNextSelectionTillValid();
+
+        AddStyle(currentSelection);
     }
 
-    private bool IsValidButton(int i)
+    private bool IsValidButton(uint i)
     {
-        return (selectables[i] != null && selectables[i].enabled);
+        return (selectables[i] != null && selectables[i].gameObject.activeSelf);
     }
 
     private void TakeNextSelectionTillValid()
     {
-        int i = currentSelection;
+        uint i = Clamp(currentSelection, 0u, ((uint)selectables.Length) - 2u);
+
         do
         {
             i++;
@@ -56,13 +60,19 @@ public class CustomEventSystem : MonoBehaviour
         }
     }
 
+    uint Clamp(uint value, uint min, uint max)
+    {
+        return (value < min) ? min : (value > max ? max : value);
+    }
+
     private void TakePreviousSelectionTillValid()
     {
-        int i = currentSelection;
+        uint i = Clamp(currentSelection, 1u, ((uint)selectables.Length) - 1u);
+
         do
         {
             i--;
-        } while (i > 0 && !IsValidButton(i));
+        } while ((i > 0 && !IsValidButton(i)));
 
         if (i >= 0 && IsValidButton(i))
         {
@@ -70,7 +80,7 @@ public class CustomEventSystem : MonoBehaviour
         }
     }
 
-    private void RemoveStyle(int i)
+    private void RemoveStyle(uint i)
     {
         if (i >= 0 && i < texts.Length && IsValidButton(i))
         {
@@ -81,7 +91,7 @@ public class CustomEventSystem : MonoBehaviour
         }
     }
 
-    private void AddStyle(int i)
+    private void AddStyle(uint i)
     {
         if (IsValidButton(i))
         {
