@@ -66,7 +66,12 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 0
   interactionRadius: 2
@@ -2002,7 +2007,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.7763941
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7051682866048531250, guid: a411ed36972e7f74abd4026384961605, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a411ed36972e7f74abd4026384961605, type: 3}
 --- !u!4 &7278466347512903898 stripped
 Transform:
