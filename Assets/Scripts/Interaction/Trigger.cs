@@ -115,16 +115,6 @@ public abstract class Trigger : SoundPlayer
     }
 
 
-    private void Start()
-    {
-        if (!isOnNeutralPositionAtStart)
-        {
-            if (isOn)   OnTriggered?.Invoke();
-            else        OnUntriggered?.Invoke();
-        }
-    }
-
-
     protected void Update()
     {
         if (Time.timeScale < 1f)
