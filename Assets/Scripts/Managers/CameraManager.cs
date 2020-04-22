@@ -29,13 +29,12 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         camera = GetComponent<CinemachineVirtualCamera>();
-        neutralCameraSize = camera.m_Lens.OrthographicSize;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraZoomBetweenEntityGoal = neutralCameraSize;
+        neutralCameraSize = cameraZoomBetweenEntityGoal = camera.m_Lens.OrthographicSize;
     }
 
     // Update is called once per frame
@@ -43,7 +42,7 @@ public class CameraManager : MonoBehaviour
     {
         UpdateCameraZoomBetweenEntity();
 
-        if (playerOnCameraZoneEnterCount == 0)
+        if (playerOnCameraZoneEnterCount != 0)
         {
             if (cameraZoomBetweenEntityGoal > cameraZoneGoal)
             {
@@ -56,13 +55,13 @@ public class CameraManager : MonoBehaviour
         }
         else
         {
-            if (cameraZoomBetweenEntityGoal  > neutralCameraSize)
+            if (cameraZoomBetweenEntityGoal > neutralCameraSize)
             {
                 ScaleOrUnscaleCamera(cameraZoomBetweenEntityGoal);
             }
             else
             {
-                camera.m_Lens.OrthographicSize = neutralCameraSize;
+                ScaleOrUnscaleCamera(neutralCameraSize);
             }
         }
     }
@@ -80,6 +79,7 @@ public class CameraManager : MonoBehaviour
         // It is multiplied by 1f / cam.m_Lens.Aspect to keep the player and
         // the shadow on screen horizontally, while not unzooming too much
         cameraZoomBetweenEntityGoal = neutralCameraSize + (mainToSecondary - distanceOffsetZoomBetweenEntity) * 1f / camera.m_Lens.Aspect;
+        Debug.Log(cameraZoomBetweenEntityGoal);
     }
 
     public void PlayerEnterInCameraZone (float cameraScaleGoal)
