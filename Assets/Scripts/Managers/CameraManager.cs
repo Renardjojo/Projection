@@ -79,7 +79,6 @@ public class CameraManager : MonoBehaviour
         // It is multiplied by 1f / cam.m_Lens.Aspect to keep the player and
         // the shadow on screen horizontally, while not unzooming too much
         cameraZoomBetweenEntityGoal = neutralCameraSize + (mainToSecondary - distanceOffsetZoomBetweenEntity) * 1f / camera.m_Lens.Aspect;
-        Debug.Log(cameraZoomBetweenEntityGoal);
     }
 
     public void PlayerEnterInCameraZone (float cameraScaleGoal)
