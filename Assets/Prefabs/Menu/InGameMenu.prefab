@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 1226416469722394554}
   - component: {fileID: 5477029782362982111}
   - component: {fileID: 1206694518697725236}
+  - component: {fileID: 4158286272927593133}
   m_Layer: 5
   m_Name: QuitValidationScreen
   m_TagString: Untagged
@@ -500,6 +501,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 714362676405430178}
+  fadeOutSpeed: 0.8
+--- !u!225 &4158286272927593133
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3355833499861630789}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3404872366139423259
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +900,7 @@ GameObject:
   - component: {fileID: 3072401126370419363}
   - component: {fileID: 626144430768040844}
   - component: {fileID: 6054372299488486889}
+  - component: {fileID: 7253455126679686849}
   m_Layer: 5
   m_Name: ResetPreferencesValidationScreen
   m_TagString: Untagged
@@ -965,6 +980,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 8815696312667813086}
+  fadeOutSpeed: 0.8
+--- !u!225 &7253455126679686849
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4065999513630022559}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4308085980724115394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,6 +1401,7 @@ GameObject:
   - component: {fileID: 5544242889905102113}
   - component: {fileID: 4645521052819854315}
   - component: {fileID: 1405833165029046368}
+  - component: {fileID: 4725287096886670242}
   m_Layer: 5
   m_Name: HubValidationScreen
   m_TagString: Untagged
@@ -1452,6 +1481,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 8707874734653774093}
+  fadeOutSpeed: 0.8
+--- !u!225 &4725287096886670242
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5272078451425807395}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5613121622932698210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,6 +1797,7 @@ GameObject:
   - component: {fileID: 6001997557988873035}
   - component: {fileID: 6001997557988873028}
   - component: {fileID: 818848244189193693}
+  - component: {fileID: 7083447547697286962}
   m_Layer: 5
   m_Name: InGameMenu
   m_TagString: Untagged
@@ -1818,7 +1861,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1858,6 +1901,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 6001997558548833016}
+  fadeOutSpeed: 0.8
+--- !u!225 &7083447547697286962
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6001997557988873029}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 1
 --- !u!1 &6001997558055651704
 GameObject:
   m_ObjectHideFlags: 0

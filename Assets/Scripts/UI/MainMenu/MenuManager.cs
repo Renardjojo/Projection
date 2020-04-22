@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
     {
         foreach (SubMenu sub in subMenus)
         {
-            if (sub.gameObject.activeSelf)
+            if (sub.isActivate)
             {
                 return true;
             }

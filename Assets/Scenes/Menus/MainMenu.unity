@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a404156ba8da20d488c6503d2c5cc4bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeOutSpeed: 0.5
 --- !u!4 &1923859587
 Transform:
   m_ObjectHideFlags: 0
@@ -218,13 +219,26 @@ GameObject:
   - component: {fileID: 1439677124306729329}
   - component: {fileID: 1439677124306729342}
   - component: {fileID: 1439677124306729343}
+  - component: {fileID: 1439677124306729341}
   m_Layer: 5
-  m_Name: Title screen
+  m_Name: TitleScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!225 &1439677124306729341
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439677124306729340}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1439677124306729342
 MonoBehaviour:
   m_ObjectHideFlags: 0
