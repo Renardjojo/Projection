@@ -132,13 +132,16 @@ public class Laser : MonoBehaviour
 
     public void setActivate(bool flag)
     {
-        isActivate = flag;
-        laserRay.SetActive(isActivate);
+        if (isActivate != flag)
+        {
+            isActivate = flag;
+            laserRay.SetActive(isActivate);
 
-        if (isActivate && playHumming)
-            hummingAudio?.Play();
-        else
-            hummingAudio?.Stop();
+            if (isActivate && playHumming)
+                hummingAudio?.Play();
+            else
+                hummingAudio?.Stop();
+        }
     }
 
     public void switchState()
