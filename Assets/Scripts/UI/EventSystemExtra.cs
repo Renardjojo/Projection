@@ -8,6 +8,7 @@ public class EventSystemExtra : MonoBehaviour
 {
     [SerializeField] private Color unselectedColor = new Color(0.44f, 0.43f, 0.43f);
     [SerializeField] private Color selectedColor   = Color.white;
+    [SerializeField] private float menuVolume = 0.5f;
 
     [SerializeField] private AudioClip changeSelectionClip   = null;
     private AudioSource                changeSelectionSource = null;
@@ -22,8 +23,8 @@ public class EventSystemExtra : MonoBehaviour
     {
         changeSelectionSource = gameObject.AddComponent<AudioSource>();
         changeSelectionSource.clip = changeSelectionClip;
-        changeSelectionSource.volume = 0.5f;
-        submitSource.volume = 0.5f;
+        changeSelectionSource.volume = menuVolume;
+        submitSource.volume = menuVolume;
 
         submitSource = gameObject.AddComponent<AudioSource>();
         submitSource.clip = submitClip;
