@@ -7166,6 +7166,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 371565494}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac834f49953a0aa44bbdfb5a20556edf, type: 3}
 --- !u!1 &168061979
@@ -8534,7 +8544,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -13904,7 +13914,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -13914,7 +13924,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -14016,7 +14026,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -15930,7 +15940,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -15940,7 +15950,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -18484,7 +18494,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -18494,7 +18504,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -19253,7 +19263,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -19263,7 +19273,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -20617,6 +20627,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 1891534325}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -22117,7 +22137,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -27310,7 +27330,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -27320,7 +27340,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -27442,6 +27462,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 1657719626}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -29681,7 +29711,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -29691,7 +29721,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -32103,7 +32133,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -32113,7 +32143,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -37270,7 +37300,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -37280,7 +37310,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -37533,7 +37563,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -38113,7 +38143,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -38123,7 +38153,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -39725,7 +39755,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -43257,6 +43287,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 1190698145}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -43951,7 +43991,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -43961,7 +44001,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -44580,6 +44620,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 711261884}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -48690,6 +48740,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 1811252732}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -49394,7 +49454,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -49404,7 +49464,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -49529,7 +49589,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -49539,7 +49599,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -50458,6 +50518,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 482207895}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -53257,7 +53327,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -53267,7 +53337,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -55108,6 +55178,16 @@ PrefabInstance:
       propertyPath: orTriggerList.Array.data[0].andList.Array.data[0]
       value: 
       objectReference: {fileID: 468825859}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195633722119733195, guid: ac834f49953a0aa44bbdfb5a20556edf,
+        type: 3}
+      propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 613312036680346506, guid: ac834f49953a0aa44bbdfb5a20556edf,
         type: 3}
       propertyPath: m_Name
@@ -55494,7 +55574,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -55504,7 +55584,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -56374,7 +56454,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -56448,7 +56528,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -56603,7 +56683,7 @@ PrefabInstance:
     - target: {fileID: 5212094556258397845, guid: 4f8d0777290c5974093b936a0965d337,
         type: 3}
       propertyPath: isOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8d0777290c5974093b936a0965d337, type: 3}
@@ -56917,7 +56997,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -56927,7 +57007,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -57710,7 +57790,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -57720,7 +57800,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -58697,7 +58777,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -58712,7 +58792,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -60390,7 +60470,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -60400,7 +60480,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -60833,7 +60913,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnActivatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOff
+      value: SetOn
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
@@ -60843,7 +60923,7 @@ PrefabInstance:
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
       propertyPath: OnDisabledEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetOn
+      value: SetOff
       objectReference: {fileID: 0}
     - target: {fileID: 7051682866048531253, guid: a411ed36972e7f74abd4026384961605,
         type: 3}
