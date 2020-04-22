@@ -164,6 +164,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.Find("Body").gameObject.transform.position, maxShadowDistance);
+    }
 
     private void Update()
     {
