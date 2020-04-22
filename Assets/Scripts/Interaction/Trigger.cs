@@ -80,6 +80,16 @@ public abstract class Trigger : SoundPlayer
         {
             switchedOnAudio         = gameObject.AddComponent<AudioSource>();
             switchedOnAudio.clip    = switchedOnSound;
+            switchedOnAudio.volume  = volume;
+        }
+
+
+        if (offToOnSound)
+        {
+            offToOnAudio        = gameObject.AddComponent<AudioSource>();
+            offToOnAudio.clip   = offToOnSound;
+            offToOnAudio.loop   = true;
+            offToOnAudio.volume = transitionVolume;
         }
 
         if (useSameSound)
@@ -90,16 +100,9 @@ public abstract class Trigger : SoundPlayer
 
         else if (switchedOffSound)
         {
-            switchedOffAudio = gameObject.AddComponent<AudioSource>();
-            switchedOffAudio.clip = switchedOffSound;
-        }
-
-        if (offToOnSound)
-        {
-            offToOnAudio        = gameObject.AddComponent<AudioSource>();
-            offToOnAudio.clip   = offToOnSound;
-            offToOnAudio.loop   = true;
-            offToOnAudio.volume = transitionVolume;
+            switchedOffAudio        = gameObject.AddComponent<AudioSource>();
+            switchedOffAudio.clip   = switchedOffSound;
+            switchedOffAudio.volume = volume;
         }
 
         if (onToOffSound)

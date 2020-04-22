@@ -8,6 +8,8 @@ public class CheckPoint : MonoBehaviour
 {
     [Header("Sound")]
     [SerializeField] private AudioClip activationSound = null;
+    [Range(0f, 1f)]
+    [SerializeField] private float volume = 1f;
 
     [Header("Configuration")]
     [SerializeField]    private GameObject bodyPlayer                   = null;
@@ -24,8 +26,9 @@ public class CheckPoint : MonoBehaviour
     {
         if (activationSound)
         {
-            activationAudio = gameObject.AddComponent<AudioSource>();
-            activationAudio.clip = activationSound;
+            activationAudio         = gameObject.AddComponent<AudioSource>();
+            activationAudio.clip    = activationSound;
+            activationAudio.volume  = volume;
 
             if (OnCheck == null)
                 OnCheck = new UnityEvent();

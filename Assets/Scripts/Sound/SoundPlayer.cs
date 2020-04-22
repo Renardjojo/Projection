@@ -16,6 +16,11 @@ public abstract class SoundPlayer : MonoBehaviour
     [SerializeField]
     protected bool useSameSound;
 
+    [Tooltip("Volume of both sounds")]
+    [Range(0f, 1f)]
+    [SerializeField]
+    protected float volume = 1f;
+
     protected AudioSource switchedOnAudio;
     protected AudioSource switchedOffAudio;
 
