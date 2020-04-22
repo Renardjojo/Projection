@@ -9,6 +9,7 @@ public class CameraGeneralPlan : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera camera;
     [SerializeField] private ZoomCameraBetweenEntities zoomCameraPlayerScript;
     private Collider collider;
+    private LevelManager levelManager; 
 
     [SerializeField, Range(1f, 25f)] private float generalPlanScale = 7f;
     [SerializeField, Range(0f, 1f)] private float lerpSpeed = 0.8f;
@@ -19,6 +20,10 @@ public class CameraGeneralPlan : MonoBehaviour
     {
         collider = GetComponent<Collider>();
         gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+        levelManager = GameObject.Find("GameManager/Manager/LevelManager").GetComponent<LevelManager>();
+        if (levelManager == null)
+            Debug.LogAssertion("LevelManager not found");
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,8 +32,9 @@ public class CameraGeneralPlan : MonoBehaviour
         {
             exPlanScale = zoomCameraPlayerScript.minOrthoSize;
             zoomCameraPlayerScript.minOrthoSize = generalPlanScale;
-            StopAllCoroutines();
-            StartCoroutine(LerpScale(generalPlanScale));
+
+            levelManager.StopCameraZoomCoroutine();
+            levelManager.StartCameraZoomCoroutine(LerpScale(generalPlanScale));
         }
     }
 
@@ -37,8 +43,9 @@ public class CameraGeneralPlan : MonoBehaviour
         if (camera.Follow.gameObject == other.gameObject)
         {
             zoomCameraPlayerScript.minOrthoSize = exPlanScale;
-            StopAllCoroutines();
-            StartCoroutine(LerpScale(exPlanScale));
+
+            levelManager.StopCameraZoomCoroutine();
+            levelManager.StartCameraZoomCoroutine(LerpScale(exPlanScale));
         }
     }
 
