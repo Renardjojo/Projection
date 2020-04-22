@@ -84,6 +84,10 @@ public class MovingObject : MonoBehaviour
             frameDisplacement = (endPosition - startPosition) * (step - stepExFram);
             transform.position += frameDisplacement;
         }
+        else
+        {
+            frameDisplacement = Vector3.zero;
+        }
     }
 
     public void EnableMovement(bool value)
