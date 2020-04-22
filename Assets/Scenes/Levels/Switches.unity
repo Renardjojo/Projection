@@ -1272,9 +1272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 10
-  lerpSpeed: 0.8
 --- !u!65 &41348942
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3228,9 +3226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 12
-  lerpSpeed: 0.8
 --- !u!65 &106082473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5806,7 +5802,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh314722
+  m_Name: pb_Mesh399914
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6407,9 +6403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 14
-  lerpSpeed: 0.8
 --- !u!65 &191867051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10577,9 +10571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 25
-  lerpSpeed: 0.8
 --- !u!65 &358006637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17827,7 +17819,7 @@ PrefabInstance:
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
       propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
@@ -17904,6 +17896,41 @@ PrefabInstance:
       propertyPath: flag
       value: 
       objectReference: {fileID: 729170840}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 702905175}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d25b08c82e0d84c9e1debe893ceccd, type: 3}
 --- !u!114 &702905175 stripped
@@ -18987,7 +19014,7 @@ PrefabInstance:
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
       propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
@@ -19064,6 +19091,36 @@ PrefabInstance:
       propertyPath: flag
       value: 
       objectReference: {fileID: 1240927086}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 754462044}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d25b08c82e0d84c9e1debe893ceccd, type: 3}
 --- !u!114 &754462044 stripped
@@ -24079,9 +24136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 17
-  lerpSpeed: 0.8
 --- !u!65 &1012983311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29072,9 +29127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 10
-  lerpSpeed: 0.8
 --- !u!65 &1208747758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29475,9 +29528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 25
-  lerpSpeed: 0.8
 --- !u!65 &1241176222
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36047,7 +36098,7 @@ PrefabInstance:
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
       propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
         type: 3}
@@ -36124,6 +36175,41 @@ PrefabInstance:
       propertyPath: flag
       value: 
       objectReference: {fileID: 2009683539}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1422358946}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetFlag
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894859798071130605, guid: e6d25b08c82e0d84c9e1debe893ceccd,
+        type: 3}
+      propertyPath: OnCheck.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6d25b08c82e0d84c9e1debe893ceccd, type: 3}
 --- !u!114 &1422358946 stripped
@@ -36778,7 +36864,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh313376
+  m_Name: pb_Mesh398492
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -40904,9 +40990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1778161251}
-  zoomCameraPlayerScript: {fileID: 1778161250}
   generalPlanScale: 12
-  lerpSpeed: 0.8
 --- !u!65 &1581783742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47354,7 +47438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 0, z: 0}
   useCurrentPoisitionToStart: 1
-  endPosition: {x: -22, y: -3, z: 0}
+  endPosition: {x: -22, y: -3, z: 1.67}
   endPositionDependingOfStartPosition: 0
   moveTowardEndPosition: 1
   backAndForth: 1
@@ -47861,18 +47945,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af182ddbc581b0245a93166965bd79d0, type: 3}
---- !u!114 &1778161250 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4443928828936813433, guid: af182ddbc581b0245a93166965bd79d0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1778161249}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5353b28a4d9ffc440a95d799062ebaf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1778161251 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4191053923638084997, guid: af182ddbc581b0245a93166965bd79d0,
