@@ -104,7 +104,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2544343660075631850}
   - component: {fileID: 2544343660075631851}
-  - component: {fileID: 1668286794}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -240,22 +239,6 @@ MonoBehaviour:
       interractSound: {fileID: 0}
       resetPositionSound: {fileID: 8300000, guid: 482634dae70253342bb41368e878c493,
         type: 3}
---- !u!114 &1668286794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2544343660075631849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5353b28a4d9ffc440a95d799062ebaf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainEntity: {fileID: 2544343660083584310}
-  secondEntity: {fileID: 2544343661859167753}
-  cam: {fileID: 0}
-  distanceOffset: 5
 --- !u!1 &2544343660083584310
 GameObject:
   m_ObjectHideFlags: 0
