@@ -86,7 +86,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4637386971850983268}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9999999, y: 1, z: 0.9999999}
@@ -139,7 +139,13 @@ MonoBehaviour:
   switchedOnSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  volume: 1
+  offToOnSound: {fileID: 0}
+  onToOffSound: {fileID: 0}
+  audioSlowFactor: 0.5
+  transitionVolume: 1
   isOn: 0
+  isOnNeutralPositionAtStart: 0
   activationDelay: 0
   deactivationDelay: 5.33
   interactionRadius: 2
@@ -232,7 +238,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8834715347552426850}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9999999, y: 1, z: 0.9999999}
@@ -273,6 +279,7 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  volume: 1
   orTriggerList:
   - andList:
     - {fileID: 5740558097814268148}
