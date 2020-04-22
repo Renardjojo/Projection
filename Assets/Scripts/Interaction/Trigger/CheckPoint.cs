@@ -6,10 +6,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MeshRenderer))]
 public class CheckPoint : MonoBehaviour
 {
-    [SerializeField]    private Color onColor = Color.green;
-    [SerializeField]    private Color offColor = Color.red;
-    [SerializeField]    private GameObject flag;
-                        private Material flagMaterial;
+//    [SerializeField]    private Color onColor = Color.green;
+//    [SerializeField]    private Color offColor = Color.red;
+//    [SerializeField]    private GameObject flag;
+//                        private Material flagMaterial;
     [SerializeField]    private GameObject bodyPlayer;
     [SerializeField]    private PlayerController playerControllerScript;
 
@@ -20,8 +20,8 @@ public class CheckPoint : MonoBehaviour
 
     private void Awake()
     {
-        flagMaterial = flag.GetComponent<MeshRenderer>().material;
-        flagMaterial.SetColor("_BaseColor", offColor);
+       //flagMaterial = flag.GetComponent<MeshRenderer>().material;
+        //flagMaterial.SetColor("_BaseColor", offColor);
     }
 
     // Start is called before the first frame update
@@ -36,7 +36,7 @@ public class CheckPoint : MonoBehaviour
         if (!isActivate && (bodyPlayer.transform.position - transform.position).sqrMagnitude < radiusZone * radiusZone)
         {
             isActivate = true;
-            flagMaterial.SetColor("_BaseColor", onColor);
+            //flagMaterial.SetColor("_BaseColor", onColor);
             playerControllerScript.UseCheckPointPosition(transform.position);
             OnCheck?.Invoke();
         }
@@ -53,12 +53,12 @@ public class CheckPoint : MonoBehaviour
     {
         if (flag)
         {
-            flagMaterial.SetColor("_BaseColor", onColor);
+            //flagMaterial.SetColor("_BaseColor", onColor);
             isActivate = true;
         }
         else
         {
-            flagMaterial.SetColor("_BaseColor", offColor);
+            //flagMaterial.SetColor("_BaseColor", offColor);
             isActivate = false;
         }
     }
