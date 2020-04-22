@@ -30,9 +30,14 @@ public class EventSystemExtra : MonoBehaviour
         submitSource.volume = menuVolume;
     }
 
-    public void PlaySubmitSong()
+    public void PlaySubmitSound()
     {
         submitSource.Play();
+    }
+
+    public void PlaySelectionSound()
+    {
+        changeSelectionSource.Play();
     }
 
     private UnityEngine.UI.Text GetTextFromButton()

@@ -119,7 +119,29 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7197531814651710813}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6054372299488486889}
+        m_MethodName: DisableMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5172117876849737648}
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &96757756519163178
@@ -446,10 +468,10 @@ RectTransform:
   m_Father: {fileID: 6001997557988873033}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 489.5, y: -275.5}
-  m_SizeDelta: {x: 979.01, y: 551}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 89.5025, y: -22.5}
+  m_SizeDelta: {x: 179.005, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1226416469722394554
 CanvasRenderer:
@@ -501,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 714362676405430178}
-  fadeOutSpeed: 0.8
+  fadeOutSpeed: 3
 --- !u!225 &4158286272927593133
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -925,10 +947,10 @@ RectTransform:
   m_Father: {fileID: 6001997557988873033}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 489.5, y: -275.5}
-  m_SizeDelta: {x: 979.01, y: 551}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 89.5025, y: -22.5}
+  m_SizeDelta: {x: 179.005, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3072401126370419363
 CanvasRenderer:
@@ -980,7 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 8815696312667813086}
-  fadeOutSpeed: 0.8
+  fadeOutSpeed: 3
 --- !u!225 &7253455126679686849
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1426,10 +1448,10 @@ RectTransform:
   m_Father: {fileID: 6001997557988873033}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 489.5, y: -275.5}
-  m_SizeDelta: {x: 979.01, y: 551}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 89.5025, y: -22.5}
+  m_SizeDelta: {x: 179.005, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5544242889905102113
 CanvasRenderer:
@@ -1481,7 +1503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 8707874734653774093}
-  fadeOutSpeed: 0.8
+  fadeOutSpeed: 3
 --- !u!225 &4725287096886670242
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1901,7 +1923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 6001997558548833016}
-  fadeOutSpeed: 0.8
+  fadeOutSpeed: 3
 --- !u!225 &7083447547697286962
 CanvasGroup:
   m_ObjectHideFlags: 0

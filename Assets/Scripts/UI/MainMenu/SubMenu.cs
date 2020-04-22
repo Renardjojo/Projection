@@ -5,7 +5,7 @@ public class SubMenu : MonoBehaviour
 {
     [SerializeField, Tooltip("First Selected Button")]
     private UnityEngine.UI.Button button = null;
-    [SerializeField, Range(0.1f, 1f)] float fadeOutSpeed = 0.8f;
+    [SerializeField, Range(0.1f, 50f)] float fadeOutSpeed = 0.8f;
     Coroutine fadeCoroutine = null;
     internal bool isActivate = false;
 
