@@ -16,6 +16,27 @@ public class Triggered : SoundPlayer
     [SerializeField] protected UnityEvent OnDisabledEvent = null;
     protected bool isActivate = false;
 
+
+    private void Awake()
+    {
+        if (switchedOnSound)
+        {
+            switchedOnAudio         = gameObject.AddComponent<AudioSource>();
+            switchedOnAudio.clip    = switchedOnSound;
+            switchedOnAudio.volume  = volume;
+        }
+
+        if (useSameSound)
+            switchedOffAudio = switchedOnAudio;
+
+        else if (switchedOffSound)
+        {
+            switchedOffAudio        = gameObject.AddComponent<AudioSource>();
+            switchedOffAudio.clip   = switchedOffSound;
+            switchedOffAudio.volume = volume;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
