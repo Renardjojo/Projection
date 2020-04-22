@@ -6,37 +6,40 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MeshRenderer))]
 public class CheckPoint : MonoBehaviour
 {
-//    [SerializeField]    private Color onColor = Color.green;
-//    [SerializeField]    private Color offColor = Color.red;
-//    [SerializeField]    private GameObject flag;
-//                        private Material flagMaterial;
-    [SerializeField]    private GameObject bodyPlayer;
-    [SerializeField]    private PlayerController playerControllerScript;
+    [Header("Sound")]
+    [SerializeField] private AudioClip activationSound = null;
+
+    [Header("Configuration")]
+    [SerializeField]    private GameObject bodyPlayer                   = null;
+    [SerializeField]    private PlayerController playerControllerScript = null;
 
     [SerializeField]    private float radiusZone = 1f;
                         private bool isActivate = false;
 
     [SerializeField] private UnityEvent OnCheck = null;
 
+    private AudioSource activationAudio;
+
     private void Awake()
     {
-       //flagMaterial = flag.GetComponent<MeshRenderer>().material;
-        //flagMaterial.SetColor("_BaseColor", offColor);
+        if (activationSound)
+        {
+            activationAudio = gameObject.AddComponent<AudioSource>();
+            activationAudio.clip = activationSound;
+
+            if (OnCheck == null)
+                OnCheck = new UnityEvent();
+
+            OnCheck.AddListener(activationAudio.Play);
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isActivate && (bodyPlayer.transform.position - transform.position).sqrMagnitude < radiusZone * radiusZone)
         {
             isActivate = true;
-            //flagMaterial.SetColor("_BaseColor", onColor);
             playerControllerScript.UseCheckPointPosition(transform.position);
             OnCheck?.Invoke();
         }
@@ -51,15 +54,6 @@ public class CheckPoint : MonoBehaviour
 
     public void SetFlag(bool flag)
     {
-        if (flag)
-        {
-            //flagMaterial.SetColor("_BaseColor", onColor);
-            isActivate = true;
-        }
-        else
-        {
-            //flagMaterial.SetColor("_BaseColor", offColor);
-            isActivate = false;
-        }
+        isActivate = flag;
     }
 }
