@@ -110,6 +110,7 @@ MonoBehaviour:
   switchedOnSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   switchedOffSound: {fileID: 8300000, guid: c4947174458d0414eab8c9d5aaee8f4e, type: 3}
   useSameSound: 1
+  volume: 1
   offToOnSound: {fileID: 0}
   onToOffSound: {fileID: 0}
   audioSlowFactor: 0.5
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPosition: {x: 0, y: 0, z: 0}
   useCurrentPoisitionToStart: 1
-  endPosition: {x: 0, y: -0.1, z: 0}
+  endPosition: {x: 0, y: -0.08, z: 0}
   endPositionDependingOfStartPosition: 1
   moveTowardEndPosition: 1
   backAndForth: 0
@@ -173,6 +174,8 @@ MonoBehaviour:
   switchedOnSound: {fileID: 0}
   switchedOffSound: {fileID: 0}
   useSameSound: 0
+  volume: 1
+  singleUse: 0
   orTriggerList:
   - andList:
     - {fileID: 5926456578921156113}
