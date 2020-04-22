@@ -22,6 +22,8 @@ public class EventSystemExtra : MonoBehaviour
     {
         changeSelectionSource = gameObject.AddComponent<AudioSource>();
         changeSelectionSource.clip = changeSelectionClip;
+        changeSelectionSource.volume = 0.5f;
+        submitSource.volume = 0.5f;
 
         submitSource = gameObject.AddComponent<AudioSource>();
         submitSource.clip = submitClip;
