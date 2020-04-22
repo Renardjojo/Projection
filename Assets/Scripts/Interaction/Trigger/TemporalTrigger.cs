@@ -22,7 +22,7 @@ public class TemporalTrigger : Trigger
 
     private new void Update()
     {
-        timeElapsedForTempoTrigger += affectedByTimeSlow ? Time.deltaTime : Time.unscaledDeltaTime;
+        timeElapsedForTempoTrigger += affectedByTimeSlow ? Time.deltaTime * Time.timeScale : Time.unscaledDeltaTime;
 
         if (IsOn)
         {
