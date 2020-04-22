@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float          maxShadowDistance   = 5f;
     [SerializeField] private TimeManager    timeManagerScript   = null;
     [SerializeField] private UnityEvent     OnIsDead            = null;
+    [SerializeField] private SpriteRenderer MaxRangeCircleSprite = null;
 
 
     private GameObject                      body = null;
@@ -164,29 +165,39 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.Find("Body").gameObject.transform.position, maxShadowDistance);
-    }
-
     private void Update()
     {
-        if (!isTransposed)
+        Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
+        bodyToShadow.z = 0f;
+        float bodyToShadowMagnitude = bodyToShadow.magnitude;
+        float bodyToShadowMagnitudeDivByMaxDistance = bodyToShadowMagnitude / maxShadowDistance;
+
+        if (bodyToShadowMagnitudeDivByMaxDistance > 1.05f)
+        {
+            //If the shadow his to far, reset it
+            ResetShadow();
+        }
+        else if (!isTransposed)
         {
             shadow.transform.rotation = body.transform.rotation;
             shadowMoveScript.DirectMove(body.transform.position + shadowOffset - shadow.transform.position);
             shadowOffset = shadow.transform.position - body.transform.position;
         }
-
         else
         {
-            Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
-            bodyToShadow.z = 0f;
+            if (bodyToShadowMagnitudeDivByMaxDistance > 0.5f)
+            {
+                MaxRangeCircleSprite.color = new Color(1f, 1f, 1f, (bodyToShadowMagnitudeDivByMaxDistance > 1f ? 1f : (bodyToShadowMagnitudeDivByMaxDistance - 0.5f) * 2f));
+            }
+            else
+            {
+                MaxRangeCircleSprite.color = new Color(1f, 1f, 1f, 0f);
+            }
 
-            if (bodyToShadow.magnitude > maxShadowDistance)
+            if (bodyToShadowMagnitude > maxShadowDistance)
             {
                 //Found the exedente of distance between the max distance and the actual distance and multiply it by the current vector to get the exedent vector.
-                bodyToShadow *= (bodyToShadow.magnitude / maxShadowDistance) - 1f;
+                bodyToShadow *= (bodyToShadowMagnitudeDivByMaxDistance) - 1f;
 
                 //Reset the exedent position from the body to the shadow 
                 shadowMoveScript.DirectMove(-bodyToShadow);

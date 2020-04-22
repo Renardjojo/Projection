@@ -335,8 +335,8 @@ public class CharacterMovements : MonoBehaviour
         float playerCapsuleHeight = controller.height;
         float playerCapsuleRadius = controller.radius;
 
-        Vector3 posRay1 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.left * (playerCapsuleRadius - 0.1f);
-        Vector3 posRay2 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.right * (playerCapsuleRadius - 0.1f);
+        Vector3 posRay1 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.left * (playerCapsuleRadius - 0.01f);
+        Vector3 posRay2 = transform.position + Vector3.down * (playerCapsuleHeight / 2f - (playerCapsuleRadius * 0.5f)) + Vector3.right * (playerCapsuleRadius - 0.01f);
 
         // Bit shift the index of the layer of gameobject to get a bit mask
         int layerMask   = 1 << gameObject.layer;
