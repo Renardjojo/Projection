@@ -11,6 +11,8 @@ public class TemporalTrigger : Trigger
     [Tooltip("Time this object will remain off (s)")]
     [SerializeField, Range(0f, 60f)] private float OffDuration = 1f;
 
+    [SerializeField] private bool affectedByTimeSlow = true;
+
     private float timeElapsedForTempoTrigger = 0f;
 
     private void Start()
@@ -20,7 +22,7 @@ public class TemporalTrigger : Trigger
 
     private new void Update()
     {
-        timeElapsedForTempoTrigger += Time.deltaTime * Time.timeScale;
+        timeElapsedForTempoTrigger += affectedByTimeSlow ? Time.deltaTime * Time.timeScale : Time.unscaledDeltaTime;
 
         if (IsOn)
         {
