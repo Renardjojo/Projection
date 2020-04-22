@@ -24,10 +24,10 @@ public class EventSystemExtra : MonoBehaviour
         changeSelectionSource = gameObject.AddComponent<AudioSource>();
         changeSelectionSource.clip = changeSelectionClip;
         changeSelectionSource.volume = menuVolume;
-        submitSource.volume = menuVolume;
 
         submitSource = gameObject.AddComponent<AudioSource>();
         submitSource.clip = submitClip;
+        submitSource.volume = menuVolume;
     }
 
     public void PlaySubmitSong()
