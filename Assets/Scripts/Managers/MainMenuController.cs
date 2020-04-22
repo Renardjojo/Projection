@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     bool isOnHub = false;
+    [SerializeField, Range (0.1f, 1f)] float fadeOutSpeed = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,14 +51,25 @@ public class MainMenuController : MonoBehaviour
         GameObject.Find("GameManager/Manager/InputManager").SetActive(false);
     }
 
+    IEnumerator FadeOutCoroutine()
+    {
+        CanvasGroup canvasGroup = GameObject.Find("TitleScreen").GetComponent<CanvasGroup>();
+
+        while ((canvasGroup.alpha -= fadeOutSpeed * Time.deltaTime) > 0f)
+        {
+            yield return null;
+        }
+
+        SceneManager.UnloadSceneAsync("MainMenu");
+        GameObject.Find("GameManager/Manager/InputManager").SetActive(true);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (Input.anyKey )
         {
-            SceneManager.UnloadSceneAsync("MainMenu");
-
-            GameObject.Find("GameManager/Manager/InputManager").SetActive(true);
+            StartCoroutine(FadeOutCoroutine());
         }
     }
 }
