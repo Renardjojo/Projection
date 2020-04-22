@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float          maxShadowDistance   = 5f;
     [SerializeField] private TimeManager    timeManagerScript   = null;
     [SerializeField] private UnityEvent     OnIsDead            = null;
+    [SerializeField] private SpriteRenderer MaxRangeCircleSprite = null;
 
 
     private GameObject                      body = null;
@@ -181,12 +182,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
+            float bodyToShadowMagnitude = bodyToShadow.magnitude;
+            float bodyToShadowMagnitudeDivByMaxDistance = bodyToShadowMagnitude / maxShadowDistance;
+
+            MaxRangeCircleSprite.color = new Color(1f, 1f, 1f, (bodyToShadowMagnitudeDivByMaxDistance > 1f ? 1f : bodyToShadowMagnitudeDivByMaxDistance));
+
             bodyToShadow.z = 0f;
 
-            if (bodyToShadow.magnitude > maxShadowDistance)
+            if (bodyToShadowMagnitude > maxShadowDistance)
             {
                 //Found the exedente of distance between the max distance and the actual distance and multiply it by the current vector to get the exedent vector.
-                bodyToShadow *= (bodyToShadow.magnitude / maxShadowDistance) - 1f;
+                bodyToShadow *= (bodyToShadowMagnitudeDivByMaxDistance) - 1f;
 
                 //Reset the exedent position from the body to the shadow 
                 shadowMoveScript.DirectMove(-bodyToShadow);
