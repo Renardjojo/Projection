@@ -165,29 +165,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.Find("Body").gameObject.transform.position, maxShadowDistance);
-    }
-
     private void Update()
     {
-        if (!isTransposed)
+        Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
+        bodyToShadow.z = 0f;
+        float bodyToShadowMagnitude = bodyToShadow.magnitude;
+        float bodyToShadowMagnitudeDivByMaxDistance = bodyToShadowMagnitude / maxShadowDistance;
+
+        if (bodyToShadowMagnitudeDivByMaxDistance > 1.05f)
+        {
+            //If the shadow his to far, reset it
+            ResetShadow();
+        }
+        else if (!isTransposed)
         {
             shadow.transform.rotation = body.transform.rotation;
             shadowMoveScript.DirectMove(body.transform.position + shadowOffset - shadow.transform.position);
             shadowOffset = shadow.transform.position - body.transform.position;
         }
-
         else
         {
-            Vector3 bodyToShadow = shadow.transform.position - body.transform.position;
-            float bodyToShadowMagnitude = bodyToShadow.magnitude;
-            float bodyToShadowMagnitudeDivByMaxDistance = bodyToShadowMagnitude / maxShadowDistance;
-
-            MaxRangeCircleSprite.color = new Color(1f, 1f, 1f, (bodyToShadowMagnitudeDivByMaxDistance > 1f ? 1f : bodyToShadowMagnitudeDivByMaxDistance));
-
-            bodyToShadow.z = 0f;
+            if (bodyToShadowMagnitudeDivByMaxDistance > 0.5f)
+            {
+                MaxRangeCircleSprite.color = new Color(1f, 1f, 1f, (bodyToShadowMagnitudeDivByMaxDistance > 1f ? 1f : (bodyToShadowMagnitudeDivByMaxDistance - 0.5f) * 2f));
+            }
+            else
+            {
+                MaxRangeCircleSprite.color = new Color(1f, 1f, 1f, 0f);
+            }
 
             if (bodyToShadowMagnitude > maxShadowDistance)
             {

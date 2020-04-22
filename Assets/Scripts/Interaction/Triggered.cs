@@ -11,11 +11,11 @@ public class AndTriggerList
 
 public class Triggered : SoundPlayer
 {
+    [SerializeField] protected bool singleUse = false;
     [SerializeField] protected List<AndTriggerList> orTriggerList = null;
     [SerializeField] protected UnityEvent OnActivatedEvent = null;
     [SerializeField] protected UnityEvent OnDisabledEvent = null;
     protected bool isActivate = false;
-
 
     private void Awake()
     {
@@ -55,6 +55,9 @@ public class Triggered : SoundPlayer
 
     public void TryToActivate()
     {
+        if (isActivate)
+            return;
+
         bool Or = false;
 
         foreach (AndTriggerList andTriggerList in orTriggerList)
@@ -80,6 +83,9 @@ public class Triggered : SoundPlayer
 
     public void TryToDeactivate()
     {
+        if (!isActivate || (isActivate && singleUse))
+            return;
+
         bool Or = false;
 
         foreach (AndTriggerList andTriggerList in orTriggerList)
@@ -105,6 +111,9 @@ public class Triggered : SoundPlayer
 
     public void OnActivated()
     {
+        if (singleUse && isActivate)
+            return;
+
         isActivate = true;
         OnActivatedEvent?.Invoke();
         PlaySound();
